@@ -7,6 +7,7 @@ package seng202.teamsix;
  * Taran Jennison
  * Hamish Ravji
  * George Stephenson
+ * Anzac Morel
  */
 public class App 
 {
