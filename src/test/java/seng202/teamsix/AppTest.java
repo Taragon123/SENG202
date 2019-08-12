@@ -49,4 +49,8 @@ public class AppTest
         System.out.println("goes through this test case");
         assertTrue(2+2 == 4);
     }
+
+    public void testAndy() {
+        assertEquals(1 + 2, 3);
+    }
 }
