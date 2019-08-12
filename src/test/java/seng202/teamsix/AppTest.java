@@ -59,4 +59,9 @@ public class AppTest
         assertEquals(1 + 2, 3);
     }
 
+    public void testRchi() {
+        Systemout.println("BLAHHH");
+        assertEquals(2 + 2, 4);
+    }
+
 }
