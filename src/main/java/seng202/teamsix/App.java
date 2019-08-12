@@ -4,6 +4,7 @@ package seng202.teamsix;
  * Hello world!
  * Put Your name here:
  * Connor Macdonald
+ * Taran Jennison
  *
  */
 public class App 
