@@ -45,7 +45,8 @@ public class AppTest
         assertTrue(1+2 == 3);
     }
 
-    public void quickMath() {
+    public void testQuickMath() {
+        System.out.println("goes through this test case");
         assertTrue(2+2 == 4);
     }
 }
