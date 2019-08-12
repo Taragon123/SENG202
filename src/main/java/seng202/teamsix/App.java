@@ -4,7 +4,7 @@ package seng202.teamsix;
  * Hello world!
  * Put Your name here:
  * Connor Macdonald
- *
+ * Hamesh Ravji
  */
 public class App 
 {
