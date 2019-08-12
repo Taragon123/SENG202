@@ -55,10 +55,8 @@ public class AppTest
         assertTrue(13 * 2 == 26);
     }
 
-    public void testFooRchi() {
-        System.out.println("BLAHH");
-        assertTrue( 1 + 1 == 2);
+    public void testAndy() {
+        assertEquals(1 + 2, 3);
     }
-
 
 }
