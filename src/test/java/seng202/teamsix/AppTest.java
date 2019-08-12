@@ -49,4 +49,9 @@ public class AppTest
         System.out.println("goes through this test case");
         assertTrue(2+2 == 4);
     }
+
+    public void testFooRchi() {
+        System.out.println("BLAHH");
+        assertTrue( 2+3 == 5);
+    }
 }
