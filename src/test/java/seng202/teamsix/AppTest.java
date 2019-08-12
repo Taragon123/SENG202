@@ -58,4 +58,9 @@ public class AppTest
         System.out.println("Testing");
         assertTrue(13 * 2 == 26);
     }
+
+    public void testForGeorge() {
+        System.out.println("Testing for george");
+        assertEquals(4+3, 7);
+    }
 }
