@@ -41,7 +41,11 @@ public class AppTest
         assertTrue(app.foo());
     }
 
-    public void testFootaran() {
+    public void testFooTaran() {
         assertTrue(1+2 == 3);
+    }
+
+    public void quickMath() {
+        assertTrue(2+2 == 4);
     }
 }
