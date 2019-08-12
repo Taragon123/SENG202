@@ -53,4 +53,9 @@ public class AppTest
     public void testAndy() {
         assertEquals(1 + 2, 3);
     }
+
+    public void testFooAnzac() {
+        System.out.println("Testing");
+        assertTrue(13 * 2 == 26);
+    }
 }
