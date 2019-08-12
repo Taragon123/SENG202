@@ -50,12 +50,15 @@ public class AppTest
         assertTrue(2+2 == 4);
     }
 
-    public void testAndy() {
-        assertEquals(1 + 2, 3);
-    }
-
     public void testFooAnzac() {
         System.out.println("Testing");
         assertTrue(13 * 2 == 26);
     }
+
+    public void testFooRchi() {
+        System.out.println("BLAHH");
+        assertTrue( 1 + 1 == 2);
+    }
+
+
 }
