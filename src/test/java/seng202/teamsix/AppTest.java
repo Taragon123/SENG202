@@ -41,7 +41,12 @@ public class AppTest
         assertTrue(app.foo());
     }
 
-    public void testAndy() {
-        assertEquals(1 + 2, 3);
+    public void testFooTaran() {
+        assertTrue(1+2 == 3);
+    }
+
+    public void testQuickMath() {
+        System.out.println("goes through this test case");
+        assertTrue(2+2 == 4);
     }
 }

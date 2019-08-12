@@ -2,7 +2,11 @@ package seng202.teamsix;
 
 /**
  * Hello world!
- *
+ * Put Your name here:
+ * Connor Macdonald
+ * Taran Jennison
+ * Hamish Ravji
+ * George Stephenson
  */
 public class App 
 {
