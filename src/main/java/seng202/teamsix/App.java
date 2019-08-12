@@ -2,6 +2,8 @@ package seng202.teamsix;
 
 /**
  * Hello world!
+ * Put Your name here:
+ * Connor Macdonald
  *
  */
 public class App 
