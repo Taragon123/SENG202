@@ -40,4 +40,8 @@ public class AppTest
         App app = new App();
         assertTrue(app.foo());
     }
+
+    public void testAndy() {
+        assertEquals(1 + 2, 3);
+    }
 }
