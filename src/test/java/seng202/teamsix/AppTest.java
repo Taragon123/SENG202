@@ -64,4 +64,8 @@ public class AppTest
         assertEquals(2 + 2, 4);
     }
 
+    public void testForGeorge() {
+        System.out.println("Testing for george");
+        assertEquals(4+3, 7);
+    }
 }
