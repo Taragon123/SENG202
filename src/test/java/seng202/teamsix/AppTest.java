@@ -50,8 +50,8 @@ public class AppTest
         assertTrue(2+2 == 4);
     }
 
-    public void testFooRchi() {
-        System.out.println("BLAHH");
-        assertTrue( 2+3 == 5);
+    public void testFooAnzac() {
+        System.out.println("Testing");
+        assertTrue(13 * 2 == 26);
     }
 }
