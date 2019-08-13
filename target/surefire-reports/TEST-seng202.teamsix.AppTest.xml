@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="2" failures="0" name="seng202.teamsix.AppTest" time="0.007" errors="0" skipped="0">
+<testsuite tests="8" failures="0" name="seng202.teamsix.AppTest" time="0.007" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="java.vm.version" value="11.0.4+11-post-Ubuntu-1ubuntu218.04.3"/>
@@ -43,7 +43,7 @@
     <property name="java.class.path" value="/opt/idea-IU/plugins/maven/lib/maven3/boot/plexus-classworlds-2.6.0.jar"/>
     <property name="java.vm.specification.version" value="11"/>
     <property name="sun.arch.data.model" value="64"/>
-    <property name="sun.java.command" value="org.codehaus.classworlds.Launcher -Didea.version2019.2 test"/>
+    <property name="sun.java.command" value="org.codehaus.classworlds.Launcher -Didea.version2019.2 package"/>
     <property name="java.home" value="/usr/lib/jvm/java-11-openjdk-amd64"/>
     <property name="user.language" value="en"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
@@ -61,6 +61,12 @@
     <property name="sun.cpu.endian" value="little"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="seng202.teamsix.AppTest" name="testApp" time="0.006"/>
-  <testcase classname="seng202.teamsix.AppTest" name="testFoo" time="0.001"/>
+  <testcase classname="seng202.teamsix.AppTest" name="testApp" time="0.005"/>
+  <testcase classname="seng202.teamsix.AppTest" name="testFoo" time="0"/>
+  <testcase classname="seng202.teamsix.AppTest" name="testAndy" time="0"/>
+  <testcase classname="seng202.teamsix.AppTest" name="testRchi" time="0.002"/>
+  <testcase classname="seng202.teamsix.AppTest" name="testFooAnzac" time="0"/>
+  <testcase classname="seng202.teamsix.AppTest" name="testFooTaran" time="0"/>
+  <testcase classname="seng202.teamsix.AppTest" name="testForGeorge" time="0"/>
+  <testcase classname="seng202.teamsix.AppTest" name="testQuickMath" time="0"/>
 </testsuite>
