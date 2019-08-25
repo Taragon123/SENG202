@@ -1,6 +1,6 @@
 package seng202.teamsix.data;
 
-public class ItemTag {
+public class ItemTag extends UUID_Entity{
     /**
      * Class for tags
      */
@@ -10,6 +10,7 @@ public class ItemTag {
 
     //Constructors
     public ItemTag(String name, Boolean is_dominant) {
+        super();
         this.name = name;
         this.is_dominant = is_dominant;
     }
