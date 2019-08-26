@@ -2,15 +2,15 @@ package seng202.teamsix.data;
 import java.util.ArrayList;
 
 public class Menu extends MenuItem {
-    private ArrayList<MenuItem> menuItems = new ArratList<MenuItem>();
-    private String name;
-    private String description;
+    public ArrayList<MenuItem> menuItems = new ArrayList<MenuItem>();
+    public String name;
+    public String description;
 
     /**
      * Sets the value of name.
      * @param String containing the value of name.
      */
-    void setName(String newName) {
+    public void setName(String newName) {
         name = newName;
     }
 
@@ -18,7 +18,7 @@ public class Menu extends MenuItem {
      * Gets the value of name.
      * @return String name of menu
      */
-     String getName() {
+    public String getName() {
         return name;
     }
 
@@ -26,7 +26,7 @@ public class Menu extends MenuItem {
      * Sets the value of description.
      * @param String containing the value of the description.
      */
-     void setDescription(String newDescription) {
+    public void setDescription(String newDescription) {
         description = newDescription;
     }
 
@@ -34,7 +34,7 @@ public class Menu extends MenuItem {
      * Gets the value of description.
      * @return String description of menu
      */
-     String getDescription() {
+    public String getDescription() {
         return description;
     }
 
@@ -42,7 +42,7 @@ public class Menu extends MenuItem {
      * Gets the menu items in the menu.
      * @return ArrayList containing menu items
      */
-    ArrayList<MenuItem> getMenuItems() {
+    public ArrayList<MenuItem> getMenuItems() {
          return menuItems;
     }
 
@@ -50,7 +50,7 @@ public class Menu extends MenuItem {
      * Adds item to menu list.
      * @param MenuItem to be added to the list.
      */
-    void addToMenu(MenuItem itemToAdd) {
+    public void addToMenu(MenuItem itemToAdd) {
         menuItems.add(itemToAdd);
     }
 
@@ -58,7 +58,7 @@ public class Menu extends MenuItem {
      * Removes item from menu list.
      * @param MenuItem to be removed from the list.
      */
-    void removeFromMenu(MenuItem itemToRemove) {
+    public void removeFromMenu(MenuItem itemToRemove) {
         menuItems.remove(itemToRemove);
     }
 }
