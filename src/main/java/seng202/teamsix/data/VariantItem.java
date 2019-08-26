@@ -1,7 +1,7 @@
 package seng202.teamsix.data;
 import java.util.ArrayList;
 
-public class VarientItem {
+public class VariantItem {
     public ArrayList<UUID_Entity> variantList = new ArrayList<UUID_Entity>();
     public boolean priceFixed;
 
