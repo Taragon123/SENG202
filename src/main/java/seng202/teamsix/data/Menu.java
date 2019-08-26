@@ -6,6 +6,10 @@ public class Menu extends MenuItem {
     private String name;
     private String description;
 
+    /**
+     * Sets the value of name.
+     * @param String containing the value of name.
+     */
     void setName(String newName) {
         name = newName;
     }
@@ -18,6 +22,10 @@ public class Menu extends MenuItem {
         return name;
     }
 
+    /**
+     * Sets the value of description.
+     * @param String containing the value of the description.
+     */
      void setDescription(String newDescription) {
         description = newDescription;
     }
@@ -30,14 +38,26 @@ public class Menu extends MenuItem {
         return description;
     }
 
+    /**
+     * Gets the menu items in the menu.
+     * @return ArrayList containing menu items
+     */
     ArrayList<MenuItem> getMenuItems() {
          return menuItems;
     }
 
+    /**
+     * Adds item to menu list.
+     * @param MenuItem to be added to the list.
+     */
     void addToMenu(MenuItem itemToAdd) {
         menuItems.add(itemToAdd);
     }
 
+    /**
+     * Removes item from menu list.
+     * @param MenuItem to be removed from the list.
+     */
     void removeFromMenu(MenuItem itemToRemove) {
         menuItems.remove(itemToRemove);
     }
