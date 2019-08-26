@@ -4,6 +4,23 @@ public class MenuItem {
     private UUID_Entity item;
     private String name;
     private String description;
+    private double price;
+
+    /**
+     * Sets the price of item
+     * @param price the price of the item to be displaued to the menu
+     */
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    /**
+     * Gets the price of the item in the menu
+     * @return the price of the item in the menu
+     */
+    public double getPrice() {
+        return price;
+    }
 
     /**
      * Gets the name of the menu item.
