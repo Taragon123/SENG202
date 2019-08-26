@@ -6,6 +6,9 @@ public class UUID_Entity {
     // Members
     private UUID uuid;
 
+    UUID_Entity() {
+        generateUUID();
+    }
 
     // Methods
 
