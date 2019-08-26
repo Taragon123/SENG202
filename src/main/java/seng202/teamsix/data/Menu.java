@@ -1,14 +1,14 @@
 package seng202.teamsix.data;
 import java.util.ArrayList;
 
-public class Menu extends MenuItem {
+public class Menu {
     public ArrayList<MenuItem> menuItems = new ArrayList<MenuItem>();
     public String name;
     public String description;
 
     /**
      * Sets the value of name.
-     * @param String containing the value of name.
+     * @param newName containing the value of name.
      */
     public void setName(String newName) {
         name = newName;
@@ -24,7 +24,7 @@ public class Menu extends MenuItem {
 
     /**
      * Sets the value of description.
-     * @param String containing the value of the description.
+     * @param newDescription containing the value of the description.
      */
     public void setDescription(String newDescription) {
         description = newDescription;
@@ -48,7 +48,7 @@ public class Menu extends MenuItem {
 
     /**
      * Adds item to menu list.
-     * @param MenuItem to be added to the list.
+     * @param itemToAdd to be added to the list.
      */
     public void addToMenu(MenuItem itemToAdd) {
         menuItems.add(itemToAdd);
@@ -56,7 +56,7 @@ public class Menu extends MenuItem {
 
     /**
      * Removes item from menu list.
-     * @param MenuItem to be removed from the list.
+     * @param itemToRemove to be removed from the list.
      */
     public void removeFromMenu(MenuItem itemToRemove) {
         menuItems.remove(itemToRemove);
