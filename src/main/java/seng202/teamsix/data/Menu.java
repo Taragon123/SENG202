@@ -1,24 +1,37 @@
 package seng202.teamsix.data;
+import java.util.ArrayList;
 
 public class Menu extends MenuItem {
     private ArrayList<MenuItem> menuItems = new ArratList<MenuItem>();
     private String name;
     private String description;
 
-    private void setName(String newName) {
+    void setName(String newName) {
         name = newName;
     }
 
-    private String getName() {
+    /**
+     * Gets the value of name.
+     * @return String name of menu
+     */
+     String getName() {
         return name;
     }
 
-    private void setDescription(String newDescription) {
+     void setDescription(String newDescription) {
         description = newDescription;
     }
 
-    private String getDescription() {
+    /**
+     * Gets the value of description.
+     * @return String description of menu
+     */
+     String getDescription() {
         return description;
+    }
+
+    ArrayList<MenuItem> getMenuItems() {
+         return menuItems;
     }
 
     void addToMenu(MenuItem itemToAdd) {
