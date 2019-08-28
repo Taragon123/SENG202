@@ -54,9 +54,21 @@ public class MenuItem {
         this.description = description;
     }
 
-//    public UUID_Entity getItem() {
-//        return item;
-//    }
+    /**
+     * Sets the item reference
+     * @param item item reference to be added to the menu
+     */
+    public void setItem(UUID_Entity item) {
+        this.item = item;
+    }
+
+    /**
+     * Gets the item reference
+     * @return UUID_Entity item, which is the reference of the item
+     */
+    public UUID_Entity getItem() {
+        return item;
+    }
 
 }
 

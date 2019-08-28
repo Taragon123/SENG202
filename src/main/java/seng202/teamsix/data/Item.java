@@ -2,18 +2,14 @@ package seng202.teamsix.data;
 
 import java.util.ArrayList;
 
-/**
- * UnitType enum used to indicate quantity units in relation to the item.
- */
-enum UnitType {
-        KG, G, L, ML, NUM
-}
-/**
+/** Name: Item.java
+ *
  * Class Item, essentially the item that is going to be listed in the menu. Can consist of multiple Compost or variant items.
  * Consists of a name, description, price that the business purchased the stock at, selling price (markup_price), optional
  * recipe, an Arraylist consisting of tags to indicate whether the Item is gluten-free etc, and a unit type.
  *
- * Author: Hamesh Ravji.
+ * Date: August, 2019
+ * Author: Hamesh Ravji
  */
 public class Item {
     private String name;
@@ -63,25 +59,14 @@ public class Item {
      * @param qty_unit The unit in relation to the quantity of the Item, such as sauce requires units L or ML.
      */
     public Item(String name, String description, double base_price, double markup_price, Recipe recipe,
-                ArrayList<UUID_Entity> tags, String qty_unit) {
+                ArrayList<UUID_Entity> tags, UnitType qty_unit) {
         this.name = name;
         this.description = description;
         this.base_price = base_price;
         this.markup_price = markup_price;
         this.recipe = recipe;
         this.tags = tags;
-
-        if (qty_unit == "KG") {
-            this.qty_unit = UnitType.KG;
-        } else if (qty_unit == "G") {
-            this.qty_unit = UnitType.G;
-        } else if (qty_unit == "L") {
-            this.qty_unit = UnitType.L;
-        } else if (qty_unit == "ML") {
-            this.qty_unit = UnitType.ML;
-        } else if (qty_unit == "NUM") {
-            this.qty_unit = UnitType.NUM;
-        }
+        this.qty_unit = qty_unit;
     }
 
     /**
@@ -94,24 +79,13 @@ public class Item {
      * @param qty_unit The unit in relation to the quantity of the Item, such as sauce requires L or ML.
      */
     public Item(String name, String description, double base_price, double markup_price,
-                ArrayList<UUID_Entity> tags, String qty_unit) {
+                ArrayList<UUID_Entity> tags, UnitType qty_unit) {
         this.name = name;
         this.description = description;
         this.base_price = base_price;
         this.markup_price = markup_price;
         this.tags = tags;
-
-        if (qty_unit == "KG") {
-            this.qty_unit = UnitType.KG;
-        } else if (qty_unit == "G") {
-            this.qty_unit = UnitType.G;
-        } else if (qty_unit == "L") {
-            this.qty_unit = UnitType.L;
-        } else if (qty_unit == "ML") {
-            this.qty_unit = UnitType.ML;
-        } else if (qty_unit == "NUM") {
-            this.qty_unit = UnitType.NUM;
-        }
+        this.qty_unit = qty_unit;
     }
 
     /**

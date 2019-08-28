@@ -29,4 +29,13 @@ class MenuItemTest {
         assertTrue("100% passed", menuItem.getDescription() == "Yummy");
         System.out.println("100% passed");
     }
+
+    @Test
+    public void testSetAndGetItem() {
+        UUID_Entity itemReference = new UUID_Entity();
+        MenuItem menuItem = new MenuItem();
+        menuItem.setItem(itemReference);
+        assertTrue("Passed", menuItem.getItem() == itemReference);
+        System.out.println("100% passed");
+    }
 }
