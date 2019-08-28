@@ -6,8 +6,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="SENG202-TeamSix" />
         <module name="FoodByte" />
+        <module name="SENG202-TeamSix" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8" />
