@@ -1,3 +1,9 @@
+/**
+ * Name: UUID_Entity.java
+ * Authors: Connor Macdonald
+ * Date: 19/08/2019
+ */
+
 package seng202.teamsix.data;
 
 import java.util.UUID;
