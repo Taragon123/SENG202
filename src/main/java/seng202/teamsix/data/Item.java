@@ -14,10 +14,10 @@ import java.util.ArrayList;
 public class Item {
     private String name;
     private String description;
-    private double base_price;
-    private double markup_price;
+    private Currency base_price;
+    private Currency markup_price;
     private Recipe recipe;
-    private ArrayList<UUID_Entity> tags;
+    private ArrayList<ItemTag> tags;
     private UnitType qty_unit;
 
     public String getName() {
@@ -28,11 +28,11 @@ public class Item {
         return description;
     }
 
-    public double getBasePrice() {
+    public Currency getBasePrice() {
         return base_price;
     }
 
-    public double getMarkupPrice() {
+    public Currency getMarkupPrice() {
         return markup_price;
     }
 
@@ -40,7 +40,7 @@ public class Item {
         return recipe;
     }
 
-    public ArrayList<UUID_Entity> getTags() {
+    public ArrayList<ItemTag> getTags() {
         return tags;
     }
 
@@ -58,8 +58,8 @@ public class Item {
      * @param tags A list of tags to indicate whether the item is gluten-free etc.
      * @param qty_unit The unit in relation to the quantity of the Item, such as sauce requires units L or ML.
      */
-    public Item(String name, String description, double base_price, double markup_price, Recipe recipe,
-                ArrayList<UUID_Entity> tags, UnitType qty_unit) {
+    public Item(String name, String description, Currency base_price, Currency markup_price, Recipe recipe,
+                ArrayList<ItemTag> tags, UnitType qty_unit) {
         this.name = name;
         this.description = description;
         this.base_price = base_price;
@@ -78,8 +78,8 @@ public class Item {
      * @param tags A list of tags to indicate whether the item is gluten-free etc.
      * @param qty_unit The unit in relation to the quantity of the Item, such as sauce requires L or ML.
      */
-    public Item(String name, String description, double base_price, double markup_price,
-                ArrayList<UUID_Entity> tags, UnitType qty_unit) {
+    public Item(String name, String description, Currency base_price, Currency markup_price,
+                ArrayList<ItemTag> tags, UnitType qty_unit) {
         this.name = name;
         this.description = description;
         this.base_price = base_price;
@@ -94,7 +94,7 @@ public class Item {
      * @return The markup percentage on the Item.
      */
     public double getMarkupPercentage() {
-        return (((markup_price - base_price) / base_price)*100);
+        return (((markup_price.getTotalCash() - base_price.getTotalCash()) / base_price.getTotalCash())*100);
     }
 
     /**
@@ -102,15 +102,6 @@ public class Item {
      * @return The profit that can be made by selling the item.
      */
     public double getProfit() {
-        return markup_price - base_price;
+        return markup_price.getTotalCash() - base_price.getTotalCash();
     }
-
-    /**
-     * A getter for the tags.
-     * @return An ArrayList consisting of tags.
-     */
-    public ArrayList<UUID_Entity> getAllTags() {
-        return tags;
-    }
-
 }
