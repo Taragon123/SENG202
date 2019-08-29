@@ -75,14 +75,4 @@ public class StockInstance extends UUID_Entity {
             quantity_remaining = 0;
         }
     }
-
-    public static void main(String[] args) {
-        Date date1 = new Date();
-        Date date2 = new Date();
-        StockInstance burgerBuns = new StockInstance(date1, true, date2, 100);
-        int time = burgerBuns.timeRemaining();
-        boolean expired = burgerBuns.hasExpired();
-        System.out.println(time);
-        System.out.println(expired);
-    }
 }
