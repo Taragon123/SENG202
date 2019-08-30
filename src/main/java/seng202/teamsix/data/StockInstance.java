@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.*;
  * Class StockInstance, allows us to check if stock is expired and keep track of remaining quantities
  * Author: Andrew Clifford
  * Date Created: 27/08/19
- * Last Updated: 27/08/19
+ * Last Updated: 29/08/19
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
@@ -74,7 +74,7 @@ public class StockInstance extends StockInstance_Ref {
     public Item_Ref getStockItem() {return stock_item;}
 
     /**
-     * Adds quantity to the quantity remanining i.e. to reduce the quantity remaining, pass in a negative
+     * Adds quantity to the quantity remaining i.e. to reduce the quantity remaining, pass in a negative
      * float as te parameter
      * @param quantity the quantity of the StockInstance to be added to the quantity remaining
      */
