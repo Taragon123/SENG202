@@ -2,7 +2,13 @@ package seng202.teamsix.data;
 
 import javax.xml.bind.annotation.*;
 
-
+/**
+ * Class MenuItem, items to be added to the menu. Includes name, description, and price for each menu item crated
+ * that is to be displayed in the menu.
+ * Author: Rchi Lugtu
+ * Date Created: 27/08/19
+ * Last Updated: 31/08/19
+ */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public class MenuItem {
