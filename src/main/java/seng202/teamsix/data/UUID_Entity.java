@@ -6,10 +6,14 @@
 
 package seng202.teamsix.data;
 
+import javax.xml.bind.annotation.*;
 import java.util.UUID;
 
-public class UUID_Entity {
+@XmlRootElement(name = "entity")
+@XmlAccessorType(XmlAccessType.NONE)
+public class UUID_Entity{
     // Members
+    @XmlAttribute(name = "uuid")
     private UUID uuid;
 
     UUID_Entity() {

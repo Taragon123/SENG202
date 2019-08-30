@@ -17,7 +17,7 @@ public class CompositeItemTest {
     @Test
     public void testSetGetItems() {
         CompositeItem item = new CompositeItem();
-        ArrayList<ItemTag> tags = new ArrayList<ItemTag>();
+        ArrayList<ItemTag_Ref> tags = new ArrayList<ItemTag_Ref>();
         ArrayList<Item> subItems = new ArrayList<Item>();
         subItems.add(new Item("Coke", "Cold one", new Currency(), new Currency(), tags, UnitType.KG));
         item.setComponents(subItems);

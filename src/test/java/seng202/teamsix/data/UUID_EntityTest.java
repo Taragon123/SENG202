@@ -48,6 +48,10 @@ public class UUID_EntityTest {
         UUID_Entity different_entity = new UUID_Entity();
         different_entity.generateUUID();
 
+        System.out.println(entity.getUUID().toString());
+        System.out.println(same_entity.getUUID().toString());
+        System.out.println(different_entity.getUUID().toString());
+
         assertTrue(entity.equals(same_entity));
         assertFalse(entity.equals(different_entity));
     }

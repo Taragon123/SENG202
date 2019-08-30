@@ -1,5 +1,7 @@
 package seng202.teamsix.data;
 
+import javax.xml.bind.annotation.*;
+
 import java.util.ArrayList;
 
 /** Name: Item.java
@@ -11,22 +13,34 @@ import java.util.ArrayList;
  * Date: August, 2019
  * Author: Hamesh Ravji
  */
-public class Item {
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.NONE)
+public class Item extends Item_Ref {
+    @XmlElement
     private String name;
+    @XmlElement
     private String description;
+    @XmlElement
     private Currency base_price;
+    @XmlElement
     private Currency markup_price;
+    @XmlElement
     private Recipe recipe;
-    private ArrayList<ItemTag> tags;
+    @XmlElement
+    private ArrayList<ItemTag_Ref> tags;
+    @XmlElement
     private UnitType qty_unit;
+
 
     public String getName() {
         return name;
     }
 
+
     public String getDescription() {
         return description;
     }
+
 
     public Currency getBasePrice() {
         return base_price;
@@ -40,13 +54,15 @@ public class Item {
         return recipe;
     }
 
-    public ArrayList<ItemTag> getTags() {
+    public ArrayList<ItemTag_Ref> getTags() {
         return tags;
     }
 
     public UnitType getQtyUnit() {
         return qty_unit;
     }
+
+    Item() {}
 
     /**
      * Constructor class which takes all parameters including recipe.
@@ -59,7 +75,7 @@ public class Item {
      * @param qty_unit The unit in relation to the quantity of the Item, such as sauce requires units L or ML.
      */
     public Item(String name, String description, Currency base_price, Currency markup_price, Recipe recipe,
-                ArrayList<ItemTag> tags, UnitType qty_unit) {
+                ArrayList<ItemTag_Ref> tags, UnitType qty_unit) {
         this.name = name;
         this.description = description;
         this.base_price = base_price;
@@ -79,7 +95,7 @@ public class Item {
      * @param qty_unit The unit in relation to the quantity of the Item, such as sauce requires L or ML.
      */
     public Item(String name, String description, Currency base_price, Currency markup_price,
-                ArrayList<ItemTag> tags, UnitType qty_unit) {
+                ArrayList<ItemTag_Ref> tags, UnitType qty_unit) {
         this.name = name;
         this.description = description;
         this.base_price = base_price;

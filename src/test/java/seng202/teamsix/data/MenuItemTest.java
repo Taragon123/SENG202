@@ -32,7 +32,7 @@ class MenuItemTest {
 
     @Test
     public void testSetAndGetItem() {
-        UUID_Entity itemReference = new UUID_Entity();
+        Item_Ref itemReference = new Item_Ref();
         MenuItem menuItem = new MenuItem();
         menuItem.setItem(itemReference);
         assertTrue("Passed", menuItem.getItem() == itemReference);

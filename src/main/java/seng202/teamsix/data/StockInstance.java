@@ -1,6 +1,7 @@
 package seng202.teamsix.data;
 
 import java.util.Date;
+import javax.xml.bind.annotation.*;
 
 /**
  * Class StockInstance, allows us to check if stock is expired and keep track of remaining quantities
@@ -8,14 +9,22 @@ import java.util.Date;
  * Date Created: 27/08/19
  * Last Updated: 27/08/19
  */
-public class StockInstance extends UUID_Entity {
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.NONE)
+public class StockInstance extends StockInstance_Ref {
 
-    private UUID_Entity stock_item;
+    @XmlElement
+    private Item_Ref stock_item;
+    @XmlElement
     private Date date_added;
+    @XmlElement
     private Date date_expires;
+    @XmlElement
     private boolean does_expire;
+    @XmlElement
     private float quantity_remaining;
 
+    public StockInstance() {}
     /**
      * Constructor for a StockInstance. If an item does not expire then it must be constructed with null for
      * the expiry date.
@@ -62,7 +71,7 @@ public class StockInstance extends UUID_Entity {
 
     public float getQuantityRemaining() {return quantity_remaining;}
 
-    public UUID_Entity getStockItem() {return stock_item;}
+    public Item_Ref getStockItem() {return stock_item;}
 
     /**
      * Adds quantity to the quantity remanining i.e. to reduce the quantity remaining, pass in a negative

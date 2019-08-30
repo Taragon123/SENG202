@@ -7,20 +7,28 @@
 package seng202.teamsix.data;
 
 import java.util.ArrayList;
+import javax.xml.bind.annotation.*;
 
 /**
  * Defines an ordered item for an order, an order item can contain many dependent order items that are required for the item
  */
+
+
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.NONE)
 public class OrderItem {
-    private UUID_Entity item = null;
+    @XmlElement
+    private Item_Ref item = null;
+    @XmlElement
     private ArrayList<OrderItem> dependants = new ArrayList<OrderItem>();
+    @XmlElement
     private int quantity = 0;
 
-    public UUID_Entity getItem() {
+    public Item_Ref getItem() {
         return this.item;
     }
 
-    public void setItem(UUID_Entity item) {
+    public void setItem(Item_Ref item) {
         // TODO(Connor): Add check that item exists
         this.item = item;
     }

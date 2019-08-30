@@ -9,7 +9,7 @@ public class OrderItemTest {
     @Test
     public void setItemTest() {
         OrderItem order = new OrderItem();
-        UUID_Entity random_item = new UUID_Entity();
+        Item_Ref random_item = new Item_Ref();
         order.setItem(random_item);
         assertTrue(random_item.equals(order.getItem()));
     }

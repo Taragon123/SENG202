@@ -1,10 +1,18 @@
 package seng202.teamsix.data;
 import java.util.ArrayList;
+import javax.xml.bind.annotation.*;
 
-public class Menu {
-    public ArrayList<MenuItem> menuItems = new ArrayList<MenuItem>();
-    public String name;
-    public String description;
+
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.NONE)
+public class Menu extends Menu_Ref{
+    @XmlElement
+    private String name;
+    @XmlElement
+    private String description;
+    @XmlElement
+    private ArrayList<MenuItem> menuItems = new ArrayList<MenuItem>();
+
 
     /**
      * Sets the value of name.

@@ -16,7 +16,7 @@ public class CompositeItem extends Item{
      * Constructor for blank composite item.
      */
     public CompositeItem() {
-        super("NA", "NA", new Currency(), new Currency(), new Recipe("NA"), new ArrayList<ItemTag>(), UnitType.KG);
+        super("NA", "NA", new Currency(), new Currency(), new Recipe("NA"), new ArrayList<ItemTag_Ref>(), UnitType.KG);
     }
 
     /**
@@ -24,7 +24,7 @@ public class CompositeItem extends Item{
      * @param item_list List of UUID_Entity components
      */
     public CompositeItem(String name, String description, Currency base_price, Currency markup_price, Recipe recipe,
-                         ArrayList<ItemTag> tags, UnitType qty_unit, List<Item> item_list) {
+                         ArrayList<ItemTag_Ref> tags, UnitType qty_unit, List<Item> item_list) {
         super(name, description, base_price, markup_price, recipe, tags, qty_unit);
         this.item_list = item_list;
     }

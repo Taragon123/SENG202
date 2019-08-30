@@ -9,9 +9,7 @@ import static org.junit.Assert.*;
 public class ItemTest {
     @Test
     public void testGetMarkupPercentage() {
-        ArrayList<ItemTag> tagList = new ArrayList<ItemTag>();
-        ItemTag itemTag1 = new ItemTag("Gluten Free", false);
-        tagList.add(itemTag1);
+        ArrayList<ItemTag_Ref> tagList = new ArrayList<ItemTag_Ref>();
         Recipe recipe = new Recipe("Cut Potatoes, cover in batter, deep-try for 5 minutes.");
 
         Currency base_price = new Currency();
@@ -31,9 +29,7 @@ public class ItemTest {
      * THEN the profit amount is computed, which is just $10.00 - $7.50 = $2.50.
      */
     public void testGetProfit() {
-        ArrayList<ItemTag> tagList = new ArrayList<ItemTag>();
-        ItemTag itemTag1 = new ItemTag("Gluten Free", false);
-        tagList.add(itemTag1);
+        ArrayList<ItemTag_Ref> tagList = new ArrayList<ItemTag_Ref>();
         Recipe recipe = new Recipe("Cut Potatoes, cover in batter, deep-try for 5 minutes.");
 
         Currency base_price = new Currency();
@@ -48,9 +44,7 @@ public class ItemTest {
 
     @Test
     public void testGetAllTags() {
-        ArrayList<ItemTag> tagList = new ArrayList<ItemTag>();
-        ItemTag itemTag1 = new ItemTag("Gluten Free", false);
-        tagList.add(itemTag1);
+        ArrayList<ItemTag_Ref> tagList = new ArrayList<ItemTag_Ref>();
         Recipe recipe = new Recipe("Cut Potatoes, cover in batter, deep-try for 5 minutes.");
 
         Currency base_price = new Currency();

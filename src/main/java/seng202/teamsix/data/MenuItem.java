@@ -1,9 +1,18 @@
 package seng202.teamsix.data;
 
+import javax.xml.bind.annotation.*;
+
+
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.NONE)
 public class MenuItem {
-    private UUID_Entity item;
+    @XmlElement
+    private Item_Ref item;
+    @XmlElement
     private String name;
+    @XmlElement
     private String description;
+    @XmlElement
     private double price;
 
     /**
@@ -58,15 +67,15 @@ public class MenuItem {
      * Sets the item reference
      * @param item item reference to be added to the menu
      */
-    public void setItem(UUID_Entity item) {
+    public void setItem(Item_Ref item) {
         this.item = item;
     }
 
     /**
      * Gets the item reference
-     * @return UUID_Entity item, which is the reference of the item
+     * @return Item_Ref item, which is the reference of the item
      */
-    public UUID_Entity getItem() {
+    public Item_Ref getItem() {
         return item;
     }
 

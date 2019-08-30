@@ -1,9 +1,16 @@
 package seng202.teamsix.data;
 
+import com.sun.xml.txw2.annotation.XmlElement;
+
+import javax.xml.bind.annotation.*;
 import java.math.BigDecimal;
 
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.NONE)
 public class Currency {
+    @XmlAttribute(name="dollars")
     private int dollars = 0;
+    @XmlAttribute(name="cents")
     private int cents = 0;
 
 
