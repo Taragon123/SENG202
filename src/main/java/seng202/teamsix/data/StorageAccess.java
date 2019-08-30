@@ -7,6 +7,9 @@
 package seng202.teamsix.data;
 
 
+import javax.xml.bind.JAXBException;
+import java.io.IOException;
+
 /**
  * Storage Access is the template of data storage classes as well as a singleton with a reference to current storage access used.
  * An example usage of the class can be seen below:
@@ -21,6 +24,17 @@ public abstract class StorageAccess {
      * @return singleton instance
      */
     public static StorageAccess instance() {
+        if(internal == null) {
+            //TODO(Connor): Add better error handling here
+            try {
+                internal = new XML_StorageAccess("data");
+            } catch(IOException e) {
+                System.err.println("Could not create/open data file");
+            } catch(JAXBException e) {
+                System.err.println("XML_StorageAccess could not create jaxb object contexts");
+            }
+        }
+
         return internal;
     }
 
