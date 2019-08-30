@@ -1,23 +1,31 @@
 package seng202.teamsix.data;
 
+import java.math.BigDecimal;
+
 public class Currency {
-    public double dollars;
-    public double cents;
-    public double totalCash;
+    private int dollars = 0;
+    private int cents = 0;
+
+
+    public Currency() { }
+
+    public Currency(int dollars, int cents) {
+        addCash(dollars, cents);
+    }
 
     /**
      * Sets the value of dollars.
      * @param newDollarValue containing the amount of dollars.
      */
-    void setDollars(double newDollarValue){
+    public void setDollars(int newDollarValue){
         dollars = newDollarValue;
     }
 
     /**
      * Gets the value of dollars.
-     * @return double amount of dollars
+     * @return int amount of dollars
      */
-    double getDollars() {
+    public int getDollars() {
         return dollars;
     }
 
@@ -25,24 +33,25 @@ public class Currency {
      * Sets the value of cents.
      * @param newCentValue containing the amount of cents.
      */
-    void setCents(double newCentValue){
-        cents = newCentValue;
+    public void setCents(int newCentValue){
+        cents = 0;
+        addCash(0, newCentValue);
     }
 
     /**
      * Gets the value of cents.
-     * @return double amount of cents
+     * @return int amount of cents
      */
-    double getCents() {
+    public int getCents() {
         return cents;
     }
 
     /**
      * Gets the value of the total cash.
-     * @return double amount of total cash
+     * @return int amount of total cash
      */
     public double getTotalCash() {
-        return totalCash;
+        return dollars + (cents / 100.0);
     }
 
     /**
@@ -50,7 +59,8 @@ public class Currency {
      * @param newTotal containing the new cash total.
      */
     public void setTotalCash(double newTotal) {
-        totalCash = newTotal;
+        dollars = (int)newTotal;
+        cents = (int)Math.round(BigDecimal.valueOf(newTotal).divideAndRemainder(BigDecimal.ONE)[1].doubleValue() * 100.0);
     }
 
     /**
@@ -58,20 +68,18 @@ public class Currency {
      * @param numDollars containing the amount of dollars.
      * @param numDollars containing the amount of cents.
      */
-    public void addCash(double numDollars, double numCents) {
-        double totalToAdd = numDollars + (numCents / 100);
-        double newTotal = totalCash + totalToAdd;
-        setTotalCash(newTotal);
+    public void addCash(int numDollars, int numCents) {
+        cents += numCents;
+        dollars += numDollars + numCents / 100;
+        cents = Math.floorMod(cents, 100);
     }
-
     /**
      * Calculates the new value of total cash and calls set total cash.
      * @param numDollars containing the amount of dollars.
      * @param numDollars containing the amount of cents.
      */
-    public void subCash(double numDollars, double numCents) {
-        double totalToSub = numDollars + (numCents / 100);
-        double newTotal = totalCash - totalToSub;
-        setTotalCash(newTotal);
+    public void subCash(int numDollars, int numCents) {
+        dollars -= numDollars + numCents / 100;
+        cents = Math.floorMod(cents - numCents, 100);
     }
 }
