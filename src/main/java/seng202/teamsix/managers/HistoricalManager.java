@@ -27,14 +27,20 @@ public class HistoricalManager {
     }
 
     /**
-     * Removes the given Order from the ArrayList of orders
-     * @param order Order to be removed from the list of StockInstances
+     * Prints the timestamp of each order in the order list
      */
-    public void removeOrder(Order order) {
-        if (order_list.contains(order)) {
-            order_list.remove(order);
-        } else {
-            System.err.println("The specified order is not in the list of orders!");
+    public void printOrderDates() {
+        for (int index = 0; index < order_list.size(); index++) {
+            System.out.println(order_list.get(index).getTimestamp());
+        }
+    }
+
+    /**
+     * Prints the items that were contained in each order in the order list
+     */
+    public void printOrderContents() {
+        for (int index = 0; index < order_list.size(); index++) {
+            System.out.println(order_list.get(index).getOrderTree());
         }
     }
 }
