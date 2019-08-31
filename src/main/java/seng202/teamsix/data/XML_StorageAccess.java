@@ -102,7 +102,7 @@ public class XML_StorageAccess extends StorageAccess{
 
     @Override
     public void updateMenu(Menu menu) {
-        cache.menu_map.put(menu.getUUID(), menu);
+        cache.menu_map.put(menu.getUUID()), menu);
     }
 
     @Override
