@@ -1,7 +1,8 @@
 package seng202.teamsix.data;
+import javax.swing.*;
 import java.util.ArrayList;
 
-public class Menu {
+public class Menu extends MenuItem {
     public ArrayList<MenuItem> menuItems = new ArrayList<MenuItem>();
     public String name;
     public String description;
