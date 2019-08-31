@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.*;
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public class MenuItem {
+public class MenuItem extends Menu_Ref{
     @XmlElement
     private Item_Ref item;
     @XmlElement
