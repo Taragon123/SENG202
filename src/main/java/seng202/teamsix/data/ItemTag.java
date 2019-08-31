@@ -1,14 +1,21 @@
 package seng202.teamsix.data;
 
-public class ItemTag extends UUID_Entity{
-    /**
-     * Class for tags
-     */
+import javax.xml.bind.annotation.*;
+
+/**
+ * Class for tags
+ */
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.NONE)
+public class ItemTag extends ItemTag_Ref{
     //Members
+    @XmlElement
     private String name;
+    @XmlElement
     private Boolean is_dominant;
 
     //Constructors
+    public ItemTag() {}
     public ItemTag(String name, Boolean is_dominant) {
         super();
         this.name = name;

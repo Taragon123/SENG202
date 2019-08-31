@@ -1,9 +1,41 @@
 package seng202.teamsix.data;
 
+import javax.xml.bind.annotation.*;
+
+/**
+ * Class MenuItem, items to be added to the menu. Includes name, description, and price for each menu item crated
+ * that is to be displayed in the menu.
+ * Author: Rchi Lugtu
+ * Date Created: 27/08/19
+ * Last Updated: 31/08/19
+ */
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.NONE)
 public class MenuItem {
-    private UUID_Entity item;
+    @XmlElement
+    private Item_Ref item;
+    @XmlElement
     private String name;
+    @XmlElement
     private String description;
+    @XmlElement
+    private double price;
+
+    /**
+     * Sets the price of item
+     * @param price the price of the item to be displaued to the menu
+     */
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    /**
+     * Gets the price of the item in the menu
+     * @return the price of the item in the menu
+     */
+    public double getPrice() {
+        return price;
+    }
 
     /**
      * Gets the name of the menu item.
@@ -37,9 +69,21 @@ public class MenuItem {
         this.description = description;
     }
 
-//    public UUID_Entity getItem() {
-//        return item;
-//    }
+    /**
+     * Sets the item reference
+     * @param item item reference to be added to the menu
+     */
+    public void setItem(Item_Ref item) {
+        this.item = item;
+    }
+
+    /**
+     * Gets the item reference
+     * @return Item_Ref item, which is the reference of the item
+     */
+    public Item_Ref getItem() {
+        return item;
+    }
 
 }
 

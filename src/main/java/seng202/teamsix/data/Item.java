@@ -1,42 +1,52 @@
 package seng202.teamsix.data;
 
+import javax.xml.bind.annotation.*;
+
 import java.util.ArrayList;
 
-/**
- * UnitType enum used to indicate quantity units in relation to the item.
- */
-enum UnitType {
-        KG, G, L, ML, NUM
-}
-/**
+/** Name: Item.java
+ *
  * Class Item, essentially the item that is going to be listed in the menu. Can consist of multiple Compost or variant items.
  * Consists of a name, description, price that the business purchased the stock at, selling price (markup_price), optional
  * recipe, an Arraylist consisting of tags to indicate whether the Item is gluten-free etc, and a unit type.
  *
- * Author: Hamesh Ravji.
+ * Date: August, 2019
+ * Author: Hamesh Ravji
  */
-public class Item {
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.NONE)
+public class Item extends Item_Ref {
+    @XmlElement
     private String name;
+    @XmlElement
     private String description;
-    private double base_price;
-    private double markup_price;
+    @XmlElement
+    private Currency base_price;
+    @XmlElement
+    private Currency markup_price;
+    @XmlElement
     private Recipe recipe;
-    private ArrayList<UUID_Entity> tags;
+    @XmlElement
+    private ArrayList<ItemTag_Ref> tags;
+    @XmlElement
     private UnitType qty_unit;
+
 
     public String getName() {
         return name;
     }
 
+
     public String getDescription() {
         return description;
     }
 
-    public double getBasePrice() {
+
+    public Currency getBasePrice() {
         return base_price;
     }
 
-    public double getMarkupPrice() {
+    public Currency getMarkupPrice() {
         return markup_price;
     }
 
@@ -44,13 +54,15 @@ public class Item {
         return recipe;
     }
 
-    public ArrayList<UUID_Entity> getTags() {
+    public ArrayList<ItemTag_Ref> getTags() {
         return tags;
     }
 
     public UnitType getQtyUnit() {
         return qty_unit;
     }
+
+    Item() {}
 
     /**
      * Constructor class which takes all parameters including recipe.
@@ -62,26 +74,15 @@ public class Item {
      * @param tags A list of tags to indicate whether the item is gluten-free etc.
      * @param qty_unit The unit in relation to the quantity of the Item, such as sauce requires units L or ML.
      */
-    public Item(String name, String description, double base_price, double markup_price, Recipe recipe,
-                ArrayList<UUID_Entity> tags, String qty_unit) {
+    public Item(String name, String description, Currency base_price, Currency markup_price, Recipe recipe,
+                ArrayList<ItemTag_Ref> tags, UnitType qty_unit) {
         this.name = name;
         this.description = description;
         this.base_price = base_price;
         this.markup_price = markup_price;
         this.recipe = recipe;
         this.tags = tags;
-
-        if (qty_unit == "KG") {
-            this.qty_unit = UnitType.KG;
-        } else if (qty_unit == "G") {
-            this.qty_unit = UnitType.G;
-        } else if (qty_unit == "L") {
-            this.qty_unit = UnitType.L;
-        } else if (qty_unit == "ML") {
-            this.qty_unit = UnitType.ML;
-        } else if (qty_unit == "NUM") {
-            this.qty_unit = UnitType.NUM;
-        }
+        this.qty_unit = qty_unit;
     }
 
     /**
@@ -93,25 +94,14 @@ public class Item {
      * @param tags A list of tags to indicate whether the item is gluten-free etc.
      * @param qty_unit The unit in relation to the quantity of the Item, such as sauce requires L or ML.
      */
-    public Item(String name, String description, double base_price, double markup_price,
-                ArrayList<UUID_Entity> tags, String qty_unit) {
+    public Item(String name, String description, Currency base_price, Currency markup_price,
+                ArrayList<ItemTag_Ref> tags, UnitType qty_unit) {
         this.name = name;
         this.description = description;
         this.base_price = base_price;
         this.markup_price = markup_price;
         this.tags = tags;
-
-        if (qty_unit == "KG") {
-            this.qty_unit = UnitType.KG;
-        } else if (qty_unit == "G") {
-            this.qty_unit = UnitType.G;
-        } else if (qty_unit == "L") {
-            this.qty_unit = UnitType.L;
-        } else if (qty_unit == "ML") {
-            this.qty_unit = UnitType.ML;
-        } else if (qty_unit == "NUM") {
-            this.qty_unit = UnitType.NUM;
-        }
+        this.qty_unit = qty_unit;
     }
 
     /**
@@ -120,7 +110,7 @@ public class Item {
      * @return The markup percentage on the Item.
      */
     public double getMarkupPercentage() {
-        return (((markup_price - base_price) / base_price)*100);
+        return (((markup_price.getTotalCash() - base_price.getTotalCash()) / base_price.getTotalCash())*100);
     }
 
     /**
@@ -128,15 +118,6 @@ public class Item {
      * @return The profit that can be made by selling the item.
      */
     public double getProfit() {
-        return markup_price - base_price;
+        return markup_price.getTotalCash() - base_price.getTotalCash();
     }
-
-    /**
-     * A getter for the tags.
-     * @return An ArrayList consisting of tags.
-     */
-    public ArrayList<UUID_Entity> getAllTags() {
-        return tags;
-    }
-
 }
