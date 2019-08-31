@@ -29,18 +29,18 @@ class StockInstanceTest {
         Date date_expired = new Date();
         StockInstance stock_item = new StockInstance(date_added, true, date_expired, 100);
 
-        assertEquals(100, stock_item.getQuantityRemaining());
+        assertEquals(100, stock_item.getQuantityRemaining(), 0.0001);
 
         //Test adding quantity
         stock_item.setQuantityRemaining(10);
-        assertEquals(110, stock_item.getQuantityRemaining());
+        assertEquals(110, stock_item.getQuantityRemaining(), 0.0001);
 
         //Test subtracting quantity
         stock_item.setQuantityRemaining(-20);
-        assertEquals(90, stock_item.getQuantityRemaining());
+        assertEquals(90, stock_item.getQuantityRemaining(), 0.0001);
 
         //Test subtracting more than what is remaining
         stock_item.setQuantityRemaining(-100);
-        assertEquals(0, stock_item.getQuantityRemaining());
+        assertEquals(0, stock_item.getQuantityRemaining(), 0.0001);
     }
 }
