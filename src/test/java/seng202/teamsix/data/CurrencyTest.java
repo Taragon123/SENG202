@@ -6,8 +6,8 @@ public class CurrencyTest {
     @Test
     public void testSetAndGetDollars() {
         Currency cash = new Currency();
-        cash.setDollars(5);
-        assertEquals(5, cash.getDollars());
+        cash.setCents(500);
+        assertEquals(5, cash.getTotalCash());
     }
     @Test
     public void testSetAndGetCents() {

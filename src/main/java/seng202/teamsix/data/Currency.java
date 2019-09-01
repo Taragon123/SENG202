@@ -33,6 +33,7 @@ public class Currency {
      * @return int amount of dollars
      */
     public int getDollars() {
+        dollars = cents / 100;
         return dollars;
     }
 
