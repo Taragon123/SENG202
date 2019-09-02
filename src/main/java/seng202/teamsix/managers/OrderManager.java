@@ -1,36 +1,83 @@
 package seng202.teamsix.managers;
 
-/**
- * Name: OrderManager.java
- * Date: 31/08/2019
- * Author: Hamesh Ravji
- *
- * This class manages all things to do with an Order, such as building it, as well as updating relative data afterwards.
- */
-
+import seng202.teamsix.data.ItemTag_Ref;
+import seng202.teamsix.data.Item_Ref;
 import seng202.teamsix.data.Order;
 
 public class OrderManager {
-    private Order order;
 
-    public OrderManager() {
-        order = new Order();
+    private Order cart = new Order();
+
+    public OrderManager(Order order) {
+        this.cart = order;
     }
 
-    public void buildOrder() {
-        OrderBuilder orderBuilder = new OrderBuilder();
-        // Methods which should be available from this class are:
-        // this.order = orderBuilder.getOrder();
-        // orderBuilder.addItem();
-        // orderBuilder.removeItem();
+    /**
+     * Adds the item to the cart given a reference to an Item item_ref, number of items qty, and a reference to an ItemTag default tag.
+     * @param item_ref A reference to the item that we wish to add to the list.
+     * @param qty The quantity corresponding to the number of Items.
+     * @param default_tag A reference to the Item_Tag that we want to add to the list of dependencies if it isn't arleady there.
+     */
+    public void addToCart(Item_Ref item_ref, int qty, ItemTag_Ref default_tag) {
+        // Waiting for the addToOrder method to be completed in the OrderItem class.
+        // cart.getOrderTree().addToOrder(item_ref);
     }
 
-    public void finaliseBuilder() {
-        FinaliseBuilder finaliseBuilder = new FinaliseBuilder(order);
-        // Methods which should be available from this class are:
-        // finaliseBuilder.printReceipt();
-        // finaliseBuilder.parseXML();
-
+    /**
+     * Removes the item from the cart given a reference to an Item item_ref, and number of items qty.
+     * @param item_ref A reference to the Item that we wish to remove from the list.
+     * @param qty The quantity corresponding to the number of Items.
+     */
+    public void removeFromCart(Item_Ref item_ref, int qty) {
+        // Waiting for implementation in the OrderItem class, or some more information on how to traverse through the
+        // OrderItem structure.
     }
 
+    /**
+     * A little unsure on what this does, will check with group.
+     * @param itemtag_ref
+     */
+    public void trySetOrderForTag(ItemTag_Ref itemtag_ref) {
+        // To be implemented.
+    }
+
+    /**a
+     * Returns the order.
+     * @return The order.
+     */
+    public Order getOrder() {
+        return cart;
+    }
+
+    /**
+     * Returns a Currency object corresponding to the cash required to pay for the order.
+     */
+    public void getCashRequired() {
+        // To be implemented.
+    }
+
+    /**
+     * Returns a Boolean corresponding to whether payment for the order was received.
+     */
+    public void requestPayment() {
+        // To be implemented.
+    }
+
+    /**
+     * Cancelling the order.
+     */
+    public void cancelOrder() {
+        // Yet to be implemented.
+    }
+
+    /**
+     * Finalises the order by saving it so it can be viewed in future if needed, sends order to chefs, prints receipt.
+     */
+    public void finaliseOrder() {
+        // Save the order with StorageAccess/
+
+        // Send order to kitchen via order ticket which is to be printed.
+
+        // Print customers receipt.
+    }
 }
