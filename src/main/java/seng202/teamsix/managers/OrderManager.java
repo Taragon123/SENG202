@@ -9,8 +9,6 @@ package seng202.teamsix.managers;
  */
 
 import seng202.teamsix.data.Order;
-import seng202.teamsix.logical_services.FinaliseBuilder;
-import seng202.teamsix.logical_services.OrderBuilder;
 
 public class OrderManager {
     private Order order;
