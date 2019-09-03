@@ -3,14 +3,11 @@ package seng202.teamsix.managers;
 import seng202.teamsix.data.ItemTag_Ref;
 import seng202.teamsix.data.Item_Ref;
 import seng202.teamsix.data.Order;
+import seng202.teamsix.data.OrderItem;
 
 public class OrderManager {
 
     private Order cart = new Order();
-
-    public OrderManager(Order order) {
-        this.cart = order;
-    }
 
     /**
      * Adds the item to the cart given a reference to an Item item_ref, number of items qty, and a reference to an ItemTag default tag.
@@ -20,7 +17,10 @@ public class OrderManager {
      */
     public void addToCart(Item_Ref item_ref, int qty, ItemTag_Ref default_tag) {
         // Waiting for the addToOrder method to be completed in the OrderItem class.
-        // cart.getOrderTree().addToOrder(item_ref);
+        OrderItem orderItemToAdd = new OrderItem();
+        orderItemToAdd.setItem(item_ref);
+        orderItemToAdd.setQuantity(qty);
+        cart.getOrderTree().addDependant(orderItemToAdd);
     }
 
     /**

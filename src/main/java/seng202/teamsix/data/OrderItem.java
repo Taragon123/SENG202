@@ -48,4 +48,8 @@ public class OrderItem {
     public void setQuantity(int quantity) {
         this.quantity = Math.max(quantity,0);
     }
+
+    public void addToOrder(Item_Ref item_ref) {
+
+    }
 }

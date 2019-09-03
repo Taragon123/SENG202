@@ -188,6 +188,22 @@
             </value>
         </entry>
         <entry>
+            <key>4aad856d-ea1e-432d-83b6-de96616bb22a</key>
+            <value uuid="4aad856d-ea1e-432d-83b6-de96616bb22a">
+                <name>Test Item</name>
+                <description>This item is being used to test the xml system</description>
+                <base_price dollars="10" cents="50"/>
+                <markup_price dollars="14" cents="99"/>
+                <recipe>
+                    <method>1. Create a test
+2. Run test
+3. See if build passes
+</method>
+                </recipe>
+                <qty_unit>NUM</qty_unit>
+            </value>
+        </entry>
+        <entry>
             <key>5bca07a9-cb4d-4adc-8202-2793d5ceb859</key>
             <value uuid="5bca07a9-cb4d-4adc-8202-2793d5ceb859">
                 <name>Test Item</name>
@@ -404,6 +420,13 @@
             </value>
         </entry>
         <entry>
+            <key>9c940c6d-991f-4570-9f16-2a41aa905bed</key>
+            <value uuid="9c940c6d-991f-4570-9f16-2a41aa905bed">
+                <name>Gluten Free</name>
+                <is_dominant>true</is_dominant>
+            </value>
+        </entry>
+        <entry>
             <key>41e78293-09f1-4551-8cc0-bacee996b992</key>
             <value uuid="41e78293-09f1-4551-8cc0-bacee996b992">
                 <name>Gluten Free</name>
@@ -417,9 +440,13 @@
             <value uuid="5b6e6992-7790-4277-b87b-91e225214536">
                 <name>My Menu</name>
                 <description>Hello I am a menu description</description>
-                <menuItems>
-                    <price>0.0</price>
-                </menuItems>
+                <price>0.0</price>
+            </value>
+        </entry>
+        <entry>
+            <key>08dabb9a-735b-418d-9015-cd0684dc5ace</key>
+            <value uuid="08dabb9a-735b-418d-9015-cd0684dc5ace">
+                <price>0.0</price>
             </value>
         </entry>
         <entry>
@@ -427,9 +454,7 @@
             <value uuid="d7b46c18-a568-454a-9ccc-15517b7c0ea4">
                 <name>My Menu</name>
                 <description>Hello I am a menu description</description>
-                <menuItems>
-                    <price>0.0</price>
-                </menuItems>
+                <price>0.0</price>
             </value>
         </entry>
         <entry>
@@ -437,9 +462,7 @@
             <value uuid="e79391b8-a0a0-4c2b-bd38-9d294108c944">
                 <name>My Menu</name>
                 <description>Hello I am a menu description</description>
-                <menuItems>
-                    <price>0.0</price>
-                </menuItems>
+                <price>0.0</price>
             </value>
         </entry>
         <entry>
@@ -447,9 +470,7 @@
             <value uuid="b331663e-c46c-4547-86ea-951f118178cf">
                 <name>My Menu</name>
                 <description>Hello I am a menu description</description>
-                <menuItems>
-                    <price>0.0</price>
-                </menuItems>
+                <price>0.0</price>
             </value>
         </entry>
     </menu_map>
@@ -503,6 +524,18 @@
             </value>
         </entry>
         <entry>
+            <key>1249ef90-21fd-407f-a99a-e738d2b8b4aa</key>
+            <value uuid="1249ef90-21fd-407f-a99a-e738d2b8b4aa">
+                <order_tree>
+                    <dependants>
+                        <quantity>0</quantity>
+                    </dependants>
+                    <quantity>0</quantity>
+                </order_tree>
+                <timestamp>2019-09-03T22:23:19.307+12:00</timestamp>
+            </value>
+        </entry>
+        <entry>
             <key>ab80f3d8-723e-4224-9dea-33c7aa3b05b8</key>
             <value uuid="ab80f3d8-723e-4224-9dea-33c7aa3b05b8">
                 <order_tree>
@@ -547,6 +580,15 @@
             <value uuid="e4d40cec-4d91-4ec0-bbaf-13e5eeb4d2eb">
                 <date_added>2019-08-30T22:12:32.674+12:00</date_added>
                 <date_expires>2019-08-30T22:12:32.674+12:00</date_expires>
+                <does_expire>true</does_expire>
+                <quantity_remaining>4.0</quantity_remaining>
+            </value>
+        </entry>
+        <entry>
+            <key>119367c8-0fc6-40a0-afc8-2ff5db6642fb</key>
+            <value uuid="119367c8-0fc6-40a0-afc8-2ff5db6642fb">
+                <date_added>2019-09-03T22:23:19.385+12:00</date_added>
+                <date_expires>2019-09-03T22:23:19.385+12:00</date_expires>
                 <does_expire>true</does_expire>
                 <quantity_remaining>4.0</quantity_remaining>
             </value>
