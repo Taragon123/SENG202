@@ -13,8 +13,6 @@ public class StockManager {
 
     private ArrayList<StockInstance> stock_list;
 
-    /* Constructors below, not 100% sure at this stage how the StockManager is going to be instantiated */
-
     /**
      * Constructor for the StockManager class, used if there is no current list of stock items
      */
