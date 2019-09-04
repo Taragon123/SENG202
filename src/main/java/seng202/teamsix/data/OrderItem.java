@@ -39,6 +39,7 @@ public class OrderItem {
 
     public void addDependant(OrderItem order_item) {
         this.dependants.add(order_item);
+
     }
 
     public void removeDependant(OrderItem order_item) {

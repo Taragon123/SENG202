@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * Consists of a name, description, price that the business purchased the stock at, selling price (markup_price), optional
  * recipe, an Arraylist consisting of tags to indicate whether the Item is gluten-free etc, and a unit type.
  *
- * Date: August, 2019
+ * Date: August - September, 2019
  * Author: Hamesh Ravji
  */
 @XmlRootElement

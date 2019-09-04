@@ -1,7 +1,11 @@
 package seng202.teamsix.data;
 
 /**
+ * Name: CashRegister.java
  * Class is used to maintain the amount of cash we currently have in the cash register.
+ *
+ * Date: September, 2019
+ * Author: Hamesh Ravji
  */
 
 public class CashRegister {

@@ -7,6 +7,7 @@
 package seng202.teamsix.data;
 
 import javax.xml.bind.annotation.*;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -19,6 +20,18 @@ public class Order extends Order_Ref{
     private OrderItem order_tree = new OrderItem();
     @XmlElement
     private Date timestamp;
+
+    private ArrayList<OrderItem> orderItems = new ArrayList<OrderItem>();
+
+    public ArrayList<OrderItem> getOrderItems() {
+        return orderItems;
+    }
+
+    //public boolean addOrderItem(Item itemToAdd) {
+    //}
+
+    //public boolean removeOrderItem(OrderItem itemToRemove) {
+    //}
 
     public OrderItem getOrderTree() {
         return order_tree;

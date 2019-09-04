@@ -1,9 +1,14 @@
 package seng202.teamsix.managers;
 
-import seng202.teamsix.data.ItemTag_Ref;
-import seng202.teamsix.data.Item_Ref;
-import seng202.teamsix.data.Order;
-import seng202.teamsix.data.OrderItem;
+/**
+ * Name: OrderManager.java
+ * Date: September, 2019
+ * Author(s): Hamesh Ravji, George Stephenson
+ *
+ * This class
+ */
+
+import seng202.teamsix.data.*;
 
 public class OrderManager {
 
@@ -33,6 +38,7 @@ public class OrderManager {
         // OrderItem structure.
         for (OrderItem orderitem_c: cart.getOrderTree().getDependants()) {
             Item_Ref item_ref_c = orderitem_c.getItem();
+            Item item_c = (Item)item_ref_c;
             if (item_ref_c == item_ref) {
                 int num_items_in_order = orderitem_c.getQuantity();
                 if (num_items_in_order > qty) {
