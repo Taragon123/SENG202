@@ -10,8 +10,9 @@ import java.util.UUID;
  */
 public class ItemManager
 {
-    private ArrayList<Item> items = new ArrayList<Item>();
-    private ArrayList<ItemTag> tags = new ArrayList<ItemTag>();
+    /*
+    TODO UNFINISHED, SOME METHODS INCOMPLETE
+     */
 
     /**
      * Constructor
@@ -19,29 +20,12 @@ public class ItemManager
     public ItemManager() {}
 
     /**
-     * Gets a list of all stored tags.
-     * @return list of tags
-     */
-    public ArrayList<ItemTag> getAllTags() {
-        return tags;
-    }
-
-    /**
-     * Gets a list of all stored items.
-     * @return list of items
-     */
-    public ArrayList<Item> getAllItems() {
-        return items;
-    }
-
-    /**
      * Gets item with given ID
      * @param item_id ID query
      * @return Item
      */
-    public Item getItem(UUID item_id) {
-        ArrayList<ItemTag_Ref> tags = new ArrayList<ItemTag_Ref>();
-        return new Item("Coke", "Cold one", new Currency(), new Currency(), tags, UnitType.KG);
+    public Item getItem(Item_Ref item_id) {
+        return StorageAccess.instance().getItem(item_id);
     }
 
     /**
@@ -58,8 +42,8 @@ public class ItemManager
      * Adds item to stored items.
      * @param new_item item to add
      */
-    public void addItem(Item new_item) {
-        items.add(new_item);
+    public void addUpdateItem(Item new_item) {
+        StorageAccess.instance().updateItem(new_item);
     }
 
     /**
@@ -67,7 +51,7 @@ public class ItemManager
      * @param new_tag tag to add
      */
     public void addTag(ItemTag new_tag) {
-        tags.add(new_tag);
+        StorageAccess.instance().updateItemTag(new_tag);
     }
 
     //Removing from added objects
@@ -77,7 +61,7 @@ public class ItemManager
      * @param item_id removes item with this ID
      */
     public void removeItem(UUID item_id) {
-
+        // TODO needs methods implementing in StorageAccess
     }
 
     /**
@@ -85,6 +69,7 @@ public class ItemManager
      * @param tag_id removes tag with this ID
      */
     public void removeTag(UUID tag_id) {
-
+        // TODO needs methods implementing in StorageAccess
     }
+
 }
