@@ -41,6 +41,10 @@ public class OrderItem {
         this.dependants.add(order_item);
     }
 
+    public void removeDependant(OrderItem order_item) {
+        this.dependants.remove(order_item);
+    }
+
     public int getQuantity() {
         return this.quantity;
     }

@@ -31,6 +31,17 @@ public class OrderManager {
     public void removeFromCart(Item_Ref item_ref, int qty) {
         // Waiting for implementation in the OrderItem class, or some more information on how to traverse through the
         // OrderItem structure.
+        for (OrderItem orderitem_c: cart.getOrderTree().getDependants()) {
+            Item_Ref item_ref_c = orderitem_c.getItem();
+            if (item_ref_c == item_ref) {
+                int num_items_in_order = orderitem_c.getQuantity();
+                if (num_items_in_order > qty) {
+                    orderitem_c.setQuantity(num_items_in_order - qty);
+                } else if (num_items_in_order == qty) {
+                    cart.getOrderTree().removeDependant(orderitem_c);
+                }
+            }
+        }
     }
 
     /**
