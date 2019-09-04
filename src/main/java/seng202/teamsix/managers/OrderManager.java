@@ -7,7 +7,7 @@ import seng202.teamsix.data.OrderItem;
 
 public class OrderManager {
 
-    private Order cart = new Order();
+    private Order cart;
 
     /**
      * Adds the item to the cart given a reference to an Item item_ref, number of items qty, and a reference to an ItemTag default tag.
@@ -45,8 +45,16 @@ public class OrderManager {
      * Returns the order.
      * @return The order.
      */
-    public Order getOrder() {
+    public Order getCart() {
         return cart;
+    }
+
+    /**
+     *
+     * @param cart
+     */
+    public void setCart(Order cart) {
+        this.cart = cart;
     }
 
     /**
