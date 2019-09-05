@@ -25,6 +25,11 @@ public class StockInstance extends StockInstance_Ref {
     private float quantity_remaining;
 
     /**
+     * Empty constructor
+     */
+    public StockInstance() {}
+
+    /**
      * Constructor for a StockInstance. If an item does not expire then it must be constructed with null for
      * the expiry date.
      * @param date_added the date that the StockInstance was added
