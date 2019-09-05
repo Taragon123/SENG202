@@ -4,7 +4,8 @@ import javax.xml.bind.annotation.*;
 
 import java.util.ArrayList;
 
-/** Name: Item.java
+/**
+ * Name: Item.java
  *
  * Class Item, essentially the item that is going to be listed in the menu. Can consist of multiple Compost or variant items.
  * Consists of a name, description, price that the business purchased the stock at, selling price (markup_price), optional
@@ -31,16 +32,13 @@ public class Item extends Item_Ref {
     @XmlElement
     private UnitType qty_unit;
 
-
     public String getName() {
         return name;
     }
 
-
     public String getDescription() {
         return description;
     }
-
 
     public Currency getBasePrice() {
         return base_price;
@@ -62,7 +60,61 @@ public class Item extends Item_Ref {
         return qty_unit;
     }
 
-    Item() {}
+    /**
+     * A setter for the name of the item.
+     * @param name The new name we wish to assign to the item.
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Setter for description.
+     * @param description The new description of the item.
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    /**
+     * Setter for base_price.
+     * @param base_price Sets a new price that the item costs to produce, given Currency object.
+     */
+    public void setBasePrice(Currency base_price) {
+        this.base_price = base_price;
+    }
+
+    /**
+     * Setter for markup_price.
+     * @param markup_price Sets a new price that we wish to sell the item for, given Currency object.
+     */
+    public void setMarkUpPrice(Currency markup_price) {
+        this.markup_price = markup_price;
+    }
+
+    /**
+     * Setter for recipe.
+     * @param recipe The Recipe object we wish to assign to the item.
+     */
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
+    }
+
+    /**
+     * Setter for tags.
+     * @param tags An arraylist consisting of ItemTag_Ref's we wish to assign to the item.
+     */
+    public void setTags(ArrayList<ItemTag_Ref> tags) {
+        this.tags = tags;
+    }
+
+    /**
+     * Setter for qty_unit.
+     * @param qty_unit The quantity unit type we wish to assign to the item.
+     */
+    public void setQtyUnit(UnitType qty_unit) {
+        this.qty_unit = qty_unit;
+    }
 
     /**
      * Constructor class which takes all parameters including recipe.
@@ -119,5 +171,21 @@ public class Item extends Item_Ref {
      */
     public double getProfit() {
         return markup_price.getTotalCash() - base_price.getTotalCash();
+    }
+
+    /**
+     * Rewrite the equals method such that it compares all the attributes of the current Item object with the given Item object.
+     * @param other ItemRef object which we want to compare with.
+     * @return If all the items are the identical, return true. False otherwise.
+     */
+    public boolean equals(Item other) {
+
+        return (this.name == other.name &&
+                this.description == other.description &&
+                this.base_price == other.base_price &&
+                this.markup_price == other.markup_price &&
+                this.tags == other.tags &&
+                this.qty_unit == other.qty_unit &&
+                this.recipe == other.recipe);
     }
 }

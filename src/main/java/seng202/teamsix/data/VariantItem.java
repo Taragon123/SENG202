@@ -1,15 +1,24 @@
 package seng202.teamsix.data;
 import java.util.ArrayList;
 
+/**
+ * Name: VariantItem.java
+ * Date: August - September, 2019
+ *
+ * Description:
+ *
+ * Author:
+ */
+
 public class VariantItem {
-    public ArrayList<UUID_Entity> variantList = new ArrayList<UUID_Entity>();
-    public boolean priceFixed;
+    private ArrayList<Item_Ref> variantList = new ArrayList<Item_Ref>();
+    private boolean priceFixed;
 
     /**
      * Gets the variant list.
      * @return ArrayList containing variants
      */
-    public ArrayList<UUID_Entity> getVariants() {
+    public ArrayList<Item_Ref> getVariants() {
         return variantList;
     }
 
@@ -17,7 +26,7 @@ public class VariantItem {
      * Adds item to variant list.
      * @param itemToAdd to be added to the list.
      */
-    public void addToMenu(UUID_Entity itemToAdd) {
+    public void addToMenu(Item_Ref itemToAdd) {
         variantList.add(itemToAdd);
     }
 
@@ -25,7 +34,7 @@ public class VariantItem {
      * Removes item from menu list.
      * @param itemToRemove to be removed from the list.
      */
-    public void removeFromMenu(UUID_Entity itemToRemove) {
+    public void removeFromMenu(Item_Ref itemToRemove) {
         variantList.remove(itemToRemove);
     }
 }

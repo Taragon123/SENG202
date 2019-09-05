@@ -27,12 +27,6 @@ public class Order extends Order_Ref{
         return orderItems;
     }
 
-    //public boolean addOrderItem(Item itemToAdd) {
-    //}
-
-    //public boolean removeOrderItem(OrderItem itemToRemove) {
-    //}
-
     public OrderItem getOrderTree() {
         return order_tree;
     }

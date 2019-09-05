@@ -10,6 +10,8 @@ package seng202.teamsix.managers;
 
 import seng202.teamsix.data.*;
 
+import java.util.ArrayList;
+
 public class OrderManager {
 
     private Order cart;
@@ -21,11 +23,7 @@ public class OrderManager {
      * @param default_tag A reference to the Item_Tag that we want to add to the list of dependencies if it isn't arleady there.
      */
     public void addToCart(Item_Ref item_ref, int qty, ItemTag_Ref default_tag) {
-        // Waiting for the addToOrder method to be completed in the OrderItem class.
-        OrderItem orderItemToAdd = new OrderItem();
-        orderItemToAdd.setItem(item_ref);
-        orderItemToAdd.setQuantity(qty);
-        cart.getOrderTree().addDependant(orderItemToAdd);
+        cart.getOrderTree().addToOrder(item_ref, qty, default_tag);
     }
 
     /**
@@ -34,20 +32,7 @@ public class OrderManager {
      * @param qty The quantity corresponding to the number of Items.
      */
     public void removeFromCart(Item_Ref item_ref, int qty) {
-        // Waiting for implementation in the OrderItem class, or some more information on how to traverse through the
-        // OrderItem structure.
-        for (OrderItem orderitem_c: cart.getOrderTree().getDependants()) {
-            Item_Ref item_ref_c = orderitem_c.getItem();
-            Item item_c = (Item)item_ref_c;
-            if (item_ref_c == item_ref) {
-                int num_items_in_order = orderitem_c.getQuantity();
-                if (num_items_in_order > qty) {
-                    orderitem_c.setQuantity(num_items_in_order - qty);
-                } else if (num_items_in_order == qty) {
-                    cart.getOrderTree().removeDependant(orderitem_c);
-                }
-            }
-        }
+        cart.getOrderTree().removeFromOrder(item_ref, qty);
     }
 
     /**
@@ -58,7 +43,7 @@ public class OrderManager {
         // To be implemented.
     }
 
-    /**a
+    /**
      * Returns the order.
      * @return The order.
      */
@@ -67,7 +52,7 @@ public class OrderManager {
     }
 
     /**
-     *
+     * Setter for the cart.
      * @param cart
      */
     public void setCart(Order cart) {
@@ -75,24 +60,39 @@ public class OrderManager {
     }
 
     /**
+     * This will be used to reset the cart when the user wishes to clear it, or when a new order is placed.
+     */
+    public void resetCart() {
+        this.cart = new Order();
+    }
+
+    /**
      * Returns a Currency object corresponding to the cash required to pay for the order.
      */
-    public void getCashRequired() {
-        // To be implemented.
+    public Currency getCashRequired() {
+        ArrayList<OrderItem> orderItems = cart.getOrderTree().getDependants();
+        double cashCountTemp = 0.0;
+        Currency cashRequired = new Currency();
+        for (OrderItem orderItem: orderItems) {
+            Item item = (Item)orderItem.getItem();
+            cashCountTemp += item.getMarkupPrice().getTotalCash();
+        }
+        cashRequired.setTotalCash(cashCountTemp);
+        return cashRequired;
     }
 
     /**
      * Returns a Boolean corresponding to whether payment for the order was received.
      */
-    public void requestPayment() {
-        // To be implemented.
+    public boolean requestPayment(boolean payment_received) {
+        return payment_received;
     }
 
     /**
      * Cancelling the order.
      */
     public void cancelOrder() {
-        // Yet to be implemented.
+        resetCart();
     }
 
     /**
