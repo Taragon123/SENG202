@@ -21,12 +21,6 @@ public class Order extends Order_Ref{
     @XmlElement
     private Date timestamp;
 
-    private ArrayList<OrderItem> orderItems = new ArrayList<OrderItem>();
-
-    public ArrayList<OrderItem> getOrderItems() {
-        return orderItems;
-    }
-
     public OrderItem getOrderTree() {
         return order_tree;
     }

@@ -18,22 +18,6 @@
             </value>
         </entry>
         <entry>
-            <key>35cdc733-62b3-44a4-87ee-00cb9ce6940a</key>
-            <value uuid="35cdc733-62b3-44a4-87ee-00cb9ce6940a">
-                <name>Test Item</name>
-                <description>This item is being used to test the xml system</description>
-                <base_price dollars="10" cents="50"/>
-                <markup_price dollars="14" cents="99"/>
-                <recipe>
-                    <method>1. Create a test
-2. Run test
-3. See if build passes
-</method>
-                </recipe>
-                <qty_unit>NUM</qty_unit>
-            </value>
-        </entry>
-        <entry>
             <key>ea45e049-78c3-4142-a9e8-e152975a5a6f</key>
             <value uuid="ea45e049-78c3-4142-a9e8-e152975a5a6f">
                 <name>Test Item</name>
@@ -66,35 +50,8 @@
             </value>
         </entry>
         <entry>
-            <key>47f0231e-90b2-42cf-86f8-d19ff4d20c05</key>
-            <value uuid="47f0231e-90b2-42cf-86f8-d19ff4d20c05">
-                <name>Test Item</name>
-                <description>This item is being used to test the xml system</description>
-                <base_price dollars="10" cents="50"/>
-                <markup_price dollars="14" cents="99"/>
-                <recipe>
-                    <method>1. Create a test
-2. Run test
-3. See if build passes
-</method>
-                </recipe>
-                <qty_unit>NUM</qty_unit>
-            </value>
-        </entry>
-        <entry>
             <key>0ba65d9c-ecbe-4cb8-8b89-feaf1ad3054d</key>
             <value uuid="0ba65d9c-ecbe-4cb8-8b89-feaf1ad3054d"/>
-        </entry>
-        <entry>
-            <key>92fcf2d8-a604-4eaf-9381-49d8597f80cc</key>
-            <value uuid="92fcf2d8-a604-4eaf-9381-49d8597f80cc">
-                <name>Test Item</name>
-                <description>This item is being used to test the xml system</description>
-                <base_price dollars="10" cents="50"/>
-                <markup_price dollars="14" cents="99"/>
-                <recipe/>
-                <qty_unit>NUM</qty_unit>
-            </value>
         </entry>
         <entry>
             <key>68aa4c46-8b50-42de-b702-57a6d3d32d12</key>
@@ -110,22 +67,6 @@
         <entry>
             <key>aaccfe33-9f80-4139-a6c6-90e55a878de8</key>
             <value uuid="aaccfe33-9f80-4139-a6c6-90e55a878de8">
-                <name>Test Item</name>
-                <description>This item is being used to test the xml system</description>
-                <base_price dollars="10" cents="50"/>
-                <markup_price dollars="14" cents="99"/>
-                <recipe>
-                    <method>1. Create a test
-2. Run test
-3. See if build passes
-</method>
-                </recipe>
-                <qty_unit>NUM</qty_unit>
-            </value>
-        </entry>
-        <entry>
-            <key>d92cb818-e24e-40a2-9a03-2287b721e096</key>
-            <value uuid="d92cb818-e24e-40a2-9a03-2287b721e096">
                 <name>Test Item</name>
                 <description>This item is being used to test the xml system</description>
                 <base_price dollars="10" cents="50"/>
@@ -188,8 +129,8 @@
             </value>
         </entry>
         <entry>
-            <key>adacea57-a709-47c0-9d19-145d1bd5c051</key>
-            <value uuid="adacea57-a709-47c0-9d19-145d1bd5c051">
+            <key>4aad856d-ea1e-432d-83b6-de96616bb22a</key>
+            <value uuid="4aad856d-ea1e-432d-83b6-de96616bb22a">
                 <name>Test Item</name>
                 <description>This item is being used to test the xml system</description>
                 <base_price dollars="10" cents="50"/>
@@ -204,8 +145,115 @@
             </value>
         </entry>
         <entry>
-            <key>4aad856d-ea1e-432d-83b6-de96616bb22a</key>
-            <value uuid="4aad856d-ea1e-432d-83b6-de96616bb22a">
+            <key>8653dd3d-1ac1-4d27-a69c-152e199c7ab2</key>
+            <value uuid="8653dd3d-1ac1-4d27-a69c-152e199c7ab2">
+                <name>Test Item</name>
+                <description>This item is being used to test the xml system</description>
+                <base_price dollars="10" cents="50"/>
+                <markup_price dollars="14" cents="99"/>
+                <recipe>
+                    <method>1. Create a test
+2. Run test
+3. See if build passes
+</method>
+                </recipe>
+                <qty_unit>NUM</qty_unit>
+            </value>
+        </entry>
+        <entry>
+            <key>cbcf4124-5daf-4799-b55d-a037d3c8c7a8</key>
+            <value uuid="cbcf4124-5daf-4799-b55d-a037d3c8c7a8">
+                <name>Test Item</name>
+                <description>This item is being used to test the xml system</description>
+                <base_price dollars="10" cents="50"/>
+                <markup_price dollars="14" cents="99"/>
+                <recipe>
+                    <method>1. Create a test
+2. Run test
+3. See if build passes
+</method>
+                </recipe>
+                <qty_unit>NUM</qty_unit>
+            </value>
+        </entry>
+        <entry>
+            <key>70b56782-39b9-4d21-a604-5a8b151719aa</key>
+            <value uuid="70b56782-39b9-4d21-a604-5a8b151719aa">
+                <name>Test Item</name>
+                <description>This item is being used to test the xml system</description>
+                <base_price dollars="10" cents="50"/>
+                <markup_price dollars="14" cents="99"/>
+                <recipe>
+                    <method>1. Create a test
+2. Run test
+3. See if build passes
+</method>
+                </recipe>
+                <qty_unit>NUM</qty_unit>
+            </value>
+        </entry>
+        <entry>
+            <key>35cdc733-62b3-44a4-87ee-00cb9ce6940a</key>
+            <value uuid="35cdc733-62b3-44a4-87ee-00cb9ce6940a">
+                <name>Test Item</name>
+                <description>This item is being used to test the xml system</description>
+                <base_price dollars="10" cents="50"/>
+                <markup_price dollars="14" cents="99"/>
+                <recipe>
+                    <method>1. Create a test
+2. Run test
+3. See if build passes
+</method>
+                </recipe>
+                <qty_unit>NUM</qty_unit>
+            </value>
+        </entry>
+        <entry>
+            <key>47f0231e-90b2-42cf-86f8-d19ff4d20c05</key>
+            <value uuid="47f0231e-90b2-42cf-86f8-d19ff4d20c05">
+                <name>Test Item</name>
+                <description>This item is being used to test the xml system</description>
+                <base_price dollars="10" cents="50"/>
+                <markup_price dollars="14" cents="99"/>
+                <recipe>
+                    <method>1. Create a test
+2. Run test
+3. See if build passes
+</method>
+                </recipe>
+                <qty_unit>NUM</qty_unit>
+            </value>
+        </entry>
+        <entry>
+            <key>92fcf2d8-a604-4eaf-9381-49d8597f80cc</key>
+            <value uuid="92fcf2d8-a604-4eaf-9381-49d8597f80cc">
+                <name>Test Item</name>
+                <description>This item is being used to test the xml system</description>
+                <base_price dollars="10" cents="50"/>
+                <markup_price dollars="14" cents="99"/>
+                <recipe/>
+                <qty_unit>NUM</qty_unit>
+            </value>
+        </entry>
+        <entry>
+            <key>d92cb818-e24e-40a2-9a03-2287b721e096</key>
+            <value uuid="d92cb818-e24e-40a2-9a03-2287b721e096">
+                <name>Test Item</name>
+                <description>This item is being used to test the xml system</description>
+                <base_price dollars="10" cents="50"/>
+                <markup_price dollars="14" cents="99"/>
+                <recipe>
+                    <method>1. Create a test
+2. Run test
+3. See if build passes
+</method>
+                </recipe>
+                <qty_unit>NUM</qty_unit>
+            </value>
+        </entry>
+        <entry>
+            <key>adacea57-a709-47c0-9d19-145d1bd5c051</key>
+            <value uuid="adacea57-a709-47c0-9d19-145d1bd5c051">
                 <name>Test Item</name>
                 <description>This item is being used to test the xml system</description>
                 <base_price dollars="10" cents="50"/>
@@ -254,22 +302,6 @@
         <entry>
             <key>7402e45e-1679-4fac-9e14-59466718c736</key>
             <value uuid="7402e45e-1679-4fac-9e14-59466718c736">
-                <name>Test Item</name>
-                <description>This item is being used to test the xml system</description>
-                <base_price dollars="10" cents="50"/>
-                <markup_price dollars="14" cents="99"/>
-                <recipe>
-                    <method>1. Create a test
-2. Run test
-3. See if build passes
-</method>
-                </recipe>
-                <qty_unit>NUM</qty_unit>
-            </value>
-        </entry>
-        <entry>
-            <key>cbcf4124-5daf-4799-b55d-a037d3c8c7a8</key>
-            <value uuid="cbcf4124-5daf-4799-b55d-a037d3c8c7a8">
                 <name>Test Item</name>
                 <description>This item is being used to test the xml system</description>
                 <base_price dollars="10" cents="50"/>
@@ -348,8 +380,8 @@
             </value>
         </entry>
         <entry>
-            <key>70b56782-39b9-4d21-a604-5a8b151719aa</key>
-            <value uuid="70b56782-39b9-4d21-a604-5a8b151719aa">
+            <key>683000ed-006a-4411-9022-a60d35143122</key>
+            <value uuid="683000ed-006a-4411-9022-a60d35143122">
                 <name>Test Item</name>
                 <description>This item is being used to test the xml system</description>
                 <base_price dollars="10" cents="50"/>
@@ -401,6 +433,13 @@
             </value>
         </entry>
         <entry>
+            <key>5cd83e39-9470-43ff-b979-98ec53fc8789</key>
+            <value uuid="5cd83e39-9470-43ff-b979-98ec53fc8789">
+                <name>Gluten Free</name>
+                <is_dominant>true</is_dominant>
+            </value>
+        </entry>
+        <entry>
             <key>409ef587-a392-4b8b-8ea3-49285e2b16f1</key>
             <value uuid="409ef587-a392-4b8b-8ea3-49285e2b16f1">
                 <name>Gluten Free</name>
@@ -410,6 +449,13 @@
         <entry>
             <key>e6276baf-fbd0-402b-9dc8-b5138612aa29</key>
             <value uuid="e6276baf-fbd0-402b-9dc8-b5138612aa29">
+                <name>Gluten Free</name>
+                <is_dominant>true</is_dominant>
+            </value>
+        </entry>
+        <entry>
+            <key>331daa13-d0e7-4009-8cfd-aa69806db58a</key>
+            <value uuid="331daa13-d0e7-4009-8cfd-aa69806db58a">
                 <name>Gluten Free</name>
                 <is_dominant>true</is_dominant>
             </value>
@@ -458,6 +504,18 @@
         </entry>
     </item_tag_map>
     <menu_map>
+        <entry>
+            <key>f89595a8-5e23-4fd3-b409-4f39136d4670</key>
+            <value uuid="f89595a8-5e23-4fd3-b409-4f39136d4670">
+                <price>0.0</price>
+            </value>
+        </entry>
+        <entry>
+            <key>d0a7f8de-a796-4cb6-83dc-0404861fdabf</key>
+            <value uuid="d0a7f8de-a796-4cb6-83dc-0404861fdabf">
+                <price>0.0</price>
+            </value>
+        </entry>
         <entry>
             <key>5b6e6992-7790-4277-b87b-91e225214536</key>
             <value uuid="5b6e6992-7790-4277-b87b-91e225214536">
@@ -541,6 +599,18 @@
             </value>
         </entry>
         <entry>
+            <key>b66cd1f3-bf99-4db2-93f0-41e3de717b12</key>
+            <value uuid="b66cd1f3-bf99-4db2-93f0-41e3de717b12">
+                <order_tree>
+                    <dependants>
+                        <quantity>0</quantity>
+                    </dependants>
+                    <quantity>0</quantity>
+                </order_tree>
+                <timestamp>2019-09-06T00:11:55.032+12:00</timestamp>
+            </value>
+        </entry>
+        <entry>
             <key>cc559269-f0fd-4a53-8a99-345424a93b90</key>
             <value uuid="cc559269-f0fd-4a53-8a99-345424a93b90">
                 <order_tree>
@@ -550,6 +620,18 @@
                     <quantity>0</quantity>
                 </order_tree>
                 <timestamp>2019-08-30T22:12:32.606+12:00</timestamp>
+            </value>
+        </entry>
+        <entry>
+            <key>da403090-8328-49e2-a2c8-4c4967abc9c6</key>
+            <value uuid="da403090-8328-49e2-a2c8-4c4967abc9c6">
+                <order_tree>
+                    <dependants>
+                        <quantity>0</quantity>
+                    </dependants>
+                    <quantity>0</quantity>
+                </order_tree>
+                <timestamp>2019-09-06T00:09:55.472+12:00</timestamp>
             </value>
         </entry>
         <entry>
@@ -594,6 +676,24 @@
             <value uuid="c32bcce3-7ee0-462a-bbb2-4cba74789c83">
                 <date_added>2019-08-30T21:26:31.748+12:00</date_added>
                 <date_expires>2019-08-30T21:26:31.748+12:00</date_expires>
+                <does_expire>true</does_expire>
+                <quantity_remaining>4.0</quantity_remaining>
+            </value>
+        </entry>
+        <entry>
+            <key>b06b7f6f-f0e8-43e8-afe8-8d747e3797fb</key>
+            <value uuid="b06b7f6f-f0e8-43e8-afe8-8d747e3797fb">
+                <date_added>2019-09-06T00:09:55.736+12:00</date_added>
+                <date_expires>2019-09-06T00:09:55.736+12:00</date_expires>
+                <does_expire>true</does_expire>
+                <quantity_remaining>4.0</quantity_remaining>
+            </value>
+        </entry>
+        <entry>
+            <key>ea3403e0-a186-4069-b738-975f44754edc</key>
+            <value uuid="ea3403e0-a186-4069-b738-975f44754edc">
+                <date_added>2019-09-06T00:11:55.149+12:00</date_added>
+                <date_expires>2019-09-06T00:11:55.149+12:00</date_expires>
                 <does_expire>true</does_expire>
                 <quantity_remaining>4.0</quantity_remaining>
             </value>
