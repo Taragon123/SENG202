@@ -75,7 +75,7 @@ public class OrderManager {
         Currency cashRequired = new Currency();
         for (OrderItem orderItem: orderItems) {
             Item item = (Item)orderItem.getItem();
-            cashCountTemp += item.getMarkupPrice().getTotalCash();
+            cashCountTemp += item.getMarkupPrice().getTotalCash() * orderItem.getQuantity();
         }
         cashRequired.setTotalCash(cashCountTemp);
         return cashRequired;

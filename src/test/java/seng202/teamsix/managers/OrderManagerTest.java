@@ -10,56 +10,52 @@ import static org.junit.jupiter.api.Assertions.*;
 class OrderManagerTest {
 
     @Test
-    void addToCart() {
-        Order cart = new Order();
+    void addToCartTest() {
         OrderManager orderManager = new OrderManager();
-        orderManager.setCart(cart);
+        orderManager.resetCart();
+        Item_Ref item_refToAdd = initialiseItem1();
+        ItemTag tag = new ItemTag("Gluten free!", false);
+        ItemTag_Ref tag_ref = (ItemTag_Ref)tag;
+        orderManager.addToCart(item_refToAdd, 5, tag_ref);
+        OrderItem orderItemRetrievedFromOrder = orderManager.getCart().getOrderTree().getDependants().get(0);
+
+        assertEquals(((Item)item_refToAdd).getName(), ((Item)orderItemRetrievedFromOrder.getItem()).getName());
+        assertEquals(5, orderItemRetrievedFromOrder.getQuantity());
+
+        orderManager.addToCart(item_refToAdd, 10, tag_ref);
+        orderItemRetrievedFromOrder = orderManager.getCart().getOrderTree().getDependants().get(0);
+
+        assertEquals(15, orderItemRetrievedFromOrder.getQuantity());
+    }
+
+    @Test
+    void resetCartTest() {
+        OrderManager orderManager = new OrderManager();
+        orderManager.resetCart();
+
+        assertEquals(0, orderManager.getCart().getOrderTree().getDependants().size());
+    }
+
+    @Test
+    void testGetCashRequiredTest() {
+        OrderManager orderManager = new OrderManager();
+        orderManager.resetCart();
+        Item_Ref item_ref1 = initialiseItem1();
+        ItemTag tag = new ItemTag("Gluten free!", false);
+        ItemTag_Ref tag_ref = (ItemTag_Ref)tag;
+        orderManager.addToCart(item_ref1, 25, tag_ref);
+
+        assertEquals(250.0, orderManager.getCashRequired().getTotalCash());
+    }
+
+    Item_Ref initialiseItem1() {
         ArrayList<ItemTag_Ref> tagList = new ArrayList<ItemTag_Ref>();
         Recipe recipe = new Recipe("Cut Potatoes, cover in batter, deep-try for 5 minutes.");
         Currency base_price = new Currency();
         base_price.setTotalCash(7.50);
         Currency markup_price = new Currency();
         markup_price.setTotalCash(10.00);
-        Item itemToAdd = new Item("Large Fries", "Deep-fried pieces of potato. ", base_price, markup_price, recipe, tagList, UnitType.G);
-        Item_Ref item_refToAdd = (Item_Ref)itemToAdd;
-        ItemTag tag = new ItemTag("Gluten free!", false);
-        ItemTag_Ref tag_ref = (ItemTag_Ref)tag;
-        orderManager.addToCart(item_refToAdd, 5, tag_ref);
-        for (OrderItem item: orderManager.getCart().getOrderTree().getDependants()) {
-            Item item_ref_temp = (Item)item.getItem();
-            assertEquals(itemToAdd.getName(), item_ref_temp.getName());
-        }
-    }
-
-    @Test
-    void removeFromCart() {
-    }
-
-    @Test
-    void trySetOrderForTag() {
-    }
-
-    @Test
-    void getCart() {
-    }
-
-    @Test
-    void setCart() {
-    }
-
-    @Test
-    void getCashRequired() {
-    }
-
-    @Test
-    void requestPayment() {
-    }
-
-    @Test
-    void cancelOrder() {
-    }
-
-    @Test
-    void finaliseOrder() {
+        Item item = new Item("Large Fries", "Deep-fried pieces of potato. ", base_price, markup_price, recipe, tagList, UnitType.G);
+        return item;
     }
 }
