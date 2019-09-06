@@ -1,13 +1,15 @@
 package seng202.teamsix.managers;
 
 import java.util.ArrayList;
+import java.util.Date;
+
 import seng202.teamsix.data.StockInstance;
 
 /**
  * Class StockManager, used to manage the current stock inventory
  * Author: Andrew Clifford
  * Date Created: 31/08/19
- * Last Modified: 01/09/19
+ * Last Modified: 05/09/19
  */
 public class StockManager {
 
@@ -57,6 +59,18 @@ public class StockManager {
             System.err.println("The specified StockInstance is not in the list of stock_items!");
             return false;
         }
+    }
+
+    /**
+     * Creates a StockInstance and adds it to the stock_list
+     * @param date_added the date when the stock was added
+     * @param does_expire boolean, true is the StockInstance expires, false otherwise
+     * @param date_expires the date when the stock expires
+     * @param quantity_remaining the quantity remaining of the StockInstance
+     */
+    public void createStockInstance(Date date_added, boolean does_expire, Date date_expires, float quantity_remaining) {
+        StockInstance instance = new StockInstance(date_added, does_expire, date_expires, quantity_remaining);
+        this.addStock(instance);
     }
 
     public ArrayList<StockInstance> getStockList() { return stock_list; }
