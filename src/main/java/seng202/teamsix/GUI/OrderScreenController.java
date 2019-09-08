@@ -20,4 +20,8 @@ public class OrderScreenController {
     public void cancel_order() {
         System.out.println("Canceled");
     }
+
+    public void open_options() { System.out.println("options"); }
+
+    public void open_filters() { System.out.println("filter"); }
 }
