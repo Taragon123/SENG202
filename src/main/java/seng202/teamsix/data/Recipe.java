@@ -1,3 +1,9 @@
+/**
+ * Name: Recipe.java
+ * Author:
+ * Date: August, 2019
+ */
+
 package seng202.teamsix.data;
 
 import javax.xml.bind.annotation.*;

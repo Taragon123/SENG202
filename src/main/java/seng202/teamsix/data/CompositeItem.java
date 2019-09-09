@@ -55,9 +55,9 @@ public class CompositeItem extends Item{
 
     /**
      * Gets recipe for combining components.
-     * @return String explaining how to combine components
+     * @return recipe for composite item
      */
-    public String getCompositeRecipe() {
-        return recipe.getMethod();
+    public Recipe getCompositeRecipe() {
+        return recipe;
     }
 }

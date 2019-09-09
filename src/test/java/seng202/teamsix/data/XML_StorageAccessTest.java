@@ -56,6 +56,11 @@ public class XML_StorageAccessTest {
                                  UnitType.NUM);
             storage.updateItem(item);
             storage.saveData();
+
+            // Reload
+            storage.loadData();
+            Item_Ref ref = storage.getItem(item);
+            assertTrue(ref.equals(item));
         }catch (IOException e) {
             fail("XML_StorageAccess unable to create valid directory");
         }catch (JAXBException e) {
@@ -74,6 +79,11 @@ public class XML_StorageAccessTest {
             ItemTag tag = new ItemTag("Gluten Free", true);
             storage.updateItemTag(tag);
             storage.saveData();
+
+            // Reload
+            storage.loadData();
+            assertTrue(storage.getItemTag(tag).equals(tag));
+
         }catch (IOException e) {
             fail("XML_StorageAccess unable to create valid directory");
         }catch (JAXBException e) {
@@ -95,6 +105,10 @@ public class XML_StorageAccessTest {
             menu.addToMenu(new MenuItem());
             storage.updateMenu(menu);
             storage.saveData();
+
+            // Reload
+            storage.loadData();
+            assertTrue(storage.getMenu(menu).equals(menu));
         }catch (IOException e) {
             fail("XML_StorageAccess unable to create valid directory");
         }catch (JAXBException e) {
@@ -115,6 +129,11 @@ public class XML_StorageAccessTest {
             order.getOrderTree().addDependant(new OrderItem());
             storage.updateOrder(order);
             storage.saveData();
+
+            // Reload
+            storage.loadData();
+            assertTrue(storage.getOrder(order).equals(order));
+
         }catch (IOException e) {
             fail("XML_StorageAccess unable to create valid directory");
         }catch (JAXBException e) {
@@ -134,6 +153,42 @@ public class XML_StorageAccessTest {
             StockInstance stock = new StockInstance(new Date(), true, new Date(), 4);
             storage.updateStockInstance(stock);
             storage.saveData();
+
+            // Reload
+            storage.loadData();
+            assertTrue(storage.getStockInstance(stock).equals(stock));
+
+        }catch (IOException e) {
+            fail("XML_StorageAccess unable to create valid directory");
+        }catch (JAXBException e) {
+            System.out.println(e.toString());
+            fail("XML_StorageAccess could not create jaxb object contexts");
+        }
+    }
+
+    @Test
+    public void testGetAll() {
+        XML_StorageAccess storage;
+
+        // Test pass case
+        try {
+            storage = new XML_StorageAccess("test_data");
+            for (Item_Ref ref : storage.getAllItems()) {
+                assertNotNull(storage.getItem(ref));
+            }
+            for (ItemTag_Ref ref : storage.getAllItemTags()) {
+                assertNotNull(storage.getItemTag(ref));
+            }
+            for (Menu_Ref ref : storage.getAllMenus()) {
+                assertNotNull(storage.getMenu(ref));
+            }
+            for (Order_Ref ref : storage.getAllOrders()) {
+                assertNotNull(storage.getOrder(ref));
+            }
+            for (StockInstance_Ref ref : storage.getAllStockInstances()) {
+                assertNotNull(storage.getStockInstance(ref));
+            }
+
         }catch (IOException e) {
             fail("XML_StorageAccess unable to create valid directory");
         }catch (JAXBException e) {
