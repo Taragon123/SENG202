@@ -6,6 +6,9 @@ import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
@@ -25,8 +28,11 @@ public class OrderScreenController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        Image logo = new Image("https://i.imgur.com/GzCtLGK.png");
+        System.out.println("Image loading error? " + logo.isError());
+        logo_view.setImage(logo);
         Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy   HH:mm");
             date_time.setText(LocalDateTime.now().format(formatter));
         }), new KeyFrame(Duration.seconds(1)));
         clock.setCycleCount(Animation.INDEFINITE);
@@ -35,7 +41,11 @@ public class OrderScreenController implements Initializable {
 
     @FXML
     private Label date_time;
-    
+
+    @FXML
+    private GridPane main_grid;
+    @FXML
+    private ImageView logo_view;
 
     public void add_to_order() {
         System.out.println("Added");
