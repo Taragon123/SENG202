@@ -28,7 +28,7 @@ public class CompositeItemTest {
     public void testSetGetRecipe() {
         CompositeItem item = new CompositeItem();
         item.setCompositeRecipe(new Recipe("Do nothing, there's no components!"));
-        assertEquals(item.getCompositeRecipe(), "Do nothing, there's no components!");
+        assertEquals(item.getCompositeRecipe().getMethod(), "Do nothing, there's no components!");
     }
 
     @Test

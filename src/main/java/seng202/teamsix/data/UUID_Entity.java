@@ -59,8 +59,8 @@ public class UUID_Entity{
     public boolean equals(Object obj) {
         if(obj instanceof UUID_Entity) {
             UUID_Entity entity = (UUID_Entity) obj;
-            return uuid.getMostSignificantBits() == uuid.getMostSignificantBits()
-                    && entity.uuid.getLeastSignificantBits() == entity.uuid.getLeastSignificantBits();
+            return uuid.getMostSignificantBits() == entity.uuid.getMostSignificantBits()
+                    && uuid.getLeastSignificantBits() == entity.uuid.getLeastSignificantBits();
         }
         return false;
     }
