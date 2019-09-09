@@ -1,5 +1,19 @@
 package seng202.teamsix.GUI;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.text.Text;
+import javafx.util.Duration;
+
+import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ResourceBundle;
+
 /**
  * Name: OrderScreenController.java
  * Authors: Taran Jennison
@@ -7,10 +21,25 @@ package seng202.teamsix.GUI;
  */
 
 
-public class OrderScreenController {
+public class OrderScreenController implements Initializable {
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+            date_time.setText(LocalDateTime.now().format(formatter));
+        }), new KeyFrame(Duration.seconds(1)));
+        clock.setCycleCount(Animation.INDEFINITE);
+        clock.play();
+    }
+
+    @FXML
+    private Label date_time;
+    
 
     public void add_to_order() {
         System.out.println("Added");
+        date_time.setText("9/09/2019 6:03PM");
     }
 
     public void confirm_order() {
@@ -24,4 +53,5 @@ public class OrderScreenController {
     public void open_options() { System.out.println("options"); }
 
     public void open_filters() { System.out.println("filter"); }
+
 }
