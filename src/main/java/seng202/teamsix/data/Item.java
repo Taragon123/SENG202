@@ -62,6 +62,10 @@ public class Item extends Item_Ref {
         return qty_unit;
     }
 
+    public boolean containsTag(ItemTag_Ref itemtag_ref) {
+        return (this.tags.contains(itemtag_ref));
+    }
+
     Item() {}
 
     /**

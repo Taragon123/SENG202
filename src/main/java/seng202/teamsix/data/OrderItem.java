@@ -15,7 +15,7 @@ import javax.xml.bind.annotation.*;
  *
  * Defines an ordered item for an order, an order item can contain many dependent order items that are required for the item
  *
- * Author(s): Connor Macdonald, Hamesh Ravji
+ * Authors: Connor Macdonald, Hamesh Ravji
  */
 
 
