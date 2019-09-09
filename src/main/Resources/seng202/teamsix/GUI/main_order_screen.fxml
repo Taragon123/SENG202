@@ -31,7 +31,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <GridPane alignment="CENTER" hgap="10.0" layoutX="-1.0" layoutY="1.0" prefHeight="625.0" prefWidth="900.0" style="-fx-background-color: #c8d6e5;" vgap="10.0">
+                        <GridPane fx:id="burger_grid" alignment="CENTER" hgap="10.0" layoutX="-1.0" layoutY="1.0" prefHeight="625.0" prefWidth="900.0" style="-fx-background-color: #c8d6e5;" vgap="10.0">
                           <columnConstraints>
                             <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
                               <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
@@ -64,7 +64,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <GridPane alignment="CENTER" hgap="10.0" layoutX="-1.0" layoutY="1.0" prefHeight="611.0" prefWidth="900.0" vgap="10.0">
+                        <GridPane fx:id="sides_grid" alignment="CENTER" hgap="10.0" layoutX="-1.0" layoutY="1.0" prefHeight="611.0" prefWidth="900.0" vgap="10.0">
                            <columnConstraints>
                               <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
                               <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
@@ -129,10 +129,6 @@
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin></Button>
-      <ListView fx:id="order_list_display" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: ffffff; -fx-background-radius: 10;" GridPane.columnIndex="1" GridPane.rowIndex="1">
-         <GridPane.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </GridPane.margin></ListView>
       <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #576574;">
          <children>
             <Label fx:id="date_time" layoutX="14.0" layoutY="6.0" prefHeight="45.0" prefWidth="180.0" style="-fx-font-size: 20; -fx-background-color: #c8d6e5; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #000000; -fx-border-width: 2;" text="Date Time">
@@ -161,5 +157,29 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </ImageView>
+      <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="607.0" minHeight="10.0" prefHeight="591.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="327.0" minHeight="10.0" prefHeight="76.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <ListView fx:id="order_list_display" prefHeight="200.0" prefWidth="360.0" style="-fx-background-color: ffffff; -fx-background-radius: 10;">
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </GridPane.margin>
+            </ListView>
+            <Label fx:id="cost_field" prefHeight="68.0" prefWidth="360.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10;" text="Order Cost" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </GridPane.margin>
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </GridPane>
    </children>
 </GridPane>
