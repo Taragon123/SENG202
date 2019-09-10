@@ -1,3 +1,9 @@
+/**
+ * Name: UUID_Entity.java
+ * Authors: Anzac Morel
+ * Date: 19/08/2019
+ */
+
 package seng202.teamsix.data;
 
 import com.sun.xml.txw2.annotation.XmlElement;
@@ -43,7 +49,12 @@ public class Currency {
      */
     public void setCents(int newCentValue){
         cents = 0;
-        addCash(0, newCentValue);
+        if (newCentValue > 0) {
+            addCash(0, newCentValue);
+        }
+        else {
+            subCash(0, -newCentValue);
+        }
     }
 
     /**
