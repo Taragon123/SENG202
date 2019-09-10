@@ -31,4 +31,5 @@ public class CashRegister {
     public Currency getRegisterAmount() {
         return registerAmount;
     }
+
 }

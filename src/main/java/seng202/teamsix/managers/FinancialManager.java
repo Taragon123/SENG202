@@ -1,3 +1,9 @@
+/**
+ * Name: UUID_Entity.java
+ * Authors: Anzac Morel
+ * Date: 19/08/2019
+ */
+
 package seng202.teamsix.managers;
 
 //import seng202.teamsix.data.Order;
