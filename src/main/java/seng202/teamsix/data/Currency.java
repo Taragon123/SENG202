@@ -49,7 +49,12 @@ public class Currency {
      */
     public void setCents(int newCentValue){
         cents = 0;
-        addCash(0, newCentValue);
+        if (newCentValue > 0) {
+            addCash(0, newCentValue);
+        }
+        else {
+            subCash(0, -newCentValue);
+        }
     }
 
     /**
