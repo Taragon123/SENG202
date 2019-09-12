@@ -28,11 +28,8 @@ public class OrderScreenController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        Image logo = new Image("https://i.imgur.com/GzCtLGK.png");
-        // System.out.println("Image loading error? " + logo.isError());
-        logo_view.setImage(logo);
-        String cost = "Cost: %s%d".format("$", "0");
-        System.out.println(cost);
+
+        String cost = String.format("Cost: $%.2f", 10.20);
         cost_field.setText(cost);
         Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy   HH:mm");
@@ -46,9 +43,7 @@ public class OrderScreenController implements Initializable {
     private Label date_time;
 
     @FXML
-    private GridPane main_grid;
-    @FXML
-    private ImageView logo_view;
+    private GridPane burger_grid;
 
     @FXML
     private Label cost_field;
