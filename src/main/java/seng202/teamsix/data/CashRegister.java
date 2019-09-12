@@ -8,8 +8,12 @@ package seng202.teamsix.data;
  * Author: Hamesh Ravji
  */
 
+/**
+ * This enum is used to keep track of the currency types, the coins and notes along with their associated values.
+ */
 enum CurrencyType {
-    HUNDRED_D(100), FIFTY_D(50), TWENTY_D(20), TEN_D(10), FIVE_D(5), TWO_D(2), ONE_D(1), FIFTY_C(0.50), TWENTY_C(0.20), TEN_C(0.10);
+    HUNDRED_D(100), FIFTY_D(50), TWENTY_D(20), TEN_D(10), FIVE_D(5), TWO_D(2),
+    ONE_D(1), FIFTY_C(0.50), TWENTY_C(0.20), TEN_C(0.10);
 
     public double value;
 
@@ -93,7 +97,8 @@ class Till {
 
     }
 
-    public Till(int num100s, int num50s, int num20s, int num10s, int num5s, int num2s, int num1s, int num50cs, int num20cs, int num10cs) {
+    public Till(int num100s, int num50s, int num20s, int num10s, int num5s, int num2s, int num1s, int num50cs,
+                int num20cs, int num10cs) {
         this.num100Notes = num100s;
         this.num50Notes = num50s;
         this.num20Notes = num20s;
@@ -217,6 +222,27 @@ public class CashRegister {
     }
 
     public void addToTill(Till tillToAdd) {
+        for (CurrencyType type: CurrencyType.values()) {
+            this.till.setNumNotesOrCoins(type, (this.till.getNumNotesOrCoins(type) + tillToAdd.getNumNotesOrCoins(type)));
+        }
+    }
 
+    /**
+     * This function removes all the notes from the tillToRemove from the cash register till. If the tillToRemove has
+     * more of a note/coin than the till currently has, return false.
+     * @param tillToRemove The till that we want to
+     * @return
+     */
+    public boolean removeFromTill(Till tillToRemove) {
+        Till tempTill = this.till;
+        for (CurrencyType type: CurrencyType.values()) {
+            if (tempTill.getNumNotesOrCoins(type) >= tillToRemove.getNumNotesOrCoins(type)) {
+                tempTill.setNumNotesOrCoins(type, (tempTill.getNumNotesOrCoins(type) - tillToRemove.getNumNotesOrCoins(type)));
+            } else {
+                return false;
+            }
+        }
+        this.till = tempTill;
+        return true;
     }
 }

@@ -18,9 +18,7 @@ class CashRegisterTest {
         Till till = new Till(5, 5, 5, 5, 5, 5, 5, 5, 5, 5);
         CashRegister cashRegister = new CashRegister(till);
         Till actualDenomination = cashRegister.getDenomination(125);
-
         Till expectedDenomination = new Till(1, 0, 1, 0, 1, 0, 0, 0, 0, 0);
-
         assertTrue(actualDenomination.equals(expectedDenomination));
     }
 }
