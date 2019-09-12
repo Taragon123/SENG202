@@ -1,3 +1,9 @@
+/**
+ * Name: UUID_Entity.java
+ * Authors: Anzac Morel
+ * Date: 19/08/2019
+ */
+
 package seng202.teamsix.data;
 
 import com.sun.xml.txw2.annotation.XmlElement;
@@ -33,7 +39,6 @@ public class Currency {
      * @return int amount of dollars
      */
     public int getDollars() {
-        dollars = cents / 100;
         return dollars;
     }
 
@@ -43,7 +48,12 @@ public class Currency {
      */
     public void setCents(int newCentValue){
         cents = 0;
-        addCash(0, newCentValue);
+        if (newCentValue > 0) {
+            addCash(0, newCentValue);
+        }
+        else {
+            subCash(0, -newCentValue);
+        }
     }
 
     /**
@@ -78,7 +88,7 @@ public class Currency {
      */
     public void addCash(int numDollars, int numCents) {
         cents += numCents;
-        dollars += numDollars + numCents / 100;
+        dollars += numDollars + cents / 100;
         cents = Math.floorMod(cents, 100);
     }
     /**
@@ -87,7 +97,7 @@ public class Currency {
      * @param numDollars containing the amount of cents.
      */
     public void subCash(int numDollars, int numCents) {
-        dollars -= numDollars + numCents / 100;
+        dollars -= numDollars + Math.ceil(numCents / 100.0);
         cents = Math.floorMod(cents - numCents, 100);
     }
 }

@@ -1,13 +1,12 @@
 package seng202.teamsix.data;
 
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.Test;
 import static org.junit.Assert.*;
-class MenuItemTest {
+
+public class MenuItemTest {
 
     @Test
-    void testSetAndGetPrice() {
+    public void testSetAndGetPrice() {
         MenuItem menuItem = new MenuItem();
         menuItem.setPrice(123.456);
         assertTrue("100% passed", menuItem.getPrice() == 123.456);
@@ -15,7 +14,7 @@ class MenuItemTest {
     }
 
     @Test
-    void testSetAndGetName() {
+    public void testSetAndGetName() {
         MenuItem menuItem = new MenuItem();
         menuItem.setName("Cheeseburger");
         assertTrue("100% passed", menuItem.getName() == "Cheeseburger");
@@ -23,7 +22,7 @@ class MenuItemTest {
     }
 
     @Test
-    void testSetAndGetDescription() {
+    public void testSetAndGetDescription() {
         MenuItem menuItem = new MenuItem();
         menuItem.setDescription("Yummy");
         assertTrue("100% passed", menuItem.getDescription() == "Yummy");

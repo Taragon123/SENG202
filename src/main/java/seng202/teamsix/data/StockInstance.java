@@ -51,8 +51,7 @@ public class StockInstance extends StockInstance_Ref {
      */
     public boolean hasExpired() {
         if (does_expire) {
-            Date date_now = new Date();
-            return timeRemaining() > 0; //checks if the date_now past the expiry_date
+            return timeRemaining() <= 0; //checks if the date_now past the expiry_date
         } else {
             return false;
         }

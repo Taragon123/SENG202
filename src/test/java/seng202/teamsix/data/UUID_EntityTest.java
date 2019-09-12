@@ -52,7 +52,7 @@ public class UUID_EntityTest {
         System.out.println(same_entity.getUUID().toString());
         System.out.println(different_entity.getUUID().toString());
 
-        assertTrue(entity.equals(same_entity));
-        assertFalse(entity.equals(different_entity));
+        assertEquals(entity, same_entity);
+        assertNotEquals(entity, different_entity);
     }
 }

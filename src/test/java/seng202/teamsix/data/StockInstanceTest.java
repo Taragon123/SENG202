@@ -1,22 +1,22 @@
 package seng202.teamsix.data;
 
-import org.junit.jupiter.api.Test;
 import java.util.Date;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class StockInstanceTest {
+public class StockInstanceTest {
 
     @Test
-    void testHasExpired() {
+    public void testHasExpired() {
         Date date_added = new Date();
-        Date date_expired = new Date();
+        Date date_expired = new Date(0);
         StockInstance stock_item = new StockInstance(date_added, true, date_expired, 100);
-        assertEquals(stock_item.hasExpired(), true);
+        assertEquals(true, stock_item.hasExpired());
     }
 
+
     @Test
-    void testTimeRemaining() {
+    public void testTimeRemaining() {
         Date date_added = new Date();
         Date date_expired = new Date();
         StockInstance stock_item = new StockInstance(date_added, true, date_expired, 100);
@@ -24,7 +24,7 @@ class StockInstanceTest {
     }
 
     @Test
-    void testSetQuantityRemaining() {
+    public void testSetQuantityRemaining() {
         Date date_added = new Date();
         Date date_expired = new Date();
         StockInstance stock_item = new StockInstance(date_added, true, date_expired, 100);
