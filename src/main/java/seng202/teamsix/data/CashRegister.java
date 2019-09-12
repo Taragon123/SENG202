@@ -221,6 +221,10 @@ public class CashRegister {
         return denomTill;
     }
 
+    /**
+     * Adds the number of each coin and note listed in the tillToAdd object to the cash register till object.
+     * @param tillToAdd Contains the number of notes and coins that we want to add to the cash register till.
+     */
     public void addToTill(Till tillToAdd) {
         for (CurrencyType type: CurrencyType.values()) {
             this.till.setNumNotesOrCoins(type, (this.till.getNumNotesOrCoins(type) + tillToAdd.getNumNotesOrCoins(type)));
@@ -230,8 +234,9 @@ public class CashRegister {
     /**
      * This function removes all the notes from the tillToRemove from the cash register till. If the tillToRemove has
      * more of a note/coin than the till currently has, return false.
-     * @param tillToRemove The till that we want to
-     * @return
+     * @param tillToRemove Contains the number of each coin and note that we want to be removed from the till.
+     * @return A boolean indicating whether there is enough of each of the coins and notes listed in the tillToRemove
+     * within the cash register till.
      */
     public boolean removeFromTill(Till tillToRemove) {
         Till tempTill = this.till;

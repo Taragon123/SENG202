@@ -21,4 +21,13 @@ class CashRegisterTest {
         Till expectedDenomination = new Till(1, 0, 1, 0, 1, 0, 0, 0, 0, 0);
         assertTrue(actualDenomination.equals(expectedDenomination));
     }
+
+    @Test
+    void addToTillTest() {
+        CashRegister cashRegister = new CashRegister();
+        assertEquals(0.0, cashRegister.getRegisterAmount().getTotalCash());
+        Till tillToAdd1 = new Till(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        cashRegister.addToTill(tillToAdd1);
+        assertTrue(cashRegister.getTill().equals(tillToAdd1));
+    }
 }
