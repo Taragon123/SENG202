@@ -1,13 +1,12 @@
 package seng202.teamsix.data;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class ItemTagTest {
+public class ItemTagTest {
 
     @Test
-    void getIsDominant() {
+    public void getIsDominant() {
         ItemTag tag = new ItemTag("Gluten free!", false);
         assertEquals(false, tag.getIsDominant());
         tag = new ItemTag("this tag is very cool my dude", true);
@@ -15,7 +14,7 @@ class ItemTagTest {
     }
 
     @Test
-    void getName() {
+    public void getName() {
         ItemTag tag = new ItemTag("Gluten free!", false);
         assertEquals("Gluten free!", tag.getName());
         tag = new ItemTag("this tag is very cool my dude", false);

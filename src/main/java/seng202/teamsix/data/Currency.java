@@ -39,7 +39,6 @@ public class Currency {
      * @return int amount of dollars
      */
     public int getDollars() {
-        dollars = cents / 100;
         return dollars;
     }
 
@@ -89,7 +88,7 @@ public class Currency {
      */
     public void addCash(int numDollars, int numCents) {
         cents += numCents;
-        dollars += numDollars + numCents / 100;
+        dollars += numDollars + cents / 100;
         cents = Math.floorMod(cents, 100);
     }
     /**
@@ -98,7 +97,7 @@ public class Currency {
      * @param numDollars containing the amount of cents.
      */
     public void subCash(int numDollars, int numCents) {
-        dollars -= numDollars + numCents / 100;
+        dollars -= numDollars + Math.ceil(numCents / 100.0);
         cents = Math.floorMod(cents - numCents, 100);
     }
 }
