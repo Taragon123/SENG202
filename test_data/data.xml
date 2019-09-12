@@ -380,6 +380,22 @@
             </value>
         </entry>
         <entry>
+            <key>11c4dbcf-ae78-4653-b461-538be79afbad</key>
+            <value uuid="11c4dbcf-ae78-4653-b461-538be79afbad">
+                <name>Test Item</name>
+                <description>This item is being used to test the xml system</description>
+                <base_price dollars="10" cents="50"/>
+                <markup_price dollars="14" cents="99"/>
+                <recipe>
+                    <method>1. Create a test
+2. Run test
+3. See if build passes
+</method>
+                </recipe>
+                <qty_unit>NUM</qty_unit>
+            </value>
+        </entry>
+        <entry>
             <key>683000ed-006a-4411-9022-a60d35143122</key>
             <value uuid="683000ed-006a-4411-9022-a60d35143122">
                 <name>Test Item</name>
@@ -407,6 +423,13 @@
         <entry>
             <key>a5eeb0a0-0d69-4006-be15-e25b6519fc97</key>
             <value uuid="a5eeb0a0-0d69-4006-be15-e25b6519fc97">
+                <name>Gluten Free</name>
+                <is_dominant>true</is_dominant>
+            </value>
+        </entry>
+        <entry>
+            <key>289a8375-ccaa-4981-9459-e195bfaf6945</key>
+            <value uuid="289a8375-ccaa-4981-9459-e195bfaf6945">
                 <name>Gluten Free</name>
                 <is_dominant>true</is_dominant>
             </value>
@@ -553,6 +576,12 @@
             </value>
         </entry>
         <entry>
+            <key>919207ce-3bb3-4f60-b7c9-75278286dada</key>
+            <value uuid="919207ce-3bb3-4f60-b7c9-75278286dada">
+                <price>0.0</price>
+            </value>
+        </entry>
+        <entry>
             <key>b331663e-c46c-4547-86ea-951f118178cf</key>
             <value uuid="b331663e-c46c-4547-86ea-951f118178cf">
                 <name>My Menu</name>
@@ -647,6 +676,18 @@
             </value>
         </entry>
         <entry>
+            <key>81568717-25a8-4621-8646-7a668ee2b250</key>
+            <value uuid="81568717-25a8-4621-8646-7a668ee2b250">
+                <order_tree>
+                    <dependants>
+                        <quantity>0</quantity>
+                    </dependants>
+                    <quantity>0</quantity>
+                </order_tree>
+                <timestamp>2019-09-10T11:47:57.095+12:00</timestamp>
+            </value>
+        </entry>
+        <entry>
             <key>1249ef90-21fd-407f-a99a-e738d2b8b4aa</key>
             <value uuid="1249ef90-21fd-407f-a99a-e738d2b8b4aa">
                 <order_tree>
@@ -685,6 +726,15 @@
             <value uuid="b06b7f6f-f0e8-43e8-afe8-8d747e3797fb">
                 <date_added>2019-09-06T00:09:55.736+12:00</date_added>
                 <date_expires>2019-09-06T00:09:55.736+12:00</date_expires>
+                <does_expire>true</does_expire>
+                <quantity_remaining>4.0</quantity_remaining>
+            </value>
+        </entry>
+        <entry>
+            <key>6259ba3a-44c9-4b56-aae6-a2949a5590df</key>
+            <value uuid="6259ba3a-44c9-4b56-aae6-a2949a5590df">
+                <date_added>2019-09-10T11:47:57.218+12:00</date_added>
+                <date_expires>2019-09-10T11:47:57.218+12:00</date_expires>
                 <does_expire>true</does_expire>
                 <quantity_remaining>4.0</quantity_remaining>
             </value>

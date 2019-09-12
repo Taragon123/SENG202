@@ -4,7 +4,7 @@ import javax.xml.bind.annotation.*;
 
 /**
  * Class Recipe, holds the recipe as an object with a string attribute called method which is essentially the instructions
- * to making a certain item, such as a burger. This is class because we may add more methods and attributes in future.
+ * to making a certain item, such as a burger. This is a class because we may add more methods and attributes in future.
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
