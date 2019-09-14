@@ -8,11 +8,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CashRegisterOperationsStepDefs {
     CashRegister cashRegister;
+    CashRegister cashRegister2;
 
     @Given("${int} current total cash")
     public void $CurrentTotalCash(int arg0) {
         cashRegister = new CashRegister();
-
         cashRegister.setRegisterAmount(10000);
     }
 
@@ -26,13 +26,20 @@ public class CashRegisterOperationsStepDefs {
         assertEquals(150, cashRegister.getRegisterAmount());
     }
 
-    @When("${int} is removed from the current total cash")
-    public void $IsRemovedFromTheCurrentTotalCash(int arg0) {
-        cashRegister.setRegisterAmount(-5000);
+
+    @Given("${int} dollars in cash \\(total)")
+    public void $DollarsInCashTotal(int arg0) {
+        cashRegister2 = new CashRegister();
+        cashRegister2.setRegisterAmount(20000);
     }
 
-    @Then("Current total cash is now ${int}")
-    public void currentTotalCashIsNow$(int arg0) {
-        assertEquals(100, cashRegister.getRegisterAmount());
+    @When("${int} is removed from the total cash")
+    public void $IsRemovedFromTheTotalCash(int arg0) {
+        cashRegister2.setRegisterAmount(-5000);
+    }
+
+    @Then("Now ${int} in cash \\(total)")
+    public void now$InCashTotal(int arg0) {
+        assertEquals(150, cashRegister2.getRegisterAmount());
     }
 }
