@@ -1,14 +1,8 @@
 package seng202.teamsix.managers;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class StockManagerTest {
-
-    @Test
-    public void test() {
-        assertEquals(1, 1);
-    }
+public class StockManagerTest {
 
 }
