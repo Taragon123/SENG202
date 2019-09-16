@@ -1,3 +1,9 @@
+/**
+ * Name: ItemTag.java
+ * Authors: George Stephenson
+ * Date: 19/08/2019
+ */
+
 package seng202.teamsix.data;
 
 import javax.xml.bind.annotation.*;
@@ -8,13 +14,13 @@ import javax.xml.bind.annotation.*;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public class ItemTag extends ItemTag_Ref{
-    //Members
+    // Members
     @XmlElement
     private String name;
     @XmlElement
     private Boolean is_dominant;
 
-    //Constructors
+    // Constructors
     public ItemTag() {}
     public ItemTag(String name, Boolean is_dominant) {
         super();
@@ -22,9 +28,10 @@ public class ItemTag extends ItemTag_Ref{
         this.is_dominant = is_dominant;
     }
 
-    //Functions
+    // Methods
     /**
      * Gets the value of is_dominant.
+     * Dominance determines if parent item also has tag.
      * @return Boolean true if tag is dominant
      */
     public Boolean getIsDominant() {

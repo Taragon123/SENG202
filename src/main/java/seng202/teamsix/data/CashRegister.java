@@ -131,7 +131,6 @@ class Till {
 public class CashRegister {
 
     private Currency registerAmount;
-    private Till till;
 
     /**
      * Constructor class creates a new Currency object and sets the initial total cash value to $0.
@@ -139,7 +138,6 @@ public class CashRegister {
     public CashRegister() {
         registerAmount = new Currency();
         registerAmount.setTotalCash(0);
-        till = new Till();
     }
 
     /**
@@ -171,13 +169,16 @@ public class CashRegister {
         registerAmount.setTotalCash(amountInTill);
     }
 
-
     /**
      * Returns the amount of cash currently in the cash register.
      * @return Amount of cash remaining in the register.
      */
-    public Currency getRegisterAmount() {
-        return registerAmount;
+    public double getRegisterAmount() {
+        return registerAmount.getTotalCash();
+    }
+
+    public void setRegisterAmount(int cents) {
+        registerAmount.setCents(cents);
     }
 
     /**

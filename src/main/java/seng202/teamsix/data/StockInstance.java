@@ -24,7 +24,11 @@ public class StockInstance extends StockInstance_Ref {
     @XmlElement
     private float quantity_remaining;
 
+    /**
+     * Empty constructor
+     */
     public StockInstance() {}
+
     /**
      * Constructor for a StockInstance. If an item does not expire then it must be constructed with null for
      * the expiry date.
@@ -47,13 +51,11 @@ public class StockInstance extends StockInstance_Ref {
      */
     public boolean hasExpired() {
         if (does_expire) {
-            Date date_now = new Date();
-            return date_now.compareTo(date_expires) > 0; //checks if the date_now past the expiry_date
+            return timeRemaining() <= 0; //checks if the date_now past the expiry_date
         } else {
             return false;
         }
     }
-
 
     /**
      * Calculates the difference in days between the date_expires and the current date

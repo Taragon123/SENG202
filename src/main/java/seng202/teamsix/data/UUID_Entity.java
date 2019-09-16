@@ -14,7 +14,7 @@ import java.util.UUID;
 public class UUID_Entity{
     // Members
     @XmlAttribute(name = "uuid")
-    private UUID uuid;
+    protected UUID uuid;
 
     UUID_Entity() {
         generateUUID();
@@ -50,10 +50,25 @@ public class UUID_Entity{
      * Tests if two uuid entities are equal.
      * This function should not be overwritten by subclasses as the uuid should
      * always be the condition of equality.
-     * @param entity compare equality with
+     * This function overwrites the Object equals as this allows for uuid to be the equality
+     * in the Java Map libraries
+     * @param obj compare equality with
      * @return true if equals entity
      */
-    public boolean equals(UUID_Entity entity) {
-        return uuid.equals(entity.getUUID());
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof UUID_Entity) {
+            UUID_Entity entity = (UUID_Entity) obj;
+            return uuid.getMostSignificantBits() == entity.uuid.getMostSignificantBits()
+                    && uuid.getLeastSignificantBits() == entity.uuid.getLeastSignificantBits();
+        }
+        return false;
     }
+
+
+    @Override
+    public int hashCode() {
+        return (int)(uuid.getMostSignificantBits() ^ uuid.getLeastSignificantBits());
+    }
+
 }

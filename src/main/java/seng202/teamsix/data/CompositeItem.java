@@ -55,9 +55,44 @@ public class CompositeItem extends Item{
 
     /**
      * Gets recipe for combining components.
-     * @return String explaining how to combine components
+     * @return recipe for composite item
      */
-    public String getCompositeRecipe() {
-        return recipe.getMethod();
+    public Recipe getCompositeRecipe() {
+        return recipe;
+    }
+
+    /**
+     *
+     * @param ref tag to check
+     * @return true if item contains tag
+     */
+    @Override
+    public boolean hasTag(ItemTag_Ref ref) {
+        // Check first if naturally contains tag
+        for(ItemTag_Ref tag : getTags()) {
+            if(tag.equals(ref)) {
+                return true;
+            }
+        }
+
+        // Check if item inherits tag from children
+        if(getItems().size() > 0) {
+            ItemTag tag = StorageAccess.instance().getItemTag(ref);
+            Boolean parent_has_tag = tag.getIsDominant();
+
+            for (Item_Ref child_ref : getItems()) {
+                Item item = StorageAccess.instance().getItem(child_ref);
+                Boolean child_has_tag = item.hasTag(ref);
+                if (tag.getIsDominant()) {
+                    parent_has_tag &= child_has_tag;
+                } else {
+                    parent_has_tag |= child_has_tag;
+                }
+            }
+
+            return parent_has_tag;
+        }
+        
+        return false;
     }
 }

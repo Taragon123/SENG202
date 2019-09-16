@@ -125,6 +125,21 @@ public class Item extends Item_Ref {
         return markup_price.getTotalCash() - base_price.getTotalCash();
     }
 
+    /**
+     * Check if item contains a tag
+     * @param ref tag to check
+     * @return true if item contains tag
+     */
+    public boolean hasTag(ItemTag_Ref ref) {
+        // Using equals instead of contains because references may be different objects but have same uuid
+        for(ItemTag_Ref tag : getTags()) {
+            if(tag.equals(ref)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean equals(Item other) {
 
         return (this.name == other.name &&
