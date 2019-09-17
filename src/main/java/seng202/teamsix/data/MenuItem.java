@@ -20,6 +20,8 @@ public class MenuItem extends Menu_Ref{
     private String description;
     @XmlElement
     private double price;
+    @XmlElement
+    private int colour;
 
     /**
      * Sets the price of item
@@ -29,12 +31,29 @@ public class MenuItem extends Menu_Ref{
         this.price = price;
     }
 
+
     /**
      * Gets the price of the item in the menu
      * @return the price of the item in the menu
      */
     public double getPrice() {
         return price;
+    }
+
+    /**
+     * Sets the colour associated with buttons of this menu
+     * @param colour the colour that is to be associated with buttons of this menu
+     */
+    public void setColour(int colour) {
+        this.colour = colour;
+    }
+
+    /**
+     * Gets the colour associated with buttons of this menu
+     * @return the colour that is associated with buttons of this menu
+     */
+    public int getColour() {
+        return colour;
     }
 
     /**
