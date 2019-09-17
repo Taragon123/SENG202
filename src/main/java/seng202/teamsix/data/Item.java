@@ -140,6 +140,7 @@ public class Item extends Item_Ref {
         return false;
     }
 
+    /*
     public boolean equals(Item other) {
 
         return (this.name == other.name &&
@@ -150,4 +151,5 @@ public class Item extends Item_Ref {
                 this.qty_unit == other.qty_unit &&
                 this.recipe == other.recipe);
     }
+     */
 }

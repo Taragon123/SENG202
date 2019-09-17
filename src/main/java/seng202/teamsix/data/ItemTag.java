@@ -45,15 +45,4 @@ public class ItemTag extends ItemTag_Ref{
     public String getName() {
         return name;
     }
-
-    /**
-     * Overwrite equals from parent class.
-     * @param other The ItemTag which we want to compare with.
-     * @return True if identical, false otherwise.
-     */
-    public boolean equals(ItemTag other) {
-        return (super.equals(other) &&
-                this.name == other.name &&
-                this.is_dominant == other.is_dominant);
-    }
 }
