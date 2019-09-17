@@ -102,7 +102,21 @@ public class XML_StorageAccessTest {
             Menu menu = new Menu();
             menu.setName("My Menu");
             menu.setDescription("Hello I am a menu description");
-            menu.addToMenu(new MenuItem());
+
+            MenuItem menu_item = new MenuItem();
+            menu_item.setName("Mega Burger");
+            menu_item.setDescription("Blows your socks off!");
+            menu_item.setPrice(new Currency(10, 50));
+            menu_item.setItem(new Item_Ref());
+            menu.addToMenu(menu_item);
+
+            menu_item = new MenuItem();
+            menu_item.setName("Fire Burger");
+            menu_item.setDescription("Spicy");
+            menu_item.setPrice(new Currency(15, 50));
+            menu_item.setItem(new Item_Ref());
+            menu.addToMenu(menu_item);
+
             storage.updateMenu(menu);
             storage.saveData();
 
