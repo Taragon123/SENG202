@@ -24,3 +24,10 @@ Feature: Order operations
     Given The customer has ordered all that they desire (Burger and chips, $15)
     When The order is confirmed by the user
     Then The customer is asked to pay the full price which is then added to the cash register
+
+  Scenario: Customise a menu item to suit a customers needs
+    Given A customer requests no tomatoes on their burger
+    When Edit item is selected
+    And Remove tomatoes is selected
+    Then Burger no longer has the tomatoes tag, receipt reflects this
+
