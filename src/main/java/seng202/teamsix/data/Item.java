@@ -16,13 +16,13 @@ import java.util.ArrayList;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public class Item extends Item_Ref {
-    @XmlElement
+    @XmlElement @QueryField
     private String name;
-    @XmlElement
+    @XmlElement @QueryField("desc")
     private String description;
-    @XmlElement
+    @XmlElement @QueryField
     private Currency base_price;
-    @XmlElement
+    @XmlElement @QueryField
     private Currency markup_price;
     @XmlElement
     private Recipe recipe;
@@ -60,6 +60,10 @@ public class Item extends Item_Ref {
 
     public UnitType getQtyUnit() {
         return qty_unit;
+    }
+
+    public boolean containsTag(ItemTag_Ref itemtag_ref) {
+        return (this.tags.contains(itemtag_ref));
     }
 
     Item() {}
@@ -117,8 +121,11 @@ public class Item extends Item_Ref {
      * Calculates the profit that can be made from selling the item at selling price.
      * @return The profit that can be made by selling the item.
      */
-    public double getProfit() {
-        return markup_price.getTotalCash() - base_price.getTotalCash();
+    @QueryField("profit")
+    public Currency getProfit() {
+        Currency profit = new Currency(markup_price.getDollars(), markup_price.getCents());
+        profit.subCash(base_price.getDollars(), base_price.getCents());
+        return profit;
     }
 
     /**
@@ -135,4 +142,17 @@ public class Item extends Item_Ref {
         }
         return false;
     }
+
+    /*
+    public boolean equals(Item other) {
+
+        return (this.name == other.name &&
+                this.description == other.description &&
+                this.base_price == other.base_price &&
+                this.markup_price == other.markup_price &&
+                this.tags == other.tags &&
+                this.qty_unit == other.qty_unit &&
+                this.recipe == other.recipe);
+    }
+     */
 }

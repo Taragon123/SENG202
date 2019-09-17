@@ -28,3 +28,23 @@ Feature: Menu operations
     And Selects the file they wish to open
     And Selects open
     Then The selected file is open in the system
+
+  Scenario: Add item to existing menu
+    Given A new burger is created
+    When Edit menu is selected
+    And Burger information added
+    Then New burger now in menu
+
+  Scenario: Remove item from existing menu
+    Given A burger is no longer being sold
+    When Edit menu is selected
+    And Burger is removed
+    Then Burger no longer in menu
+
+  Scenario: Add recipe to accompany a existing menu item
+    Given A new recipe for an item is created
+    When Add recipe is selected
+    And Recipe is selected
+    And Add is selected
+    Then Recipe is now in the menu
+

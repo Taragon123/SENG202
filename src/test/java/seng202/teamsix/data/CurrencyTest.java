@@ -59,4 +59,15 @@ public class CurrencyTest {
         assertEquals(3, cash.getDollars());
         assertEquals(70, cash.getCents());
     }
+
+    @Test
+    public void testCompareTo() {
+        Currency cash = new Currency(10, 50);
+        Currency less = new Currency(8,60);
+        Currency more = new Currency(10, 70);
+
+        assertTrue(cash.compareTo(less) < 0);
+        assertTrue(cash.compareTo(more) > 0);
+        assertTrue(cash.compareTo(cash) == 0);
+    }
 }

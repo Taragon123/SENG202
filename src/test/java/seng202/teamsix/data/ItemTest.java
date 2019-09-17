@@ -39,7 +39,7 @@ public class ItemTest {
         markup_price.setTotalCash(10.00);
 
         Item item = new Item("Large Fries", "Deep-fried pieces of potato. ", base_price, markup_price, recipe, tagList, UnitType.G);
-        assertEquals(2.5, item.getProfit(), 0.0);
+        assertEquals(new Currency(2, 50), item.getProfit());
     }
 
     @Test
