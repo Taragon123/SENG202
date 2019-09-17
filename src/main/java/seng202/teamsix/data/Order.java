@@ -7,6 +7,7 @@
 package seng202.teamsix.data;
 
 import javax.xml.bind.annotation.*;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
