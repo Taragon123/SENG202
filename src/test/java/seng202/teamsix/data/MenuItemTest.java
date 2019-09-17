@@ -8,8 +8,8 @@ public class MenuItemTest {
     @Test
     public void testSetAndGetPrice() {
         MenuItem menuItem = new MenuItem();
-        menuItem.setPrice(123.456);
-        assertTrue("100% passed", menuItem.getPrice() == 123.456);
+        menuItem.setPrice(new Currency(123, 45));
+        assertTrue("100% passed", menuItem.getPrice().equals(new Currency(123,45)));
         System.out.println("100% passed");
     }
 

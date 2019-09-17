@@ -120,6 +120,18 @@ class DataQueryConstraintEqual<T extends Comparable<T>> extends DataQueryConstra
 }
 
 /**
+ * Query constraint that class member must match regex
+ */
+class DataQueryConstraintRegex extends DataQueryConstraint {
+    String regex;
+
+    boolean accepts(Object obj) {
+        String value = (String) field.get(obj);
+        return value.matches(regex);
+    }
+}
+
+/**
  * DataQueryComparator is used during the sorting phase of DataQuery to determine the order of elements.
  */
 class DataQueryComparator implements Comparator<UUID_Entity> {
@@ -241,6 +253,36 @@ public class DataQuery<T extends UUID_Entity> {
         DataQueryConstraintEqual<I> constraint = new DataQueryConstraintEqual<>();
         constraint.field = field;
         constraint.comparison = value;
+
+        int index = constraint_count++;
+        constraint_list.put(index, constraint);
+
+        return index;
+    }
+
+    /**
+     * Adds a constraint condition on QueryField that is must match the specified regex
+     * @param field_name QueryField name
+     * @param regex
+     * @return
+     * @throws IllegalArgumentException
+     */
+    public int addConstraintRegex(String field_name, String regex) throws IllegalArgumentException {
+        DataQueryMember field = getFieldWithAnnotation(field_name);
+
+        // Test field
+        if(field == null) {
+            throw new IllegalArgumentException(String.format("Field '%s' does not exist for class '%s'", field_name, dataClass.getName()));
+        }
+
+        if(field.getType() != String.class) {
+            throw new IllegalArgumentException(String.format("Field '%s' does not have type string for class '%s'", field_name, dataClass.getName()));
+        }
+
+        // Create Constraint
+        DataQueryConstraintRegex constraint = new DataQueryConstraintRegex();
+        constraint.field = field;
+        constraint.regex = regex;
 
         int index = constraint_count++;
         constraint_list.put(index, constraint);

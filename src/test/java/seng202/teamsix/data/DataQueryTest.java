@@ -59,5 +59,13 @@ public class DataQueryTest {
 
         // Create query
         DataQuery<ItemTag> query = new DataQuery<>(ItemTag.class);
+        query.addConstraintEqual("name", "Gluten Free");
+        List<UUID_Entity> result = query.runQuery();
+
+        assertTrue(result.size() == 1);
+        ItemTag tag = StorageAccess.instance().getItemTag(new ItemTag_Ref(result.get(0)));
+
+        assertEquals(tag.getName(), "Gluten Free");
+
     }
 }
