@@ -18,7 +18,7 @@ public class CompositeItemTest {
     public void testSetGetItems() {
         CompositeItem item = new CompositeItem();
         ArrayList<ItemTag_Ref> tags = new ArrayList<ItemTag_Ref>();
-        ArrayList<Item> subItems = new ArrayList<Item>();
+        ArrayList<Item_Ref> subItems = new ArrayList<Item_Ref>();
         subItems.add(new Item("Coke", "Cold one", new Currency(), new Currency(), tags, UnitType.KG));
         item.setComponents(subItems);
         assertEquals(item.getItems().size(), 1);

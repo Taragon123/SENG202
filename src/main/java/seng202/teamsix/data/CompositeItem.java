@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CompositeItem extends Item{
-    private List<Item> item_list;
+    private List<Item_Ref> item_list;
     private Recipe recipe;
 
     /**
@@ -24,7 +24,7 @@ public class CompositeItem extends Item{
      * @param item_list List of UUID_Entity components
      */
     public CompositeItem(String name, String description, Currency base_price, Currency markup_price, Recipe recipe,
-                         ArrayList<ItemTag_Ref> tags, UnitType qty_unit, List<Item> item_list) {
+                         ArrayList<ItemTag_Ref> tags, UnitType qty_unit, List<Item_Ref> item_list) {
         super(name, description, base_price, markup_price, recipe, tags, qty_unit);
         this.item_list = item_list;
     }
@@ -41,7 +41,7 @@ public class CompositeItem extends Item{
      * Sets list of components.
      * @param item_list List of UUID_Entity components
      */
-    public void setComponents(List<Item> item_list) {
+    public void setComponents(List<Item_Ref> item_list) {
         this.item_list = item_list;
     }
 
@@ -49,7 +49,7 @@ public class CompositeItem extends Item{
      * Getter for component items.
      * @return List of UUID_Entity components
      */
-    public List<Item> getItems() {
+    public List<Item_Ref> getItems() {
         return item_list;
     }
 

@@ -17,13 +17,12 @@ public class OrderManager {
     private Order cart;
 
     /**
-     * Adds the item to the cart given a reference to an Item item_ref, number of items qty, and a reference to an ItemTag default tag.
+     * Adds the item to the cart given a reference to an Item item_ref, number of items qty.
      * @param item_ref A reference to the item that we wish to add to the list.
      * @param qty The quantity corresponding to the number of Items.
-     * @param default_tag A reference to the Item_Tag that we want to add to the list of dependencies if it isn't arleady there.
      */
-    public void addToCart(Item_Ref item_ref, int qty, ItemTag_Ref default_tag) {
-        cart.getOrderTree().addToOrder(item_ref, qty, default_tag);
+    public void addToCart(Item_Ref item_ref, int qty) {
+        cart.getOrderTree().addToOrder(item_ref, qty);
     }
 
     /**
@@ -40,6 +39,7 @@ public class OrderManager {
      * @param itemtag_ref
      */
     public boolean setOrderForTag(ItemTag_Ref itemtag_ref) {
+
         // To be implemented.
         ArrayList<Boolean> componentBools = new ArrayList<>();
         boolean adapted = false;

@@ -64,12 +64,12 @@ public class OrderItem {
     }
 
     /**
-     * Adds an Item to the Order, given an Item_Ref item_ref, int qty, and ItemTag_Ref default tag.
+     * Adds an Item to the Order, given an Item_Ref item_ref and int qty.
      * @param item_ref Refers to the Item of which we want to add to the order.
      * @param qty The number of items we want to add too the order.
-     * @param default_tag The tag corresponding to the Item, indicates if the item is gluten-free or dairy-free etc.
      */
-    public void addToOrder(Item_Ref item_ref, int qty, ItemTag_Ref default_tag) {
+    public void addToOrder(Item_Ref item_ref, int qty) {
+        // Is Item already added
         boolean is_added = false;
         for (OrderItem orderItem: dependants) {
             if (orderItem.getItem() == item_ref) {
@@ -77,11 +77,25 @@ public class OrderItem {
                 is_added = true;
             }
         }
+
+        // If not added add to order
         if (! is_added) {
-            OrderItem orderItemToAdd = new OrderItem();
-            orderItemToAdd.setItem(item_ref);
-            orderItemToAdd.setQuantity(qty);
-            this.dependants.add(orderItemToAdd);
+            //Add the main order item
+            OrderItem parent = new OrderItem();
+            parent.setItem(item_ref);
+            parent.setQuantity(qty);
+            this.dependants.add(parent);
+
+            // Add its children
+            Item item = StorageAccess.instance().getItem(item_ref);
+            if(item instanceof CompositeItem){
+                for(Item_Ref child_item_ref : ((CompositeItem) item).getItems()) {
+                    // TODO(Connor): This is a functionality bug need some way of determining amounts of quantity for child items
+                    parent.addToOrder(child_item_ref, 1);
+                }
+            }else if(item instanceof VariantItem) {
+                parent.addToOrder(((VariantItem) item).getVariants().get(0), 1);
+            }
         }
     }
 
@@ -106,4 +120,5 @@ public class OrderItem {
         }
         return is_removed;
     }
+
 }
