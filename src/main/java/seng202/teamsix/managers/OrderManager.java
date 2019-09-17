@@ -85,14 +85,14 @@ public class OrderManager {
                 for (Item_Ref variant: variantItem.getVariants()) {
                     // if the variant does not contain the tag,
                     if (!((Item)variant).getTags().contains(itemtag_ref)) {
-                        variantItem.removeFromMenu(variant);
+                        variantItem.removeVariant(variant);
                     }
                 }
                 while (variantItem.getVariants().size() > 1) {
 
                     // removes the last variantItem from the list of variantItems. This continues until there is only one
                     // variant with the tag remaining.
-                    variantItem.removeFromMenu(variantItem.getVariants().get(variantItem.getVariants().size() - 1));
+                    variantItem.removeVariant(variantItem.getVariants().get(variantItem.getVariants().size() - 1));
                 }
                 return true;
             }
