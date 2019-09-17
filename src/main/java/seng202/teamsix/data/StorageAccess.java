@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.Dictionary;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * Storage Access is the template of data storage classes as well as a singleton with a reference to current storage access used.
@@ -53,6 +54,44 @@ public abstract class StorageAccess {
         } catch(JAXBException e) {
             System.err.println("XML_StorageAccess could not create jaxb object contexts");
         }
+    }
+
+    public UUID_Entity get(UUID_Entity ref) {
+        Item item = getItem(new Item_Ref(ref));
+        if(item != null) {
+            return item;
+        }
+
+        ItemTag itemtag = getItemTag(new ItemTag_Ref(ref));
+        if(itemtag != null) {
+            return itemtag;
+        }
+
+        Menu menu = getMenu(new Menu_Ref(ref));
+        if(menu != null) {
+            return menu;
+        }
+
+        Order order = getOrder(new Order_Ref(ref));
+        if(order != null) {
+            return order;
+        }
+
+        StockInstance stock = getStockInstance(new StockInstance_Ref(ref));
+        if(stock != null) {
+            return stock;
+        }
+
+        return null;
+    }
+
+    public <T> Set<? extends UUID_Entity> getAllByClassType(Class<T> type) {
+        if(type == Item.class) return getAllItems();
+        if(type == ItemTag.class) return getAllItemTags();
+        if(type == Menu.class) return getAllMenus();
+        if(type == Order.class) return getAllOrders();
+        if(type == StockInstance.class) return getAllStockInstances();
+        return null;
     }
 
     // Get Methods

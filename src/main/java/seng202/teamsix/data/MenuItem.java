@@ -20,7 +20,6 @@ public class MenuItem extends Menu_Ref{
     private String description;
     @XmlElement
     private double price;
-
     /**
      * Sets the price of item
      * @param price the price of the item to be displaued to the menu
