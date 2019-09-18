@@ -3,6 +3,7 @@ package seng202.teamsix.data;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -52,9 +53,9 @@ public class OrderItemTest {
         OrderItem bag = new OrderItem();
         ItemTag_Ref itemTagRefToAdd1 = new ItemTag("Gluten-Free", true);
         ItemTag_Ref itemTagRefToAdd2 = new ItemTag("Dairy-Free", false);
-        bag.addToOrder(item1, 5, itemTagRefToAdd1);
-        bag.addToOrder(item1, 3, itemTagRefToAdd1);
-        bag.addToOrder(item2, 2, itemTagRefToAdd2);
+        bag.addToOrder(item1, 5);
+        bag.addToOrder(item1, 3);
+        bag.addToOrder(item2, 2);
         assertEquals(8, bag.getDependants().get(0).getQuantity());
         assertEquals(2, bag.getDependants().get(1).getQuantity());
     }
@@ -68,8 +69,7 @@ public class OrderItemTest {
         Item item1 = initialiseItem1();
         Item item2 = initialiseItem2();
         OrderItem bag = new OrderItem();
-        ItemTag_Ref itemTagRefToAdd1 = new ItemTag("Gluten-Free", true);
-        bag.addToOrder(item1, 5, itemTagRefToAdd1);
+        bag.addToOrder(item1, 5);
         assertTrue(bag.removeFromOrder(item1, 4));
         assertEquals(1, bag.getDependants().get(0).getQuantity());
         assertFalse(bag.removeFromOrder(item2, 4));
@@ -100,8 +100,9 @@ public class OrderItemTest {
     public Item initialiseItem2() {
         CompositeItem item = new CompositeItem();
         ArrayList<ItemTag_Ref> tags = new ArrayList<ItemTag_Ref>();
-        ArrayList<Item> subItems = new ArrayList<Item>();
-        subItems.add(new Item("Coke", "Cold one", new Currency(), new Currency(), tags, UnitType.G));
+        List<Item_Ref> subItems = new ArrayList<>();
+        Item subItemToAdd = new Item("Coke", "Cold one", new Currency(), new Currency(), tags, UnitType.G);
+        subItems.add(subItemToAdd);
         item.setComponents(subItems);
         return item;
     }

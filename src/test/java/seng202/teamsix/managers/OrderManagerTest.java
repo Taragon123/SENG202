@@ -16,13 +16,13 @@ class OrderManagerTest {
         Item_Ref item_refToAdd = initialiseItem1();
         ItemTag tag = new ItemTag("Gluten free!", false);
         ItemTag_Ref tag_ref = (ItemTag_Ref)tag;
-        orderManager.addToCart(item_refToAdd, 5, tag_ref);
+        orderManager.addToCart(item_refToAdd, 5);
         OrderItem orderItemRetrievedFromOrder = orderManager.getCart().getOrderTree().getDependants().get(0);
 
         assertEquals(((Item)item_refToAdd).getName(), ((Item)orderItemRetrievedFromOrder.getItem()).getName());
         assertEquals(5, orderItemRetrievedFromOrder.getQuantity());
 
-        orderManager.addToCart(item_refToAdd, 10, tag_ref);
+        orderManager.addToCart(item_refToAdd, 10);
         orderItemRetrievedFromOrder = orderManager.getCart().getOrderTree().getDependants().get(0);
 
         assertEquals(15, orderItemRetrievedFromOrder.getQuantity());
@@ -41,9 +41,7 @@ class OrderManagerTest {
         OrderManager orderManager = new OrderManager();
         orderManager.resetCart();
         Item_Ref item_ref1 = initialiseItem1();
-        ItemTag tag = new ItemTag("Gluten free!", false);
-        ItemTag_Ref tag_ref = (ItemTag_Ref)tag;
-        orderManager.addToCart(item_ref1, 25, tag_ref);
+        orderManager.addToCart(item_ref1, 25);
 
         assertEquals(250.0, orderManager.getCashRequired().getTotalCash());
     }
@@ -58,4 +56,5 @@ class OrderManagerTest {
         Item item = new Item("Large Fries", "Deep-fried pieces of potato. ", base_price, markup_price, recipe, tagList, UnitType.G);
         return item;
     }
+
 }

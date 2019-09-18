@@ -27,7 +27,7 @@ public class OrderOperationsStepDefs {
         Item burger = new Item("Burger", "Simple burger", base, markup,
                 tags, UnitType.L);
 
-        order.addToCart(burger, 1, tag_ref);
+        order.addToCart(burger, 1);
     }
 
     @When("Chips are added to the current order")
@@ -42,7 +42,7 @@ public class OrderOperationsStepDefs {
         Item chips = new Item("Chips", "Hot chips", base, markup,
                 tags, UnitType.ML);
 
-        order.addToCart(chips, 1, tag_ref);
+        order.addToCart(chips, 1);
     }
 
     @Then("The current order consists of one burger and one chips")
