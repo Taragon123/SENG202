@@ -35,67 +35,37 @@ public class OrderManager {
     }
 
     /**
-     * returns a boolean indicating whether the OrderItem object has the associated itemtag_ref.
-     * @param orderComponent The OrderItem we want to check has the tag.
-     * @param itemtag_ref The ItemTag_Ref object we want to see is included in the list of tags associated with the OrderItem.
-     * @return
-     */
-    public boolean hasTagHelper(OrderItem orderComponent, ItemTag_Ref itemtag_ref) {
-
-        boolean hasTag = false;
-        Item_Ref component = orderComponent.getItem();
-        if (component instanceof CompositeItem) {
-            hasTag = ((CompositeItem)component).hasTag(itemtag_ref);
-        } else if (component instanceof VariantItem) {
-            Item itemComponent = StorageAccess.instance().getItem(component);
-            hasTag = ((VariantItem)component).hasTag(itemtag_ref);
-        } else if (component instanceof Item) {
-            Item itemComponent = StorageAccess.instance().getItem(component);
-            hasTag = itemComponent.hasTag(itemtag_ref);
-        }
-        return hasTag;
-    }
-
-    public boolean setTagHelper(OrderItem orderComponent, ItemTag_Ref itemtag_ref) {
-
-        boolean hasTag = false;
-        Item_Ref component = orderComponent.getItem();
-        if (component instanceof CompositeItem) {
-            hasTag = ((CompositeItem)component).hasTag(itemtag_ref);
-        } else if (component instanceof VariantItem) {
-            Item itemComponent = StorageAccess.instance().getItem(component);
-            hasTag = ((VariantItem)component).setForTag(itemtag_ref);
-        } else if (component instanceof Item) {
-            Item itemComponent = StorageAccess.instance().getItem(component);
-            hasTag = itemComponent.hasTag(itemtag_ref);
-        }
-        return hasTag;
-    }
-
-    /**
-     * A little unsure on what this does, will check with group. Should return boolean, if it the order can't be set for tag, return false.
+     * A little unsure on what this does, will check with group. Should return boolean, if it the order can't be
      * @param itemtag_ref
      */
-    public boolean setForTag(ItemTag_Ref itemtag_ref) {
+    public boolean setOrderForTag(ItemTag_Ref itemtag_ref) {
 
-        ItemTag itemtag = StorageAccess.instance().getItemTag(itemtag_ref);
-        boolean containsTag;
-        if (itemtag.getIsDominant()) {
-            containsTag = true;
-            for (OrderItem child: cart.getOrderTree().getDependants()) {
-                containsTag &= hasTagHelper(child, itemtag_ref);
-            }
-        } else {
-            containsTag = false;
-            for (OrderItem child: cart.getOrderTree().getDependants()) {
-                containsTag |= hasTagHelper(child, itemtag_ref);
+        // To be implemented.
+        ArrayList<Boolean> componentBools = new ArrayList<>();
+        boolean adapted = false;
+        for (Object component: cart.getOrderTree().getDependants()) {
+            // if the item tag is dominant, all the items inside must have the tag.
+            if (((ItemTag)itemtag_ref).getIsDominant()) {
+                componentBools.add(recurseAdaptOrderDominant(component, itemtag_ref));
+            } else {
+                componentBools.add(recurseAdaptOrderDominant(component, itemtag_ref));
             }
         }
-        if (containsTag) {
+        if (! componentBools.contains(false)) {
             return true;
+        } else {
+            return false;
         }
-        return false;
     }
+
+
+//    public boolean recurseAdaptOrderNonDominant(Object o, ItemTag_Ref itemtag_ref)
+//    {
+//        Object item = cart.getOrderTree().getItem
+//   }
+    /*
+        If the ItemTag is marked as dominant, all the children must contain the tag.
+     */
 
     public boolean recurseAdaptOrderDominant(Object o, ItemTag_Ref itemtag_ref)
     {
@@ -203,8 +173,6 @@ public class OrderManager {
      */
     public void finaliseOrder() {
         // Save the order with StorageAccess/
-        StorageAccess.instance().updateOrder(cart);
-
 
 
         // Send order to kitchen via order ticket which is to be printed.

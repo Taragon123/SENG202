@@ -106,14 +106,13 @@ public class OrderItem {
      * @return True if items are removed (even if qty > already in cart), false if they didn't exist in the first place.
      */
     public boolean removeFromOrder(Item_Ref item_ref, int qty) {
-
         boolean is_removed = false;
         for (OrderItem orderItem: dependants) {
             if (orderItem.getItem() == item_ref) {
                 if (orderItem.quantity > qty) {
                     orderItem.quantity -= qty;
                     is_removed = true;
-                } else if (orderItem.quantity == qty) {
+                } else {
                     dependants.remove(orderItem);
                     is_removed = true;
                 }
