@@ -9,6 +9,7 @@ package seng202.teamsix;
  * George Stephenson
  * Anzac Morel
  * Andrew Clifford
+ * Rchi Lugtu
  */
 public class App 
 {

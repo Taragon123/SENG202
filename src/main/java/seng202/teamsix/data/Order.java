@@ -7,6 +7,7 @@
 package seng202.teamsix.data;
 
 import javax.xml.bind.annotation.*;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -31,5 +32,4 @@ public class Order extends Order_Ref{
     public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
     }
-
 }

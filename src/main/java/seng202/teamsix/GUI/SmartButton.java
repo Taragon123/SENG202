@@ -1,15 +1,17 @@
 package seng202.teamsix.GUI;
 
+import com.sun.xml.bind.XmlAccessorFactory;
 import com.sun.xml.fastinfoset.algorithm.UUIDEncodingAlgorithm;
+import javafx.beans.NamedArg;
 import javafx.scene.control.Button;
 import seng202.teamsix.data.UUID_Entity;
 
 public class SmartButton extends Button {
 
-    private UUID_Entity entity;
+    String entity;
 
-    public SmartButton() {
+    public SmartButton(@NamedArg("entity") String entity) {
         super();
+        this.entity = entity;
     }
-
 }

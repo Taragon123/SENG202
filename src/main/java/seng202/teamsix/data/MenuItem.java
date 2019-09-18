@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.*;
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public class MenuItem extends Menu_Ref{
+public class MenuItem {
     @XmlElement
     private Item_Ref item;
     @XmlElement
@@ -19,22 +19,40 @@ public class MenuItem extends Menu_Ref{
     @XmlElement
     private String description;
     @XmlElement
-    private double price;
-
+    private int colour;
+    @XmlElement
+    private Currency price;
     /**
      * Sets the price of item
      * @param price the price of the item to be displaued to the menu
      */
-    public void setPrice(double price) {
+    public void setPrice(Currency price) {
         this.price = price;
     }
+
 
     /**
      * Gets the price of the item in the menu
      * @return the price of the item in the menu
      */
-    public double getPrice() {
+    public Currency getPrice() {
         return price;
+    }
+
+    /**
+     * Sets the colour associated with buttons of this menu
+     * @param colour the colour that is to be associated with buttons of this menu
+     */
+    public void setColour(int colour) {
+        this.colour = colour;
+    }
+
+    /**
+     * Gets the colour associated with buttons of this menu
+     * @return the colour that is associated with buttons of this menu
+     */
+    public int getColour() {
+        return colour;
     }
 
     /**

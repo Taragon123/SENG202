@@ -15,9 +15,9 @@ import javax.xml.bind.annotation.*;
 @XmlAccessorType(XmlAccessType.NONE)
 public class ItemTag extends ItemTag_Ref{
     // Members
-    @XmlElement
+    @XmlElement @QueryField
     private String name;
-    @XmlElement
+    @XmlElement @QueryField
     private Boolean is_dominant;
 
     // Constructors

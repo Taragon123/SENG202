@@ -13,12 +13,9 @@ import java.math.BigDecimal;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
-public class Currency {
-    @XmlAttribute(name="dollars")
-    private int dollars = 0;
+public class Currency implements Comparable<Currency> {
     @XmlAttribute(name="cents")
     private int cents = 0;
-
 
     public Currency() { }
 
@@ -31,7 +28,7 @@ public class Currency {
      * @param newDollarValue containing the amount of dollars.
      */
     public void setDollars(int newDollarValue){
-        dollars = newDollarValue;
+        cents = newDollarValue*100 + getCents();
     }
 
     /**
@@ -39,7 +36,7 @@ public class Currency {
      * @return int amount of dollars
      */
     public int getDollars() {
-        return dollars;
+        return cents / 100;
     }
 
     /**
@@ -47,13 +44,7 @@ public class Currency {
      * @param newCentValue containing the amount of cents.
      */
     public void setCents(int newCentValue){
-        cents = 0;
-        if (newCentValue > 0) {
-            addCash(0, newCentValue);
-        }
-        else {
-            subCash(0, -newCentValue);
-        }
+        cents = getDollars() * 100 + newCentValue;
     }
 
     /**
@@ -61,7 +52,7 @@ public class Currency {
      * @return int amount of cents
      */
     public int getCents() {
-        return cents;
+        return cents % 100;
     }
 
     /**
@@ -69,7 +60,7 @@ public class Currency {
      * @return int amount of total cash
      */
     public double getTotalCash() {
-        return dollars + (cents / 100.0);
+        return cents / 100.0;
     }
 
     /**
@@ -77,8 +68,7 @@ public class Currency {
      * @param newTotal containing the new cash total.
      */
     public void setTotalCash(double newTotal) {
-        dollars = (int)newTotal;
-        cents = (int)Math.round(BigDecimal.valueOf(newTotal).divideAndRemainder(BigDecimal.ONE)[1].doubleValue() * 100.0);
+        cents = (int) Math.round(newTotal*100.0);
     }
 
     /**
@@ -88,8 +78,7 @@ public class Currency {
      */
     public void addCash(int numDollars, int numCents) {
         cents += numCents;
-        dollars += numDollars + cents / 100;
-        cents = Math.floorMod(cents, 100);
+        cents += numDollars * 100;
     }
     /**
      * Calculates the new value of total cash and calls set total cash.
@@ -97,7 +86,28 @@ public class Currency {
      * @param numDollars containing the amount of cents.
      */
     public void subCash(int numDollars, int numCents) {
-        dollars -= numDollars + Math.ceil(numCents / 100.0);
-        cents = Math.floorMod(cents - numCents, 100);
+        cents -= numCents;
+        cents -= numDollars * 100;
+    }
+
+    @Override
+    public int compareTo(Currency currency) {
+        int total_cents_A = currency.cents;
+        int total_cents_B = this.cents;
+
+        return total_cents_A - total_cents_B;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Currency) {
+            return ((Currency)obj).cents == this.cents;
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("$%d.%d", getDollars(), getCents());
     }
 }

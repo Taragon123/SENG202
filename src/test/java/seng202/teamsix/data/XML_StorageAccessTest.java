@@ -55,12 +55,43 @@ public class XML_StorageAccessTest {
                                  new ArrayList<ItemTag_Ref>(),
                                  UnitType.NUM);
             storage.updateItem(item);
-            storage.saveData();
 
+            ArrayList<ItemTag_Ref> tags = new ArrayList<>();
+            tags.add(new ItemTag_Ref());
+
+            ArrayList<Item_Ref> item_list = new ArrayList<>();
+            item_list.add(new Item_Ref());
+            item_list.add(new Item_Ref());
+
+
+            CompositeItem composite_item = new CompositeItem("Burger",
+                                                             "Mhmmm sounds good",
+                                                             new Currency(10, 80),
+                                                             new Currency(19,99),
+                                                             new Recipe("Just slap that bad boy together"),
+                                                             tags,
+                                                             UnitType.NUM,
+                                                             item_list);
+            storage.updateItem(composite_item);
+
+            VariantItem variant_item = new VariantItem("Buns",
+                                                "Carbs for days",
+                                                        new Currency(10, 80),
+                                                        new Currency(19,99),
+                                                        new Recipe("Pre made in bags"),
+                                                        tags,
+                                                        UnitType.NUM,
+                                                        item_list);
+            storage.updateItem(variant_item);
+
+            storage.saveData();
             // Reload
             storage.loadData();
             Item_Ref ref = storage.getItem(item);
             assertTrue(ref.equals(item));
+
+            assertTrue(storage.getItem(composite_item) instanceof CompositeItem);
+            assertTrue(storage.getItem(variant_item) instanceof VariantItem);
         }catch (IOException e) {
             fail("XML_StorageAccess unable to create valid directory");
         }catch (JAXBException e) {
@@ -102,7 +133,21 @@ public class XML_StorageAccessTest {
             Menu menu = new Menu();
             menu.setName("My Menu");
             menu.setDescription("Hello I am a menu description");
-            menu.addToMenu(new MenuItem());
+
+            MenuItem menu_item = new MenuItem();
+            menu_item.setName("Mega Burger");
+            menu_item.setDescription("Blows your socks off!");
+            menu_item.setPrice(new Currency(10, 50));
+            menu_item.setItem(new Item_Ref());
+            menu.addToMenu(menu_item);
+
+            menu_item = new MenuItem();
+            menu_item.setName("Fire Burger");
+            menu_item.setDescription("Spicy");
+            menu_item.setPrice(new Currency(15, 50));
+            menu_item.setItem(new Item_Ref());
+            menu.addToMenu(menu_item);
+
             storage.updateMenu(menu);
             storage.saveData();
 
