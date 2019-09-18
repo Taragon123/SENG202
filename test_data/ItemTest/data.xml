@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<data>
+    <item_map>
+        <entry>
+            <key uuid="bea6c321-2003-48f8-87dc-857d2c5aece1"/>
+            <value uuid="bea6c321-2003-48f8-87dc-857d2c5aece1">
+                <name>Test Item</name>
+                <description>This item is being used to test the xml system</description>
+                <base_price cents="1050"/>
+                <markup_price cents="1499"/>
+                <recipe>
+                    <method>1. Create a test
+2. Run test
+3. See if build passes
+</method>
+                </recipe>
+                <qty_unit>NUM</qty_unit>
+            </value>
+        </entry>
+    </item_map>
+    <item_tag_map>
+        <entry>
+            <key uuid="e8c12c88-62cc-4bc1-89a5-4d5b335456c0"/>
+            <value uuid="e8c12c88-62cc-4bc1-89a5-4d5b335456c0">
+                <name>Gluten Free</name>
+                <is_dominant>true</is_dominant>
+            </value>
+        </entry>
+    </item_tag_map>
+    <menu_map>
+        <entry>
+            <key uuid="096abbbe-2134-4841-939a-e6922e202a97"/>
+            <value uuid="096abbbe-2134-4841-939a-e6922e202a97">
+                <menuitem_list>
+                    <menuitem>
+                        <item uuid="d88efb1d-b9e3-4865-be96-b81cfa1a9089"/>
+                        <name>Mega Burger</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="b73f2268-e758-440b-9237-daf2b00193d4"/>
+                        <name>Fire Burger</name>
+                        <description>Spicy</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                </menuitem_list>
+                <name>My Menu</name>
+                <description>Hello I am a menu description</description>
+            </value>
+        </entry>
+    </menu_map>
+    <order_map>
+        <entry>
+            <key uuid="25058b57-6215-4d38-9c24-213335aa5546"/>
+            <value uuid="25058b57-6215-4d38-9c24-213335aa5546">
+                <order_tree>
+                    <dependants>
+                        <quantity>0</quantity>
+                    </dependants>
+                    <quantity>0</quantity>
+                </order_tree>
+                <timestamp>2019-09-17T19:34:48.404+12:00</timestamp>
+            </value>
+        </entry>
+    </order_map>
+    <stock_instance_map>
+        <entry>
+            <key uuid="41b0ce5b-8ff1-4d63-8b73-311d79069ffc"/>
+            <value uuid="41b0ce5b-8ff1-4d63-8b73-311d79069ffc">
+                <date_added>2019-09-17T19:34:48.482+12:00</date_added>
+                <date_expires>2019-09-17T19:34:48.482+12:00</date_expires>
+                <does_expire>true</does_expire>
+                <quantity_remaining>4.0</quantity_remaining>
+            </value>
+        </entry>
+    </stock_instance_map>
+</data>
