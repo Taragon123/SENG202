@@ -38,7 +38,7 @@ import java.util.Set;
  * Name: OrderScreenController.java
  * Authors: Taran Jennison, Andy Clifford
  * Date: 07/09/2019
- * Last Updated: 17/09/2019
+ * Last Updated: 19/09/2019, Andy
  */
 
 
@@ -56,7 +56,7 @@ public class OrderScreenController implements Initializable {
         clock.setCycleCount(Animation.INDEFINITE);
         clock.play();
 
-        Set<Menu_Ref> menu_refSet = StorageAccess.instance().getAllMenus(); // retrieve uuid of all menus
+        Set<Menu_Ref> menu_refSet = StorageAccess.instance().getAllMenus(); //retrieve uuid of all menus
         for (Menu_Ref menu_ref: menu_refSet) {
 
             //Create Tab pane and add it to the list of Tab's (menu_tabs)
@@ -94,7 +94,17 @@ public class OrderScreenController implements Initializable {
         String buttonText = menu_item.getName();
         button.setText(buttonText);
         button.setTextFill(Paint.valueOf("#FFFFFF"));
-        button.setUserData(menu_item.getItem()); //sets the user data of the button to the item reference (uuid)
+        button.setUserData(menu_item); //sets the user data of the button to the item reference (uuid)
+
+        //Setup onAction event fort the button i.e. add_to_order
+        EventHandler<ActionEvent> actionEvent = new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent e) {
+                Button button = (Button)e.getSource(); //gets the button that was clicked
+                MenuItem menu_item = (MenuItem)button.getUserData(); //cast the userData of the button to a menuItem
+                add_to_order(menu_item);
+            }
+        };
+        button.setOnAction(actionEvent);
 
         //layout options etc.
         button.setMnemonicParsing(false);
@@ -119,6 +129,7 @@ public class OrderScreenController implements Initializable {
         Tab tab = new Tab();
         tab.setStyle(style);
         String tabText = StorageAccess.instance().getMenu(menu_ref).getName();
+        tab.setText(tabText);
         tab.setClosable(false);
         return tab;
     }
@@ -181,16 +192,14 @@ public class OrderScreenController implements Initializable {
     private TabPane menu_tabs;
 
     @FXML
-    private GridPane burger_grid;
-
-    @FXML
     private Label cost_field;
 
-    public void add_to_order(ActionEvent actionEvent) {
+    @FXML
+    private ListView order_list_display;
 
-        Button node = (Button)actionEvent.getSource();
-
-        System.out.println("Added"); }
+    public void add_to_order(MenuItem menu_item) {
+        System.out.println("Added " + menu_item.getName() + " to order");
+    }
 
     public void confirm_order() { System.out.println("Confirmed"); }
 
@@ -201,12 +210,3 @@ public class OrderScreenController implements Initializable {
     public void open_filters() { System.out.println("filter"); }
 
 }
-
-/*        int i = 0;
-        for (Node node: burger_grid.getChildren()) {
-            if (node instanceof Button) {
-                ((Button) node).setText("Hello");
-                node.setUserData(i);
-                i++;
-            }
-        }*/
