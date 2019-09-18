@@ -5,12 +5,18 @@
  */
 package seng202.teamsix.data;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+@XmlRootElement
 public class CompositeItem extends Item{
-    private List<Item_Ref> item_list;
-    private Recipe recipe;
+    @XmlElementWrapper(name = "composite_item_list")
+    @XmlElement(name = "item")
+    private ArrayList<Item_Ref> item_list;
 
     /**
      * Constructor for blank composite item.
@@ -24,24 +30,17 @@ public class CompositeItem extends Item{
      * @param item_list List of UUID_Entity components
      */
     public CompositeItem(String name, String description, Currency base_price, Currency markup_price, Recipe recipe,
-                         ArrayList<ItemTag_Ref> tags, UnitType qty_unit, List<Item_Ref> item_list) {
+                         ArrayList<ItemTag_Ref> tags, UnitType qty_unit, ArrayList<Item_Ref> item_list) {
         super(name, description, base_price, markup_price, recipe, tags, qty_unit);
         this.item_list = item_list;
     }
 
-    /**
-     * Sets recipe for composite item.
-     * @param recipe Recipe object
-     */
-    public void setCompositeRecipe(Recipe recipe) {
-        this.recipe = recipe;
-    }
 
     /**
      * Sets list of components.
      * @param item_list List of UUID_Entity components
      */
-    public void setComponents(List<Item_Ref> item_list) {
+    public void setComponents(ArrayList<Item_Ref> item_list) {
         this.item_list = item_list;
     }
 
@@ -51,14 +50,6 @@ public class CompositeItem extends Item{
      */
     public List<Item_Ref> getItems() {
         return item_list;
-    }
-
-    /**
-     * Gets recipe for combining components.
-     * @return recipe for composite item
-     */
-    public Recipe getCompositeRecipe() {
-        return recipe;
     }
 
     /**
@@ -94,5 +85,31 @@ public class CompositeItem extends Item{
         }
         
         return false;
+    }
+
+    /**
+     * Recursive function that creates item tree string representation.
+     * @param current_depth this should be zero if called directly used by recursion function
+     * @return item tree representation
+     */
+    @Override
+    String getItemTreeRepr(int current_depth) {
+        String spacer = String.join("", Collections.nCopies(current_depth, "|--"));
+        String line = spacer + "+ " + getName() + "\n";
+
+        StringBuilder output = new StringBuilder();
+        output.append(line);
+        for(Item_Ref child_item_ref : getItems()) {
+            Item child_item = StorageAccess.instance().getItem(child_item_ref);
+            if(child_item != null) {
+                output.append(child_item.getItemTreeRepr(current_depth + 1));
+            }
+        }
+        if(current_depth > 0){
+            output.append("|" + String.join("", Collections.nCopies(Math.max(current_depth-1, 0), "--|")) + "\n");
+        }
+
+
+        return output.toString();
     }
 }

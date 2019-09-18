@@ -14,8 +14,6 @@ class OrderManagerTest {
         OrderManager orderManager = new OrderManager();
         orderManager.resetCart();
         Item_Ref item_refToAdd = initialiseItem1();
-        ItemTag tag = new ItemTag("Gluten free!", false);
-        ItemTag_Ref tag_ref = (ItemTag_Ref)tag;
         orderManager.addToCart(item_refToAdd, 5);
         OrderItem orderItemRetrievedFromOrder = orderManager.getCart().getOrderTree().getDependants().get(0);
 
@@ -56,5 +54,4 @@ class OrderManagerTest {
         Item item = new Item("Large Fries", "Deep-fried pieces of potato. ", base_price, markup_price, recipe, tagList, UnitType.G);
         return item;
     }
-
 }

@@ -3,6 +3,7 @@ package seng202.teamsix.data;
 import javax.xml.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /** Name: Item.java
  *
@@ -15,6 +16,7 @@ import java.util.ArrayList;
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
+@XmlSeeAlso({VariantItem.class, CompositeItem.class})
 public class Item extends Item_Ref {
     @XmlElement @QueryField
     private String name;
@@ -141,5 +143,17 @@ public class Item extends Item_Ref {
             }
         }
         return false;
+    }
+
+    /**
+     * Recursive function that creates item tree string representation.
+     * Is overridden by CompositeItem and VariantItem
+     * @param current_depth this should be zero if called directly used by recursion function
+     * @return item tree representation
+     */
+    String getItemTreeRepr(int current_depth) {
+        String spacer = String.join("", Collections.nCopies(current_depth, "|--"));
+        String line = spacer + "+ " + getName() + "\n";
+        return line;
     }
 }
