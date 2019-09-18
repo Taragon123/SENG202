@@ -3,7 +3,6 @@ package seng202.teamsix.data;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -51,13 +50,39 @@ public class OrderItemTest {
         Item item1 = initialiseItem1();
         Item item2 = initialiseItem2();
         OrderItem bag = new OrderItem();
-        ItemTag_Ref itemTagRefToAdd1 = new ItemTag("Gluten-Free", true);
-        ItemTag_Ref itemTagRefToAdd2 = new ItemTag("Dairy-Free", false);
         bag.addToOrder(item1, 5);
         bag.addToOrder(item1, 3);
         bag.addToOrder(item2, 2);
         assertEquals(8, bag.getDependants().get(0).getQuantity());
         assertEquals(2, bag.getDependants().get(1).getQuantity());
+    }
+
+    @Test
+    public void addToOrderRealExample() {
+        StorageAccess.initTestMode("ItemTest");
+
+        Item_Ref combo_ref = new Item_Ref();
+        combo_ref.setUUID(8782518176451284363l, -6654882082024982124l);
+        CompositeItem combo_item = (CompositeItem) StorageAccess.instance().getItem(combo_ref);
+
+        OrderItem order = new OrderItem();
+        order.addToOrder(combo_item, 1);
+
+        String expected =   "+ (Empty)\n" +
+                            "|--+ Cheese Burger Combo\n" +
+                            "|--|--+ Cheese Burger\n" +
+                            "|--|--|--+ Buns\n" +
+                            "|--|--|--|--+ Gluten Free Bun\n" +
+                            "|--|--|\n" +
+                            "|--|--|--+ Patty\n" +
+                            "|--|--|--|--+ Meat Patty\n" +
+                            "|--|--|\n" +
+                            "|--|--|--+ Cheese\n" +
+                            "|--|\n" +
+                            "|--|--+ Drink\n" +
+                            "|--|--+ Chips\n" +
+                            "|\n";
+        assertEquals(order.getOrderTreeRepr(0), expected);
     }
 
     /**
@@ -99,10 +124,8 @@ public class OrderItemTest {
      */
     public Item initialiseItem2() {
         CompositeItem item = new CompositeItem();
-        ArrayList<ItemTag_Ref> tags = new ArrayList<ItemTag_Ref>();
-        List<Item_Ref> subItems = new ArrayList<>();
-        Item subItemToAdd = new Item("Coke", "Cold one", new Currency(), new Currency(), tags, UnitType.G);
-        subItems.add(subItemToAdd);
+        ArrayList<Item_Ref> subItems = new ArrayList<>();
+        subItems.add(new Item_Ref());
         item.setComponents(subItems);
         return item;
     }

@@ -5,10 +5,24 @@
  */
 
 package seng202.teamsix.data;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
+import java.util.Collections;
 
+@XmlRootElement
 public class VariantItem extends Item {
-    public ArrayList<Item_Ref> variantList = new ArrayList<>();
+    @XmlElementWrapper(name = "variant_list")
+    @XmlElement(name = "variant")
+    private ArrayList<Item_Ref> variantList = new ArrayList<>();
+
+    public VariantItem() {}
+    public VariantItem(String name, String description, Currency base_price, Currency markup_price, Recipe recipe,
+                         ArrayList<ItemTag_Ref> tags, UnitType qty_unit, ArrayList<Item_Ref> variant_list) {
+        super(name, description, base_price, markup_price, recipe, tags, qty_unit);
+        this.variantList = variant_list;
+    }
 
     /**
      * Gets the variant list.
@@ -48,5 +62,30 @@ public class VariantItem extends Item {
         }
 
         return parent_has_tag;
+    }
+
+    /**
+     * Recursive function that creates item tree string representation.
+     * @param current_depth this should be zero if called directly used by recursion function
+     * @return item tree representation
+     */
+    @Override
+    String getItemTreeRepr(int current_depth) {
+        String spacer = String.join("", Collections.nCopies(current_depth, "|--"));
+        String line = spacer + "+ " + getName() + " *\n";
+
+        StringBuilder output = new StringBuilder();
+        output.append(line);
+        for(Item_Ref child_item_ref : getVariants()) {
+            Item child_item = StorageAccess.instance().getItem(child_item_ref);
+            if(child_item != null) {
+                output.append(child_item.getItemTreeRepr(current_depth + 1));
+            }
+        }
+        if(current_depth > 0){
+            output.append("|" + String.join("", Collections.nCopies(Math.max(current_depth-1, 0), "--|")) + "\n");
+        }
+
+        return output.toString();
     }
 }

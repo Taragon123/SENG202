@@ -7,6 +7,7 @@
 package seng202.teamsix.data;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import javax.xml.bind.annotation.*;
 
 /**
@@ -64,12 +65,11 @@ public class OrderItem {
     }
 
     /**
-     * Adds an Item to the Order, given an Item_Ref item_ref and int qty.
+     * Adds an Item to the Order, given an Item_Ref item_ref, int qty, and ItemTag_Ref default tag.
      * @param item_ref Refers to the Item of which we want to add to the order.
      * @param qty The number of items we want to add too the order.
      */
     public void addToOrder(Item_Ref item_ref, int qty) {
-        // Is Item already added
         boolean is_added = false;
         for (OrderItem orderItem: dependants) {
             if (orderItem.getItem() == item_ref) {
@@ -77,23 +77,19 @@ public class OrderItem {
                 is_added = true;
             }
         }
-
-        // If not added add to order
         if (! is_added) {
-            //Add the main order item
             OrderItem parent = new OrderItem();
             parent.setItem(item_ref);
             parent.setQuantity(qty);
             this.dependants.add(parent);
 
-            // Add its children
             Item item = StorageAccess.instance().getItem(item_ref);
-            if(item instanceof CompositeItem){
-                for(Item_Ref child_item_ref : ((CompositeItem) item).getItems()) {
-                    // TODO(Connor): This is a functionality bug need some way of determining amounts of quantity for child items
-                    parent.addToOrder(child_item_ref, 1);
+
+            if(item instanceof CompositeItem) {
+                for(Item_Ref child_ref : ((CompositeItem) item).getItems()) {
+                    parent.addToOrder(child_ref, 1);
                 }
-            }else if(item instanceof VariantItem) {
+            } else if(item instanceof VariantItem) {
                 parent.addToOrder(((VariantItem) item).getVariants().get(0), 1);
             }
         }
@@ -121,4 +117,26 @@ public class OrderItem {
         return is_removed;
     }
 
+    public String getOrderTreeRepr(int current_depth) {
+        Item item = StorageAccess.instance().getItem(getItem());
+        String order_name = "(Empty)";
+        if(item != null) {
+            order_name = item.getName();
+        }
+
+        String spacer = String.join("", Collections.nCopies(current_depth, "|--"));
+        String line = spacer + "+ " + order_name + "\n";
+
+        StringBuilder output = new StringBuilder();
+        output.append(line);
+        for(OrderItem dependant : getDependants()) {
+            output.append(dependant.getOrderTreeRepr(current_depth + 1));
+        }
+
+        if(current_depth > 0 && getDependants().size() > 0){
+            output.append("|" + String.join("", Collections.nCopies(Math.max(current_depth-1, 0), "--|")) + "\n");
+        }
+
+        return output.toString();
+    }
 }

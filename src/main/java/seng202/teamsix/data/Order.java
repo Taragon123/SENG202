@@ -32,5 +32,4 @@ public class Order extends Order_Ref{
     public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
     }
-
 }
