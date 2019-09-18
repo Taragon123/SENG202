@@ -4,6 +4,14 @@
  * Date: 12/09/2019
  */
 
+/**
+ * A Note for @SuppressWarnings("unchecked"):
+ * There is a few instances in this file where the java compiler thinks I am doing unchecked casts.
+ * Because DataQuery is following a Factory Design Pattern it is wrong because the type checking has already occurred while
+ * adding the constraint. So I have decided to suppress these warnings.
+ *
+ */
+
 package seng202.teamsix.data;
 import java.lang.reflect.*;
 import java.util.*;
@@ -96,6 +104,7 @@ abstract class DataQueryConstraint {
  * Query Constraint if a class member is within a range.
  * @param <T> must be data type of field member and implement Comparable
  */
+@SuppressWarnings("unchecked")
 class DataQueryConstraintRange<T extends Comparable<T>> extends DataQueryConstraint {
     T upper;
     T lower;
@@ -110,6 +119,7 @@ class DataQueryConstraintRange<T extends Comparable<T>> extends DataQueryConstra
  * Query constraint if a class member is equal to comparision
  * @param <T> must be data type of field member and implement Comparable
  */
+@SuppressWarnings("unchecked")
 class DataQueryConstraintEqual<T extends Comparable<T>> extends DataQueryConstraint {
     T comparison;
 
@@ -320,6 +330,7 @@ public class DataQuery<T extends UUID_Entity> {
      * @return Filtered list of UUID_Entity's in sorted order
      * @throws IllegalStateException This is thrown under if state is incorrect, which shouldn't hopefully happen
      */
+    @SuppressWarnings("unchecked")
     public List<UUID_Entity> runQuery() throws IllegalStateException{
         // Get all UUID Entities of type dataClass
         Set<? extends UUID_Entity> total_list = StorageAccess.instance().getAllByClassType(dataClass);
