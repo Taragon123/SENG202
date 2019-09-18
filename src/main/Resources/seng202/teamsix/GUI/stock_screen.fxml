@@ -58,11 +58,9 @@
               <columnConstraints>
                 <ColumnConstraints fillWidth="true" hgrow="ALWAYS" minWidth="10.0" />
               </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
             </GridPane>
          </content>
       </ScrollPane>
+      <Button mnemonicParsing="false" text="Add Item" GridPane.columnIndex="2" GridPane.rowIndex="2" />
    </children>
 </GridPane>
