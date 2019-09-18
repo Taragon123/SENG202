@@ -19,6 +19,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
@@ -92,6 +93,7 @@ public class OrderScreenController implements Initializable {
         Button button = new Button();
         String buttonText = menu_item.getName();
         button.setText(buttonText);
+        button.setTextFill(Paint.valueOf("#FFFFFF"));
         button.setUserData(menu_item.getItem()); //sets the user data of the button to the item reference (uuid)
 
         //layout options etc.
