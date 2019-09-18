@@ -122,4 +122,13 @@ public class OrderItem {
         return is_removed;
     }
 
+    /*
+    public void setTagWithoutCheck(ItemTag_Ref tagRef) {
+        Item item = StockInstance.getItem(this.getItem());
+        if (item instanceof VariantItem) {
+            Item_Ref variant_with_tag = ((VariantItem) item).getVariantWithTag(tagRef);
+        }
+    }
+     */
+
 }

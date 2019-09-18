@@ -56,22 +56,6 @@ public class OrderManager {
         return hasTag;
     }
 
-    public boolean setTagHelper(OrderItem orderComponent, ItemTag_Ref itemtag_ref) {
-
-        boolean hasTag = false;
-        Item_Ref component = orderComponent.getItem();
-        if (component instanceof CompositeItem) {
-            hasTag = ((CompositeItem)component).hasTag(itemtag_ref);
-        } else if (component instanceof VariantItem) {
-            Item itemComponent = StorageAccess.instance().getItem(component);
-            hasTag = ((VariantItem)component).setForTag(itemtag_ref);
-        } else if (component instanceof Item) {
-            Item itemComponent = StorageAccess.instance().getItem(component);
-            hasTag = itemComponent.hasTag(itemtag_ref);
-        }
-        return hasTag;
-    }
-
     /**
      * A little unsure on what this does, will check with group. Should return boolean, if it the order can't be set for tag, return false.
      * @param itemtag_ref
