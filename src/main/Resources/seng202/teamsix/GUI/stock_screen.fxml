@@ -40,7 +40,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="searchBtn" alignment="CENTER" cancelButton="true" mnemonicParsing="false" onAction="searchItems" prefWidth="999999.0" text="Search" GridPane.columnIndex="1" />
+                  <Button fx:id="searchBtn" alignment="CENTER" cancelButton="true" mnemonicParsing="false" onAction="#searchItems" prefWidth="999999.0" text="Search" GridPane.columnIndex="1" />
                   <TextField fx:id="searchBox" />
                </children>
                <GridPane.margin>
@@ -52,6 +52,17 @@
             <Insets left="5.0" right="5.0" />
          </padding>
       </GridPane>
-      <ScrollPane fx:id="scroll_screen" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+      <ScrollPane fx:id="scrollPane" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
+         <content>
+            <GridPane fx:id="itemPane" gridLinesVisible="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+              <columnConstraints>
+                <ColumnConstraints fillWidth="true" hgrow="ALWAYS" minWidth="10.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+         </content>
+      </ScrollPane>
    </children>
 </GridPane>

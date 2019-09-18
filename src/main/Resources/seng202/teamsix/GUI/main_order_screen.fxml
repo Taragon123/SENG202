@@ -26,13 +26,13 @@
       <RowConstraints maxHeight="122.0" minHeight="10.0" prefHeight="77.0" vgrow="ALWAYS" />
   </rowConstraints>
    <children>
-      <TabPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #c8d6e5;" tabClosingPolicy="UNAVAILABLE" GridPane.rowIndex="1">
+      <TabPane fx:id="menu_tabs" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #c8d6e5;" tabClosingPolicy="UNAVAILABLE" GridPane.rowIndex="1">
         <tabs>
-          <Tab closable="false" style="-fx-background-color: #576574; -fx-pref-width: 200; -fx-pref-height: 50; -fx-font-size: 20;" text="Burgers">
+          <Tab closable="false" style="-fx-background-color: #576574; -fx-pref-width: 175; -fx-pref-height: 50; -fx-font-size: 20;" text="Burgers">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <GridPane fx:id="burger_grid" alignment="CENTER" hgap="10.0" layoutX="-1.0" layoutY="1.0" prefHeight="625.0" prefWidth="900.0" style="-fx-background-color: #c8d6e5;" vgap="10.0">
+                        <GridPane fx:id="burger_grid" alignment="CENTER" hgap="10.0" layoutX="-1.0" layoutY="1.0" prefHeight="611.0" prefWidth="900.0" style="-fx-background-color: #c8d6e5;" vgap="10.0">
                           <columnConstraints>
                             <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
                               <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
@@ -86,7 +86,7 @@
                   </AnchorPane>
             </content>
           </Tab>
-            <Tab closable="false" style="-fx-background-color: #576574; -fx-pref-width: 200; -fx-pref-height: 50; -fx-font-size: 20;" text="Sides">
+            <Tab closable="false" style="-fx-background-color: #576574; -fx-pref-width: 175; -fx-pref-height: 50; -fx-font-size: 20;" text="Sides">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
