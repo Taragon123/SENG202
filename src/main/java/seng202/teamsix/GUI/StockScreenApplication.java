@@ -7,10 +7,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.stage.Stage;
+import seng202.teamsix.managers.OrderManager;
 
 import java.io.IOException;
 
 public class StockScreenApplication extends Application {
+
     @Override
     public void start(Stage primaryStage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("stock_screen.fxml"));

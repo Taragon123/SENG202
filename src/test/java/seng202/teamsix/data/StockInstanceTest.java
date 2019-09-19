@@ -10,7 +10,7 @@ public class StockInstanceTest {
     public void testHasExpired() {
         Date date_added = new Date();
         Date date_expired = new Date(0);
-        StockInstance stock_item = new StockInstance(date_added, true, date_expired, 100);
+        StockInstance stock_item = new StockInstance(date_added, true, date_expired, 100, new Item_Ref());
         assertEquals(true, stock_item.hasExpired());
     }
 
@@ -19,7 +19,7 @@ public class StockInstanceTest {
     public void testTimeRemaining() {
         Date date_added = new Date();
         Date date_expired = new Date();
-        StockInstance stock_item = new StockInstance(date_added, true, date_expired, 100);
+        StockInstance stock_item = new StockInstance(date_added, true, date_expired, 100, new Item_Ref());
         assertEquals(0, stock_item.timeRemaining());
     }
 
@@ -27,7 +27,7 @@ public class StockInstanceTest {
     public void testSetQuantityRemaining() {
         Date date_added = new Date();
         Date date_expired = new Date();
-        StockInstance stock_item = new StockInstance(date_added, true, date_expired, 100);
+        StockInstance stock_item = new StockInstance(date_added, true, date_expired, 100, new Item_Ref());
 
         assertEquals(100, stock_item.getQuantityRemaining(), 0.0001);
 

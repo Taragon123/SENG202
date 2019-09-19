@@ -36,13 +36,14 @@ public class StockInstance extends StockInstance_Ref {
      * @param does_expire boolean does the StockInstance expire
      * @param date_expires the date that the StockInstance expires
      */
-    public StockInstance(Date date_added, boolean does_expire, Date date_expires, float quantity_remaining) {
-            super(); //generates uuid for the StockInstance
-            this.date_added = date_added;
-            this.does_expire = does_expire;
-            this.date_expires = date_expires; //Instantiated with null if the item does not expire
-            this.quantity_remaining = quantity_remaining;
-        }
+    public StockInstance(Date date_added, boolean does_expire, Date date_expires, float quantity_remaining, Item_Ref item_ref) {
+        super(); //generates uuid for the StockInstance
+        this.stock_item = item_ref;
+        this.date_added = date_added;
+        this.does_expire = does_expire;
+        this.date_expires = date_expires; //Instantiated with null if the item does not expire
+        this.quantity_remaining = quantity_remaining;
+    }
 
     /**
      * Compares the expiry date with the current date to check if stock has expired or not
@@ -72,6 +73,8 @@ public class StockInstance extends StockInstance_Ref {
     public Date getDateExpired() {return date_expires;}
 
     public float getQuantityRemaining() {return quantity_remaining;}
+
+    public boolean getDoesExpire() {return does_expire;}
 
     public Item_Ref getStockItem() {return stock_item;}
 

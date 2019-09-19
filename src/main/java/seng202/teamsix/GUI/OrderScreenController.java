@@ -19,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -30,6 +31,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import seng202.teamsix.data.*;
 import seng202.teamsix.data.MenuItem;
+import seng202.teamsix.managers.OrderManager;
 
 import java.awt.*;
 import java.io.IOException;
@@ -44,11 +46,21 @@ import java.util.Set;
  * Name: OrderScreenController.java
  * Authors: Taran Jennison, Andy Clifford
  * Date: 07/09/2019
- * Last Updated: 17/09/2019
+ * Last Updated: 19/09/2019, Andy
  */
 
 
 public class OrderScreenController implements Initializable {
+
+    /**
+     * The OrderManager will mainly need to be used in the OrderScreenController.
+     */
+    private OrderManager orderManager;
+
+    public Popup optionPopup = new Popup();
+    private Stage window;
+    private Scene managmentScene;
+    private boolean isPopupInit = false;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -62,7 +74,16 @@ public class OrderScreenController implements Initializable {
         clock.setCycleCount(Animation.INDEFINITE);
         clock.play();
 
-        Set<Menu_Ref> menu_refSet = StorageAccess.instance().getAllMenus(); // retrieve uuid of all menus
+        TableColumn itemCol = new TableColumn<MenuItem, String>("Item");
+        TableColumn priceCol = new TableColumn<MenuItem, String>("Price");
+        itemCol.setMinWidth(250);
+        priceCol.setMinWidth(120);
+
+        itemCol.setCellValueFactory(new PropertyValueFactory("name"));
+        priceCol.setCellValueFactory(new PropertyValueFactory("price"));
+        order_list_display.getColumns().addAll(itemCol, priceCol);
+
+        Set<Menu_Ref> menu_refSet = StorageAccess.instance().getAllMenus(); //retrieve uuid of all menus
         for (Menu_Ref menu_ref: menu_refSet) {
 
             //Create Tab pane and add it to the list of Tab's (menu_tabs)
@@ -100,7 +121,17 @@ public class OrderScreenController implements Initializable {
         String buttonText = menu_item.getName();
         button.setText(buttonText);
         button.setTextFill(Paint.valueOf("#FFFFFF"));
-        button.setUserData(menu_item.getItem()); //sets the user data of the button to the item reference (uuid)
+        button.setUserData(menu_item); //sets the user data of the button to the item reference (uuid)
+
+        //Setup onAction event fort the button i.e. add_to_order
+        EventHandler<ActionEvent> actionEvent = new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent e) {
+                Button button = (Button)e.getSource(); //gets the button that was clicked
+                MenuItem menu_item = (MenuItem)button.getUserData(); //cast the userData of the button to a menuItem
+                add_to_order(menu_item);
+            }
+        };
+        button.setOnAction(actionEvent);
 
         //layout options etc.
         button.setMnemonicParsing(false);
@@ -125,6 +156,7 @@ public class OrderScreenController implements Initializable {
         Tab tab = new Tab();
         tab.setStyle(style);
         String tabText = StorageAccess.instance().getMenu(menu_ref).getName();
+        tab.setText(tabText);
         tab.setClosable(false);
         return tab;
     }
@@ -187,40 +219,52 @@ public class OrderScreenController implements Initializable {
     private TabPane menu_tabs;
 
     @FXML
-    private GridPane burger_grid;
-
-    @FXML
     private Label cost_field;
 
-    public void add_to_order(ActionEvent actionEvent) {
+    @FXML
+    private TableView order_list_display;
 
-        Button node = (Button)actionEvent.getSource();
+    private int orderNum = 0;
 
-        System.out.println("Added"); }
+    public void add_to_order(MenuItem menu_item) {
+        //OrderManager will add the specifed item to cart #backend
+        orderManager.addToCart(menu_item, 1);
+        order_list_display.getItems().add(menu_item); //add the menu_item to the tableview
+    }
+
+    public void remove_from_order(MenuItem menu_item) {
+        orderManager.removeFromCart(menu_item, 1);
+        order_list_display.getItems().remove(menu_item);
+    }
 
     public void confirm_order() { System.out.println("Confirmed"); }
 
     public void cancel_order() { System.out.println("Canceled"); }
 
-    public void open_options(ActionEvent event) throws IOException {
-        System.out.println("options");
-        Parent pop = FXMLLoader.load(getClass().getResource("options_screen.fxml"));
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Popup optionPopup = new Popup();
-        optionPopup.getContent().add(pop);
-        optionPopup.show(window);
+    public void open_managment(ActionEvent event) {
+        System.out.println("Managment");
+        optionPopup.hide();
+        window.setScene(managmentScene);
+    }
 
+    public void toggle_options(ActionEvent event) throws IOException {
+        System.out.println("options");
+
+        if (optionPopup.isShowing()) {
+            optionPopup.hide();
+        } else {
+            optionPopup.show(window);
+        }
     }
 
     public void open_filters() { System.out.println("filter"); }
 
-}
+    public void preSet(Stage primaryStage, Scene managment) {
+        window = primaryStage;
+        managmentScene = managment;
+    }
 
-/*        int i = 0;
-        for (Node node: burger_grid.getChildren()) {
-            if (node instanceof Button) {
-                ((Button) node).setText("Hello");
-                node.setUserData(i);
-                i++;
-            }
-        }*/
+    public void setOrderManager(OrderManager orderManager1) {
+        orderManager = orderManager1;
+    }
+}

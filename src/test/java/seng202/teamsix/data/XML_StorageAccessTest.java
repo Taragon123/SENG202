@@ -195,7 +195,7 @@ public class XML_StorageAccessTest {
         // Test pass case
         try {
             storage = new XML_StorageAccess("test_data");
-            StockInstance stock = new StockInstance(new Date(), true, new Date(), 4);
+            StockInstance stock = new StockInstance(new Date(), true, new Date(), 4, new Item_Ref());
             storage.updateStockInstance(stock);
             storage.saveData();
 
