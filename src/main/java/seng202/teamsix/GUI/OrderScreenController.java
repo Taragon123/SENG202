@@ -57,7 +57,7 @@ public class OrderScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        String cost = String.format("Cost: $%.2f", 10.20);
+        String cost = String.format("Cost: $%.2f", 0.0);
         cost_field.setText(cost);
         Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy   HH:mm");
@@ -216,12 +216,22 @@ public class OrderScreenController implements Initializable {
     @FXML
     private TableView order_list_display;
 
-    private int orderNum = 0;
 
     public void add_to_order(MenuItem menu_item) {
-        //OrderManager will add the specifed item to cart #backend
-        orderManager.addToCart(menu_item, 1);
+        //OrderManager will add the specified item to cart #backend
+/*        orderManager.addToCart(menu_item, 1);*/
         order_list_display.getItems().add(menu_item); //add the menu_item to the tableview
+        double cost = menu_item.getPrice().getTotalCash();
+        updateCostField(cost);
+
+    }
+
+    public void updateCostField(double cost) {
+        String costText = cost_field.getText();
+        int start = costText.indexOf("$") + 1;
+        float currentCost = Float.parseFloat(costText.substring(start, costText.length()));
+        currentCost += cost;
+        cost_field.setText("Cost: $" + currentCost);
     }
 
     public void remove_from_order(MenuItem menu_item) {
