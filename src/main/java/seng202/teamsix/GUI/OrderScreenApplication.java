@@ -36,13 +36,13 @@ public class OrderScreenApplication extends Application {
         orderController.optionPopup.getContent().add(pop);
         orderController.optionPopup.setAutoHide(true);
 
+        FXMLLoader loadManagment = new FXMLLoader(getClass().getResource("stock_screen.fxml"));
+        loadManagment.setController(stockController);
+        Parent managmentParent = loadManagment.load();
+        Scene managmentScene = new Scene(managmentParent, 1300, 800);
 
-        FXMLLoader loaderManagement = new FXMLLoader(getClass().getResource("stock_screen.fxml"));
-        loaderManagement.setController(stockController);
-        Parent managementParent = loaderManagement.load();
-        Scene managementScene = new Scene(managementParent, 1300, 800);
-
-        orderController.preSet(primaryStage, managementScene);
+        orderController.preSet(primaryStage, managmentScene);
+        stockController.preSet(primaryStage, orderScene);
 
         primaryStage.setTitle("FoodByte");
         primaryStage.setScene(orderScene);
