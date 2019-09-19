@@ -4,27 +4,20 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
-import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
@@ -33,7 +26,6 @@ import seng202.teamsix.data.*;
 import seng202.teamsix.data.MenuItem;
 import seng202.teamsix.managers.OrderManager;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -249,11 +241,13 @@ public class OrderScreenController implements Initializable {
 
     public void toggle_options(ActionEvent event) throws IOException {
         System.out.println("options");
-
         if (optionPopup.isShowing()) {
             optionPopup.hide();
         } else {
-            optionPopup.show(window);
+            Double centreHeight = window.getHeight()/2 - 250;
+            Double centreWidth = window.getWidth()/2 - 270;
+            optionPopup.show(window, window.getX()+centreWidth, window.getY()+centreHeight);
+            //optionPopup.show;
         }
     }
 
