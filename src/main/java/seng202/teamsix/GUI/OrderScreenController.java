@@ -52,6 +52,8 @@ import java.util.Set;
 public class OrderScreenController implements Initializable {
 
     public Popup optionPopup = new Popup();
+    private Stage window;
+    private Scene managmentScene;
     private boolean isPopupInit = false;
 
     @Override
@@ -227,17 +229,27 @@ public class OrderScreenController implements Initializable {
 
     public void cancel_order() { System.out.println("Canceled"); }
 
+    public void open_managment(ActionEvent event) {
+        System.out.println("Managment");
+        optionPopup.hide();
+        window.setScene(managmentScene);
+    }
+
     public void toggle_options(ActionEvent event) throws IOException {
         System.out.println("options");
 
         if (optionPopup.isShowing()) {
             optionPopup.hide();
         } else {
-            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             optionPopup.show(window);
         }
     }
 
     public void open_filters() { System.out.println("filter"); }
+
+    public void preSet(Stage primaryStage, Scene managment) {
+        window = primaryStage;
+        managmentScene = managment;
+    }
 
 }
