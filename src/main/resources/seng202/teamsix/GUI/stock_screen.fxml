@@ -54,15 +54,13 @@
       </GridPane>
       <ScrollPane fx:id="scrollPane" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
          <content>
-            <GridPane fx:id="itemPane" gridLinesVisible="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+            <GridPane fx:id="itemPane" alignment="CENTER" gridLinesVisible="true">
               <columnConstraints>
-                <ColumnConstraints fillWidth="true" hgrow="ALWAYS" minWidth="10.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
             </GridPane>
          </content>
       </ScrollPane>
+      <Button fx:id="addBtn" mnemonicParsing="false" text="Add Item" GridPane.columnIndex="2" GridPane.rowIndex="2" />
    </children>
 </GridPane>
