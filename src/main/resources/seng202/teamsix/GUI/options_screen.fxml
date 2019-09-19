@@ -41,7 +41,7 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Button maxWidth="1.7976931348623157E308" minWidth="-Infinity" mnemonicParsing="false" style="-fx-font-size: 24; -fx-background-color: #c8d6e5; -fx-background-radius: 10; -fx-border-color: #000000; -fx-border-radius: 10; -fx-border-width: 2;" text="Managment" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                    <Button maxWidth="1.7976931348623157E308" minWidth="-Infinity" mnemonicParsing="false" onAction="#open_managment" style="-fx-font-size: 24; -fx-background-color: #c8d6e5; -fx-background-radius: 10; -fx-border-color: #000000; -fx-border-radius: 10; -fx-border-width: 2;" text="Managment" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                                        <GridPane.margin>
                                           <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                        </GridPane.margin>

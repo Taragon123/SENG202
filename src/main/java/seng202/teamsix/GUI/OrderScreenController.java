@@ -31,6 +31,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import seng202.teamsix.data.*;
 import seng202.teamsix.data.MenuItem;
+import seng202.teamsix.managers.OrderManager;
 
 import java.awt.*;
 import java.io.IOException;
@@ -51,7 +52,14 @@ import java.util.Set;
 
 public class OrderScreenController implements Initializable {
 
+    /**
+     * The OrderManager will mainly need to be used in the OrderScreenController.
+     */
+    private OrderManager orderManager;
+
     public Popup optionPopup = new Popup();
+    private Stage window;
+    private Scene managmentScene;
     private boolean isPopupInit = false;
 
     @Override
@@ -220,12 +228,24 @@ public class OrderScreenController implements Initializable {
 
     public void add_to_order(MenuItem menu_item) {
         //OrderManager will add the specifed item to cart #backend
+        orderManager.addToCart(menu_item, 1);
         order_list_display.getItems().add(menu_item); //add the menu_item to the tableview
+    }
+
+    public void remove_from_order(MenuItem menu_item) {
+        orderManager.removeFromCart(menu_item, 1);
+        order_list_display.getItems().remove(menu_item);
     }
 
     public void confirm_order() { System.out.println("Confirmed"); }
 
     public void cancel_order() { System.out.println("Canceled"); }
+
+    public void open_managment(ActionEvent event) {
+        System.out.println("Managment");
+        optionPopup.hide();
+        window.setScene(managmentScene);
+    }
 
     public void toggle_options(ActionEvent event) throws IOException {
         System.out.println("options");
@@ -233,11 +253,18 @@ public class OrderScreenController implements Initializable {
         if (optionPopup.isShowing()) {
             optionPopup.hide();
         } else {
-            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
             optionPopup.show(window);
         }
     }
 
     public void open_filters() { System.out.println("filter"); }
 
+    public void preSet(Stage primaryStage, Scene managment) {
+        window = primaryStage;
+        managmentScene = managment;
+    }
+
+    public void setOrderManager(OrderManager orderManager1) {
+        orderManager = orderManager1;
+    }
 }
