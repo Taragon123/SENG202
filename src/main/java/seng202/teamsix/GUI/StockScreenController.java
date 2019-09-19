@@ -6,7 +6,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -14,9 +16,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import seng202.teamsix.data.*;
 
+import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.util.List;
@@ -39,6 +44,30 @@ public class StockScreenController implements Initializable {
     private Button addBtn;
     @FXML
     private Button switchToOrderViewBtn;
+
+    //public Popup dialogPopup = new Popup();
+
+    private FXMLLoader loader;
+
+    @FXML
+    public void addItemAction(ActionEvent event ) {
+        try {
+            loader = new FXMLLoader(getClass().getResource("dialogBox.fxml"));
+            Parent root1 = (Parent) loader.load();
+            Stage stage = new Stage();
+            stage.initStyle(StageStyle.DECORATED);
+            stage.setTitle("Item to be Added");
+            stage.setScene(new Scene(root1));
+            //dialogPopup.show();
+            stage.show();
+        } catch (Exception e) {
+            System.out.println("Can't load new window");
+        }
+    }
+
+//    public void closePopup(ActionEvent event) throws IOException {
+//        dialogPopup.hide();
+//    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

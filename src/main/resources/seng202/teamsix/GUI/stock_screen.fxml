@@ -55,7 +55,7 @@
             <Insets left="5.0" right="5.0" />
          </padding>
       </GridPane>
-      <Button fx:id="addBtn" mnemonicParsing="false" text="Add Item" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <Button fx:id="addBtn" mnemonicParsing="false" onAction="#addItemAction" text="Add Item" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" GridPane.columnIndex="1" GridPane.rowIndex="1">
         <tabs>
           <Tab text="Stock">
