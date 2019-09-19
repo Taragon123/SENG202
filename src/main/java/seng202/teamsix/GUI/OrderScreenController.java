@@ -4,27 +4,20 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
-import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
@@ -33,7 +26,6 @@ import seng202.teamsix.data.*;
 import seng202.teamsix.data.MenuItem;
 import seng202.teamsix.managers.OrderManager;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -58,12 +50,14 @@ public class OrderScreenController implements Initializable {
     private OrderManager orderManager;
 
     public Popup optionPopup = new Popup();
+    private Stage window;
+    private Scene managmentScene;
     private boolean isPopupInit = false;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        String cost = String.format("Cost: $%.2f", 10.20);
+        String cost = String.format("Cost: $%.2f", 0.0);
         cost_field.setText(cost);
         Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy   HH:mm");
@@ -222,12 +216,22 @@ public class OrderScreenController implements Initializable {
     @FXML
     private TableView order_list_display;
 
-    private int orderNum = 0;
 
     public void add_to_order(MenuItem menu_item) {
-        //OrderManager will add the specifed item to cart #backend
-        orderManager.addToCart(menu_item, 1);
+        //OrderManager will add the specified item to cart #backend
+/*        orderManager.addToCart(menu_item, 1);*/
         order_list_display.getItems().add(menu_item); //add the menu_item to the tableview
+        double cost = menu_item.getPrice().getTotalCash();
+        updateCostField(cost);
+
+    }
+
+    public void updateCostField(double cost) {
+        String costText = cost_field.getText();
+        int start = costText.indexOf("$") + 1;
+        float currentCost = Float.parseFloat(costText.substring(start, costText.length()));
+        currentCost += cost;
+        cost_field.setText("Cost: $" + currentCost);
     }
 
     public void remove_from_order(MenuItem menu_item) {
@@ -237,20 +241,35 @@ public class OrderScreenController implements Initializable {
 
     public void confirm_order() { System.out.println("Confirmed"); }
 
-    public void cancel_order() { System.out.println("Canceled"); }
+    public void cancel_order() {
+        order_list_display.getItems().clear();
+        cost_field.setText("Cost: $0.0");
+        System.out.println("Canceled"); }
+
+    public void open_management(ActionEvent event) {
+        System.out.println("Management");
+        optionPopup.hide();
+        window.setScene(managmentScene);
+    }
 
     public void toggle_options(ActionEvent event) throws IOException {
         System.out.println("options");
-
         if (optionPopup.isShowing()) {
             optionPopup.hide();
         } else {
-            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            optionPopup.show(window);
+            Double centreHeight = window.getHeight()/2 - 250;
+            Double centreWidth = window.getWidth()/2 - 270;
+            optionPopup.show(window, window.getX()+centreWidth, window.getY()+centreHeight);
+            //optionPopup.show;
         }
     }
 
     public void open_filters() { System.out.println("filter"); }
+
+    public void preSet(Stage primaryStage, Scene management) {
+        window = primaryStage;
+        managmentScene = management;
+    }
 
     public void setOrderManager(OrderManager orderManager1) {
         orderManager = orderManager1;
