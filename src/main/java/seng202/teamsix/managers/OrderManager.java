@@ -76,19 +76,10 @@ public class OrderManager {
     }
 
     /**
-     * Setter for the cart.
-     * @param cart
-     */
-    public void setCart(Order cart) {
-        this.cart = cart;
-    }
-
-    /**
      * This will be used to reset the cart when the user wishes to clear it, or when a new order is placed.
      */
     public void resetCart() {
         this.cart = new Order();
-
     }
 
     /**
@@ -114,21 +105,31 @@ public class OrderManager {
     }
 
     /**
-     * Cancelling the order.
-     */
-    public void cancelOrder() {
-        resetCart();
-    }
-
-    /**
      * Finalises the order by saving it so it can be viewed in future if needed, sends order to chefs, prints receipt.
      */
     public void finaliseOrder() {
         // Save the order with StorageAccess/
-
+        StorageAccess.instance().updateOrder(cart);
 
         // Send order to kitchen via order ticket which is to be printed.
+        printChefOrder();
 
         // Print customers receipt.
+        printReceipt();
+    }
+
+    /**
+     * This method prints the order, just the item names and quantity. Currently prints to the command line.
+     */
+    private void printChefOrder() {
+        // need to find the depth of the order so that we can use the method getOrderTreeRepr() of the class OrderItem.
+    }
+
+    /**
+     * This method prints the Order in a receipt format, currently to the command line.
+     */
+    private void printReceipt() {
+        // similar to the printChefOrder, more details.
+
     }
 }
