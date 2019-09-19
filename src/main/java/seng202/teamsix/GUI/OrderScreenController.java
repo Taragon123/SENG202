@@ -19,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -61,6 +62,15 @@ public class OrderScreenController implements Initializable {
         }), new KeyFrame(Duration.seconds(1)));
         clock.setCycleCount(Animation.INDEFINITE);
         clock.play();
+
+        TableColumn itemCol = new TableColumn<MenuItem, String>("Item");
+        TableColumn priceCol = new TableColumn<MenuItem, String>("Price");
+        itemCol.setMinWidth(250);
+        priceCol.setMinWidth(120);
+
+        itemCol.setCellValueFactory(new PropertyValueFactory("name"));
+        priceCol.setCellValueFactory(new PropertyValueFactory("price"));
+        order_list_display.getColumns().addAll(itemCol, priceCol);
 
         Set<Menu_Ref> menu_refSet = StorageAccess.instance().getAllMenus(); //retrieve uuid of all menus
         for (Menu_Ref menu_ref: menu_refSet) {
@@ -201,10 +211,13 @@ public class OrderScreenController implements Initializable {
     private Label cost_field;
 
     @FXML
-    private ListView order_list_display;
+    private TableView order_list_display;
+
+    private int orderNum = 0;
 
     public void add_to_order(MenuItem menu_item) {
-        System.out.println("Added " + menu_item.getName() + " to order");
+        //OrderManager will add the specifed item to cart #backend
+        order_list_display.getItems().add(menu_item); //add the menu_item to the tableview
     }
 
     public void confirm_order() { System.out.println("Confirmed"); }
@@ -218,7 +231,6 @@ public class OrderScreenController implements Initializable {
         Popup optionPopup = new Popup();
         optionPopup.getContent().add(pop);
         optionPopup.show(window);
-
     }
 
     public void open_filters() { System.out.println("filter"); }
