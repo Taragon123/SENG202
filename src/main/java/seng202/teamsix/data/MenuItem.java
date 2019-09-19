@@ -88,11 +88,18 @@ public class MenuItem {
     }
 
     /**
-     * Sets the item reference
-     * @param item item reference to be added to the menu
+     * Sets the item reference and also adjusts the price to the markup amount assigned to the item.
+     * @param item_ref item reference to be added to the menu
      */
-    public void setItem(Item_Ref item) {
-        this.item = item;
+    public void setItem(Item_Ref item_ref) {
+        this.item = item_ref;
+        Item tempItem = StorageAccess.instance().getItem(item_ref);
+        if (tempItem != null) {
+            this.price = tempItem.getMarkupPrice();
+            this.name = tempItem.getName();
+            this.description = tempItem.getDescription();
+        }
+
     }
 
     /**

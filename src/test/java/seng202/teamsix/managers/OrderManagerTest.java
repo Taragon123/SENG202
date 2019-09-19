@@ -13,14 +13,14 @@ class OrderManagerTest {
     void addToCartTest() {
         OrderManager orderManager = new OrderManager();
         orderManager.resetCart();
-        Item_Ref item_refToAdd = initialiseItem1();
-        orderManager.addToCart(item_refToAdd, 5);
+        MenuItem menuItemToAdd = initialiseItem1();
+        orderManager.addToCart(menuItemToAdd, 5);
         OrderItem orderItemRetrievedFromOrder = orderManager.getCart().getOrderTree().getDependants().get(0);
 
-        assertEquals(((Item)item_refToAdd).getName(), ((Item)orderItemRetrievedFromOrder.getItem()).getName());
+        assertEquals(((Item)menuItemToAdd.getItem()).getName(), ((Item)orderItemRetrievedFromOrder.getItem()).getName());
         assertEquals(5, orderItemRetrievedFromOrder.getQuantity());
 
-        orderManager.addToCart(item_refToAdd, 10);
+        orderManager.addToCart(menuItemToAdd, 10);
         orderItemRetrievedFromOrder = orderManager.getCart().getOrderTree().getDependants().get(0);
 
         assertEquals(15, orderItemRetrievedFromOrder.getQuantity());
@@ -38,13 +38,13 @@ class OrderManagerTest {
     void testGetCashRequiredTest() {
         OrderManager orderManager = new OrderManager();
         orderManager.resetCart();
-        Item_Ref item_ref1 = initialiseItem1();
-        orderManager.addToCart(item_ref1, 25);
+        MenuItem menu_item = initialiseItem1();
+        orderManager.addToCart(menu_item, 25);
 
         assertEquals(250.0, orderManager.getCashRequired().getTotalCash());
     }
 
-    Item_Ref initialiseItem1() {
+    MenuItem initialiseItem1() {
         ArrayList<ItemTag_Ref> tagList = new ArrayList<ItemTag_Ref>();
         Recipe recipe = new Recipe("Cut Potatoes, cover in batter, deep-try for 5 minutes.");
         Currency base_price = new Currency();
@@ -52,6 +52,8 @@ class OrderManagerTest {
         Currency markup_price = new Currency();
         markup_price.setTotalCash(10.00);
         Item item = new Item("Large Fries", "Deep-fried pieces of potato. ", base_price, markup_price, recipe, tagList, UnitType.G);
-        return item;
+        MenuItem menuItem = new MenuItem();
+        menuItem.setItem(item);
+        return menuItem;
     }
 }

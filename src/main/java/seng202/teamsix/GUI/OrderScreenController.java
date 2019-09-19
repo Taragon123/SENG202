@@ -31,6 +31,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import seng202.teamsix.data.*;
 import seng202.teamsix.data.MenuItem;
+import seng202.teamsix.managers.OrderManager;
 
 import java.awt.*;
 import java.io.IOException;
@@ -50,6 +51,8 @@ import java.util.Set;
 
 
 public class OrderScreenController implements Initializable {
+
+    private OrderManager orderManager = new OrderManager();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -216,8 +219,13 @@ public class OrderScreenController implements Initializable {
     private int orderNum = 0;
 
     public void add_to_order(MenuItem menu_item) {
-        //OrderManager will add the specifed item to cart #backend
+        orderManager.addToCart(menu_item, 1);
         order_list_display.getItems().add(menu_item); //add the menu_item to the tableview
+    }
+
+    public void remove_from_order(MenuItem menu_item) {
+        orderManager.removeFromCart(menu_item, 1);
+        order_list_display.getItems().remove(menu_item);
     }
 
     public void confirm_order() { System.out.println("Confirmed"); }

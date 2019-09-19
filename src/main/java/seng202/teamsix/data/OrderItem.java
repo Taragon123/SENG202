@@ -117,7 +117,6 @@ public class OrderItem {
         return is_removed;
     }
 
-<<<<<<< HEAD
     /*
     public void setTagWithoutCheck(ItemTag_Ref tagRef) {
         Item item = StockInstance.getItem(this.getItem());
@@ -127,7 +126,6 @@ public class OrderItem {
     }
      */
 
-=======
     public String getOrderTreeRepr(int current_depth) {
         Item item = StorageAccess.instance().getItem(getItem());
         String order_name = "(Empty)";
@@ -150,5 +148,4 @@ public class OrderItem {
 
         return output.toString();
     }
->>>>>>> 9aa5a9e06854a9484fa2f631f37d2167800f4bf5
 }

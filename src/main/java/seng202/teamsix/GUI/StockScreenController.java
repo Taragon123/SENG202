@@ -13,6 +13,7 @@ import javafx.scene.layout.*;
 import seng202.teamsix.data.DataQuery;
 import seng202.teamsix.data.StockInstance;
 import seng202.teamsix.data.UUID_Entity;
+import seng202.teamsix.managers.OrderManager;
 import seng202.teamsix.managers.StockManager;
 
 import java.net.URL;
@@ -31,6 +32,8 @@ public class StockScreenController implements Initializable {
 
     @FXML
     private Button addBtn;
+
+    private OrderManager orderManager;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
