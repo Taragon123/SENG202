@@ -51,6 +51,9 @@ import java.util.Set;
 
 public class OrderScreenController implements Initializable {
 
+    public Popup optionPopup = new Popup();
+    private boolean isPopupInit = false;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -224,13 +227,15 @@ public class OrderScreenController implements Initializable {
 
     public void cancel_order() { System.out.println("Canceled"); }
 
-    public void open_options(ActionEvent event) throws IOException {
+    public void toggle_options(ActionEvent event) throws IOException {
         System.out.println("options");
-        Parent pop = FXMLLoader.load(getClass().getResource("options_screen.fxml"));
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Popup optionPopup = new Popup();
-        optionPopup.getContent().add(pop);
-        optionPopup.show(window);
+
+        if (optionPopup.isShowing()) {
+            optionPopup.hide();
+        } else {
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            optionPopup.show(window);
+        }
     }
 
     public void open_filters() { System.out.println("filter"); }
