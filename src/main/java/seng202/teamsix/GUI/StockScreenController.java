@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import seng202.teamsix.data.*;
@@ -20,13 +21,10 @@ public class StockScreenController implements Initializable {
     private List<UUID_Entity> stockList;
     private List<UUID_Entity> itemList;
 
-
     @FXML
     private GridPane stockPane;
-
     @FXML
     private Button addBtn;
-
     @FXML
     private GridPane itemPane;
 
@@ -40,20 +38,20 @@ public class StockScreenController implements Initializable {
 
         //Creating labels
         System.out.println(item.getName());
-        Label name = new Label(item.getName());
-        Label description = new Label(item.getDescription());
+        Label name_lbl = new Label("Item name: " + item.getName());
+        Label date_added_lbl = new Label("Date added: " + stockInstance.getDateAdded().toString());
+        Label quantity_remaining_lbl = new Label("Quantity remaining: " + (int)stockInstance.getQuantityRemaining());
+        Label date_expires_lbl = new Label("Expires: ");
+        if (stockInstance.getDoesExpire()) {
+            date_expires_lbl.setText(date_expires_lbl.getText() + stockInstance.getDateExpired().toString());
+        } else {
+            date_expires_lbl.setText(date_expires_lbl.getText() + "N/A");
+        }
 
         //Creating buttons
-        Button editBtn = new Button("Edit");
-        Button adjustStockBtn = new Button("Adjust Stock");
+        Button adjustStockBtn = new Button("Adjust");
 
         //Adding event handlers for buttons
-        editBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                addBtn.setText(String.format("date added %s", stockInstance.getDateAdded().toString()));
-            }
-        });
         adjustStockBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -63,13 +61,14 @@ public class StockScreenController implements Initializable {
 
         //Creating grid and adding components to grid
         final GridPane grid = new GridPane();
-        grid.setMaxSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
-        grid.setGridLinesVisible(true);
-        grid.add(name, 0, 0);
-        grid.add(description, 1, 0);
-        grid.add(editBtn, 2, 0);
-        grid.add(adjustStockBtn, 2, 1);
 
+        grid.setGridLinesVisible(true);
+        grid.add(name_lbl, 0, 0);
+        grid.add(quantity_remaining_lbl, 0, 1);
+        grid.add(date_added_lbl, 1, 0);
+        grid.add(date_expires_lbl, 1, 1);
+        grid.add(adjustStockBtn, 2, 0);
+        adjustStockBtn.setMaxHeight(Double.MAX_VALUE);
         return grid;
     }
 

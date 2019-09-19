@@ -74,6 +74,8 @@ public class StockInstance extends StockInstance_Ref {
 
     public float getQuantityRemaining() {return quantity_remaining;}
 
+    public boolean getDoesExpire() {return does_expire;}
+
     public Item_Ref getStockItem() {return stock_item;}
 
     /**
