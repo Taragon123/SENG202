@@ -11,11 +11,13 @@ import java.io.IOException;
 
 public class OrderScreenApplication extends Application {
 
+    private OrderManager orderManager = new OrderManager();
 
     @Override
     public void start(Stage primaryStage) throws IOException {
         FXMLLoader loaderOrder = new FXMLLoader(getClass().getResource("main_order_screen.fxml"));
         OrderScreenController controller = new OrderScreenController();
+        controller.setOrderManager(orderManager);
         loaderOrder.setController(controller);
         Parent root = loaderOrder.load();
 
