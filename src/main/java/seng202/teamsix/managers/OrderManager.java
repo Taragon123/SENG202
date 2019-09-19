@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class OrderManager {
 
-    private Order cart;
+    private Order cart = new Order();
 
     /**
      * Adds the item to the cart given a reference to a MenuItem menu_item, number of items qty.
