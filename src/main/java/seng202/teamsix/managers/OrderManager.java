@@ -17,101 +17,53 @@ public class OrderManager {
     private Order cart;
 
     /**
-     * Adds the item to the cart given a reference to an Item item_ref, number of items qty.
-     * @param item_ref A reference to the item that we wish to add to the list.
+     * Adds the item to the cart given a reference to a MenuItem menu_item, number of items qty.
+     * @param menu_item A reference to the menu item that we wish to add to the cart.
      * @param qty The quantity corresponding to the number of Items.
      */
-    public void addToCart(Item_Ref item_ref, int qty) {
+    public void addToCart(MenuItem menu_item, int qty) {
+        Item_Ref item_ref = menu_item.getItem();
         cart.getOrderTree().addToOrder(item_ref, qty);
     }
 
     /**
      * Removes the item from the cart given a reference to an Item item_ref, and number of items qty.
-     * @param item_ref A reference to the Item that we wish to remove from the list.
+     * @param menu_item A reference to the MenuItem that we wish to remove from the list.
      * @param qty The quantity corresponding to the number of Items.
      */
-    public void removeFromCart(Item_Ref item_ref, int qty) {
+    public void removeFromCart(MenuItem menu_item, int qty) {
+        Item_Ref item_ref = menu_item.getItem();
         cart.getOrderTree().removeFromOrder(item_ref, qty);
     }
 
     /**
-     * A little unsure on what this does, will check with group. Should return boolean, if it the order can't be
+     * returns a boolean indicating whether the OrderItem object has the associated itemtag_ref.
+     * @param orderComponent The OrderItem we want to check has the tag.
+     * @param itemtag_ref The ItemTag_Ref object we want to see is included in the list of tags associated with the OrderItem.
+     * @return
+     */
+    public boolean hasTagHelper(OrderItem orderComponent, ItemTag_Ref itemtag_ref) {
+
+        boolean hasTag = false;
+        Item_Ref component = orderComponent.getItem();
+        if (component instanceof CompositeItem) {
+            hasTag = ((CompositeItem)component).hasTag(itemtag_ref);
+        } else if (component instanceof VariantItem) {
+            Item itemComponent = StorageAccess.instance().getItem(component);
+            hasTag = ((VariantItem)component).hasTag(itemtag_ref);
+        } else if (component instanceof Item) {
+            Item itemComponent = StorageAccess.instance().getItem(component);
+            hasTag = itemComponent.hasTag(itemtag_ref);
+        }
+        return hasTag;
+    }
+
+    /**
+     * A little unsure on what this does, will check with group. Should return boolean, if it the order can't be set for
+     * tag, return false.
      * @param itemtag_ref
      */
     public boolean setOrderForTag(ItemTag_Ref itemtag_ref) {
-
-        // To be implemented.
-        ArrayList<Boolean> componentBools = new ArrayList<>();
-        boolean adapted = false;
-        for (Object component: cart.getOrderTree().getDependants()) {
-            // if the item tag is dominant, all the items inside must have the tag.
-            if (((ItemTag)itemtag_ref).getIsDominant()) {
-                componentBools.add(recurseAdaptOrderDominant(component, itemtag_ref));
-            } else {
-                componentBools.add(recurseAdaptOrderDominant(component, itemtag_ref));
-            }
-        }
-        if (! componentBools.contains(false)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-
-//    public boolean recurseAdaptOrderNonDominant(Object o, ItemTag_Ref itemtag_ref)
-//    {
-//        Object item = cart.getOrderTree().getItem
-//   }
-    /*
-        If the ItemTag is marked as dominant, all the children must contain the tag.
-     */
-
-    public boolean recurseAdaptOrderDominant(Object o, ItemTag_Ref itemtag_ref)
-    {
-        if (o instanceof VariantItem) {
-            VariantItem variantItem = (VariantItem)o;
-            ArrayList<Item_Ref> variants = variantItem.getVariants();
-            for (Item_Ref variant: variants) {
-                // if the variant does not contain the tag,
-                if (!((Item)variant).getTags().contains(itemtag_ref)) {
-                    variants.remove(variant);
-                }
-            }
-            if (variants.size() == 0) {
-                // no variants corresponding with the tag.
-                return false;
-            } else {
-                for (Item_Ref variant: variantItem.getVariants()) {
-                    // if the variant does not contain the tag,
-                    if (!((Item)variant).getTags().contains(itemtag_ref)) {
-                        variantItem.removeVariant(variant);
-                    }
-                }
-                while (variantItem.getVariants().size() > 1) {
-
-                    // removes the last variantItem from the list of variantItems. This continues until there is only one
-                    // variant with the tag remaining.
-                    variantItem.removeVariant(variantItem.getVariants().get(variantItem.getVariants().size() - 1));
-                }
-                return true;
-            }
-
-        } else if (o instanceof CompositeItem) {
-            CompositeItem compositeItem = (CompositeItem)o;
-            ArrayList<Boolean> compositeChildBools = new ArrayList<>();
-            for (Object child: compositeItem.getItems()) {
-                compositeChildBools.add(recurseAdaptOrderDominant(child, itemtag_ref));
-            }
-            if (! compositeChildBools.contains(false)) {
-                return true;
-            }
-        } else if (o instanceof Item) {
-            Item item = (Item)o;
-            if (item.getTags().contains(itemtag_ref)) {
-                return true;
-            }
-        }
         return false;
     }
 

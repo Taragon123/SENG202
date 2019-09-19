@@ -5,10 +5,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import seng202.teamsix.managers.OrderManager;
 
 import java.io.IOException;
 
 public class OrderScreenApplication extends Application {
+
+    private OrderManager orderManager = new OrderManager();
 
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -16,6 +19,8 @@ public class OrderScreenApplication extends Application {
         OrderScreenController orderController = new OrderScreenController();
 
         FXMLLoader loaderOrder = new FXMLLoader(getClass().getResource("main_order_screen.fxml"));
+        OrderScreenController controller = new OrderScreenController();
+        controller.setOrderManager(orderManager);
         loaderOrder.setController(orderController);
         Parent root = loaderOrder.load();
 

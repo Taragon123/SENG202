@@ -158,6 +158,7 @@ class DataQueryComparator implements Comparator<UUID_Entity> {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public int compare(UUID_Entity ref_a, UUID_Entity ref_b) {
         // Get objects from reference
         UUID_Entity obj_a = StorageAccess.instance().get(ref_a);
