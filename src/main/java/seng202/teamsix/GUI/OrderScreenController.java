@@ -233,8 +233,8 @@ public class OrderScreenController implements Initializable {
 
     public void cancel_order() { System.out.println("Canceled"); }
 
-    public void open_managment(ActionEvent event) {
-        System.out.println("Managment");
+    public void open_management(ActionEvent event) {
+        System.out.println("Management");
         optionPopup.hide();
         window.setScene(managmentScene);
     }
@@ -253,9 +253,9 @@ public class OrderScreenController implements Initializable {
 
     public void open_filters() { System.out.println("filter"); }
 
-    public void preSet(Stage primaryStage, Scene managment) {
+    public void preSet(Stage primaryStage, Scene management) {
         window = primaryStage;
-        managmentScene = managment;
+        managmentScene = management;
     }
 
     public void setOrderManager(OrderManager orderManager1) {
