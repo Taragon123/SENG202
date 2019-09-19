@@ -1,5 +1,7 @@
 package seng202.teamsix;
 
+import seng202.teamsix.GUI.*;
+
 /**
  * Hello world!
  * Put Your name here:
@@ -19,6 +21,6 @@ public class App
 
     public static void main( String[] args )
     {
-        System.out.println( "Hello World! I am FOODBYTE." );
+        OrderScreenApplication.main(args);
     }
 }
