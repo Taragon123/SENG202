@@ -61,17 +61,7 @@ public class StockManager {
         }
     }
 
-    /**
-     * Creates a StockInstance and adds it to the stock_list
-     * @param date_added the date when the stock was added
-     * @param does_expire boolean, true is the StockInstance expires, false otherwise
-     * @param date_expires the date when the stock expires
-     * @param quantity_remaining the quantity remaining of the StockInstance
-     */
-    public void createStockInstance(Date date_added, boolean does_expire, Date date_expires, float quantity_remaining) {
-        StockInstance instance = new StockInstance(date_added, does_expire, date_expires, quantity_remaining);
-        this.addStock(instance);
-    }
+    
 
     public ArrayList<StockInstance> getStockList() { return stock_list; }
 }
