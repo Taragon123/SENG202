@@ -122,12 +122,9 @@ public class StockScreenController implements Initializable {
 
     public void refreshPanes() {
         populateLists();
-
     }
 
-    public void addStock() {
-
-    }
+    public void addStock() {}
 
     public void updateStock() {}
 
