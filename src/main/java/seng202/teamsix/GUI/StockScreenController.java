@@ -1,23 +1,18 @@
 package seng202.teamsix.GUI;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.HPos;
-import javafx.geometry.VPos;
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Region;
 import seng202.teamsix.data.DataQuery;
 import seng202.teamsix.data.StockInstance;
 import seng202.teamsix.data.UUID_Entity;
-import seng202.teamsix.managers.OrderManager;
-import seng202.teamsix.managers.StockManager;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -32,8 +27,6 @@ public class StockScreenController implements Initializable {
 
     @FXML
     private Button addBtn;
-
-    private OrderManager orderManager;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
