@@ -241,7 +241,10 @@ public class OrderScreenController implements Initializable {
 
     public void confirm_order() { System.out.println("Confirmed"); }
 
-    public void cancel_order() { System.out.println("Canceled"); }
+    public void cancel_order() {
+        order_list_display.getItems().clear();
+        cost_field.setText("Cost: $0.0");
+        System.out.println("Canceled"); }
 
     public void open_management(ActionEvent event) {
         System.out.println("Management");
