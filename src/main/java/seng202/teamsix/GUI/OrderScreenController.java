@@ -68,11 +68,12 @@ public class OrderScreenController implements Initializable {
 
         TableColumn itemCol = new TableColumn<MenuItem, String>("Item");
         TableColumn priceCol = new TableColumn<MenuItem, String>("Price");
-        itemCol.setMinWidth(250);
-        priceCol.setMinWidth(120);
+        itemCol.setMinWidth(265);
+        priceCol.setMinWidth(92);
 
         itemCol.setCellValueFactory(new PropertyValueFactory("name"));
         priceCol.setCellValueFactory(new PropertyValueFactory("price"));
+        order_list_display.getColumns().clear();
         order_list_display.getColumns().addAll(itemCol, priceCol);
 
         Set<Menu_Ref> menu_refSet = StorageAccess.instance().getAllMenus(); //retrieve uuid of all menus
