@@ -32,6 +32,14 @@ public class UUID_Entity{
     }
 
     /**
+     * Sets the
+     * @param str_uuid
+     */
+    public void setUUID(String str_uuid) {
+        uuid.fromString(str_uuid);
+    }
+
+    /**
      * Returns internal uuid
      * @return uuid
      */
