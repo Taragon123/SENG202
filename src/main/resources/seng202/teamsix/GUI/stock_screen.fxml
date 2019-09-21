@@ -73,7 +73,7 @@
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
             <Button fx:id="switchToOrderViewBtn" mnemonicParsing="false" onAction="#openOrderView" text="Switch to Order View" />
-            <Button mnemonicParsing="false" text="Button" />
+            <Button mnemonicParsing="false" onAction="#openPastOrderView" text="Switch to Past Order View" />
          </children>
       </HBox>
    </children>

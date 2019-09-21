@@ -33,6 +33,7 @@ public class StockScreenController implements Initializable {
     private List<UUID_Entity> itemList;
     private Stage window;
     private Scene orderScene;
+    private Scene pastOrderScene;
 
     @FXML
     private GridPane root;
@@ -75,14 +76,20 @@ public class StockScreenController implements Initializable {
         refreshPanes();
     }
 
+    public void openPastOrderView() {
+        System.out.println("Past Orders");
+        window.setScene(pastOrderScene);
+    }
+
     public void openOrderView() {
         System.out.println("Ordering");
         window.setScene(orderScene);
     }
 
-    public void preSet(Stage primaryStage, Scene orderScene) {
+    public void preSet(Stage primaryStage, Scene orderScene, Scene pastOrderScene) {
         this.window = primaryStage;
         this.orderScene = orderScene;
+        this.pastOrderScene = pastOrderScene;
     }
 
     public void refreshData() {

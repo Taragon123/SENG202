@@ -22,6 +22,7 @@ public class OrderScreenApplication extends Application {
         primaryStage.setMinHeight(600);
         OrderScreenController orderController = new OrderScreenController();
         StockScreenController stockController = new StockScreenController();
+        PastOrderScreenController pastOrderController = new PastOrderScreenController();
 
         FXMLLoader loaderOrder = new FXMLLoader(getClass().getResource("main_order_screen.fxml"));
         orderController.setOrderManager(orderManager);
@@ -41,8 +42,13 @@ public class OrderScreenApplication extends Application {
         Parent managmentParent = loadManagment.load();
         Scene managmentScene = new Scene(managmentParent, 1300, 800);
 
+        FXMLLoader loadPastOrderManagment = new FXMLLoader(getClass().getResource("past_order_screen.fxml"));
+        loadPastOrderManagment.setController(pastOrderController);
+        Parent pastOrderManagment = loadPastOrderManagment.load();
+        Scene pastOrderScene = new Scene(pastOrderManagment, 1300, 800);
+
         orderController.preSet(primaryStage, managmentScene);
-        stockController.preSet(primaryStage, orderScene);
+        stockController.preSet(primaryStage, orderScene, pastOrderScene);
 
         primaryStage.setTitle("FoodByte");
         primaryStage.setScene(orderScene);
