@@ -17,15 +17,17 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class PastOrderScreenController implements Initializable {
-    private List<UUID_Entity> orders;
+    private List<UUID_Entity> orderUUIDList;
     private TableView<OrderTableEntry> orderTable;
+    private ObservableList<OrderTableEntry> observableOrders = FXCollections.observableArrayList();
+
     @FXML
     private StackPane orderPane;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         refreshData();
-        refreshPanes();
+        createPanes();
         orderPane.getChildren().addAll(orderTable);
     }
 
@@ -34,13 +36,14 @@ public class PastOrderScreenController implements Initializable {
      */
     public void refreshData() {
         DataQuery<Order> orderDataQuery = new DataQuery<>(Order.class);
-        orders = orderDataQuery.runQuery();
+        orderUUIDList = orderDataQuery.runQuery();
+        getObservableOrderTableEntryList(observableOrders);
     }
 
     /**
      * Refreshes table
      */
-    public void refreshPanes() {
+    public void createPanes() {
         createTable();
     }
 
@@ -49,7 +52,7 @@ public class PastOrderScreenController implements Initializable {
      */
     public void createTable() {
         orderTable = new TableView<>();
-        orderTable.setItems(getObservableOrderTableEntryList());
+        orderTable.setItems(observableOrders);
 
         TableColumn<OrderTableEntry, String> dateColumn = new TableColumn<>("Date");
         dateColumn.setMinWidth(100);
@@ -61,15 +64,13 @@ public class PastOrderScreenController implements Initializable {
 
     /**
      * Creates observable list of OrderTableEntry items for table
-     * @return observable list of type OrderTableEntry
      */
-    public ObservableList<OrderTableEntry> getObservableOrderTableEntryList() {
-        ObservableList<OrderTableEntry> observableOrders = FXCollections.observableArrayList();
-        for (UUID_Entity entity: orders) {
+    private void getObservableOrderTableEntryList(ObservableList<OrderTableEntry> orderEntries) {
+        orderEntries.removeAll();
+        for (UUID_Entity entity: orderUUIDList) {
             Order order = StorageAccess.instance().getOrder(new Order_Ref(entity));
-            observableOrders.add(new OrderTableEntry(order));
+            orderEntries.add(new OrderTableEntry(order));
         }
-        return observableOrders;
     }
 
     /**
