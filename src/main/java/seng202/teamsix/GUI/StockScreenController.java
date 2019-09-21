@@ -4,11 +4,13 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -111,6 +113,14 @@ public class StockScreenController implements Initializable {
         getObservableItemTableEntryList(itemEntries);
     }
 
+    public void addStockInstance(Item_Ref item_ref) {
+
+    }
+
+    public void searchItems() {
+        //TODO Implement search functionality
+    }
+
     /**
      * Runs table initialisation
      */
@@ -187,13 +197,19 @@ public class StockScreenController implements Initializable {
         unitColumn.setMinWidth(100);
         unitColumn.setCellValueFactory(new PropertyValueFactory<>("qty_unit"));
         itemTable.getColumns().add(unitColumn);
+
+        //Add button column
+        TableColumn<ItemTableEntry, Button> addStockButtonColumn = new TableColumn<>();
+        unitColumn.setMinWidth(100);
+        unitColumn.setCellValueFactory(new PropertyValueFactory<>("addStockInstance"));
+        itemTable.getColumns().add(addStockButtonColumn);
     }
 
     private void getObservableItemTableEntryList(ObservableList<ItemTableEntry> items) {
         items.clear();
         for (UUID_Entity entity: itemList) {
             Item item = StorageAccess.instance().getItem(new Item_Ref(entity));
-            items.add(new ItemTableEntry(item));
+            items.add(new ItemTableEntry(item, this));
         }
     }
 
@@ -206,10 +222,6 @@ public class StockScreenController implements Initializable {
         }
     }
 
-    public void searchItems() {
-        //TODO Implement search functionality
-    }
-
     public static class ItemTableEntry {
         private final Item_Ref item_ref;
         private final SimpleStringProperty name;
@@ -217,14 +229,22 @@ public class StockScreenController implements Initializable {
         private final SimpleStringProperty base_price;
         private final SimpleStringProperty markup_price;
         private final SimpleStringProperty qty_unit;
+        private final Button addStockInstance;
 
-        private ItemTableEntry(Item item) {
+        private ItemTableEntry(Item item, StockScreenController parent) {
             this.item_ref = item;
             this.name = new SimpleStringProperty(item.getName());
             this.description = new SimpleStringProperty(item.getDescription());
             this.base_price = new SimpleStringProperty(item.getBasePrice().toString());
             this.markup_price = new SimpleStringProperty(item.getMarkupPrice().toString());
             this.qty_unit = new SimpleStringProperty(item.getQtyUnit().toString());
+            this.addStockInstance = new Button("Create new stock item");
+            this.addStockInstance.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    parent.addStockInstance(item_ref);
+                }
+            });
         }
 
         public String getName() {
@@ -244,6 +264,9 @@ public class StockScreenController implements Initializable {
         }
         public Item_Ref getItem_ref() {
             return item_ref;
+        }
+        public Button getAddStockInstance() {
+            return addStockInstance;
         }
     }
 
