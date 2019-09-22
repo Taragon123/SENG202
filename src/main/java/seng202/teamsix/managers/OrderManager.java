@@ -10,8 +10,6 @@ package seng202.teamsix.managers;
 
 import seng202.teamsix.data.*;
 
-import java.util.ArrayList;
-
 public class OrderManager {
 
     private Order cart = new Order();
@@ -102,6 +100,10 @@ public class OrderManager {
 
         // Print customers receipt.
         printReceipt();
+    }
+
+    public Currency getCashRequired() {
+        return cart.getCashRequired();
     }
 
     /**
