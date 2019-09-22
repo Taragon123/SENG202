@@ -45,4 +45,9 @@ public class ItemTag extends ItemTag_Ref{
     public String getName() {
         return name;
     }
+
+    @Override
+    public String toString() {
+        return getName();
+    }
 }

@@ -55,4 +55,16 @@ public class UUID_EntityTest {
         assertEquals(entity, same_entity);
         assertNotEquals(entity, different_entity);
     }
+
+    @Test
+    public void setUUIDbyString() {
+        StorageAccess.initTestMode("ItemTest");
+        UUID_Entity entity = new UUID_Entity();
+        entity.setUUID("79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994");
+
+        Item item = StorageAccess.instance().getItem(new Item_Ref(entity));
+        assertNotNull(item);
+        assertTrue(item instanceof CompositeItem);
+        assertEquals(item.getName(), "Cheese Burger Combo");
+    }
 }
