@@ -1,9 +1,11 @@
 package seng202.teamsix.data;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 
 public class DataQueryTest {
@@ -17,7 +19,9 @@ public class DataQueryTest {
         query.sort_by("base_price", true);
         List<UUID_Entity> result = query.runQuery();
 
-        // Test query results
+
+
+        // Validate query results
         double last_value = Double.MAX_VALUE;
         for (UUID_Entity ref : result) {
             double current_value = StorageAccess.instance().getItem(new Item_Ref((ref))).getBasePrice().getTotalCash();

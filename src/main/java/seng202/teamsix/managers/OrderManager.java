@@ -10,8 +10,6 @@ package seng202.teamsix.managers;
 
 import seng202.teamsix.data.*;
 
-import java.util.ArrayList;
-
 public class OrderManager {
 
     private Order cart = new Order();
@@ -76,48 +74,18 @@ public class OrderManager {
     }
 
     /**
-     * Setter for the cart.
-     * @param cart
-     */
-    public void setCart(Order cart) {
-        this.cart = cart;
-    }
-
-    /**
      * This will be used to reset the cart when the user wishes to clear it, or when a new order is placed.
      */
     public void resetCart() {
         this.cart = new Order();
-
     }
 
-    /**
-     * Returns a Currency object corresponding to the cash required to pay for the order.
-     */
-    public Currency getCashRequired() {
-        ArrayList<OrderItem> orderItems = cart.getOrderTree().getDependants();
-        double cashCountTemp = 0.0;
-        Currency cashRequired = new Currency();
-        for (OrderItem orderItem: orderItems) {
-            Item item = (Item)orderItem.getItem();
-            cashCountTemp += item.getMarkupPrice().getTotalCash() * orderItem.getQuantity();
-        }
-        cashRequired.setTotalCash(cashCountTemp);
-        return cashRequired;
-    }
 
     /**
      * Returns a Boolean corresponding to whether payment for the order was received.
      */
-    public boolean requestPayment(boolean payment_received) {
+    public boolean checkPaymentReceived(boolean payment_received) {
         return payment_received;
-    }
-
-    /**
-     * Cancelling the order.
-     */
-    public void cancelOrder() {
-        resetCart();
     }
 
     /**
@@ -125,10 +93,31 @@ public class OrderManager {
      */
     public void finaliseOrder() {
         // Save the order with StorageAccess/
-
+        StorageAccess.instance().updateOrder(cart);
 
         // Send order to kitchen via order ticket which is to be printed.
+        printChefOrder();
 
         // Print customers receipt.
+        printReceipt();
+    }
+
+    public Currency getCashRequired() {
+        return cart.getCashRequired();
+    }
+
+    /**
+     * This method prints the order, just the item names and quantity. Currently prints to the command line.
+     */
+    private void printChefOrder() {
+        // need to find the depth of the order so that we can use the method getOrderTreeRepr() of the class OrderItem.
+    }
+
+    /**
+     * This method prints the Order in a receipt format, currently to the command line.
+     */
+    private void printReceipt() {
+        // similar to the printChefOrder, more details.
+
     }
 }

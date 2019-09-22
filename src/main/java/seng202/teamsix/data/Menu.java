@@ -5,7 +5,6 @@
  */
 
 package seng202.teamsix.data;
-import javax.swing.*;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -16,9 +15,9 @@ public class Menu extends Menu_Ref {
     @XmlElementWrapper(name = "menuitem_list")
     @XmlElement(name = "menuitem")
     public ArrayList<MenuItem> menuItems = new ArrayList<MenuItem>();
-    @XmlElement
+    @XmlElement @QueryField
     public String name;
-    @XmlElement
+    @XmlElement @QueryField("desc")
     public String description;
 
     /**

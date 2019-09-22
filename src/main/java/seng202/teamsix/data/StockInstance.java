@@ -1,7 +1,10 @@
 package seng202.teamsix.data;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
-import javax.xml.bind.annotation.*;
 
 /**
  * Class StockInstance, allows us to check if stock is expired and keep track of remaining quantities
@@ -13,15 +16,15 @@ import javax.xml.bind.annotation.*;
 @XmlAccessorType(XmlAccessType.NONE)
 public class StockInstance extends StockInstance_Ref {
 
-    @XmlElement
+    @XmlElement @QueryField
     private Item_Ref stock_item;
-    @XmlElement
+    @XmlElement @QueryField
     private Date date_added;
-    @XmlElement
+    @XmlElement @QueryField
     private Date date_expires;
-    @XmlElement
+    @XmlElement @QueryField
     private boolean does_expire;
-    @XmlElement
+    @XmlElement @QueryField
     private float quantity_remaining;
 
     /**

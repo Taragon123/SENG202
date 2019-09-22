@@ -6,11 +6,13 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -19,6 +21,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.TextAlignment;
+import javafx.stage.Modality;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -240,20 +243,34 @@ public class OrderScreenController implements Initializable {
         order_list_display.getItems().remove(menu_item);
     }
 
-    public void confirm_order() { System.out.println("Confirmed"); }
+    public void confirm_order() throws IOException {
+        System.out.println("Confirming");
+        FXMLLoader loadConfirmOrder = new FXMLLoader(getClass().getResource("confirm_order.fxml"));
+        OrderConfirmController orderConfirmController = new OrderConfirmController();
+
+        loadConfirmOrder.setController(orderConfirmController);
+        Parent confirmOrder = loadConfirmOrder.load();
+        orderConfirmController.setOrderManager(orderManager);
+        Scene confirmOrderScene = new Scene(confirmOrder, 750, 610);
+        Stage confirmWindow = new Stage();
+        confirmWindow.initModality(Modality.WINDOW_MODAL);
+        confirmWindow.initOwner(window);
+        confirmWindow.setScene(confirmOrderScene);
+        confirmWindow.show();
+    }
 
     public void cancel_order() {
         order_list_display.getItems().clear();
         cost_field.setText("Cost: $0.0");
         System.out.println("Canceled"); }
 
-    public void open_management(ActionEvent event) {
+    public void open_management() {
         System.out.println("Management");
         optionPopup.hide();
         window.setScene(managmentScene);
     }
 
-    public void toggle_options(ActionEvent event) throws IOException {
+    public void toggle_options() {
         System.out.println("options");
         if (optionPopup.isShowing()) {
             optionPopup.hide();
@@ -261,7 +278,6 @@ public class OrderScreenController implements Initializable {
             Double centreHeight = window.getHeight()/2 - 250;
             Double centreWidth = window.getWidth()/2 - 270;
             optionPopup.show(window, window.getX()+centreWidth, window.getY()+centreHeight);
-            //optionPopup.show;
         }
     }
 
