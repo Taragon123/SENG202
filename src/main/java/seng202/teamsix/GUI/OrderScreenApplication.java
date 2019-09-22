@@ -52,7 +52,7 @@ public class OrderScreenApplication extends Application {
         stockController.preSet(primaryStage, orderScene, pastOrderScene);
 
         CreateItemController itemController = new CreateItemController(new Item_Ref());
-        itemController.createNewWindow();
+        //itemController.createNewWindow();
 
         primaryStage.setTitle("FoodByte");
         primaryStage.setScene(orderScene);

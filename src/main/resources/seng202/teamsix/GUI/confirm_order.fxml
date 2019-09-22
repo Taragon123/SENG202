@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -30,6 +31,10 @@
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin>
+               <columns>
+                  <TableColumn fx:id="codeCol" prefWidth="235.0" text="Item" />
+                  <TableColumn fx:id="codeCol1" prefWidth="127.0" text="Price" />
+               </columns>
             </TableView>
             <VBox prefHeight="517.0" prefWidth="361.0">
                <HBox.margin>

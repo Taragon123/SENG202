@@ -232,7 +232,7 @@ public class OrderScreenController implements Initializable {
 
     public void add_to_order(MenuItem menu_item) {
         //OrderManager will add the specified item to cart #backend
-/*        orderManager.addToCart(menu_item, 1);*/
+        orderManager.addToCart(menu_item, 1);
         OrderTableEntry entry = new OrderTableEntry(menu_item, this);
         order_list_display.getItems().add(entry); //add the menu_item to the tableview
         cost_field.setText("Cost: " + orderManager.getCashRequired().toString());
@@ -251,13 +251,18 @@ public class OrderScreenController implements Initializable {
 
         loadConfirmOrder.setController(orderConfirmController);
         Parent confirmOrder = loadConfirmOrder.load();
-        orderConfirmController.setOrderManager(orderManager);
+        orderConfirmController.setOrderManager(orderManager, this);
         Scene confirmOrderScene = new Scene(confirmOrder, 750, 610);
         Stage confirmWindow = new Stage();
         confirmWindow.initModality(Modality.WINDOW_MODAL);
         confirmWindow.initOwner(window);
         confirmWindow.setScene(confirmOrderScene);
         confirmWindow.show();
+    }
+
+    public void clear_order() {
+        order_list_display.getItems().clear();
+        cost_field.setText("Cost: " + orderManager.getCashRequired().toString());
     }
 
     public void cancel_order() {

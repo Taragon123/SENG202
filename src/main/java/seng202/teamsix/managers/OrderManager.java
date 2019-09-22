@@ -102,6 +102,9 @@ public class OrderManager {
 
         // Print customers receipt.
         printReceipt();
+
+        // Clear cart
+        resetCart();
     }
 
     public Currency getCashRequired() {
