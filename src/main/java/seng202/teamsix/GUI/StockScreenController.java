@@ -47,7 +47,7 @@ public class StockScreenController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        refreshData();
+        refreshData(null, null);
         createPanes();
         // Add tables to panes in tabs
         itemTabPane.getChildren().addAll(itemTable);
@@ -89,7 +89,7 @@ public class StockScreenController implements Initializable {
 
     public void addStockInstance(StockInstance stockInstance) {
         StorageAccess.instance().updateStockInstance(stockInstance);
-        refreshData();
+        refreshData(null, null);
     }
 
 //    public void closePopup(ActionEvent event) throws IOException {
@@ -127,9 +127,13 @@ public class StockScreenController implements Initializable {
     /**
      * Refreshes data for tables
      */
-    public void refreshData() {
-        DataQuery<StockInstance> stockQuery = new DataQuery<>(StockInstance.class);
-        DataQuery<Item> itemQuery = new DataQuery<>(Item.class);
+    public void refreshData(DataQuery<StockInstance> stockQuery, DataQuery<Item> itemQuery) {
+        if (stockQuery == null) {
+            stockQuery = new DataQuery<>(StockInstance.class);
+        }
+        if (itemQuery == null) {
+            itemQuery = new DataQuery<>(Item.class);
+        }
         stockList = stockQuery.runQuery();
         itemList = itemQuery.runQuery();
         getObservableStockTableEntryList(stockEntries);
@@ -138,7 +142,11 @@ public class StockScreenController implements Initializable {
 
     public void searchItems() {
         //TODO Implement search functionality
-        refreshData();
+
+        DataQuery<StockInstance> stockQuery = new DataQuery<>(StockInstance.class);
+        DataQuery<Item> itemQuery = new DataQuery<>(Item.class);
+        refreshData(stockQuery, itemQuery);
+
     }
 
     /**

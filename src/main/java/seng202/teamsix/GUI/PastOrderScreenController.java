@@ -59,6 +59,11 @@ public class PastOrderScreenController implements Initializable {
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         orderTable.getColumns().add(dateColumn);
 
+//        TableColumn<OrderTableEntry, String> costColumn = new TableColumn<>("Price");
+//        costColumn.setMinWidth(100);
+//        costColumn.setCellValueFactory(new PropertyValueFactory<>("cost"));
+//        orderTable.getColumns().add(costColumn);
+
 
     }
 
@@ -78,14 +83,20 @@ public class PastOrderScreenController implements Initializable {
      */
     public static class OrderTableEntry {
         private final SimpleStringProperty date;
+        private final SimpleStringProperty cost;
 
         private OrderTableEntry(Order order) {
             DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
             this.date = new SimpleStringProperty(df.format(order.getTimestamp()));
+            System.out.println("ThisUUUU: " + order.getCashRequired().toString());
+            this.cost = new SimpleStringProperty();
         }
 
         public String getDate() {
             return date.get();
         }
+//        public String getCost() {
+//            return cost.get();
+//        }
     }
 }
