@@ -30,6 +30,16 @@ public class OrderItem {
     @XmlElement
     private int quantity = 0;
 
+    private Currency price = null;
+
+    public Currency getPrice() {
+        return price;
+    }
+
+    public void setPrice(Currency newPrice) {
+        price = newPrice;
+    }
+
     public Item_Ref getItem() {
         return this.item;
     }
@@ -37,6 +47,9 @@ public class OrderItem {
     public void setItem(Item_Ref item) {
         // TODO(Connor): Add check that item exists
         this.item = item;
+
+        // By default, this sets the price of the OrderItem to the markup price stated as part of the Item object.
+        //this.price = ((Item)item).getMarkupPrice();
     }
 
     public ArrayList<OrderItem> getDependants() {
@@ -69,7 +82,7 @@ public class OrderItem {
      * @param item_ref Refers to the Item of which we want to add to the order.
      * @param qty The number of items we want to add too the order.
      */
-    public void addToOrder(Item_Ref item_ref, int qty) {
+    public void addToOrder(Item_Ref item_ref, int qty, Currency price) {
         boolean is_added = false;
         for (OrderItem orderItem: dependants) {
             if (orderItem.getItem() == item_ref) {
@@ -82,15 +95,19 @@ public class OrderItem {
             parent.setItem(item_ref);
             parent.setQuantity(qty);
             this.dependants.add(parent);
+            if (price != null) {
+                parent.setPrice(price);
+            }
+
 
             Item item = StorageAccess.instance().getItem(item_ref);
 
             if(item instanceof CompositeItem) {
                 for(Item_Ref child_ref : ((CompositeItem) item).getItems()) {
-                    parent.addToOrder(child_ref, 1);
+                    parent.addToOrder(child_ref, 1, price);
                 }
             } else if(item instanceof VariantItem) {
-                parent.addToOrder(((VariantItem) item).getVariants().get(0), 1);
+                parent.addToOrder(((VariantItem) item).getVariants().get(0), 1, price);
             }
         }
     }

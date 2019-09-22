@@ -50,9 +50,9 @@ public class OrderItemTest {
         Item item1 = initialiseItem1();
         Item item2 = initialiseItem2();
         OrderItem bag = new OrderItem();
-        bag.addToOrder(item1, 5);
-        bag.addToOrder(item1, 3);
-        bag.addToOrder(item2, 2);
+        bag.addToOrder(item1, 5, null);
+        bag.addToOrder(item1, 3, null);
+        bag.addToOrder(item2, 2, null);
         assertEquals(8, bag.getDependants().get(0).getQuantity());
         assertEquals(2, bag.getDependants().get(1).getQuantity());
     }
@@ -66,7 +66,7 @@ public class OrderItemTest {
         CompositeItem combo_item = (CompositeItem) StorageAccess.instance().getItem(combo_ref);
 
         OrderItem order = new OrderItem();
-        order.addToOrder(combo_item, 1);
+        order.addToOrder(combo_item, 1, null);
 
         String expected =   "+ (Empty)\n" +
                             "|--+ Cheese Burger Combo\n" +
@@ -94,7 +94,7 @@ public class OrderItemTest {
         Item item1 = initialiseItem1();
         Item item2 = initialiseItem2();
         OrderItem bag = new OrderItem();
-        bag.addToOrder(item1, 5);
+        bag.addToOrder(item1, 5, null);
         assertTrue(bag.removeFromOrder(item1, 4));
         assertEquals(1, bag.getDependants().get(0).getQuantity());
         assertFalse(bag.removeFromOrder(item2, 4));

@@ -16,6 +16,8 @@ public class OrderManager {
 
     private Order cart = new Order();
 
+    private Currency current_order_total = new Currency();
+
     private int localTicketCount = 1;
 
     /**
@@ -31,9 +33,11 @@ public class OrderManager {
      * @param qty The quantity corresponding to the number of Items.
      */
     public void addToCart(MenuItem menu_item, int qty) {
+
+        current_order_total.addCash(menu_item.getPrice().getDollars(), menu_item.getPrice().getCents());
         Item_Ref item_ref = menu_item.getItem();
         OrderItem new_root = cart.getOrderTree();
-        new_root.addToOrder(item_ref, qty);
+        new_root.addToOrder(item_ref, qty, menu_item.getPrice());
         cart.setOrderTree(new_root);
     }
 
@@ -133,6 +137,6 @@ public class OrderManager {
      */
     private void printReceipt() {
         // similar to the printChefOrder, more details.
-        System.out.println(cart.printReceipt());
+        System.out.println(cart.getReceipt());
     }
 }

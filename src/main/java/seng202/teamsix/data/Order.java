@@ -66,9 +66,9 @@ public class Order extends Order_Ref{
     /**
      * This method prints the Order in a receipt format, currently to the command line.
      */
-    public void printReceipt() {
+    public String getReceipt() {
         // similar to the printChefOrder, more details.
-
+        return "";
     }
 
     /**
