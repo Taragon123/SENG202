@@ -40,8 +40,12 @@ public class StockInstance extends StockInstance_Ref {
         super(); //generates uuid for the StockInstance
         this.stock_item = item_ref;
         this.date_added = date_added;
+        if (does_expire) {
+            this.date_expires = date_expires; //Instantiated with null if the item does not expire
+        } else {
+            this.date_expires = null;
+        }
         this.does_expire = does_expire;
-        this.date_expires = date_expires; //Instantiated with null if the item does not expire
         this.quantity_remaining = quantity_remaining;
     }
 

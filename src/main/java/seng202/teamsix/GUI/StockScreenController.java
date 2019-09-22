@@ -15,6 +15,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import seng202.teamsix.data.*;
@@ -64,9 +65,31 @@ public class StockScreenController implements Initializable {
             stage.setScene(new Scene(root1));
             //dialogPopup.show();
             stage.show();
-        } catch (Exception e) {
-            System.out.println("Can't load new window");
+        } catch (java.io.IOException e) {
+            System.out.println("Failed to launch dialog: " + e);
         }
+    }
+
+    public void createAddStockInstanceDialog(Item_Ref item_ref) {
+        try {
+            StockInstanceDialogController controller = new StockInstanceDialogController(item_ref, this);
+            FXMLLoader stockDialogLoader = new FXMLLoader(getClass().getResource("create_stock_instance.fxml"));
+            stockDialogLoader.setController(controller);
+            Stage stage = new Stage();
+            controller.preSet(stage);
+            Parent root = stockDialogLoader.load();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Add Stock");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (java.io.IOException e) {
+            System.out.println("Failed to launch dialog: " + e);
+        }
+    }
+
+    public void addStockInstance(StockInstance stockInstance) {
+        StorageAccess.instance().updateStockInstance(stockInstance);
+        refreshData();
     }
 
 //    public void closePopup(ActionEvent event) throws IOException {
@@ -113,12 +136,9 @@ public class StockScreenController implements Initializable {
         getObservableItemTableEntryList(itemEntries);
     }
 
-    public void addStockInstance(Item_Ref item_ref) {
-
-    }
-
     public void searchItems() {
         //TODO Implement search functionality
+        refreshData();
     }
 
     /**
@@ -242,7 +262,7 @@ public class StockScreenController implements Initializable {
             this.addStockInstance.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
-                    parent.addStockInstance(item_ref);
+                    parent.createAddStockInstanceDialog(item_ref);
                 }
             });
         }
