@@ -125,7 +125,7 @@ public class OrderItem {
                 if (orderItem.quantity > qty) {
                     orderItem.quantity -= qty;
                     for (int i = 0; i < qty; i++) {
-                        if (price != null) {
+                        if (item_price != null) {
                             price.subCash(item_price.getDollars(), item_price.getCents());
                         } else {
                             Item item = StorageAccess.instance().getItem(orderItem.getItem());
@@ -135,7 +135,7 @@ public class OrderItem {
                     is_removed = true;
                 } else if (orderItem.quantity == qty) {
                     for (int j = 0; j < qty; j++) {
-                        if (price != null) {
+                        if (item_price != null) {
                             price.subCash(item_price.getDollars(), item_price.getCents());
                         } else {
                             Item item = StorageAccess.instance().getItem(orderItem.getItem());
