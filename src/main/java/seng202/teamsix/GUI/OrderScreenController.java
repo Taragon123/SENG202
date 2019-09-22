@@ -234,13 +234,14 @@ public class OrderScreenController implements Initializable {
         orderManager.addToCart(menu_item, 1);
         OrderTableEntry entry = new OrderTableEntry(menu_item, this);
         order_list_display.getItems().add(entry); //add the menu_item to the tableview
-        cost_field.setText("Cost: " + orderManager.getCashRequired().toString());
+        cost_field.setText(String.format("Cost: $%.2f", orderManager.getCart().getTotalCost().getTotalCash()));
     }
 
     public void remove_from_order(MenuItem menu_item, OrderTableEntry entry) {
-        orderManager.removeFromCart(menu_item, 1);
         order_list_display.getItems().remove(entry);
-        cost_field.setText("Cost: " + orderManager.getCashRequired().toString());
+        orderManager.removeFromCart(menu_item, 1);
+        cost_field.setText(String.format("Cost: $%.2f", orderManager.getCart().getTotalCost().getTotalCash()));
+
     }
 
     public void confirm_order() throws IOException {

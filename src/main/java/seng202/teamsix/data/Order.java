@@ -38,6 +38,10 @@ public class Order extends Order_Ref{
 
     public int localTicketNumber;
 
+    public Currency getTotalCost() {
+        return order_tree.getPrice();
+    }
+
     /**
      * Returns a Currency object corresponding to the cash required to pay for the order.
      */
@@ -78,4 +82,6 @@ public class Order extends Order_Ref{
     public void setOrderTree(OrderItem new_root) {
         order_tree = new_root;
     }
+
+
 }

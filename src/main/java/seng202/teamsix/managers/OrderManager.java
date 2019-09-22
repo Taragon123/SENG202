@@ -14,16 +14,17 @@ import java.util.List;
 
 public class OrderManager {
 
-    private Order cart = new Order();
-
-    private Currency current_order_total = new Currency();
+    private Order cart;
 
     private int localTicketCount = 1;
+
+    private Currency total_cart_cost = new Currency();
 
     /**
      * Whenever a OrderManager is constructed, the local order number must be set to 1.
      */
     public OrderManager() {
+        cart = new Order();
         cart.localTicketNumber = localTicketCount;
     }
 
@@ -33,8 +34,6 @@ public class OrderManager {
      * @param qty The quantity corresponding to the number of Items.
      */
     public void addToCart(MenuItem menu_item, int qty) {
-
-        current_order_total.addCash(menu_item.getPrice().getDollars(), menu_item.getPrice().getCents());
         Item_Ref item_ref = menu_item.getItem();
         OrderItem new_root = cart.getOrderTree();
         new_root.addToOrder(item_ref, qty, menu_item.getPrice());
@@ -47,8 +46,10 @@ public class OrderManager {
      * @param qty The quantity corresponding to the number of Items.
      */
     public void removeFromCart(MenuItem menu_item, int qty) {
-        Item_Ref item_ref = menu_item.getItem();
-        cart.getOrderTree().removeFromOrder(item_ref, qty);
+        Item_Ref item_ref = StorageAccess.instance().getItem(menu_item.getItem());
+        OrderItem new_root = cart.getOrderTree();
+        new_root.removeFromOrder(item_ref, qty, menu_item.getPrice());
+        cart.setOrderTree(new_root);
     }
 
     /**

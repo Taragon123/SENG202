@@ -71,7 +71,7 @@ public class OrderConfirmController implements Initializable {
 
     public void setOrderManager(OrderManager order_manager) {
         orderManager = order_manager;
-        orderCost = orderManager.getCart().getCashRequired();
+        orderCost = orderManager.getCart().getTotalCost();
         cost_field.setText("Cost: " + orderCost);
     }
 }

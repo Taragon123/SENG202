@@ -94,12 +94,6 @@ public class MenuItem {
     public void setItem(Item_Ref item_ref) {
         this.item = item_ref;
         Item tempItem = StorageAccess.instance().getItem(item_ref);
-        if (tempItem != null) {
-            this.price = tempItem.getMarkupPrice();
-            this.name = tempItem.getName();
-            this.description = tempItem.getDescription();
-        }
-
     }
 
     /**

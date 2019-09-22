@@ -33,7 +33,7 @@ public class OrderItem {
     @XmlElement
     private int quantity = 0;
 
-    private Currency price = null;
+    private Currency price = new Currency();
 
     public Currency getPrice() {
         return price;
@@ -50,7 +50,6 @@ public class OrderItem {
     public void setItem(Item_Ref item) {
         // TODO(Connor): Add check that item exists
         this.item = item;
-
         // By default, this sets the price of the OrderItem to the markup price stated as part of the Item object.
         //this.price = ((Item)item).getMarkupPrice();
     }
@@ -59,17 +58,9 @@ public class OrderItem {
         return this.dependants;
     }
 
-    public void setDependants(ArrayList<OrderItem> newDependants) {
-        this.dependants = newDependants;
-    }
-
     public void addDependant(OrderItem order_item) {
         this.dependants.add(order_item);
 
-    }
-
-    public void removeDependant(OrderItem order_item) {
-        this.dependants.remove(order_item);
     }
 
     public int getQuantity() {
@@ -85,8 +76,9 @@ public class OrderItem {
      * @param item_ref Refers to the Item of which we want to add to the order.
      * @param qty The number of items we want to add too the order.
      */
-    public void addToOrder(Item_Ref item_ref, int qty, Currency price) {
+    public void addToOrder(Item_Ref item_ref, int qty, Currency new_item_price) {
         boolean is_added = false;
+        Item item = StorageAccess.instance().getItem(item_ref);
         for (OrderItem orderItem: dependants) {
             if (orderItem.getItem() == item_ref) {
                 orderItem.quantity += qty;
@@ -98,19 +90,24 @@ public class OrderItem {
             parent.setItem(item_ref);
             parent.setQuantity(qty);
             this.dependants.add(parent);
-            if (price != null) {
-                parent.setPrice(price);
+            if (new_item_price != null) {
+                parent.setPrice(new_item_price);
             }
-
-
-            Item item = StorageAccess.instance().getItem(item_ref);
 
             if(item instanceof CompositeItem) {
                 for(Item_Ref child_ref : ((CompositeItem) item).getItems()) {
-                    parent.addToOrder(child_ref, 1, price);
+                    parent.addToOrder(child_ref, 1, null);
                 }
             } else if(item instanceof VariantItem) {
-                parent.addToOrder(((VariantItem) item).getVariants().get(0), 1, price);
+                parent.addToOrder(((VariantItem) item).getVariants().get(0), 1, new_item_price);
+            }
+        }
+
+        for (int i = 0; i < qty; i++) {
+            if (new_item_price != null) {
+                price.addCash(new_item_price.getDollars(), new_item_price.getCents());
+            } else {
+                price.addCash(item.getMarkupPrice().getDollars(), item.getMarkupPrice().getCents());
             }
         }
     }
@@ -121,14 +118,30 @@ public class OrderItem {
      * @param qty The number of items we want to remove from the order.
      * @return True if items are removed (even if qty > already in cart), false if they didn't exist in the first place.
      */
-    public boolean removeFromOrder(Item_Ref item_ref, int qty) {
+    public boolean removeFromOrder(Item_Ref item_ref, int qty, Currency price) {
         boolean is_removed = false;
         for (OrderItem orderItem: dependants) {
             if (orderItem.getItem() == item_ref) {
                 if (orderItem.quantity > qty) {
                     orderItem.quantity -= qty;
+                    for (int i = 0; i < qty; i++) {
+                        if (price != null) {
+                            this.price.subCash(price.getDollars(), price.getCents());
+                        } else {
+                            Item item = StorageAccess.instance().getItem(orderItem.getItem());
+                            this.price.subCash(item.getMarkupPrice().getDollars(), item.getMarkupPrice().getCents());
+                        }
+                    }
                     is_removed = true;
-                } else {
+                } else if (orderItem.quantity == qty) {
+                    for (int j = 0; j < qty; j++) {
+                        if (price != null) {
+                            this.price.subCash(price.getDollars(), price.getCents());
+                        } else {
+                            Item item = StorageAccess.instance().getItem(orderItem.getItem());
+                            this.price.subCash(item.getMarkupPrice().getDollars(), item.getMarkupPrice().getCents());
+                        }
+                    }
                     dependants.remove(orderItem);
                     is_removed = true;
                 }

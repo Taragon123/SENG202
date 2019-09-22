@@ -2,8 +2,6 @@ package seng202.teamsix.data;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-
 import static org.junit.Assert.*;
 
 public class OrderItemTest {
@@ -47,22 +45,24 @@ public class OrderItemTest {
      */
     @Test
     public void addToOrderTest() {
-        Item item1 = initialiseItem1();
-        Item item2 = initialiseItem2();
+        //Item_Ref chips_ref = initialiseItem1();
+        //Item chips = (Item) StorageAccess.instance().getItem(chips_ref);
+
+        Item_Ref combo_ref = initialiseItem2();
+        CompositeItem combo_item = (CompositeItem) StorageAccess.instance().getItem(combo_ref);
+
         OrderItem bag = new OrderItem();
-        bag.addToOrder(item1, 5, null);
-        bag.addToOrder(item1, 3, null);
-        bag.addToOrder(item2, 2, null);
+        //bag.addToOrder(chips, 5, null);
+        //bag.addToOrder(chips, 3, null);
+        bag.addToOrder(combo_item, 2, null);
+        bag.addToOrder(combo_item, 6, null);
         assertEquals(8, bag.getDependants().get(0).getQuantity());
-        assertEquals(2, bag.getDependants().get(1).getQuantity());
+        //assertEquals(2, bag.getDependants().get(1).getQuantity());
     }
 
     @Test
     public void addToOrderRealExample() {
-        StorageAccess.initTestMode("ItemTest");
-
-        Item_Ref combo_ref = new Item_Ref();
-        combo_ref.setUUID(8782518176451284363l, -6654882082024982124l);
+        Item_Ref combo_ref = initialiseItem2();
         CompositeItem combo_item = (CompositeItem) StorageAccess.instance().getItem(combo_ref);
 
         OrderItem order = new OrderItem();
@@ -91,42 +91,38 @@ public class OrderItemTest {
      */
     @Test
     public void removeFromOrderTest() {
-        Item item1 = initialiseItem1();
-        Item item2 = initialiseItem2();
+        StorageAccess.initTestMode("ItemTest");
+        Item_Ref item2 = initialiseItem2();
         OrderItem bag = new OrderItem();
-        bag.addToOrder(item1, 5, null);
-        assertTrue(bag.removeFromOrder(item1, 4));
+        bag.addToOrder(item2, 5, null);
+        assertTrue(bag.removeFromOrder(item2, 4, null));
         assertEquals(1, bag.getDependants().get(0).getQuantity());
-        assertFalse(bag.removeFromOrder(item2, 4));
+        assertFalse(bag.removeFromOrder(item2, 4, null));
     }
 
     /**
-     * This returns an Item object that we can use for testing.
-     * @return Item object used for testing.
+     * This returns an Item object that we can use for testing. Specifically, the Chips.
+     * The test data has also been imported.
+     * @return A reference to the Item object used for testing.
      */
-    public Item initialiseItem1() {
-        ArrayList<ItemTag_Ref> tagList = new ArrayList<ItemTag_Ref>();
-        ItemTag_Ref itemTagRefToAdd1 = new ItemTag("Gluten-Free", true);
-        ItemTag_Ref itemTagRefToAdd2 = new ItemTag("Dairy-Free", false);
-        tagList.add(itemTagRefToAdd1);
-        tagList.add(itemTagRefToAdd2);
-        Recipe recipe = new Recipe("Cut Potatoes, cover in batter, deep-try for 5 minutes.");
-        Currency base_price = new Currency();
-        base_price.setTotalCash(7.50);
-        Currency markup_price = new Currency();
-        markup_price.setTotalCash(10.00);
-        Item item = new Item("Large Fries", "Deep-fried pieces of potato. ", base_price, markup_price, recipe, tagList, UnitType.G);
-        return item;
+    public Item_Ref initialiseItem1() {
+        StorageAccess.initTestMode("ItemTest");
+        Item_Ref chips_ref = new Item_Ref();
+        chips_ref.setUUID("b73f2268-e758-440b-9237-daf2b00193d4");
+        Item chips = StorageAccess.instance().getItem(chips_ref);
+        System.out.println(chips.getName());
+        return chips_ref;
     }
 
     /**
-     * This returns an Item object that we can use for testing.
+     * This returns an Item object that we can use for testing. Specifically, the Cheese Burger Combo.
+     * The test data has also been imported.
+     * @return A reference to the Item object used for testing.
      */
-    public Item initialiseItem2() {
-        CompositeItem item = new CompositeItem();
-        ArrayList<Item_Ref> subItems = new ArrayList<>();
-        subItems.add(new Item_Ref());
-        item.setComponents(subItems);
-        return item;
+    public Item_Ref initialiseItem2() {
+        StorageAccess.initTestMode("ItemTest");
+        Item_Ref combo_ref = new Item_Ref();
+        combo_ref.setUUID("79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994");
+        return combo_ref;
     }
 }
