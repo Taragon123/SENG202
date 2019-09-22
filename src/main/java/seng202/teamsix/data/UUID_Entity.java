@@ -36,7 +36,7 @@ public class UUID_Entity{
      * @param str_uuid
      */
     public void setUUID(String str_uuid) {
-        uuid.fromString(str_uuid);
+        uuid = UUID.fromString(str_uuid);
     }
 
     /**

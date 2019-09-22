@@ -365,7 +365,6 @@ public class DataQuery<T extends UUID_Entity> {
             }
         }
 
-
         return filtered_list;
     }
 

@@ -6,7 +6,10 @@
 
 package seng202.teamsix.data;
 
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -18,7 +21,7 @@ import java.util.Date;
 public class Order extends Order_Ref{
     @XmlElement
     private OrderItem order_tree = new OrderItem();
-    @XmlElement
+    @XmlElement @QueryField
     private Date timestamp;
 
     public OrderItem getOrderTree() {
