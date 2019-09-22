@@ -6,9 +6,12 @@
 
 package seng202.teamsix.data;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.Collections;
-import javax.xml.bind.annotation.*;
 
 /**
  * Name: OrderItem.java
@@ -147,5 +150,14 @@ public class OrderItem {
         }
 
         return output.toString();
+    }
+
+    @Override
+    public String toString() {
+        Item item = StorageAccess.instance().getItem(getItem());
+        if(item != null) {
+            return item.getName() + "x" + quantity;
+        }
+        return "(NULL Item)";
     }
 }
