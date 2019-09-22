@@ -151,9 +151,23 @@ public class Item extends Item_Ref {
      * @param current_depth this should be zero if called directly used by recursion function
      * @return item tree representation
      */
-    String getItemTreeRepr(int current_depth) {
+    String getItemTreeRepr(int current_depth, int num_indents) {
+        String indents = getIndents(num_indents);
         String spacer = String.join("", Collections.nCopies(current_depth, "|--"));
-        String line = spacer + "+ " + getName() + "\n";
+        String line = indents + spacer + "+ " + getName() + "\n";
         return line;
+    }
+
+    /**
+     * This is a helper which returns a string with a number of tab indents given by the param num.
+     * @param num The number of ints we want the string to include.
+     * @return A string with a number of indents.
+     */
+    public String getIndents(int num) {
+        String result = "";
+        for (int i = 0; i < num; i++) {
+            result += "\t";
+        }
+        return result;
     }
 }

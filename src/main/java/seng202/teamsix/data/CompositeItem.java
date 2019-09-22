@@ -93,23 +93,22 @@ public class CompositeItem extends Item{
      * @return item tree representation
      */
     @Override
-    String getItemTreeRepr(int current_depth) {
+    String getItemTreeRepr(int current_depth, int num_indents) {
+        String indents = getIndents(num_indents);
         String spacer = String.join("", Collections.nCopies(current_depth, "|--"));
-        String line = spacer + "+ " + getName() + "\n";
+        String line = indents + spacer + "+ " + getName() + "\n";
 
         StringBuilder output = new StringBuilder();
         output.append(line);
         for(Item_Ref child_item_ref : getItems()) {
             Item child_item = StorageAccess.instance().getItem(child_item_ref);
             if(child_item != null) {
-                output.append(child_item.getItemTreeRepr(current_depth + 1));
+                output.append(child_item.getItemTreeRepr(current_depth + 1, num_indents));
             }
         }
         if(current_depth > 0){
-            output.append("|" + String.join("", Collections.nCopies(Math.max(current_depth-1, 0), "--|")) + "\n");
+            output.append(""+indents+"|" + String.join("", Collections.nCopies(Math.max(current_depth-1, 0), "--|")) + "\n");
         }
-
-
         return output.toString();
     }
 }

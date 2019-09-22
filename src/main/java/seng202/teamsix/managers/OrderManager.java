@@ -16,6 +16,15 @@ public class OrderManager {
 
     private Order cart = new Order();
 
+    private int localTicketCount = 1;
+
+    /**
+     * Whenever a OrderManager is constructed, the local order number must be set to 1.
+     */
+    public OrderManager() {
+        cart.localTicketNumber = localTicketCount;
+    }
+
     /**
      * Adds the item to the cart given a reference to a MenuItem menu_item, number of items qty.
      * @param menu_item A reference to the menu item that we wish to add to the cart.
@@ -98,24 +107,12 @@ public class OrderManager {
         StorageAccess.instance().updateOrder(cart);
 
         // Send order to kitchen via order ticket which is to be printed.
-        printChefOrder();
+        System.out.println(cart.getChefOrder());
 
         // Print customers receipt.
-        printReceipt();
-    }
-
-    /**
-     * This method prints the order, just the item names and quantity. Currently prints to the command line.
-     */
-    private void printChefOrder() {
-        // need to find the depth of the order so that we can use the method getOrderTreeRepr() of the class OrderItem.
-    }
-
-    /**
-     * This method prints the Order in a receipt format, currently to the command line.
-     */
-    private void printReceipt() {
-        // similar to the printChefOrder, more details.
-
+        cart.printReceipt();
+        localTicketCount += 1;
+        resetCart();
+        cart.localTicketNumber = localTicketCount;
     }
 }

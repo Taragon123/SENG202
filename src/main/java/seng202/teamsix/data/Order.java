@@ -33,6 +33,8 @@ public class Order extends Order_Ref{
         this.timestamp = timestamp;
     }
 
+    public int localTicketNumber;
+
     /**
      * Returns a Currency object corresponding to the cash required to pay for the order.
      */
@@ -46,5 +48,23 @@ public class Order extends Order_Ref{
         }
         cashRequired.setTotalCash(cashCountTemp);
         return cashRequired;
+    }
+
+    /**
+     * This method prints the order, just the item names and quantity. Currently prints to the command line.
+     */
+    public String getChefOrder() {
+        // need to find the depth of the order so that we can use the method getOrderTreeRepr() of the class OrderItem.
+        String returnString = "";
+        getOrderTree().getOrderTreeRepr(0);
+        return returnString;
+    }
+
+    /**
+     * This method prints the Order in a receipt format, currently to the command line.
+     */
+    public void printReceipt() {
+        // similar to the printChefOrder, more details.
+
     }
 }

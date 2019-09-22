@@ -48,6 +48,6 @@ public class CompositeItemTest {
                             "|--+ Drink\n" +
                             "|--+ Chips\n";
 
-        assertEquals(combo_item.getItemTreeRepr(0), expected);
+        assertEquals(combo_item.getItemTreeRepr(0, 0), expected);
     }
 }
