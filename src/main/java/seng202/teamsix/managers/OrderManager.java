@@ -18,8 +18,6 @@ public class OrderManager {
 
     private int localTicketCount = 1;
 
-    private Currency total_cart_cost = new Currency();
-
     /**
      * Whenever a OrderManager is constructed, the local order number must be set to 1.
      */

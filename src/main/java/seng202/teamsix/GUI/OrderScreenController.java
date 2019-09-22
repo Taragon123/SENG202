@@ -36,6 +36,7 @@ import seng202.teamsix.managers.OrderManager;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -65,6 +66,7 @@ public class OrderScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        order_list_display.setEditable(false);
         cost_field.setText("Cost: " + orderManager.getCashRequired().toString());
         Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy   HH:mm");
@@ -234,14 +236,13 @@ public class OrderScreenController implements Initializable {
         orderManager.addToCart(menu_item, 1);
         OrderTableEntry entry = new OrderTableEntry(menu_item, this);
         order_list_display.getItems().add(entry); //add the menu_item to the tableview
-        cost_field.setText(String.format("Cost: $%.2f", orderManager.getCart().getTotalCost().getTotalCash()));
+        cost_field.setText("Cost: " + orderManager.getCart().getTotalCost());
     }
 
     public void remove_from_order(MenuItem menu_item, OrderTableEntry entry) {
-        order_list_display.getItems().remove(entry);
         orderManager.removeFromCart(menu_item, 1);
-        cost_field.setText(String.format("Cost: $%.2f", orderManager.getCart().getTotalCost().getTotalCash()));
-
+        order_list_display.getItems().remove(entry);
+        cost_field.setText("Cost: " + orderManager.getCart().getTotalCost());
     }
 
     public void confirm_order() throws IOException {
@@ -251,7 +252,7 @@ public class OrderScreenController implements Initializable {
 
         loadConfirmOrder.setController(orderConfirmController);
         Parent confirmOrder = loadConfirmOrder.load();
-        orderConfirmController.setOrderManager(orderManager);
+        orderConfirmController.setOrderManager(orderManager, this);
         Scene confirmOrderScene = new Scene(confirmOrder, 750, 610);
         Stage confirmWindow = new Stage();
         confirmWindow.initModality(Modality.WINDOW_MODAL);
@@ -260,10 +261,15 @@ public class OrderScreenController implements Initializable {
         confirmWindow.show();
     }
 
+    public void clear_order() {
+        order_list_display.getItems().clear();
+        cost_field.setText("Cost: " + orderManager.getCart().getTotalCost());
+    }
+
     public void cancel_order() {
         order_list_display.getItems().clear();
         orderManager.resetCart();
-        cost_field.setText("Cost: " + orderManager.getCashRequired().toString());
+        cost_field.setText("Cost: " + orderManager.getCart().getTotalCost());
     }
 
     public void open_management() {

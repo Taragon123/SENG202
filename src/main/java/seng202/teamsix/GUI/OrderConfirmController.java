@@ -6,8 +6,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import seng202.teamsix.data.Currency;
+import seng202.teamsix.data.Item;
+import seng202.teamsix.data.OrderItem;
+import seng202.teamsix.data.StorageAccess;
 import seng202.teamsix.managers.OrderManager;
 
 import java.net.URL;
@@ -21,6 +26,7 @@ public class OrderConfirmController implements Initializable {
     private Currency orderCost = new Currency(); //get order cost
     private boolean isEftpos = false;
     private OrderManager orderManager;
+    private OrderScreenController orderScreenController;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -37,6 +43,14 @@ public class OrderConfirmController implements Initializable {
         currencyConvert.put("$50", 5000);
         currencyConvert.put("$100", 10000);
     }
+    @FXML
+    private TableView order_list_display;
+
+    @FXML
+    private TableColumn<OrderItem, String> itemCol;
+
+    @FXML
+    private TableColumn<Currency, String> priceCol;
 
     @FXML
     private Label cost_field;
@@ -60,18 +74,34 @@ public class OrderConfirmController implements Initializable {
         window.close();
     }
 
-    public void confirm_order() {
+    public void confirm_order(ActionEvent event) {
         System.out.println(totalChange.compareTo(orderCost));
-        if (totalChange.compareTo(orderCost) <= 0) {
-            System.out.println("confirm");
-        } else {
+        if (totalChange.compareTo(orderCost) > 0 && !isEftpos) {
             System.out.println("not enough change");
+        } else {
+            System.out.println("confirm");
+            System.out.println(String.format("change due: $%d", orderCost.compareTo(totalChange)/100));
+            System.out.println(orderManager.getCartOrderItems());
+            orderManager.finaliseOrder();
+            orderScreenController.clear_order();
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.close();
         }
     }
 
-    public void setOrderManager(OrderManager order_manager) {
+    public void setOrderManager(OrderManager order_manager, OrderScreenController orderController) {
         orderManager = order_manager;
+        orderScreenController = orderController;
         orderCost = orderManager.getCart().getTotalCost();
         cost_field.setText("Cost: " + orderCost);
+
+        /* init table view
+        for (OrderItem order_item : orderManager.getCartOrderItems()) {
+            Item item = StorageAccess.instance().getItem(order_item.getItem());
+            String name = item.getName();
+            //Currency cost = order_item.getCost();
+            order_list_display.getItems().add(name);
+        }*/
     }
+
 }

@@ -118,7 +118,7 @@ public class OrderItem {
      * @param qty The number of items we want to remove from the order.
      * @return True if items are removed (even if qty > already in cart), false if they didn't exist in the first place.
      */
-    public boolean removeFromOrder(Item_Ref item_ref, int qty, Currency price) {
+    public boolean removeFromOrder(Item_Ref item_ref, int qty, Currency item_price) {
         boolean is_removed = false;
         for (OrderItem orderItem: dependants) {
             if (orderItem.getItem() == item_ref) {
@@ -126,20 +126,20 @@ public class OrderItem {
                     orderItem.quantity -= qty;
                     for (int i = 0; i < qty; i++) {
                         if (price != null) {
-                            this.price.subCash(price.getDollars(), price.getCents());
+                            price.subCash(item_price.getDollars(), item_price.getCents());
                         } else {
                             Item item = StorageAccess.instance().getItem(orderItem.getItem());
-                            this.price.subCash(item.getMarkupPrice().getDollars(), item.getMarkupPrice().getCents());
+                            price.subCash(item.getMarkupPrice().getDollars(), item.getMarkupPrice().getCents());
                         }
                     }
                     is_removed = true;
                 } else if (orderItem.quantity == qty) {
                     for (int j = 0; j < qty; j++) {
                         if (price != null) {
-                            this.price.subCash(price.getDollars(), price.getCents());
+                            price.subCash(item_price.getDollars(), item_price.getCents());
                         } else {
                             Item item = StorageAccess.instance().getItem(orderItem.getItem());
-                            this.price.subCash(item.getMarkupPrice().getDollars(), item.getMarkupPrice().getCents());
+                            price.subCash(item.getMarkupPrice().getDollars(), item.getMarkupPrice().getCents());
                         }
                     }
                     dependants.remove(orderItem);
