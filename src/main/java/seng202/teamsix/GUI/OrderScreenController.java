@@ -66,6 +66,7 @@ public class OrderScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        order_list_display.setEditable(false);
         cost_field.setText("Cost: " + orderManager.getCashRequired().toString());
         Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy   HH:mm");
@@ -239,7 +240,7 @@ public class OrderScreenController implements Initializable {
     }
 
     public void remove_from_order(MenuItem menu_item, OrderTableEntry entry) {
-/*        orderManager.removeFromCart(menu_item, 1);*/
+        orderManager.removeFromCart(menu_item, 1);
         order_list_display.getItems().remove(entry);
         cost_field.setText("Cost: " + orderManager.getCashRequired().toString());
     }
