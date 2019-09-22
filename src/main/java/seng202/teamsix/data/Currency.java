@@ -107,7 +107,10 @@ public class Currency implements Comparable<Currency> {
     }
 
     @Override
+    //public String toString() {
+    //    return String.format("$%d.%d", getDollars(), getCents());
+    //}
     public String toString() {
-        return String.format("$%d.%d", getDollars(), getCents());
+        return String.format("$%.2f", getTotalCash());
     }
 }

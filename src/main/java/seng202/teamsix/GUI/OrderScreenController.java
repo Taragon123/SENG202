@@ -223,7 +223,7 @@ public class OrderScreenController implements Initializable {
 
     public void add_to_order(MenuItem menu_item) {
         //OrderManager will add the specified item to cart #backend
-/*        orderManager.addToCart(menu_item, 1);*/
+        orderManager.addToCart(menu_item, 1);
         order_list_display.getItems().add(menu_item); //add the menu_item to the tableview
         double cost = menu_item.getPrice().getTotalCash();
         updateCostField(cost);

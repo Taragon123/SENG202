@@ -32,7 +32,9 @@ public class OrderManager {
      */
     public void addToCart(MenuItem menu_item, int qty) {
         Item_Ref item_ref = menu_item.getItem();
-        cart.getOrderTree().addToOrder(item_ref, qty);
+        OrderItem new_root = cart.getOrderTree();
+        new_root.addToOrder(item_ref, qty);
+        cart.setOrderTree(new_root);
     }
 
     /**

@@ -70,4 +70,12 @@ public class Order extends Order_Ref{
         // similar to the printChefOrder, more details.
 
     }
+
+    /**
+     * A setter for orderTree so that we can add to cart
+     * @param new_root The new root which we want to set for the Order object.
+     */
+    public void setOrderTree(OrderItem new_root) {
+        order_tree = new_root;
+    }
 }
