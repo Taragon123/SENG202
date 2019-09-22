@@ -82,25 +82,11 @@ public class OrderManager {
         this.cart = new Order();
     }
 
-    /**
-     * Returns a Currency object corresponding to the cash required to pay for the order.
-     */
-    public Currency getCashRequired() {
-        ArrayList<OrderItem> orderItems = cart.getOrderTree().getDependants();
-        double cashCountTemp = 0.0;
-        Currency cashRequired = new Currency();
-        for (OrderItem orderItem: orderItems) {
-            Item item = (Item)orderItem.getItem();
-            cashCountTemp += item.getMarkupPrice().getTotalCash() * orderItem.getQuantity();
-        }
-        cashRequired.setTotalCash(cashCountTemp);
-        return cashRequired;
-    }
 
     /**
      * Returns a Boolean corresponding to whether payment for the order was received.
      */
-    public boolean requestPayment(boolean payment_received) {
+    public boolean checkPaymentReceived(boolean payment_received) {
         return payment_received;
     }
 

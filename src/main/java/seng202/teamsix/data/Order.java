@@ -32,4 +32,19 @@ public class Order extends Order_Ref{
     public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
     }
+
+    /**
+     * Returns a Currency object corresponding to the cash required to pay for the order.
+     */
+    public Currency getCashRequired() {
+        ArrayList<OrderItem> orderItems = getOrderTree().getDependants();
+        double cashCountTemp = 0.0;
+        Currency cashRequired = new Currency();
+        for (OrderItem orderItem: orderItems) {
+            Item item = StorageAccess.instance().getItem(orderItem.getItem());
+            cashCountTemp += item.getMarkupPrice().getTotalCash() * orderItem.getQuantity();
+        }
+        cashRequired.setTotalCash(cashCountTemp);
+        return cashRequired;
+    }
 }

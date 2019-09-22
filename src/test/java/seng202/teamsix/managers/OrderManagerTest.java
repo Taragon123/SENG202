@@ -34,15 +34,6 @@ class OrderManagerTest {
         assertEquals(0, orderManager.getCart().getOrderTree().getDependants().size());
     }
 
-    @Test
-    void testGetCashRequiredTest() {
-        OrderManager orderManager = new OrderManager();
-        orderManager.resetCart();
-        MenuItem menu_item = initialiseItem1();
-        orderManager.addToCart(menu_item, 25);
-
-        assertEquals(250.0, orderManager.getCashRequired().getTotalCash());
-    }
 
     MenuItem initialiseItem1() {
         ArrayList<ItemTag_Ref> tagList = new ArrayList<ItemTag_Ref>();
