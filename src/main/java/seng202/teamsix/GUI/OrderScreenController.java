@@ -1,8 +1,11 @@
 package seng202.teamsix.GUI;
 
+import com.sun.istack.localization.NullLocalizable;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -18,6 +21,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.SwipeEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.TextAlignment;
@@ -31,6 +36,7 @@ import seng202.teamsix.managers.OrderManager;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -41,7 +47,7 @@ import java.util.Set;
  * Name: OrderScreenController.java
  * Authors: Taran Jennison, Andy Clifford
  * Date: 07/09/2019
- * Last Updated: 19/09/2019, Andy
+ * Last Updated: 22/09/2019, Andy
  */
 
 
@@ -60,8 +66,7 @@ public class OrderScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        String cost = String.format("Cost: $%.2f", 0.0);
-        cost_field.setText(cost);
+        cost_field.setText("Cost: " + orderManager.getCashRequired().toString());
         Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy   HH:mm");
             date_time.setText(LocalDateTime.now().format(formatter));
@@ -71,13 +76,16 @@ public class OrderScreenController implements Initializable {
 
         TableColumn itemCol = new TableColumn<MenuItem, String>("Item");
         TableColumn priceCol = new TableColumn<MenuItem, String>("Price");
-        itemCol.setMinWidth(265);
+        TableColumn deleteCol = new TableColumn<MenuItem, Button>("");
+        itemCol.setMinWidth(190);
         priceCol.setMinWidth(92);
+        deleteCol.setMaxWidth(75);
 
         itemCol.setCellValueFactory(new PropertyValueFactory("name"));
         priceCol.setCellValueFactory(new PropertyValueFactory("price"));
+        deleteCol.setCellValueFactory(new PropertyValueFactory("deleteButton"));
         order_list_display.getColumns().clear();
-        order_list_display.getColumns().addAll(itemCol, priceCol);
+        order_list_display.getColumns().addAll(itemCol, priceCol, deleteCol);
 
         Set<Menu_Ref> menu_refSet = StorageAccess.instance().getAllMenus(); //retrieve uuid of all menus
         for (Menu_Ref menu_ref: menu_refSet) {
@@ -135,6 +143,7 @@ public class OrderScreenController implements Initializable {
         button.setPrefWidth(200.0);
         button.setLayoutX(198.0);
         button.setLayoutY(20.0);
+        button.setWrapText(true);
         button.setContentDisplay(ContentDisplay.CENTER);
         button.setTextAlignment(TextAlignment.CENTER);
         button.setTextOverrun(OverrunStyle.CENTER_ELLIPSIS);
@@ -218,29 +227,21 @@ public class OrderScreenController implements Initializable {
     private Label cost_field;
 
     @FXML
-    private TableView order_list_display;
+    private TableView<OrderTableEntry> order_list_display;
 
 
     public void add_to_order(MenuItem menu_item) {
         //OrderManager will add the specified item to cart #backend
-/*        orderManager.addToCart(menu_item, 1);*/
-        order_list_display.getItems().add(menu_item); //add the menu_item to the tableview
-        double cost = menu_item.getPrice().getTotalCash();
-        updateCostField(cost);
-
+        orderManager.addToCart(menu_item, 1);
+        OrderTableEntry entry = new OrderTableEntry(menu_item, this);
+        order_list_display.getItems().add(entry); //add the menu_item to the tableview
+        cost_field.setText("Cost: " + orderManager.getCashRequired().toString());
     }
 
-    public void updateCostField(double cost) {
-        String costText = cost_field.getText();
-        int start = costText.indexOf("$") + 1;
-        float currentCost = Float.parseFloat(costText.substring(start, costText.length()));
-        currentCost += cost;
-        cost_field.setText("Cost: $" + currentCost);
-    }
-
-    public void remove_from_order(MenuItem menu_item) {
-        orderManager.removeFromCart(menu_item, 1);
-        order_list_display.getItems().remove(menu_item);
+    public void remove_from_order(MenuItem menu_item, OrderTableEntry entry) {
+/*        orderManager.removeFromCart(menu_item, 1);*/
+        order_list_display.getItems().remove(entry);
+        cost_field.setText("Cost: " + orderManager.getCashRequired().toString());
     }
 
     public void confirm_order() throws IOException {
@@ -250,7 +251,7 @@ public class OrderScreenController implements Initializable {
 
         loadConfirmOrder.setController(orderConfirmController);
         Parent confirmOrder = loadConfirmOrder.load();
-        orderConfirmController.setOrderManager(orderManager);
+        orderConfirmController.setOrderManager(orderManager, this);
         Scene confirmOrderScene = new Scene(confirmOrder, 750, 610);
         Stage confirmWindow = new Stage();
         confirmWindow.initModality(Modality.WINDOW_MODAL);
@@ -259,10 +260,16 @@ public class OrderScreenController implements Initializable {
         confirmWindow.show();
     }
 
+    public void clear_order() {
+        order_list_display.getItems().clear();
+        cost_field.setText("Cost: " + orderManager.getCashRequired().toString());
+    }
+
     public void cancel_order() {
         order_list_display.getItems().clear();
-        cost_field.setText("Cost: $0.0");
-        System.out.println("Canceled"); }
+        orderManager.resetCart();
+        cost_field.setText("Cost: " + orderManager.getCashRequired().toString());
+    }
 
     public void open_management() {
         System.out.println("Management");
@@ -290,5 +297,30 @@ public class OrderScreenController implements Initializable {
 
     public void setOrderManager(OrderManager orderManager1) {
         orderManager = orderManager1;
+    }
+
+    public static class OrderTableEntry {
+        private final MenuItem menu_item;
+        private final SimpleStringProperty name;
+        private final SimpleStringProperty price;
+        private final Button deleteButton;
+
+        private OrderTableEntry(MenuItem menu_item, OrderScreenController parent) {
+            this.menu_item = menu_item;
+            this.name = new SimpleStringProperty(menu_item.getName());
+            this.price = new SimpleStringProperty(menu_item.getPrice().toString());
+            this.deleteButton = new Button("Delete");
+            this.deleteButton.setUserData(this);
+            this.deleteButton.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    parent.remove_from_order(menu_item, (OrderTableEntry) deleteButton.getUserData());
+                }
+            });
+        }
+
+        public String getName() { return name.get(); }
+        public String getPrice() { return price.get(); }
+        public Button getDeleteButton() { return deleteButton; }
     }
 }

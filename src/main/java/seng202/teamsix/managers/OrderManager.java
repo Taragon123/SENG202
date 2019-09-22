@@ -10,6 +10,8 @@ package seng202.teamsix.managers;
 
 import seng202.teamsix.data.*;
 
+import java.util.List;
+
 public class OrderManager {
 
     private Order cart = new Order();
@@ -100,11 +102,19 @@ public class OrderManager {
 
         // Print customers receipt.
         printReceipt();
+
+        // Clear cart
+        resetCart();
     }
 
     public Currency getCashRequired() {
         return cart.getCashRequired();
     }
+
+    public List<OrderItem> getCartOrderItems() {
+        return cart.getOrderTree().getDependants();
+    }
+
 
     /**
      * This method prints the order, just the item names and quantity. Currently prints to the command line.
