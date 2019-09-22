@@ -50,6 +50,7 @@ public class OrderScreenApplication extends Application {
 
         orderController.preSet(primaryStage, managementScene);
         stockController.preSet(primaryStage, orderScene, pastOrderScene);
+        pastOrderController.preSet(primaryStage, managementScene);
 
         CreateItemController itemController = new CreateItemController(new Item_Ref());
         //itemController.createNewWindow();

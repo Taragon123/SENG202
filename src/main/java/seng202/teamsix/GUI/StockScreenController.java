@@ -228,7 +228,7 @@ public class StockScreenController implements Initializable {
 
         //Add button column
         TableColumn<ItemTableEntry, Button> addStockButtonColumn = new TableColumn<>();
-        unitColumn.setMinWidth(100);
+        unitColumn.setMinWidth(110);
         unitColumn.setCellValueFactory(new PropertyValueFactory<>("addStockInstance"));
         itemTable.getColumns().add(addStockButtonColumn);
     }
@@ -266,7 +266,8 @@ public class StockScreenController implements Initializable {
             this.base_price = new SimpleStringProperty(item.getBasePrice().toString());
             this.markup_price = new SimpleStringProperty(item.getMarkupPrice().toString());
             this.qty_unit = new SimpleStringProperty(item.getQtyUnit().toString());
-            this.addStockInstance = new Button("Create new stock item");
+            this.addStockInstance = new Button("Add new stock");
+            this.addStockInstance.setMaxWidth(Double.MAX_VALUE);
             this.addStockInstance.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
