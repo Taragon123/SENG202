@@ -6,7 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import seng202.teamsix.managers.OrderManager;
 
 import java.io.IOException;
@@ -46,6 +45,8 @@ public class OrderScreenApplication extends Application {
         loadPastOrderManagment.setController(pastOrderController);
         Parent pastOrderManagment = loadPastOrderManagment.load();
         Scene pastOrderScene = new Scene(pastOrderManagment, 1300, 800);
+
+
 
         orderController.preSet(primaryStage, managmentScene);
         stockController.preSet(primaryStage, orderScene, pastOrderScene);
