@@ -371,6 +371,8 @@ public class OrderScreenController<priavte> implements Initializable {
         orderManager = orderManager1;
     }
 
+    public void saveData() {}
+
     /**
      * Class OrderTableEntry, used to store items in a TableView that displays the current order
      */
@@ -398,5 +400,6 @@ public class OrderScreenController<priavte> implements Initializable {
         public String getName() { return name.get(); }
         public String getPrice() { return price.get(); }
         public Button getDeleteButton() { return deleteButton; }
+
     }
 }
