@@ -61,9 +61,7 @@ public class Order extends Order_Ref{
      * This method prints the order, just the item names and quantity. Currently prints to the command line.
      */
     public String getChefOrder() {
-        // need to find the depth of the order so that we can use the method getOrderTreeRepr() of the class OrderItem.
-        String returnString = "";
-        getOrderTree().getOrderTreeRepr(0);
+        String returnString = getOrderTree().getCleanOrderRepresentation(0);
         return returnString;
     }
 
@@ -72,7 +70,8 @@ public class Order extends Order_Ref{
      */
     public String getReceipt() {
         // similar to the printChefOrder, more details.
-        return "";
+        String returnString = getOrderTree().getCleanOrderRepresentation(0);
+        return returnString;
     }
 
     /**
