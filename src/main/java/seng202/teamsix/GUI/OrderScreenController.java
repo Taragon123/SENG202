@@ -65,7 +65,7 @@ public class OrderScreenController implements Initializable {
     private OrderManager orderManager;
     public Popup optionPopup = new Popup();
     private Stage window;
-    private Scene managmentScene;
+    private Scene managementScene;
     private boolean isPopupInit = false;
     private boolean isInit = false;
 
@@ -353,7 +353,7 @@ public class OrderScreenController implements Initializable {
      */
     public void open_management() {
         optionPopup.hide();
-        window.setScene(managmentScene);
+        window.setScene(managementScene);
     }
 
     /**
@@ -376,7 +376,7 @@ public class OrderScreenController implements Initializable {
 
     public void preSet(Stage primaryStage, Scene management) {
         window = primaryStage;
-        managmentScene = management;
+        managementScene = management;
     }
 
     public void setOrderManager(OrderManager orderManager1) {
