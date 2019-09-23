@@ -68,24 +68,25 @@ public class OrderItem {
     }
 
     public void setQuantity(int quantity) {
-        this.quantity = Math.max(quantity,0);
+        this.quantity = Math.max(quantity, 0);
     }
 
     /**
      * Adds an Item to the Order, given an Item_Ref item_ref, int qty, and ItemTag_Ref default tag.
+     *
      * @param item_ref Refers to the Item of which we want to add to the order.
-     * @param qty The number of items we want to add too the order.
+     * @param qty      The number of items we want to add too the order.
      */
     public void addToOrder(Item_Ref item_ref, int qty, Currency new_item_price) {
         boolean is_added = false;
         Item item = StorageAccess.instance().getItem(item_ref);
-        for (OrderItem orderItem: dependants) {
+        for (OrderItem orderItem : dependants) {
             if (orderItem.getItem() == item_ref) {
                 orderItem.quantity += qty;
                 is_added = true;
             }
         }
-        if (! is_added) {
+        if (!is_added) {
             OrderItem parent = new OrderItem();
             parent.setItem(item_ref);
             parent.setQuantity(qty);
@@ -96,11 +97,11 @@ public class OrderItem {
                 parent.setPrice(temp_price);
             }
 
-            if(item instanceof CompositeItem) {
-                for(Item_Ref child_ref : ((CompositeItem) item).getItems()) {
+            if (item instanceof CompositeItem) {
+                for (Item_Ref child_ref : ((CompositeItem) item).getItems()) {
                     parent.addToOrder(child_ref, 1, null);
                 }
-            } else if(item instanceof VariantItem) {
+            } else if (item instanceof VariantItem) {
                 parent.addToOrder(((VariantItem) item).getVariants().get(0), 1, new_item_price);
             }
         }
@@ -115,11 +116,11 @@ public class OrderItem {
     }
 
 
-
     /**
      * Removes an Item from the Order, given an Item_Ref item_ref, and an int qty.
+     *
      * @param item_ref Refers to the Item which we want to remove from the Order.
-     * @param qty The number of items we want to remove from the order.
+     * @param qty      The number of items we want to remove from the order.
      * @return True if items are removed (even if qty > already in cart), false if they didn't exist in the first place.
      */
     public boolean removeFromOrder(Item_Ref item_ref, int qty, Currency price_of_item_to_remove) {
@@ -171,7 +172,7 @@ public class OrderItem {
     public String getOrderTreeRepr(int current_depth) {
         Item item = StorageAccess.instance().getItem(getItem());
         String order_name = "(Empty)";
-        if(item != null) {
+        if (item != null) {
             order_name = item.getName();
         }
 
@@ -180,12 +181,12 @@ public class OrderItem {
 
         StringBuilder output = new StringBuilder();
         output.append(line);
-        for(OrderItem dependant : getDependants()) {
+        for (OrderItem dependant : getDependants()) {
             output.append(dependant.getOrderTreeRepr(current_depth + 1));
         }
 
-        if(current_depth > 0 && getDependants().size() > 0){
-            output.append("|" + String.join("", Collections.nCopies(Math.max(current_depth-1, 0), "--|")) + "\n");
+        if (current_depth > 0 && getDependants().size() > 0) {
+            output.append("|" + String.join("", Collections.nCopies(Math.max(current_depth - 1, 0), "--|")) + "\n");
         }
 
         return output.toString();
@@ -194,9 +195,42 @@ public class OrderItem {
     @Override
     public String toString() {
         Item item = StorageAccess.instance().getItem(getItem());
-        if(item != null) {
+        if (item != null) {
             return item.getName() + "x" + quantity;
         }
         return "(NULL Item)";
+    }
+
+    /**
+     * This method returns a string representation of the everything below the OrderItem in the hierarchy tree, where dashed lines represent the items inside the order.
+     *
+     * @param current_depth Pass through 0 initially, used to determine how much we need to indent the line.
+     * @return A string containing all the dependants and what makes up those dependants in a hierarchical form.
+     */
+    public String getCleanOrderRepresentation(int current_depth) {
+        Item item = StorageAccess.instance().getItem(getItem());
+        String order_name;
+        String line = "";
+        if (item != null) {
+            order_name = item.getName();
+            String spacer = String.join("", Collections.nCopies(current_depth - 1, "  "));
+            if (current_depth == 1) {
+                line = spacer + this.getQuantity() + " x " + order_name + "\n";
+            } else {
+                line = spacer + "  - " + order_name;
+                if ((item instanceof VariantItem) || (item instanceof CompositeItem)) {
+                    line += "\n";
+                }
+            }
+
+        }
+        StringBuilder output = new StringBuilder();
+        output.append(line);
+        for (OrderItem dependant : getDependants()) {
+            output.append(dependant.getCleanOrderRepresentation(current_depth + 1));
+        }
+        output.append("" + String.join("", Collections.nCopies(Math.max(current_depth - 1, 0), "   ")) + "\n");
+
+        return output.toString();
     }
 }

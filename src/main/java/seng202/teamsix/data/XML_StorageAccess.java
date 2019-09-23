@@ -148,7 +148,7 @@ public class XML_StorageAccess extends StorageAccess{
         data_filename = source_dir + "/data.xml";
 
         // Create folder if does not exist
-        File dir = new File(data_filename);
+        File dir = new File(source_dir);
         if (!dir.exists()) {
             // If cannot create folder create exception
             if(!dir.mkdir()) {

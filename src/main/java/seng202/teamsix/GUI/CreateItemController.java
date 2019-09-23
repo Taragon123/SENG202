@@ -254,7 +254,7 @@ public class CreateItemController implements Initializable {
     ArrayList<Item_Ref> getSelectedItems() {
         // Down casting to just be item_references
         ArrayList<Item_Ref> selected = new ArrayList<>();
-        for(Item item : listview_selected_items.getSelectionModel().getSelectedItems()) {
+        for(Item item : listview_selected_items.getItems()) {
             selected.add(new Item_Ref(item));
         }
 

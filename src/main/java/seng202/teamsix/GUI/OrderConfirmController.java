@@ -1,5 +1,6 @@
 package seng202.teamsix.GUI;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,17 +11,18 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import seng202.teamsix.data.Currency;
-import seng202.teamsix.data.Item;
-import seng202.teamsix.data.OrderItem;
-import seng202.teamsix.data.StorageAccess;
+import seng202.teamsix.data.*;
+import seng202.teamsix.data.MenuItem;
 import seng202.teamsix.managers.OrderManager;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
@@ -33,6 +35,17 @@ public class OrderConfirmController implements Initializable {
     private OrderManager orderManager;
     private OrderScreenController orderScreenController;
     private Popup changePopup = new Popup();
+    private ArrayList<OrderTableEntry> orderList;
+
+    public OrderConfirmController(ArrayList<OrderScreenController.OrderTableEntry> orderList) {
+
+        this.orderList = new ArrayList<>();
+        for (OrderScreenController.OrderTableEntry entry: orderList) {
+            MenuItem menu_item = entry.getMenuItem();
+            OrderTableEntry e = new OrderTableEntry(menu_item, this);
+            this.orderList.add(e);
+        }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -48,9 +61,24 @@ public class OrderConfirmController implements Initializable {
         currencyConvert.put("$20", 2000);
         currencyConvert.put("$50", 5000);
         currencyConvert.put("$100", 10000);
+
+        TableColumn itemCol = new TableColumn<MenuItem, String>("Item");
+        TableColumn priceCol = new TableColumn<MenuItem, String>("Price");
+        itemCol.setMinWidth(270);
+        priceCol.setMinWidth(90);
+        itemCol.setCellValueFactory(new PropertyValueFactory("name"));
+        priceCol.setCellValueFactory(new PropertyValueFactory("price"));
+        order_list_display.getColumns().clear();
+        order_list_display.setSelectionModel(null);
+        order_list_display.getColumns().addAll(itemCol, priceCol);
+
+        for (OrderTableEntry entry: orderList) {
+            order_list_display.getItems().add(entry);
+        }
+
     }
     @FXML
-    private TableView order_list_display;
+    private TableView<OrderTableEntry> order_list_display;
 
     @FXML
     private TableColumn<OrderItem, String> itemCol;
@@ -69,8 +97,13 @@ public class OrderConfirmController implements Initializable {
 
     public void add_change(ActionEvent event) {
         String input = ((Button) event.getSource()).getText();
-        totalChange.addCash(0, currencyConvert.get(input));
-        change_field.setText("Change: " + totalChange);
+        if (input.equals("Clear")) {
+            totalChange.setTotalCash(0);
+            change_field.setText("Change: " + totalChange);
+        } else {
+            totalChange.addCash(0, currencyConvert.get(input));
+            change_field.setText("Change: " + totalChange);
+        }
         if (totalChange.compareTo(orderCost) <= 0 || isEftpos) {
             confirmButton.setDisable(false);
         } else {
@@ -132,13 +165,21 @@ public class OrderConfirmController implements Initializable {
         orderCost = orderManager.getCart().getTotalCost();
         cost_field.setText("Cost: " + orderCost);
 
-        /* init table view
-        for (OrderItem order_item : orderManager.getCartOrderItems()) {
-            Item item = StorageAccess.instance().getItem(order_item.getItem());
-            String name = item.getName();
-            //Currency cost = order_item.getCost();
-            order_list_display.getItems().add(name);
-        }*/
+    }
+
+    public static class OrderTableEntry {
+        private final MenuItem menu_item;
+        private final SimpleStringProperty name;
+        private final SimpleStringProperty price;
+
+        private OrderTableEntry(MenuItem menu_item, OrderConfirmController parent) {
+            this.menu_item = menu_item;
+            this.name = new SimpleStringProperty(menu_item.getName());
+            this.price = new SimpleStringProperty(menu_item.getPrice().toString());
+        }
+
+        public String getName() { return name.get(); }
+        public String getPrice() { return price.get(); }
     }
 
 }
