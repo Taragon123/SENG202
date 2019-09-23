@@ -97,8 +97,13 @@ public class OrderConfirmController implements Initializable {
 
     public void add_change(ActionEvent event) {
         String input = ((Button) event.getSource()).getText();
-        totalChange.addCash(0, currencyConvert.get(input));
-        change_field.setText("Change: " + totalChange);
+        if (input.equals("Clear")) {
+            totalChange.setTotalCash(0);
+            change_field.setText("Change: " + totalChange);
+        } else {
+            totalChange.addCash(0, currencyConvert.get(input));
+            change_field.setText("Change: " + totalChange);
+        }
         if (totalChange.compareTo(orderCost) <= 0 || isEftpos) {
             confirmButton.setDisable(false);
         } else {
