@@ -100,4 +100,12 @@ public class StockInstance extends StockInstance_Ref {
             quantity_remaining = 0;
         }
     }
+    @QueryField("name")
+    public String getName() {
+        String stockInstanceName = StorageAccess.instance().getItem(stock_item).getName();
+        if (stockInstanceName == null) {
+            stockInstanceName = "null";
+        }
+        return stockInstanceName;
+    }
 }
