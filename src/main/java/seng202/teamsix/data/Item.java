@@ -146,8 +146,8 @@ public class Item extends Item_Ref {
      */
     @QueryField("profit")
     public Currency getProfit() {
-        Currency profit = new Currency(markup_price.getDollars(), markup_price.getCents());
-        profit.subCash(base_price.getDollars(), base_price.getCents());
+        Currency profit = new Currency(markup_price.getTotalCash());
+        profit.subCash(base_price);
         return profit;
     }
 

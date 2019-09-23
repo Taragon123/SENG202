@@ -17,7 +17,8 @@ class CashRegisterTest {
     void addRegisterAmountTest() {
         CashRegister cashRegister = new CashRegister();
         assertEquals(0.0, cashRegister.getRegisterAmount());
-        cashRegister.addRegisterAmount(198);
+        Currency oneNinetyEight = new Currency(1, 98);
+        cashRegister.addRegisterAmount(oneNinetyEight);
         assertEquals(1.98, cashRegister.getRegisterAmount());
     }
 }

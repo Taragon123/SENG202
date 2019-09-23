@@ -46,11 +46,10 @@ public class CashRegister {
     }
 
     /**
-     * This method adds an integer containing the number of cents to add. As the Currency class already has cents wrap
-     * around for dollars, we only need to add the cents.
-     * @param centsToAdd The number of cents we want to add to the cash register.
+     * This method adds a Currency object, containing the number of cents to add, to the current registerAmount Currency
+     * @param amount The Currency to be added containing the amount of cents that will be added
      */
-    public void addRegisterAmount(int centsToAdd) {
-        registerAmount.setCents(registerAmount.getCents() + centsToAdd);
+    public void addRegisterAmount(Currency amount) {
+        registerAmount.addCash(amount);
     }
 }
