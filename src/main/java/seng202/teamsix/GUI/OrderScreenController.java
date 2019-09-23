@@ -67,8 +67,6 @@ public class OrderScreenController<priavte> implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if (!isInit) {
-            order_list_display.setEditable(false);
-            order_list_display.setSelectionModel(null);
             cost_field.setText("Cost: " + orderManager.getCashRequired().toString());
             Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy   HH:mm");
@@ -77,51 +75,72 @@ public class OrderScreenController<priavte> implements Initializable {
             clock.setCycleCount(Animation.INDEFINITE);
             clock.play();
 
-            TableColumn itemCol = new TableColumn<MenuItem, String>("Item");
-            TableColumn priceCol = new TableColumn<MenuItem, String>("Price");
-            TableColumn deleteCol = new TableColumn<MenuItem, Button>("");
-            itemCol.setMinWidth(190);
-            priceCol.setMinWidth(92);
-            deleteCol.setMaxWidth(75);
+            initializeOrderDisplayTable();
+            populateGrid();
 
-            itemCol.setCellValueFactory(new PropertyValueFactory("name"));
-            priceCol.setCellValueFactory(new PropertyValueFactory("price"));
-            deleteCol.setCellValueFactory(new PropertyValueFactory("deleteButton"));
-            order_list_display.getColumns().clear();
-            order_list_display.getColumns().addAll(itemCol, priceCol, deleteCol);
+            isInit = true;
+        }
+    }
 
-            menu_tabs.getTabs().clear();
-            Set<Menu_Ref> menu_refSet = StorageAccess.instance().getAllMenus(); //retrieve uuid of all menus
-            for (Menu_Ref menu_ref : menu_refSet) {
+    /**
+     * Initializes the current order TableView i.e. setups the columns, their widths and cell values
+     */
+    public void initializeOrderDisplayTable() {
+        TableColumn itemCol = new TableColumn<MenuItem, String>("Item");
+        TableColumn priceCol = new TableColumn<MenuItem, String>("Price");
+        TableColumn deleteCol = new TableColumn<MenuItem, Button>("");
+        itemCol.setMinWidth(190);
+        priceCol.setMinWidth(92);
+        deleteCol.setMaxWidth(75);
+        itemCol.setCellValueFactory(new PropertyValueFactory("name"));
+        priceCol.setCellValueFactory(new PropertyValueFactory("price"));
+        deleteCol.setCellValueFactory(new PropertyValueFactory("deleteButton"));
 
-                //Create Tab pane and add it to the list of Tab's (menu_tabs)
-                Tab tab = createTab(menu_ref, "-fx-background-color: #576574; -fx-pref-width: 175; -fx-pref-height: 50; -fx-font-size: 20;");
-                ScrollPane scrollpane = new ScrollPane();
-                scrollpane.setFitToWidth(true);
-                tab.setContent(scrollpane);
-                menu_tabs.getTabs().add(tab);
+        itemCol.setSortable(false);
+        priceCol.setSortable(false);
+        deleteCol.setSortable(false);
 
-                //Create GridPane and set it as the content of the Tab
-                GridPane grid = createGridPane();
-                scrollpane.setContent(grid);
+        order_list_display.setEditable(false);
+        order_list_display.setSelectionModel(null);
+        order_list_display.getColumns().clear();
+        order_list_display.getColumns().addAll(itemCol, priceCol, deleteCol);
+    }
 
-                //Set the row and column constraints (this call enables the grid to have 5 columns and 5 rows)
-                int colMax = 5; // the max col number
-                int rowMax = 5; // the max row number
-                setColumnConstraints(grid, colMax);
+    /**
+     * Populates the main order screen with Tabs for each menu, and populates each tab with a
+     * GridPane of all the MenuItems within that menu
+     */
+    public void populateGrid() {
+        menu_tabs.getTabs().clear();
+        Set<Menu_Ref> menu_refSet = StorageAccess.instance().getAllMenus(); //retrieve uuid of all menus
+        for (Menu_Ref menu_ref : menu_refSet) {
+
+            //Create Tab pane and add it to the list of Tab's (menu_tabs)
+            Tab tab = createTab(menu_ref, "-fx-background-color: #576574; -fx-pref-width: 175; -fx-pref-height: 50; -fx-font-size: 20;");
+            ScrollPane scrollpane = new ScrollPane();
+            scrollpane.setFitToWidth(true);
+            tab.setContent(scrollpane);
+            menu_tabs.getTabs().add(tab);
+
+            //Create GridPane and set it as the content of the Tab
+            GridPane grid = createGridPane();
+            scrollpane.setContent(grid);
+
+            //Set the row and column constraints (this call enables the grid to have 5 columns and 5 rows)
+            int colMax = 5; // the max col number
+            int rowMax = 5; // the max row number
+            setColumnConstraints(grid, colMax);
 //                setRowConstraints(grid, rowMax);
 
-                //Now populate buttons with
-                int currIndex = 0;
-                ArrayList<MenuItem> menu_items = StorageAccess.instance().getMenu(menu_ref).getMenuItems();
-                for (MenuItem menu_item : menu_items) {
-                    Button button = createButton(menu_item);
-                    button.setMinHeight(100);
-                    grid.add(button, currIndex % colMax, currIndex/colMax);
-                    currIndex++;
-                }
+            //Now populate buttons
+            int currIndex = 0;
+            ArrayList<MenuItem> menu_items = StorageAccess.instance().getMenu(menu_ref).getMenuItems();
+            for (MenuItem menu_item : menu_items) {
+                Button button = createButton(menu_item);
+                button.setMinHeight(100);
+                grid.add(button, currIndex % colMax, currIndex/colMax);
+                currIndex++;
             }
-            isInit = true;
         }
     }
 
@@ -243,6 +262,10 @@ public class OrderScreenController<priavte> implements Initializable {
     private Button confirmButton;
 
 
+    /**
+     * Adds a MenuItem to the current order and adds it to the display
+     * @param menu_item MenuItem object to be added to the current order
+     */
     public void add_to_order(MenuItem menu_item) {
         //OrderManager will add the specified item to cart #backend
         orderManager.addToCart(menu_item, 1);
@@ -252,6 +275,11 @@ public class OrderScreenController<priavte> implements Initializable {
         confirmButton.setDisable(false);
     }
 
+    /**
+     * Removes a MenuItem to the current order and removes it from the display
+     * @param menu_item the MenuItem object to be removed from the current order
+     * @param entry the OrderTableEntry to be removed from the display
+     */
     public void remove_from_order(MenuItem menu_item, OrderTableEntry entry) {
         order_list_display.getItems().remove(entry);
         orderManager.removeFromCart(menu_item, 1);
@@ -262,6 +290,10 @@ public class OrderScreenController<priavte> implements Initializable {
         }
     }
 
+    /**
+     * Loads the OrderConfirmation GUI so the current order can be confirmed
+     * @throws IOException
+     */
     public void confirm_order() throws IOException {
         System.out.println("Confirming");
         FXMLLoader loadConfirmOrder = new FXMLLoader(getClass().getResource("confirm_order.fxml"));
@@ -283,12 +315,18 @@ public class OrderScreenController<priavte> implements Initializable {
         confirmWindow.show();
     }
 
+    /**
+     * Clears the current order display table, doesn't remove the items from the order cart however
+     */
     public void clear_order() {
         order_list_display.getItems().clear();
         cost_field.setText("Cost: " + orderManager.getCart().getTotalCost());
         confirmButton.setDisable(true);
     }
 
+    /**
+     * Clears all items from the current order display table and removes all items from the order cart
+     */
     public void cancel_order() {
         order_list_display.getItems().clear();
         orderManager.resetCart();
@@ -296,12 +334,18 @@ public class OrderScreenController<priavte> implements Initializable {
         confirmButton.setDisable(true);
     }
 
+    /**
+     * Opens the management screen
+     */
     public void open_management() {
         System.out.println("Management");
         optionPopup.hide();
         window.setScene(managmentScene);
     }
 
+    /**
+     * Opens the options popup
+     */
     public void toggle_options() {
         System.out.println("options");
         if (optionPopup.isShowing()) {
@@ -313,6 +357,9 @@ public class OrderScreenController<priavte> implements Initializable {
         }
     }
 
+    /**
+     * Opens the filters screen
+     */
     public void open_filters() { System.out.println("filter"); }
 
     public void preSet(Stage primaryStage, Scene management) {
@@ -324,6 +371,9 @@ public class OrderScreenController<priavte> implements Initializable {
         orderManager = orderManager1;
     }
 
+    /**
+     * Class OrderTableEntry, used to store items in a TableView that displays the current order
+     */
     public static class OrderTableEntry {
         private final MenuItem menu_item;
         private final SimpleStringProperty name;

@@ -68,6 +68,8 @@ public class OrderConfirmController implements Initializable {
         priceCol.setMinWidth(90);
         itemCol.setCellValueFactory(new PropertyValueFactory("name"));
         priceCol.setCellValueFactory(new PropertyValueFactory("price"));
+        itemCol.setSortable(false);
+        priceCol.setSortable(false);
         order_list_display.getColumns().clear();
         order_list_display.setSelectionModel(null);
         order_list_display.getColumns().addAll(itemCol, priceCol);
@@ -95,6 +97,10 @@ public class OrderConfirmController implements Initializable {
     @FXML
     private Button confirmButton;
 
+    /**
+     * Adds the amount to the totalChange received from the buyer buy the amount of the calculator button that was clicked on
+     * @param event the calculator button that was clicked on
+     */
     public void add_change(ActionEvent event) {
         String input = ((Button) event.getSource()).getText();
         if (input.equals("Clear")) {
@@ -167,6 +173,9 @@ public class OrderConfirmController implements Initializable {
 
     }
 
+    /**
+     * Class OrderTableEntry, used to store items in a TableView that displays the current order
+     */
     public static class OrderTableEntry {
         private final MenuItem menu_item;
         private final SimpleStringProperty name;
