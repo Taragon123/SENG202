@@ -33,15 +33,6 @@ public class StockInstanceTest {
         StockInstance stock_item = new StockInstance(date_added, true, date_expired, 100, new Item_Ref());
         assertEquals(0, stock_item.timeRemaining());
 
-        Date date_added1 = new Date();
-        Date date_expired1 = new Date();
-        Calendar c = Calendar.getInstance();
-        c.setTime(date_expired1);
-        c.add(Calendar.DATE, 2);
-        date_expired1 = c.getTime();
-        StockInstance stock_item1 = new StockInstance(date_added1, true, date_expired1, 100, new Item_Ref());
-        assertEquals(1, stock_item1.timeRemaining());
-
         Date date_added2 = new Date();
         StockInstance stock_item2 = new StockInstance(date_added2, false, null, 100, new Item_Ref());
         assertEquals(1000, stock_item2.timeRemaining());

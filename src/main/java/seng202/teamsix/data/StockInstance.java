@@ -72,7 +72,7 @@ public class StockInstance extends StockInstance_Ref {
     public int timeRemaining() {
         if (date_expires != null) {
             Date date_now = new Date();
-            int diff_in_days = (int) ((date_expires.getTime() - date_now.getTime()) / (1000 * 60 * 60 * 24));
+            int diff_in_days = (int) ((date_expires.getTime() - date_now.getTime()) / (1000 * 60 * 60 * 24) + 0.999);
             return diff_in_days;
         } else {
             return 1000; //StockInstance doesn't expire, return 1000 for now, it wont be called anyway
