@@ -28,16 +28,20 @@ public class OrderTest {
         menu_combo.setItem(combo_ref);
         OrderManager orderManager = new OrderManager();
         orderManager.addToCart(menu_combo, 4);
-        String expected = "Order Number: 1\n" +
-                        "4 x Cheese Burger Combo\n" +
-                        "    - Cheese Burger\n" +
-                        "      - Buns\n" +
-                        "        - Gluten Free Bun\n" +
-                        "      - Patty\n" +
-                        "        - Meat Patty\n" +
-                        "      - Cheese\n" +
-                        "    - Drink\n" +
-                        "    - Chips\n\n";
+        String expected =   "/**********  Chef's Order  **********/\n" +
+                            "Order Number: 1\n" +
+                            "Contents:\n" +
+                            "4 x Cheese Burger Combo\n" +
+                            "    - Cheese Burger\n" +
+                            "      - Buns\n" +
+                            "        - Gluten Free Bun\n" +
+                            "      - Patty\n" +
+                            "        - Meat Patty\n" +
+                            "      - Cheese\n" +
+                            "    - Drink\n" +
+                            "    - Chips\n" +
+                            "\n" +
+                            "/************************************/";
         assertEquals(expected, orderManager.getCart().getChefOrder());
     }
 
