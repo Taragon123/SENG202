@@ -28,6 +28,7 @@ public class StockScreenController implements Initializable {
     private List<UUID_Entity> stockList;
     private List<UUID_Entity> itemList;
     private List<UUID_Entity> orderList;
+    private List<UUID_Entity> menuList;
 
     private Stage window;
     private Scene orderScene;
@@ -61,6 +62,7 @@ public class StockScreenController implements Initializable {
         itemTabPane.getChildren().addAll(itemTable);
         stockTabPane.getChildren().addAll(stockTable);
         orderTabPane.getChildren().addAll(orderTable);
+        menuTabPane.getChildren().addAll(menuTable);
     }
 
     @FXML
@@ -126,12 +128,13 @@ public class StockScreenController implements Initializable {
         DataQuery<Item> itemQuery = new DataQuery<>(Item.class);
         stockList = stockQuery.runQuery();
         itemList = itemQuery.runQuery();
-        getObservableStockTableEntryList(stockEntries);
-        getObservableItemTableEntryList(itemEntries);
+
         DataQuery<Order> orderDataQuery = new DataQuery<>(Order.class);
         orderList = orderDataQuery.runQuery();
         System.out.print(orderList.size());
         getObservableOrderTableEntryList(observableOrders);
+        getObservableStockTableEntryList(stockEntries);
+        getObservableItemTableEntryList(itemEntries);
     }
 
     public void searchItems() {
@@ -267,8 +270,12 @@ public class StockScreenController implements Initializable {
         }
     }
 
-    private void getObservableMenuTableEntryList(ObservableList<MenuItem> menuList) {
-
+    private void getObservableMenuTableEntryList(ObservableList<MenuItem> menuEntries) {
+        menuEntries.clear();
+        for (UUID_Entity entity: menuList) {
+            Menu menu = StorageAccess.instance().getMenu(new Menu_Ref(entity));
+//            menuEntries.add(new MenuItemTableEntry(menu));
+        }
     }
 
     public static class ItemTableEntry {
@@ -345,20 +352,20 @@ public class StockScreenController implements Initializable {
     }
 
     public static class MenuItemTableEntry {
-        private final SimpleStringProperty price;
         private final SimpleStringProperty name;
+        private final SimpleStringProperty desc;
 
-        private MenuItemTableEntry(MenuItem menuItem){
-            price = new SimpleStringProperty(menuItem.getPrice().toString());
-            name = new SimpleStringProperty(StorageAccess.instance().getItem(menuItem.getItem()).getName());
+        private MenuItemTableEntry(Menu menu){
+            name = new SimpleStringProperty(menu.getName());
+            desc = new SimpleStringProperty(menu.getDescription());
         }
 
         public String getPrice() {
-            return price.get();
+            return name.get();
         }
 
         public String getname() {
-            return name.get();
+            return desc.get();
         }
     }
 

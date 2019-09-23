@@ -157,7 +157,7 @@ public class OrderScreenController<priavte> implements Initializable {
         button.setTextAlignment(TextAlignment.CENTER);
         button.setTextOverrun(OverrunStyle.CENTER_ELLIPSIS);
         button.setStyle("-fx-background-color: #66390b; -fx-font-size: 20; -fx-background-radius: 10;");
-        return button;
+        return button;    //set button colour here ^
     }
 
     /**
