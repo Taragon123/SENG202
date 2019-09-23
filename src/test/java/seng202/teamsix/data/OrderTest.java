@@ -18,7 +18,7 @@ public class OrderTest {
 
     //@Ignore
     @Test
-    public void testPrintChefsOrder() {
+    public void testPrintChefsOrderAndReceipt() {
         StorageAccess.initTestMode("ItemTest");
 
         Item_Ref combo_ref = new Item_Ref();
@@ -26,9 +26,11 @@ public class OrderTest {
         CompositeItem combo_item = (CompositeItem) StorageAccess.instance().getItem(combo_ref);
         MenuItem menu_combo = new MenuItem();
         menu_combo.setItem(combo_ref);
+        Currency menu_combo_price = new Currency(19.99);
+        menu_combo.setPrice(menu_combo_price);
         OrderManager orderManager = new OrderManager();
         orderManager.addToCart(menu_combo, 4);
-        String expected =   "/**********  Chef's Order  **********/\n" +
+        String expectedChefsOrder =   "/**********  Chef's Order  **********/\n" +
                             "Order Number: 1\n" +
                             "Contents:\n" +
                             "4 x Cheese Burger Combo\n" +
@@ -42,7 +44,26 @@ public class OrderTest {
                             "    - Chips\n" +
                             "\n" +
                             "/************************************/";
-        assertEquals(expected, orderManager.getCart().getChefOrder());
+        assertEquals(expectedChefsOrder, orderManager.getCart().getChefOrder());
+
+        String expectedReceipt =    "/************  Receipt  *************/\n" +
+                                    "FoodByte\n" +
+                                    "null\n" +
+                                    "Receipt (Order Number: 1)\n" +
+                                    "Contents:\n" +
+                                    "4 x Cheese Burger Combo @ $19.99 each\n" +
+                                    "    - Cheese Burger\n" +
+                                    "      - Buns\n" +
+                                    "        - Gluten Free Bun\n" +
+                                    "      - Patty\n" +
+                                    "        - Meat Patty\n" +
+                                    "      - Cheese\n" +
+                                    "    - Drink\n" +
+                                    "    - Chips\n" +
+                                    "\n" +
+                                    "Total Amount Paid: $79.96\n" +
+                                    "/************************************/";
+        assertEquals(expectedReceipt, orderManager.getCart().getReceipt());
     }
 
     /**
