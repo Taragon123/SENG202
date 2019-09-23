@@ -96,24 +96,28 @@ public class OrderScreenController implements Initializable {
 
                 //Create Tab pane and add it to the list of Tab's (menu_tabs)
                 Tab tab = createTab(menu_ref, "-fx-background-color: #576574; -fx-pref-width: 175; -fx-pref-height: 50; -fx-font-size: 20;");
+                ScrollPane scrollpane = new ScrollPane();
+                scrollpane.setFitToWidth(true);
+                tab.setContent(scrollpane);
                 menu_tabs.getTabs().add(tab);
 
                 //Create GridPane and set it as the content of the Tab
                 GridPane grid = createGridPane();
-                tab.setContent(grid);
+                scrollpane.setContent(grid);
 
                 //Set the row and column constraints (this call enables the grid to have 5 columns and 5 rows)
                 int colMax = 5; // the max col number
                 int rowMax = 5; // the max row number
                 setColumnConstraints(grid, colMax);
-                setRowConstraints(grid, rowMax);
+//                setRowConstraints(grid, rowMax);
 
                 //Now populate buttons with
                 int currIndex = 0;
                 ArrayList<MenuItem> menu_items = StorageAccess.instance().getMenu(menu_ref).getMenuItems();
                 for (MenuItem menu_item : menu_items) {
                     Button button = createButton(menu_item);
-                    grid.add(button, currIndex % colMax, currIndex / rowMax);
+                    button.setMinHeight(100);
+                    grid.add(button, currIndex % colMax, currIndex/colMax);
                     currIndex++;
                 }
             }
