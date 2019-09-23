@@ -1,6 +1,8 @@
 package seng202.teamsix.GUI;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -21,6 +23,7 @@ import java.util.ResourceBundle;
 public class CreateItemController implements Initializable {
     private Item_Ref modifying_item = null;
     private Stage controller_window;
+    private EventHandler<ActionEvent> callback = null;
 
     @FXML
     private Label label_ingredients;
@@ -70,7 +73,7 @@ public class CreateItemController implements Initializable {
     @FXML
     private Label label_errormessage;
 
-    void createNewWindow() {
+    void createNewWindow(EventHandler<ActionEvent> callback_handler) {
         FXMLLoader loaderCreateItem = new FXMLLoader(getClass().getResource("modify_item_screen.fxml"));
         loaderCreateItem.setController(this);
 
@@ -86,11 +89,14 @@ public class CreateItemController implements Initializable {
         Scene root = new Scene(parentCreateItem, 1024, 720);
         controller_window = new Stage();
 
+        // Set Title
         if(modifying_item == null) {
             controller_window.setTitle("Create Item");
         } else {
             controller_window.setTitle("Modify Item");
         }
+
+        callback = callback_handler;
 
         controller_window.setScene(root);
         controller_window.getIcons().add(new Image("file:assets/icons/icon.png"));
@@ -249,6 +255,7 @@ public class CreateItemController implements Initializable {
     @FXML
     void cancelClicked(ActionEvent event) {
         controller_window.close();
+        callback.handle(new ActionEvent());
     }
 
     ArrayList<Item_Ref> getSelectedItems() {
@@ -337,5 +344,6 @@ public class CreateItemController implements Initializable {
 
         // Quit window
         controller_window.close();
+        callback.handle(new ActionEvent());
     }
 }

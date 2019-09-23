@@ -74,7 +74,12 @@ public class StockScreenController implements Initializable {
     @FXML
     public void addItemAction(ActionEvent event ) {
         CreateItemController itemController = new CreateItemController(null);
-        itemController.createNewWindow();
+        itemController.createNewWindow(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                refreshData();
+            }
+        });
     }
 
     public void addMenuAction() {
@@ -407,7 +412,12 @@ public class StockScreenController implements Initializable {
                 @Override
                 public void handle(ActionEvent actionEvent) {
                     CreateItemController itemController = new CreateItemController(item_ref);
-                    itemController.createNewWindow();
+                    itemController.createNewWindow(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent actionEvent) {
+                            parent.refreshData();
+                        }
+                    });
                 }
             });
             this.addToMenu = new Button("Add to menu");
