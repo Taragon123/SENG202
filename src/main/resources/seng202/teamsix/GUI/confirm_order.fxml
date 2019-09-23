@@ -163,7 +163,7 @@
                   </Label>
                   <HBox prefHeight="82.0" prefWidth="349.0">
                      <children>
-                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#cancel_confirm" style="-fx-background-color: #ff1111; -fx-background-radius: 10; -fx-font-size: 24;" text="Cancel" textFill="WHITE" HBox.hgrow="ALWAYS">
+                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#cancel_confirm" style="-fx-background-color: #ff1111; -fx-background-radius: 10; -fx-font-size: 24;" text="Back" textFill="WHITE" HBox.hgrow="ALWAYS">
                            <HBox.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </HBox.margin>

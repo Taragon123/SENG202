@@ -68,6 +68,7 @@ public class OrderScreenController<priavte> implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if (!isInit) {
             order_list_display.setEditable(false);
+            order_list_display.setSelectionModel(null);
             cost_field.setText("Cost: " + orderManager.getCashRequired().toString());
             Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy   HH:mm");
@@ -246,7 +247,7 @@ public class OrderScreenController<priavte> implements Initializable {
         //OrderManager will add the specified item to cart #backend
         orderManager.addToCart(menu_item, 1);
         OrderTableEntry entry = new OrderTableEntry(menu_item, this);
-        order_list_display.getItems().add(entry); //add the menu_item to the tableview
+        order_list_display.getItems().add(entry); //add the menu_item to the table
         cost_field.setText("Cost: " + orderManager.getCart().getTotalCost());
         confirmButton.setDisable(false);
     }
@@ -264,7 +265,12 @@ public class OrderScreenController<priavte> implements Initializable {
     public void confirm_order() throws IOException {
         System.out.println("Confirming");
         FXMLLoader loadConfirmOrder = new FXMLLoader(getClass().getResource("confirm_order.fxml"));
-        OrderConfirmController orderConfirmController = new OrderConfirmController();
+
+        ArrayList<OrderTableEntry> orderList = new ArrayList<>();
+        for (OrderTableEntry entry: order_list_display.getItems()) {
+            orderList.add(entry);
+        }
+        OrderConfirmController orderConfirmController = new OrderConfirmController(orderList);
 
         loadConfirmOrder.setController(orderConfirmController);
         Parent confirmOrder = loadConfirmOrder.load();
@@ -338,6 +344,7 @@ public class OrderScreenController<priavte> implements Initializable {
             });
         }
 
+        public MenuItem getMenuItem() { return menu_item; }
         public String getName() { return name.get(); }
         public String getPrice() { return price.get(); }
         public Button getDeleteButton() { return deleteButton; }
