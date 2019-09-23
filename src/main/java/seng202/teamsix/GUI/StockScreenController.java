@@ -10,15 +10,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.StackPane;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import seng202.teamsix.data.*;
 
+import java.io.File;
 import java.net.URL;
 import java.text.DateFormat;
 import java.util.List;
@@ -97,9 +100,43 @@ public class StockScreenController implements Initializable {
 //        dialogPopup.hide();
 //    }
 
+    /**
+     * Export StorageAccess data called from export button
+     */
     public void exportXML() {
-        //TODO implement this
-        System.out.println("EXPORT");
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialFileName("data.xml");
+        fileChooser.setTitle("Export XML File");
+        File file = fileChooser.showSaveDialog(window);
+        if(file != null) {
+            boolean result = StorageAccess.instance().exportData(file.getAbsolutePath());
+            if (!result) {
+                // Show error
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("Could not export data.");
+                alert.showAndWait();
+            }
+        }
+    }
+
+    /**
+     * Import data into StorageAccess called from import button
+     */
+    public void importXML() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("FOODBYTE Files", "*.xml"));
+        fileChooser.setTitle("Import XML File");
+        File file = fileChooser.showOpenDialog(window);
+
+        if(file != null) {
+            boolean result = StorageAccess.instance().importData(file.getAbsolutePath());
+            if (!result) {
+                // Show error
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("Could not import data.");
+                alert.showAndWait();
+            }
+        }
     }
 
     /**
