@@ -23,8 +23,21 @@ public class Currency implements Comparable<Currency> {
         setTotalCash(value);
     }
 
-    public Currency(int dollars, int cents) {
-        addCash(dollars, cents);
+    public Currency(int intiDollars, int intiCents) { setValue(intiDollars, intiCents); }
+
+    /**
+     * Sets the value of the Currency object to the given dollar and cent value
+     * @param newDollars int amount of dollars
+     * @param newCents int amount of cents
+     */
+    public void setValue(int newDollars, int newCents) { cents = newDollars*100 + newCents; }
+
+    /**
+     * Returns the current value of cents as an int
+     * @return total amount of cents in Currency (
+     */
+    public int getValue() {
+        return cents;
     }
 
     /**
@@ -52,8 +65,8 @@ public class Currency implements Comparable<Currency> {
     }
 
     /**
-     * Gets the value of cents.
-     * @return int amount of cents
+     * Gets the remainder cents after dollars.
+     * @return int amount of cents after dollars
      */
     public int getCents() {
         return cents % 100;
@@ -68,30 +81,26 @@ public class Currency implements Comparable<Currency> {
     }
 
     /**
-     * Sets the value of total cash.
-     * @param newTotal containing the new cash total.
+     * Sets the value of total cash using double as input.
+     * @param newTotal Double containing the new cash total.
      */
     public void setTotalCash(double newTotal) {
         cents = (int) Math.round(newTotal*100.0);
     }
 
     /**
-     * Calculates the new value of total cash and calls set total cash.
-     * @param numDollars containing the amount of dollars.
-     * @param numDollars containing the amount of cents.
+     * Calculates the new value of total cash by adding the cents of the additional to the current cents value
+     * @param additional The Currency object that is to be added to the current Currency object
      */
-    public void addCash(int numDollars, int numCents) {
-        cents += numCents;
-        cents += numDollars * 100;
+    public void addCash(Currency additional) {
+        cents += additional.getValue();
     }
     /**
-     * Calculates the new value of total cash and calls set total cash.
-     * @param numDollars containing the amount of dollars.
-     * @param numDollars containing the amount of cents.
+     * Calculates the new value of total cash by subtracting the cents of the subtrahend to the current cents value
+     * @param subtrahend Currency containing the amount of cents to be deducted
      */
-    public void subCash(int numDollars, int numCents) {
-        cents -= numCents;
-        cents -= numDollars * 100;
+    public void subCash(Currency subtrahend) {
+        cents -= subtrahend.getValue();
     }
 
     @Override

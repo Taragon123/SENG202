@@ -10,17 +10,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import seng202.teamsix.data.*;
+import seng202.teamsix.data.Menu;
 
 import java.io.File;
 import java.net.URL;
@@ -80,33 +77,19 @@ public class StockScreenController implements Initializable {
         itemController.createNewWindow();
     }
 
-    public void createAddStockInstanceDialog(Item_Ref item_ref) {
-        try {
-            StockInstanceDialogController controller = new StockInstanceDialogController(item_ref, this);
-            FXMLLoader stockDialogLoader = new FXMLLoader(getClass().getResource("create_stock_instance.fxml"));
-            stockDialogLoader.setController(controller);
-            Stage stage = new Stage();
-            controller.preSet(stage);
-            Parent root = stockDialogLoader.load();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setTitle("Add Stock");
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (java.io.IOException e) {
-            System.out.println("Failed to launch dialog: " + e);
-        }
+    public void addMenuAction() {
+        createDialog(new EditMenu(null), "edit_menu.fxml", "Add Menu");
     }
 
-    private void createAddItemToMenuDialog(Item_Ref item_ref) {
+    private void createDialog(CustomDialogInterface controller, String fxml, String title) {
         try {
-            AddToMenuController controller = new AddToMenuController(item_ref, menuList);
-            FXMLLoader menuAddDialogLoader = new FXMLLoader(getClass().getResource("add_to_menu.fxml"));
-            menuAddDialogLoader.setController(controller);
+            FXMLLoader menuEditDialogLoader = new FXMLLoader(getClass().getResource(fxml));
+            menuEditDialogLoader.setController(controller);
             Stage stage = new Stage();
             controller.preSet(stage);
-            Parent root = menuAddDialogLoader.load();
+            Parent root = menuEditDialogLoader.load();
             stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setTitle("Add to Menu");
+            stage.setTitle(title);
             stage.setScene(new Scene(root));
             stage.show();
         } catch (java.io.IOException e) {
@@ -349,6 +332,11 @@ public class StockScreenController implements Initializable {
         descColumn.setMinWidth(500);
         descColumn.setCellValueFactory(new PropertyValueFactory<>("desc"));
         menuTable.getColumns().add(descColumn);
+
+        TableColumn<MenuTableEntry, Button> editBtnColumn = new TableColumn<>();
+        editBtnColumn.setMinWidth(70);
+        editBtnColumn.setCellValueFactory(new PropertyValueFactory<>("viewButton"));
+        menuTable.getColumns().add(editBtnColumn);
     }
 
     private void getObservableItemTableEntryList(ObservableList<ItemTableEntry> items) {
@@ -380,7 +368,7 @@ public class StockScreenController implements Initializable {
         menuEntries.clear();
         for (UUID_Entity entity: menuList) {
             Menu menu = StorageAccess.instance().getMenu(new Menu_Ref(entity));
-            menuEntries.add(new MenuTableEntry(menu));
+            menuEntries.add(new MenuTableEntry(menu, this));
         }
     }
 
@@ -406,7 +394,7 @@ public class StockScreenController implements Initializable {
             this.addStockInstance.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
-                    parent.createAddStockInstanceDialog(item_ref);
+                    parent.createDialog(new StockInstanceDialog(item_ref), "create_stock_instance.fxml", "Add Stock");
                 }
             });
             this.editItem = new Button("Edit Item");
@@ -421,7 +409,7 @@ public class StockScreenController implements Initializable {
             this.addToMenu.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
-                    parent.createAddItemToMenuDialog(item_ref);
+                    parent.createDialog(new AddToMenu(item_ref, parent.menuList), "add_to_menu.fxml", "Add to Menu");
                 }
             });
         }
@@ -474,11 +462,13 @@ public class StockScreenController implements Initializable {
     }
 
     public static class MenuTableEntry {
+        private final Menu_Ref menu_ref;
         private final SimpleStringProperty name;
         private final SimpleStringProperty desc;
         private final Button viewButton;
 
-        private MenuTableEntry(Menu menu){
+        private MenuTableEntry(Menu menu, StockScreenController parent){
+            this.menu_ref = menu;
             name = new SimpleStringProperty(menu.getName());
             desc = new SimpleStringProperty(menu.getDescription());
 
@@ -486,7 +476,7 @@ public class StockScreenController implements Initializable {
             viewButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
-
+                    parent.createDialog(new EditMenu(menu_ref), "edit_menu.fxml", "Edit Menu");
                 }
             });
         }
@@ -494,9 +484,11 @@ public class StockScreenController implements Initializable {
         public String getName() {
             return name.get();
         }
-
         public String getDesc() {
             return desc.get();
+        }
+        public Button getViewButton() {
+            return viewButton;
         }
     }
 

@@ -93,7 +93,7 @@ public class OrderItem {
             this.dependants.add(parent);
             if (new_item_price != null) {
                 Currency temp_price = parent.getPrice();
-                temp_price.addCash(new_item_price.getDollars(), new_item_price.getCents());
+                temp_price.addCash(new_item_price);
                 parent.setPrice(temp_price);
             }
 
@@ -108,9 +108,9 @@ public class OrderItem {
         if (recurse_depth == 0) {
             for (int i = 0; i < qty; i++) {
                 if (new_item_price != null) {
-                    price.addCash(new_item_price.getDollars(), new_item_price.getCents());
+                    price.addCash(new_item_price);
                 } else {
-                    price.addCash(item.getMarkupPrice().getDollars(), item.getMarkupPrice().getCents());
+                    price.addCash(item.getMarkupPrice());
                 }
             }
         }
@@ -147,10 +147,10 @@ public class OrderItem {
         if (is_removed) {
             for (int i = 0; i < qty; i++) {
                 if (price_of_item_to_remove != null) {
-                    price.subCash(price_of_item_to_remove.getDollars(), price_of_item_to_remove.getCents());
+                    price.subCash(price_of_item_to_remove);
                 } else {
                     Item item = StorageAccess.instance().getItem(item_ref);
-                    price.subCash(item.getMarkupPrice().getDollars(), item.getMarkupPrice().getCents());
+                    price.subCash(item.getMarkupPrice());
                 }
             }
             return true;

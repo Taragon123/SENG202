@@ -18,6 +18,8 @@ public class OrderManager {
     private Order cart;
 
     private int localTicketCount = 1;
+    // initialize chas register with $200
+    private CashRegister cashRegister = new CashRegister(200);
 
     /**
      * Whenever a OrderManager is constructed, the local order number must be set to 1.
@@ -118,6 +120,11 @@ public class OrderManager {
 
         // Send order to kitchen via order ticket which is to be printed.
         System.out.println(cart.getChefOrder());
+
+        //Update the cash register
+        cashRegister.addRegisterAmount(this.getCart().getTotalCost());
+        System.out.println(String.format("Cash register: %.2f", cashRegister.getRegisterAmount()));
+
         // Print customers receipt.
         System.out.println(cart.getReceipt());
         localTicketCount += 1;
