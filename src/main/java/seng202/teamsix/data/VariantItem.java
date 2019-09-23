@@ -33,6 +33,13 @@ public class VariantItem extends Item {
     }
 
     /**
+     * Sets variant list
+     * @param varitants item references of possible variants for item
+     */
+    public void setVariants(ArrayList<Item_Ref> varitants) {
+        variantList = varitants;
+    }
+    /**
      * Adds item to variant list.
      * @param itemToAdd to be added to the list.
      */

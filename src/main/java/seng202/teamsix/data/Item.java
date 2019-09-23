@@ -33,42 +33,63 @@ public class Item extends Item_Ref {
     @XmlElement
     private UnitType qty_unit;
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getName() {
         return name;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public String getDescription() {
         return description;
     }
 
+    public void setBasePrice(Currency base_price) {
+        this.base_price = base_price;
+    }
 
     public Currency getBasePrice() {
         return base_price;
+    }
+
+    public void setMarkupPrice(Currency markup_price) {
+        this.markup_price = markup_price;
     }
 
     public Currency getMarkupPrice() {
         return markup_price;
     }
 
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
+    }
+
     public Recipe getRecipe() {
         return recipe;
+    }
+
+    public void setTags(ArrayList<ItemTag_Ref> tags) {
+        this.tags = tags;
     }
 
     public ArrayList<ItemTag_Ref> getTags() {
         return tags;
     }
 
+    public void setQtyUnit(UnitType type) {
+        this.qty_unit = type;
+    }
+
     public UnitType getQtyUnit() {
         return qty_unit;
     }
 
-    public boolean containsTag(ItemTag_Ref itemtag_ref) {
-        return (this.tags.contains(itemtag_ref));
-    }
-
-    Item() {}
+    public Item() {}
 
     /**
      * Constructor class which takes all parameters including recipe.
@@ -178,5 +199,10 @@ public class Item extends Item_Ref {
             this.markup_price == other.markup_price &&
             this.tags == other.tags &&
             this.qty_unit == other.qty_unit);
+    }
+
+    @Override
+    public String toString() {
+        return getName();
     }
 }
