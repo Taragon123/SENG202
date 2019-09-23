@@ -98,6 +98,11 @@ public class StockScreenController implements Initializable {
 //        dialogPopup.hide();
 //    }
 
+    public void exportXML() {
+        //TODO implement this
+        System.out.println("EXPORT");
+    }
+
     /**
      * Switches to past order view
      */
