@@ -14,6 +14,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
@@ -54,8 +55,13 @@ public class StockScreenController implements Initializable {
     private StackPane menuTabPane;
     @FXML
     private StackPane orderTabPane;
+    @FXML
+    private TextField searchBox;
+    @FXML
+    private Button clearSearchBtn;
 
     private FXMLLoader loader;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -175,8 +181,29 @@ public class StockScreenController implements Initializable {
     }
 
     public void searchItems() {
-        //TODO Implement search functionality
+        String searchText = searchBox.getText();
+        DataQuery<Item> query = new DataQuery<>(Item.class);
+        query.sort_by("name", true);
+
+        if (searchText.length() != 0) {
+            String regex = String.format("(?i).*(%s).*", searchText);
+            query.addConstraintRegex("name", regex);
+
+            List<UUID_Entity> itemref_list = query.runQuery();
+            if (itemref_list.size() > 0) {
+                for (int i = 0; i < itemref_list.size(); i++) {
+                    System.out.println(StorageAccess.instance().getItem(new Item_Ref(itemref_list.get(i))).getName());
+                }
+            } else {
+                System.out.println("Found nothing");
+            }
+        }
         refreshData();
+    }
+
+    public void clearSearchBar() {
+        System.out.println("Search cleared");
+        searchBox.setText("");
     }
 
     /**
