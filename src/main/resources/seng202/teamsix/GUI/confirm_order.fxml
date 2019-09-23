@@ -129,12 +129,20 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </GridPane.margin>
                         </Button>
-                        <ToggleButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#eftpos_toggle" text="Eftpos" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3">
+                        <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#add_change" text="Clear" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </GridPane.margin>
+                        </Button>
+                        <ToggleButton maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#eftpos_toggle" text="Eftpos" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <GridPane.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </GridPane.margin>
                            <font>
-                              <Font size="24.0" />
+                              <Font size="22.0" />
                            </font>
                         </ToggleButton>
                      </children>
