@@ -194,6 +194,604 @@
                         <colour>0</colour>
                         <price cents="1550"/>
                     </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem><menuitem>
+                    <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                    <name>Burger Combo</name>
+                    <description>Blows your socks off!</description>
+                    <price cents="1050"/>
+                </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem><menuitem>
+                    <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                    <name>Burger Combo</name>
+                    <description>Blows your socks off!</description>
+                    <price cents="1050"/>
+                </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <name>Burger Combo</name>
+                        <description>Blows your socks off!</description>
+                        <price cents="1050"/>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Chips</name>
+                        <description>Salty</description>
+                        <price cents="1550"/>
+                    </menuitem>
                 </menuitem_list>
                 <name>Lunch Menu</name>
                 <description>Hello I am a menu description</description>
