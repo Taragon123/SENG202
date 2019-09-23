@@ -317,7 +317,6 @@ public class OrderScreenController implements Initializable {
             orderList.add(entry);
         }
         OrderConfirmController orderConfirmController = new OrderConfirmController(orderList);
-
         loadConfirmOrder.setController(orderConfirmController);
         Parent confirmOrder = loadConfirmOrder.load();
         orderConfirmController.setOrderManager(orderManager, this);
@@ -336,15 +335,15 @@ public class OrderScreenController implements Initializable {
         order_list_display.getItems().clear();
         cost_field.setText("Cost: " + orderManager.getCart().getTotalCost());
         confirmButton.setDisable(true);
+
     }
 
     /**
      * Clears all items from the current order display table and removes all items from the order cart
      */
     public void cancel_order() {
-        order_list_display.getItems().clear();
         orderManager.resetCart();
-        cost_field.setText("Cost: " + orderManager.getCart().getTotalCost());
+        clear_order();
         confirmButton.setDisable(true);
     }
 
