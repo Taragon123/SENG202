@@ -36,6 +36,8 @@ public class OrderManager {
         OrderItem new_root = cart.getOrderTree();
         new_root.addToOrder(item_ref, qty, menu_item.getPrice());
         cart.setOrderTree(new_root);
+
+
     }
 
     /**

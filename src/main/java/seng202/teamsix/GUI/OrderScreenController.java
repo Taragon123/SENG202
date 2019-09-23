@@ -233,6 +233,7 @@ public class OrderScreenController implements Initializable {
 
     public void add_to_order(MenuItem menu_item) {
         //OrderManager will add the specified item to cart #backend
+        System.out.println(menu_item.getPrice().getTotalCash());
         orderManager.addToCart(menu_item, 1);
         OrderTableEntry entry = new OrderTableEntry(menu_item, this);
         order_list_display.getItems().add(entry); //add the menu_item to the tableview
@@ -240,8 +241,9 @@ public class OrderScreenController implements Initializable {
     }
 
     public void remove_from_order(MenuItem menu_item, OrderTableEntry entry) {
-        orderManager.removeFromCart(menu_item, 1);
         order_list_display.getItems().remove(entry);
+        orderManager.removeFromCart(menu_item, 1);
+
         cost_field.setText("Cost: " + orderManager.getCart().getTotalCost());
     }
 

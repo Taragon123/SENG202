@@ -91,7 +91,9 @@ public class OrderItem {
             parent.setQuantity(qty);
             this.dependants.add(parent);
             if (new_item_price != null) {
-                parent.setPrice(new_item_price);
+                Currency temp_price = parent.getPrice();
+                temp_price.addCash(new_item_price.getDollars(), new_item_price.getCents());
+                parent.setPrice(temp_price);
             }
 
             if(item instanceof CompositeItem) {
@@ -112,43 +114,50 @@ public class OrderItem {
         }
     }
 
+
+
     /**
      * Removes an Item from the Order, given an Item_Ref item_ref, and an int qty.
      * @param item_ref Refers to the Item which we want to remove from the Order.
      * @param qty The number of items we want to remove from the order.
      * @return True if items are removed (even if qty > already in cart), false if they didn't exist in the first place.
      */
-    public boolean removeFromOrder(Item_Ref item_ref, int qty, Currency item_price) {
+    public boolean removeFromOrder(Item_Ref item_ref, int qty, Currency price_of_item_to_remove) {
         boolean is_removed = false;
-        for (OrderItem orderItem: dependants) {
-            if (orderItem.getItem() == item_ref) {
-                if (orderItem.quantity > qty) {
-                    orderItem.quantity -= qty;
-                    for (int i = 0; i < qty; i++) {
-                        if (item_price != null) {
-                            price.subCash(item_price.getDollars(), item_price.getCents());
-                        } else {
-                            Item item = StorageAccess.instance().getItem(orderItem.getItem());
-                            price.subCash(item.getMarkupPrice().getDollars(), item.getMarkupPrice().getCents());
-                        }
-                    }
+        // check the list of dependants to see if the item is in the list (at the top level)
+        int index = 0;
+        while (index < dependants.size() && !is_removed) {
+            OrderItem order_item = dependants.get(index);
+
+            if (order_item.getItem().equals(item_ref)) {
+                // match found, check if the quantity in the list of dependants is larger than the qty passed through.
+                if (order_item.getQuantity() > qty) {
+                    order_item.setQuantity(order_item.getQuantity() - qty);
                     is_removed = true;
-                } else if (orderItem.quantity == qty) {
-                    for (int j = 0; j < qty; j++) {
-                        if (item_price != null) {
-                            price.subCash(item_price.getDollars(), item_price.getCents());
-                        } else {
-                            Item item = StorageAccess.instance().getItem(orderItem.getItem());
-                            price.subCash(item.getMarkupPrice().getDollars(), item.getMarkupPrice().getCents());
-                        }
-                    }
-                    dependants.remove(orderItem);
+                } else if (order_item.getQuantity() == qty) {
+                    dependants.remove(order_item);
                     is_removed = true;
+
                 }
             }
+            index++;
         }
-        return is_removed;
+        if (is_removed) {
+            for (int i = 0; i < qty; i++) {
+                if (price_of_item_to_remove != null) {
+                    price.subCash(price_of_item_to_remove.getDollars(), price_of_item_to_remove.getCents());
+                } else {
+                    Item item = StorageAccess.instance().getItem(item_ref);
+                    price.subCash(item.getMarkupPrice().getDollars(), item.getMarkupPrice().getCents());
+                }
+            }
+            return true;
+        } else {
+            System.out.println("Something is definitely wrong here");
+            return false;
+        }
     }
+
 
     /*
     public void setTagWithoutCheck(ItemTag_Ref tagRef) {

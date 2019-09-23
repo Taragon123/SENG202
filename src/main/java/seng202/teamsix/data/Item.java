@@ -170,4 +170,13 @@ public class Item extends Item_Ref {
         }
         return result;
     }
+
+    public boolean equals(Item other) {
+        return (this.name == other.name &&
+            this.description == other.description &&
+            this.base_price == other.base_price &&
+            this.markup_price == other.markup_price &&
+            this.tags == other.tags &&
+            this.qty_unit == other.qty_unit);
+    }
 }
