@@ -125,9 +125,6 @@ public class OrderManager {
         cashRegister.addRegisterAmount(getCart().getTotalCost());
         System.out.println(String.format("Cash register: %.2f", cashRegister.getRegisterAmount()));
 
-        //Reset the cart
-        resetCart();
-
         // Print customers receipt.
         printReceipt();
         localTicketCount += 1;
