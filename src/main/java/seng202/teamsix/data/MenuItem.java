@@ -24,7 +24,7 @@ public class MenuItem {
     private Currency price;
     /**
      * Sets the price of item
-     * @param price the price of the item to be displaued to the menu
+     * @param price the price of the item to be displayed to the menu
      */
     public void setPrice(Currency price) {
         this.price = price;

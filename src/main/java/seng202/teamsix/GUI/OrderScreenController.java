@@ -39,9 +39,7 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Name: OrderScreenController.java
@@ -65,7 +63,6 @@ public class OrderScreenController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         order_list_display.setEditable(false);
         cost_field.setText("Cost: " + orderManager.getCashRequired().toString());
         Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
@@ -88,9 +85,11 @@ public class OrderScreenController implements Initializable {
         order_list_display.getColumns().clear();
         order_list_display.getColumns().addAll(itemCol, priceCol, deleteCol);
 
-        Set<Menu_Ref> menu_refSet = StorageAccess.instance().getAllMenus(); //retrieve uuid of all menus
-        for (Menu_Ref menu_ref: menu_refSet) {
+        menu_tabs.getTabs().clear();
 
+        Set<Menu_Ref> menu_refSet = StorageAccess.instance().getAllMenus(); //retrieve uuid of all menus
+        ArrayList<Menu_Ref> menu_refSet1 = new ArrayList<Menu_Ref>();
+        for (Menu_Ref menu_ref: menu_refSet) {
             //Create Tab pane and add it to the list of Tab's (menu_tabs)
             Tab tab = createTab(menu_ref, "-fx-background-color: #576574; -fx-pref-width: 175; -fx-pref-height: 50; -fx-font-size: 20;");
             menu_tabs.getTabs().add(tab);
@@ -248,7 +247,6 @@ public class OrderScreenController implements Initializable {
     }
 
     public void confirm_order() throws IOException {
-        System.out.println("Confirming");
         FXMLLoader loadConfirmOrder = new FXMLLoader(getClass().getResource("confirm_order.fxml"));
         OrderConfirmController orderConfirmController = new OrderConfirmController();
 
