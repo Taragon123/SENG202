@@ -1,23 +1,19 @@
 package seng202.teamsix.GUI;
 
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import seng202.teamsix.data.*;
 import seng202.teamsix.data.Menu;
 import seng202.teamsix.data.MenuItem;
 
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class AddToMenuController implements Initializable {
+public class AddToMenu implements Initializable, CustomDialogInterface {
     private Stage stage;
     private Item_Ref item_ref;
     private final List<UUID_Entity> menus;
@@ -31,7 +27,7 @@ public class AddToMenuController implements Initializable {
     @FXML
     private Label titleLbl;
 
-    public AddToMenuController(Item_Ref item_ref, List<UUID_Entity> menu) {
+    public AddToMenu(Item_Ref item_ref, List<UUID_Entity> menu) {
         this.item_ref = item_ref;
         this.menus = menu;
     }
@@ -39,11 +35,10 @@ public class AddToMenuController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         String name = StorageAccess.instance().getItem(item_ref).getName();
-        titleLbl.setText("Add Stock of " + name);
+        titleLbl.setText("Add \"" + name + "\" to a Menu");
         for (UUID_Entity entity: menus) {
             menuDropdown.getItems().add(StorageAccess.instance().getMenu(new Menu_Ref(entity)).getName());
         }
-
     }
 
     public void cancel() {

@@ -17,9 +17,8 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-public class StockInstanceDialogController implements Initializable {
+public class StockInstanceDialog implements Initializable, CustomDialogInterface {
     private Stage stage;
-    private StockScreenController parent;
     private Item_Ref item_ref;
 
     @FXML
@@ -31,9 +30,8 @@ public class StockInstanceDialogController implements Initializable {
     @FXML
     private Label titleLbl;
 
-    public StockInstanceDialogController(Item_Ref item_ref, StockScreenController parent) {
+    public StockInstanceDialog(Item_Ref item_ref) {
         this.item_ref = item_ref;
-        this.parent = parent;
     }
 
     @Override
@@ -63,7 +61,7 @@ public class StockInstanceDialogController implements Initializable {
 
     private boolean checkInputs() {
         try {
-            double quantity = Double.parseDouble(quantityInput.getText());
+            Double.parseDouble(quantityInput.getText());
             return true;
         } catch (NumberFormatException e) {
             //TODO add error to GUI
