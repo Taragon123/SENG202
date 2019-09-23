@@ -25,7 +25,7 @@ public class CashRegister {
      */
     public CashRegister(int initialAmount) {
         registerAmount = new Currency();
-        registerAmount.setCents(initialAmount);
+        registerAmount.setTotalCash(initialAmount);
     }
 
     /**
