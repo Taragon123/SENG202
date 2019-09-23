@@ -90,6 +90,7 @@ public class OrderScreenController implements Initializable {
             order_list_display.getColumns().clear();
             order_list_display.getColumns().addAll(itemCol, priceCol, deleteCol);
 
+            menu_tabs.getTabs().clear();
             Set<Menu_Ref> menu_refSet = StorageAccess.instance().getAllMenus(); //retrieve uuid of all menus
             for (Menu_Ref menu_ref : menu_refSet) {
 
