@@ -1,10 +1,8 @@
 package seng202.teamsix.GUI;
 
-import com.sun.istack.localization.NullLocalizable;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -18,25 +16,24 @@ import javafx.geometry.VPos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.SwipeEvent;
-import javafx.scene.layout.*;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import seng202.teamsix.data.*;
 import seng202.teamsix.data.MenuItem;
+import seng202.teamsix.data.Menu_Ref;
+import seng202.teamsix.data.StorageAccess;
 import seng202.teamsix.managers.OrderManager;
 
 import java.io.IOException;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -300,6 +297,13 @@ public class OrderScreenController<priavte> implements Initializable {
         System.out.println("Management");
         optionPopup.hide();
         window.setScene(managmentScene);
+    }
+
+    public void saveData() {
+        StorageAccess.instance().saveData();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText("Data Saved!");
+        alert.showAndWait();
     }
 
     public void toggle_options() {
