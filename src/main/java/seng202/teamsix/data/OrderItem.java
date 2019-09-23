@@ -77,7 +77,7 @@ public class OrderItem {
      * @param item_ref Refers to the Item of which we want to add to the order.
      * @param qty      The number of items we want to add too the order.
      */
-    public void addToOrder(Item_Ref item_ref, int qty, Currency new_item_price) {
+    public void addToOrder(Item_Ref item_ref, int qty, Currency new_item_price, int recurse_depth) {
         boolean is_added = false;
         Item item = StorageAccess.instance().getItem(item_ref);
         for (OrderItem orderItem : dependants) {
@@ -99,18 +99,19 @@ public class OrderItem {
 
             if (item instanceof CompositeItem) {
                 for (Item_Ref child_ref : ((CompositeItem) item).getItems()) {
-                    parent.addToOrder(child_ref, 1, null);
+                    parent.addToOrder(child_ref, 1, new_item_price, recurse_depth + 1);
                 }
             } else if (item instanceof VariantItem) {
-                parent.addToOrder(((VariantItem) item).getVariants().get(0), 1, new_item_price);
+                parent.addToOrder(((VariantItem) item).getVariants().get(0), 1, null, recurse_depth + 1);
             }
         }
-
-        for (int i = 0; i < qty; i++) {
-            if (new_item_price != null) {
-                price.addCash(new_item_price.getDollars(), new_item_price.getCents());
-            } else {
-                price.addCash(item.getMarkupPrice().getDollars(), item.getMarkupPrice().getCents());
+        if (recurse_depth == 0) {
+            for (int i = 0; i < qty; i++) {
+                if (new_item_price != null) {
+                    price.addCash(new_item_price.getDollars(), new_item_price.getCents());
+                } else {
+                    price.addCash(item.getMarkupPrice().getDollars(), item.getMarkupPrice().getCents());
+                }
             }
         }
     }
@@ -207,7 +208,7 @@ public class OrderItem {
      * @param current_depth Pass through 0 initially, used to determine how much we need to indent the line.
      * @return A string containing all the dependants and what makes up those dependants in a hierarchical form.
      */
-    public String getCleanOrderRepresentation(int current_depth) {
+    public String getCleanOrderRepresentation(int current_depth, boolean wants_price) {
         Item item = StorageAccess.instance().getItem(getItem());
         String order_name;
         String line = "";
@@ -215,7 +216,11 @@ public class OrderItem {
             order_name = item.getName();
             String spacer = String.join("", Collections.nCopies(current_depth - 1, "  "));
             if (current_depth == 1) {
-                line = spacer + this.getQuantity() + " x " + order_name + "\n";
+                line = spacer + this.getQuantity() + " x " + order_name;
+                if (wants_price) {
+                    line += " @ "+this.getPrice()+" each";
+                }
+                line += "\n";
             } else {
                 line = spacer + "  - " + order_name;
                 if ((item instanceof VariantItem) || (item instanceof CompositeItem)) {
@@ -227,7 +232,7 @@ public class OrderItem {
         StringBuilder output = new StringBuilder();
         output.append(line);
         for (OrderItem dependant : getDependants()) {
-            output.append(dependant.getCleanOrderRepresentation(current_depth + 1));
+            output.append(dependant.getCleanOrderRepresentation(current_depth + 1, wants_price));
         }
         if (!(item instanceof VariantItem) && !(item instanceof CompositeItem)) {
             output.append("\n");

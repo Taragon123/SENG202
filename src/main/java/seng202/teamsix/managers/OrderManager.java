@@ -35,7 +35,7 @@ public class OrderManager {
     public void addToCart(MenuItem menu_item, int qty) {
         Item_Ref item_ref = menu_item.getItem();
         OrderItem new_root = cart.getOrderTree();
-        new_root.addToOrder(item_ref, qty, menu_item.getPrice());
+        new_root.addToOrder(item_ref, qty, menu_item.getPrice(), 0);
         cart.setOrderTree(new_root);
 
 
@@ -117,10 +117,9 @@ public class OrderManager {
         StorageAccess.instance().updateOrder(cart);
 
         // Send order to kitchen via order ticket which is to be printed.
-        printChefOrder();
-
+        System.out.println(cart.getChefOrder());
         // Print customers receipt.
-        printReceipt();
+        System.out.println(cart.getReceipt());
         localTicketCount += 1;
         resetCart();
         cart.localTicketNumber = localTicketCount;
@@ -134,20 +133,4 @@ public class OrderManager {
         return cart.getOrderTree().getDependants();
     }
 
-
-    /**
-     * This method prints the order, just the item names and quantity. Currently prints to the command line.
-     */
-    private void printChefOrder() {
-        // need to find the depth of the order so that we can use the method getOrderTreeRepr() of the class OrderItem.
-
-    }
-
-    /**
-     * This method prints the Order in a receipt format, currently to the command line.
-     */
-    private void printReceipt() {
-        // similar to the printChefOrder, more details.
-
-    }
 }

@@ -12,7 +12,7 @@ public class OrderTest {
         Order order = new Order();
         Item_Ref burger_ref = initialiseItem1(); // returns a reference to a burger item already one of the xml files.
         OrderItem root = order.getOrderTree();
-        root.addToOrder(burger_ref, 25, null); // Each burger has a selling price of $19.99. By multiplying this by 25 we get $499.75.
+        root.addToOrder(burger_ref, 25, null, 0); // Each burger has a selling price of $19.99. By multiplying this by 25 we get $499.75.
         assertEquals(499.75, order.getCashRequired().getTotalCash(), 0.0);
     }
 
@@ -28,7 +28,8 @@ public class OrderTest {
         menu_combo.setItem(combo_ref);
         OrderManager orderManager = new OrderManager();
         orderManager.addToCart(menu_combo, 4);
-        String expected = "4 x Cheese Burger Combo\n" +
+        String expected = "Order Number: 1\n" +
+                        "4 x Cheese Burger Combo\n" +
                         "    - Cheese Burger\n" +
                         "      - Buns\n" +
                         "        - Gluten Free Bun\n" +
