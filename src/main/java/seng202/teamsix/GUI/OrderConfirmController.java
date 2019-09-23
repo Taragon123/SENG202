@@ -49,8 +49,27 @@ public class OrderConfirmController implements Initializable {
     private Popup changePopup = new Popup();
     private ArrayList<OrderTableEntry> orderList;
 
-    public OrderConfirmController(ArrayList<OrderScreenController.OrderTableEntry> orderList) {
+    @FXML
+    private TableView<OrderTableEntry> order_list_display;
+    @FXML
+    private TableColumn<OrderItem, String> itemCol;
+    @FXML
+    private TableColumn<Currency, String> priceCol;
+    @FXML
+    private Label cost_field;
+    @FXML
+    private Label change_field;
+    @FXML
+    private Button confirmButton;
+    @FXML
+    private Label changeDueField;
 
+    /**
+     * Constructor for the OrderConfirmController. Used to pass in table data (OrderTableEntry's) from the main order screen so it
+     * can be replicated in the order confirmation screen.
+     * @param orderList
+     */
+    public OrderConfirmController(ArrayList<OrderScreenController.OrderTableEntry> orderList) {
         this.orderList = new ArrayList<>();
         for (OrderScreenController.OrderTableEntry entry: orderList) {
             MenuItem menu_item = entry.getMenuItem();
@@ -89,25 +108,7 @@ public class OrderConfirmController implements Initializable {
         for (OrderTableEntry entry: orderList) {
             order_list_display.getItems().add(entry);
         }
-
     }
-    @FXML
-    private TableView<OrderTableEntry> order_list_display;
-
-    @FXML
-    private TableColumn<OrderItem, String> itemCol;
-
-    @FXML
-    private TableColumn<Currency, String> priceCol;
-
-    @FXML
-    private Label cost_field;
-
-    @FXML
-    private Label change_field;
-
-    @FXML
-    private Button confirmButton;
 
     /**
      * Adds the amount to the totalChange received from the buyer buy the amount of the calculator button that was clicked on
@@ -130,11 +131,10 @@ public class OrderConfirmController implements Initializable {
     }
 
     /**
-     * If the eftpos toggle is
+     * Called when the eftpos toggle button is clicked
      */
     public void eftpos_toggle() {
         isEftpos = !isEftpos;
-        System.out.println(String.format("Eftpos: %b", isEftpos));
         if (totalChange.compareTo(orderCost) <= 0 || isEftpos) {
             confirmButton.setDisable(false);
         } else {
@@ -142,15 +142,22 @@ public class OrderConfirmController implements Initializable {
         }
     }
 
+    /**
+     * Closes the order confirmation screen, called when the Back button is clicked
+     * @param event Cancel order button click
+     */
     public void cancel_confirm(ActionEvent event) {
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.close();
     }
 
+    /**
+     * Confirms the current order, called when the Confirm button is clicked from the order confirmation
+     * screen
+     * @param event Contirm order button click
+     * @throws IOException
+     */
     public void confirm_order(ActionEvent event) throws IOException {
-//        System.out.println(totalChange.compareTo(orderCost));
-//        System.out.println("confirm");
-//        System.out.println(orderManager.getCartOrderItems());
         orderManager.finaliseOrder();
         orderScreenController.clear_order();
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -160,9 +167,11 @@ public class OrderConfirmController implements Initializable {
         }
     }
 
-    @FXML
-    private Label changeDueField;
-
+    /**
+     * Displays a popup on the main order screen that shows the change due to the customer
+     * @param window
+     * @throws IOException
+     */
     private void displayChange(Stage window) throws IOException {
         Window mainScreen = window.getOwner();
         FXMLLoader loaderOptions = new FXMLLoader(getClass().getResource("change_due.fxml"));
