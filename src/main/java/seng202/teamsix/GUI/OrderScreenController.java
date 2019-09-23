@@ -51,7 +51,7 @@ import java.util.Set;
  */
 
 
-public class OrderScreenController implements Initializable {
+public class OrderScreenController<priavte> implements Initializable {
 
     /**
      * The OrderManager will mainly need to be used in the OrderScreenController.
@@ -67,7 +67,6 @@ public class OrderScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if (!isInit) {
-            System.out.println("intit");
             order_list_display.setEditable(false);
             cost_field.setText("Cost: " + orderManager.getCashRequired().toString());
             Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
@@ -234,6 +233,9 @@ public class OrderScreenController implements Initializable {
     @FXML
     private TableView<OrderTableEntry> order_list_display;
 
+    @FXML
+    private Button confirmButton;
+
 
     public void add_to_order(MenuItem menu_item) {
         //OrderManager will add the specified item to cart #backend
@@ -242,6 +244,7 @@ public class OrderScreenController implements Initializable {
         OrderTableEntry entry = new OrderTableEntry(menu_item, this);
         order_list_display.getItems().add(entry); //add the menu_item to the tableview
         cost_field.setText("Cost: " + orderManager.getCart().getTotalCost());
+        confirmButton.setDisable(false);
     }
 
     public void remove_from_order(MenuItem menu_item, OrderTableEntry entry) {
@@ -249,6 +252,9 @@ public class OrderScreenController implements Initializable {
         orderManager.removeFromCart(menu_item, 1);
 
         cost_field.setText("Cost: " + orderManager.getCart().getTotalCost());
+        if (orderManager.getCart().isEmpty()) {
+            confirmButton.setDisable(true);
+        }
     }
 
     public void confirm_order() throws IOException {
@@ -270,12 +276,14 @@ public class OrderScreenController implements Initializable {
     public void clear_order() {
         order_list_display.getItems().clear();
         cost_field.setText("Cost: " + orderManager.getCart().getTotalCost());
+        confirmButton.setDisable(true);
     }
 
     public void cancel_order() {
         order_list_display.getItems().clear();
         orderManager.resetCart();
         cost_field.setText("Cost: " + orderManager.getCart().getTotalCost());
+        confirmButton.setDisable(true);
     }
 
     public void open_management() {

@@ -27,7 +27,7 @@
    <children>
       <TabPane fx:id="menu_tabs" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #c8d6e5;" tabClosingPolicy="UNAVAILABLE" GridPane.rowIndex="1">
       </TabPane>
-      <Button mnemonicParsing="false" onAction="#confirm_order" prefHeight="60.0" prefWidth="180.0" style="-fx-background-color: #2cFF02; -fx-background-radius: 10; -fx-font-size: 24;" text="Confirm" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+      <Button fx:id="confirmButton" disable="true" mnemonicParsing="false" onAction="#confirm_order" prefHeight="60.0" prefWidth="180.0" style="-fx-background-color: #2cFF02; -fx-background-radius: 10; -fx-font-size: 24;" text="Confirm" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
          <font>
             <Font size="10.0" />
          </font>

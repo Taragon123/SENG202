@@ -76,6 +76,14 @@ public class Order extends Order_Ref{
     }
 
     /**
+     * Returns true only if the current order is empty
+     * @return boolean representation of if the order is empty (has 0 items)
+     */
+    public boolean isEmpty() {
+        return (this.getOrderTree().getDependants().size() == 0);
+    }
+
+    /**
      * A setter for orderTree so that we can add to cart
      * @param new_root The new root which we want to set for the Order object.
      */
