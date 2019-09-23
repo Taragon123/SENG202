@@ -230,7 +230,7 @@ public class OrderItem {
             output.append(dependant.getCleanOrderRepresentation(current_depth + 1));
         }
         if (!(item instanceof VariantItem) && !(item instanceof CompositeItem)) {
-            output.append("" + String.join("", Collections.nCopies(Math.max(current_depth - 1, 0), "   ")) + "\n");
+            output.append("\n");
         }
 
         return output.toString();

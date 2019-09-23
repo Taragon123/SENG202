@@ -36,9 +36,8 @@ public class OrderTest {
                         "        - Meat Patty\n" +
                         "      - Cheese\n" +
                         "    - Drink\n" +
-                        "    - Chips ";
-        System.out.println(orderManager.getCart().getChefOrder());
-        //assertEquals(expected, orderManager.getCart().getChefOrder());
+                        "    - Chips\n\n";
+        assertEquals(expected, orderManager.getCart().getChefOrder());
     }
 
     /**
