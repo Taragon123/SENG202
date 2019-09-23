@@ -255,7 +255,6 @@ public class CreateItemController implements Initializable {
     @FXML
     void cancelClicked(ActionEvent event) {
         controller_window.close();
-        callback.handle(new ActionEvent());
     }
 
     ArrayList<Item_Ref> getSelectedItems() {

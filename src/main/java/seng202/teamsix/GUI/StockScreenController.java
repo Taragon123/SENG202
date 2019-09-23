@@ -143,6 +143,13 @@ public class StockScreenController implements Initializable {
     }
 
     /**
+     * Saves system data
+     */
+    public void saveData() {
+        StorageAccess.instance().saveData();
+    }
+
+    /**
      * Switches to order view
      */
     public void openOrderView() {
