@@ -26,6 +26,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
+/**
+ * Name: OrderScreenController.java
+ * Authors: Andy Clifford, Taran Jennison
+ * Date: 15/09/2019
+ * Last Updated: 24/09/2019, Andy
+ */
+
+/**
+ * OrderConfirmController, used to manage the order confirmation screen of the GUI. Includes a
+ * TableView of the current order so it can still be viewed before confirming the order, and options
+ * for an eftpos or cash transaction. Items can not be added or removed from the confirmation screen.
+ */
 public class OrderConfirmController implements Initializable {
 
     private HashMap<String, Currency> currencyConvert = new HashMap<String, Currency>();
@@ -117,6 +129,9 @@ public class OrderConfirmController implements Initializable {
         }
     }
 
+    /**
+     * If the eftpos toggle is
+     */
     public void eftpos_toggle() {
         isEftpos = !isEftpos;
         System.out.println(String.format("Eftpos: %b", isEftpos));
