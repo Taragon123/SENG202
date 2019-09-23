@@ -51,19 +51,41 @@ import java.util.Set;
  */
 
 
-public class OrderScreenController<priavte> implements Initializable {
+/**
+ * OrderScreen Controller, used to manage the main order screen of the GUI. This includes
+ * a TabPane for each Menu, and a GridPane for each MenuItem within that Menu. a TableView is used
+ * to display the current order. Methods for adding and removing items from the OrderManager's cart
+ * are provided.
+ */
+public class OrderScreenController implements Initializable {
 
     /**
      * The OrderManager will mainly need to be used in the OrderScreenController.
      */
     private OrderManager orderManager;
-
     public Popup optionPopup = new Popup();
     private Stage window;
-    private Scene managmentScene;
+    private Scene managementScene;
     private boolean isPopupInit = false;
     private boolean isInit = false;
 
+    @FXML
+    private Label date_time;
+    @FXML
+    private TabPane menu_tabs;
+    @FXML
+    private Label cost_field;
+    @FXML
+    private TableView<OrderTableEntry> order_list_display;
+    @FXML
+    private Button confirmButton;
+
+
+    /**
+     * Initializes the OrderScreenController i.e. creates a Tab for each MenuItem using helper methods
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if (!isInit) {
@@ -83,7 +105,8 @@ public class OrderScreenController<priavte> implements Initializable {
     }
 
     /**
-     * Initializes the current order TableView i.e. setups the columns, their widths and cell values
+     * Initializes the current order TableView i.e. setups the columns, their widths and cell values,
+     * called from the OrderScreenController initializer
      */
     public void initializeOrderDisplayTable() {
         TableColumn itemCol = new TableColumn<MenuItem, String>("Item");
@@ -108,7 +131,7 @@ public class OrderScreenController<priavte> implements Initializable {
 
     /**
      * Populates the main order screen with Tabs for each menu, and populates each tab with a
-     * GridPane of all the MenuItems within that menu
+     * GridPane of all the MenuItems within that menu, called from the OrderScreenController initializer.
      */
     public void populateGrid() {
         menu_tabs.getTabs().clear();
@@ -145,7 +168,8 @@ public class OrderScreenController<priavte> implements Initializable {
     }
 
     /**
-     * Creates a Button object with text associated with MenuItem reference
+     * Creates a Button object with text associated with MenuItem reference, called from the
+     * OrderScreenController initializer.
      * @param menu_item a reference to a MenuItem (uuid)
      * @return a Button object with text set to the name of the MenuItem and userData set to the reference to that item (uuid)
      */
@@ -181,7 +205,8 @@ public class OrderScreenController<priavte> implements Initializable {
     }
 
     /**
-     * Creates a Tab pane with text set to the name associated with the Menu Reference
+     * Creates a Tab pane with text set to the name associated with the Menu Reference, called
+     * from the OrderScreenController initializer
      * @param menu_ref a reference to a Menu
      * @param style the colour and background options etc. from scenebuilder
      * @return a Tab pane with text set to the name associated with the Menu Reference
@@ -196,14 +221,14 @@ public class OrderScreenController<priavte> implements Initializable {
     }
 
     /**
-     * Creates a GridPane and sets options equal to those in SceneBuilder
+     * Creates a GridPane and sets options equal to those in SceneBuilder, called from the
+     * OrderScreenController initializer
      * @return GridPane object
      */
     private GridPane createGridPane() {
         GridPane grid = new GridPane();
         grid.setHgap(10.0);
         grid.setVgap(10.0);
-        grid.setAlignment(Pos.CENTER);
         grid.setLayoutX(-1.0);
         grid.setLayoutY(1.0);
         grid.setPrefHeight(611.0);
@@ -246,24 +271,9 @@ public class OrderScreenController<priavte> implements Initializable {
         }
     }
 
-    @FXML
-    private Label date_time;
-
-    @FXML
-    private TabPane menu_tabs;
-
-    @FXML
-    private Label cost_field;
-
-    @FXML
-    private TableView<OrderTableEntry> order_list_display;
-
-    @FXML
-    private Button confirmButton;
-
-
     /**
-     * Adds a MenuItem to the current order and adds it to the display
+     * Adds a MenuItem to the current order and adds it to the display, called when a specific
+     * MenuItem button is clicked in the main screen.
      * @param menu_item MenuItem object to be added to the current order
      */
     public void add_to_order(MenuItem menu_item) {
@@ -276,7 +286,8 @@ public class OrderScreenController<priavte> implements Initializable {
     }
 
     /**
-     * Removes a MenuItem to the current order and removes it from the display
+     * Removes a MenuItem to the current order and removes it from the display, called when the delete
+     * button is clicked for a specific item in the order_list_display
      * @param menu_item the MenuItem object to be removed from the current order
      * @param entry the OrderTableEntry to be removed from the display
      */
@@ -291,19 +302,20 @@ public class OrderScreenController<priavte> implements Initializable {
     }
 
     /**
-     * Loads the OrderConfirmation GUI so the current order can be confirmed
+     * Loads the OrderConfirmation GUI so the current order can be confirmed, called when the Confirm
+     * button is clicked
      * @throws IOException
      */
     public void confirm_order() throws IOException {
-        System.out.println("Confirming");
         FXMLLoader loadConfirmOrder = new FXMLLoader(getClass().getResource("confirm_order.fxml"));
 
+        /* Retrieve all the OrderTableEntry's from the order_list_display so they can
+           be passed to the OrderConfirmController */
         ArrayList<OrderTableEntry> orderList = new ArrayList<>();
         for (OrderTableEntry entry: order_list_display.getItems()) {
             orderList.add(entry);
         }
         OrderConfirmController orderConfirmController = new OrderConfirmController(orderList);
-
         loadConfirmOrder.setController(orderConfirmController);
         Parent confirmOrder = loadConfirmOrder.load();
         orderConfirmController.setOrderManager(orderManager, this);
@@ -322,32 +334,31 @@ public class OrderScreenController<priavte> implements Initializable {
         order_list_display.getItems().clear();
         cost_field.setText("Cost: " + orderManager.getCart().getTotalCost());
         confirmButton.setDisable(true);
+
     }
 
     /**
-     * Clears all items from the current order display table and removes all items from the order cart
+     * Clears all items from the current order display table and removes all items from the order cart,
+     * called when the cancel button is clicked from the main order screen
      */
     public void cancel_order() {
-        order_list_display.getItems().clear();
         orderManager.resetCart();
-        cost_field.setText("Cost: " + orderManager.getCart().getTotalCost());
+        clear_order();
         confirmButton.setDisable(true);
     }
 
     /**
-     * Opens the management screen
+     * Opens the management screen, called when the Management button is clicked
      */
     public void open_management() {
-        System.out.println("Management");
         optionPopup.hide();
-        window.setScene(managmentScene);
+        window.setScene(managementScene);
     }
 
     /**
-     * Opens the options popup
+     * Opens the options popup, called when the Options button is clicked
      */
     public void toggle_options() {
-        System.out.println("options");
         if (optionPopup.isShowing()) {
             optionPopup.hide();
         } else {
@@ -358,13 +369,13 @@ public class OrderScreenController<priavte> implements Initializable {
     }
 
     /**
-     * Opens the filters screen
+     * Opens the filters screen, called when the filter button is clicked from the main order screen
      */
-    public void open_filters() { System.out.println("filter"); }
+    public void open_filters() {}
 
     public void preSet(Stage primaryStage, Scene management) {
         window = primaryStage;
-        managmentScene = management;
+        managementScene = management;
     }
 
     public void setOrderManager(OrderManager orderManager1) {
