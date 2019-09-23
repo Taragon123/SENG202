@@ -18,8 +18,8 @@ import javafx.stage.Window;
 import seng202.teamsix.data.*;
 import seng202.teamsix.data.MenuItem;
 import seng202.teamsix.managers.OrderManager;
+import seng202.teamsix.data.Currency;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ import java.util.ResourceBundle;
 
 public class OrderConfirmController implements Initializable {
 
-    private HashMap<String, Integer> currencyConvert = new HashMap<String, Integer>();
+    private HashMap<String, Currency> currencyConvert = new HashMap<String, Currency>();
     private Currency totalChange = new Currency();
     private Currency orderCost = new Currency(); //get order cost
     private boolean isEftpos = false;
@@ -51,16 +51,16 @@ public class OrderConfirmController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         change_field.setText("Change: " + totalChange);
         cost_field.setText("Cost: ");
-        currencyConvert.put("10c", 10);
-        currencyConvert.put("20c", 20);
-        currencyConvert.put("50c", 50);
-        currencyConvert.put("$1", 100);
-        currencyConvert.put("$2", 200);
-        currencyConvert.put("$5", 500);
-        currencyConvert.put("$10", 1000);
-        currencyConvert.put("$20", 2000);
-        currencyConvert.put("$50", 5000);
-        currencyConvert.put("$100", 10000);
+        currencyConvert.put("10c", new Currency(0.1));
+        currencyConvert.put("20c", new Currency(0.2));
+        currencyConvert.put("50c", new Currency(0.5));
+        currencyConvert.put("$1", new Currency(1));
+        currencyConvert.put("$2", new Currency(2));
+        currencyConvert.put("$5", new Currency(5));
+        currencyConvert.put("$10", new Currency(10));
+        currencyConvert.put("$20", new Currency(20));
+        currencyConvert.put("$50", new Currency(50));
+        currencyConvert.put("$100", new Currency(100));
 
         TableColumn itemCol = new TableColumn<MenuItem, String>("Item");
         TableColumn priceCol = new TableColumn<MenuItem, String>("Price");
@@ -107,7 +107,7 @@ public class OrderConfirmController implements Initializable {
             totalChange.setTotalCash(0);
             change_field.setText("Change: " + totalChange);
         } else {
-            totalChange.addCash(0, currencyConvert.get(input));
+            totalChange.addCash(currencyConvert.get(input));
             change_field.setText("Change: " + totalChange);
         }
         if (totalChange.compareTo(orderCost) <= 0 || isEftpos) {
