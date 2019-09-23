@@ -7,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import seng202.teamsix.data.Item_Ref;
 import seng202.teamsix.managers.OrderManager;
 
 import java.io.IOException;
@@ -50,9 +49,6 @@ public class OrderScreenApplication extends Application {
 
         orderController.preSet(primaryStage, managementScene);
         stockController.preSet(primaryStage, orderScene, pastOrderScene);
-
-        CreateItemController itemController = new CreateItemController(new Item_Ref());
-        itemController.createNewWindow();
 
         primaryStage.setTitle("FoodByte");
         primaryStage.setScene(orderScene);

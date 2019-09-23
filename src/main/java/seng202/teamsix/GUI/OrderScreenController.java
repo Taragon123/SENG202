@@ -62,57 +62,62 @@ public class OrderScreenController implements Initializable {
     private Stage window;
     private Scene managmentScene;
     private boolean isPopupInit = false;
+    private boolean isInit = false;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        if (!isInit) {
+            System.out.println("intit");
+            order_list_display.setEditable(false);
+            cost_field.setText("Cost: " + orderManager.getCashRequired().toString());
+            Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy   HH:mm");
+                date_time.setText(LocalDateTime.now().format(formatter));
+            }), new KeyFrame(Duration.seconds(1)));
+            clock.setCycleCount(Animation.INDEFINITE);
+            clock.play();
 
-        order_list_display.setEditable(false);
-        cost_field.setText("Cost: " + orderManager.getCashRequired().toString());
-        Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy   HH:mm");
-            date_time.setText(LocalDateTime.now().format(formatter));
-        }), new KeyFrame(Duration.seconds(1)));
-        clock.setCycleCount(Animation.INDEFINITE);
-        clock.play();
+            TableColumn itemCol = new TableColumn<MenuItem, String>("Item");
+            TableColumn priceCol = new TableColumn<MenuItem, String>("Price");
+            TableColumn deleteCol = new TableColumn<MenuItem, Button>("");
+            itemCol.setMinWidth(190);
+            priceCol.setMinWidth(92);
+            deleteCol.setMaxWidth(75);
 
-        TableColumn itemCol = new TableColumn<MenuItem, String>("Item");
-        TableColumn priceCol = new TableColumn<MenuItem, String>("Price");
-        TableColumn deleteCol = new TableColumn<MenuItem, Button>("");
-        itemCol.setMinWidth(190);
-        priceCol.setMinWidth(92);
-        deleteCol.setMaxWidth(75);
+            itemCol.setCellValueFactory(new PropertyValueFactory("name"));
+            priceCol.setCellValueFactory(new PropertyValueFactory("price"));
+            deleteCol.setCellValueFactory(new PropertyValueFactory("deleteButton"));
+            order_list_display.getColumns().clear();
+            order_list_display.getColumns().addAll(itemCol, priceCol, deleteCol);
 
-        itemCol.setCellValueFactory(new PropertyValueFactory("name"));
-        priceCol.setCellValueFactory(new PropertyValueFactory("price"));
-        deleteCol.setCellValueFactory(new PropertyValueFactory("deleteButton"));
-        order_list_display.getColumns().clear();
-        order_list_display.getColumns().addAll(itemCol, priceCol, deleteCol);
+            menu_tabs.getTabs().clear();
+            Set<Menu_Ref> menu_refSet = StorageAccess.instance().getAllMenus(); //retrieve uuid of all menus
+            for (Menu_Ref menu_ref : menu_refSet) {
 
-        Set<Menu_Ref> menu_refSet = StorageAccess.instance().getAllMenus(); //retrieve uuid of all menus
-        for (Menu_Ref menu_ref: menu_refSet) {
+                //Create Tab pane and add it to the list of Tab's (menu_tabs)
+                Tab tab = createTab(menu_ref, "-fx-background-color: #576574; -fx-pref-width: 175; -fx-pref-height: 50; -fx-font-size: 20;");
+                menu_tabs.getTabs().add(tab);
 
-            //Create Tab pane and add it to the list of Tab's (menu_tabs)
-            Tab tab = createTab(menu_ref, "-fx-background-color: #576574; -fx-pref-width: 175; -fx-pref-height: 50; -fx-font-size: 20;");
-            menu_tabs.getTabs().add(tab);
+                //Create GridPane and set it as the content of the Tab
+                GridPane grid = createGridPane();
+                tab.setContent(grid);
 
-            //Create GridPane and set it as the content of the Tab
-            GridPane grid = createGridPane();
-            tab.setContent(grid);
+                //Set the row and column constraints (this call enables the grid to have 5 columns and 5 rows)
+                int colMax = 5; // the max col number
+                int rowMax = 5; // the max row number
+                setColumnConstraints(grid, colMax);
+                setRowConstraints(grid, rowMax);
 
-            //Set the row and column constraints (this call enables the grid to have 5 columns and 5 rows)
-            int colMax = 5; // the max col number
-            int rowMax = 5; // the max row number
-            setColumnConstraints(grid, colMax);
-            setRowConstraints(grid, rowMax);
-
-            //Now populate buttons with
-            int currIndex = 0;
-            ArrayList<MenuItem> menu_items = StorageAccess.instance().getMenu(menu_ref).getMenuItems();
-            for (MenuItem menu_item : menu_items) {
-                Button button = createButton(menu_item);
-                grid.add(button, currIndex % colMax, currIndex / rowMax);
-                currIndex++;
+                //Now populate buttons with
+                int currIndex = 0;
+                ArrayList<MenuItem> menu_items = StorageAccess.instance().getMenu(menu_ref).getMenuItems();
+                for (MenuItem menu_item : menu_items) {
+                    Button button = createButton(menu_item);
+                    grid.add(button, currIndex % colMax, currIndex / rowMax);
+                    currIndex++;
+                }
             }
+            isInit = true;
         }
     }
 
