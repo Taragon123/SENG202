@@ -44,6 +44,7 @@ public class StockScreenController implements Initializable {
     private ObservableList<OrderTableEntry> orderEntries = FXCollections.observableArrayList();
     private ObservableList<MenuTableEntry> menuEntries = FXCollections.observableArrayList();
 
+
     @FXML
     private StackPane stockTabPane;
     @FXML
@@ -56,7 +57,6 @@ public class StockScreenController implements Initializable {
     private TextField searchBox;
     @FXML
     private Button clearSearchBtn;
-
     private FXMLLoader loader;
 
 
@@ -175,10 +175,26 @@ public class StockScreenController implements Initializable {
      * Refreshes data for tables and searches
      */
     private void refreshData(boolean doSearch) {
+
+
         DataQuery<StockInstance> stockDataQuery = new DataQuery<>(StockInstance.class);
         DataQuery<Item> itemDataQuery = new DataQuery<>(Item.class);
         DataQuery<Order> orderDataQuery = new DataQuery<>(Order.class);
         DataQuery<Menu> menuDataQuery = new DataQuery<>(Menu.class);
+
+        if (doSearch) {
+            String searchText = searchBox.getText();
+
+            stockDataQuery.sort_by("name", true);
+            itemDataQuery.sort_by("name", true);
+
+
+            if (searchText.length() != 0) {
+                String regex = String.format("(?i).*(%s).*", searchText);
+                stockDataQuery.addConstraintRegex("name", regex);
+                itemDataQuery.addConstraintRegex("name", regex);
+            }
+        }
 
         stockList = stockDataQuery.runQuery();
         itemList = itemDataQuery.runQuery();
@@ -192,28 +208,11 @@ public class StockScreenController implements Initializable {
     }
 
     public void searchItems() {
-        String searchText = searchBox.getText();
-        DataQuery<Item> query = new DataQuery<>(Item.class);
-        query.sort_by("name", true);
-
-        if (searchText.length() != 0) {
-            String regex = String.format("(?i).*(%s).*", searchText);
-            query.addConstraintRegex("name", regex);
-
-            List<UUID_Entity> itemref_list = query.runQuery();
-            if (itemref_list.size() > 0) {
-                for (int i = 0; i < itemref_list.size(); i++) {
-                    System.out.println(StorageAccess.instance().getItem(new Item_Ref(itemref_list.get(i))).getName());
-                }
-            } else {
-                System.out.println("Found nothing");
-            }
-        }
-        refreshData();
+        refreshData(true);
     }
 
-    public void clearSearchBar() {
-        System.out.println("Search cleared");
+    public void clearSearch() {
+        refreshData();
         searchBox.setText("");
     }
 

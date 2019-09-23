@@ -44,7 +44,7 @@
                <children>
                   <Button fx:id="searchBtn" alignment="CENTER" cancelButton="true" mnemonicParsing="false" onAction="#searchItems" prefHeight="25.0" prefWidth="133.0" text="Search" GridPane.columnIndex="2" />
                   <TextField fx:id="searchBox" />
-                  <Button fx:id="clearSearchBtn" mnemonicParsing="false" onAction="#clearSearchBar" text="X" GridPane.columnIndex="1" />
+                  <Button fx:id="clearSearchBtn" mnemonicParsing="false" onAction="#clearSearch" text="X" GridPane.columnIndex="1" />
                </children>
                <GridPane.margin>
                   <Insets left="5.0" />
