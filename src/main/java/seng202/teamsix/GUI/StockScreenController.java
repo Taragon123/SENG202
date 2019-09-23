@@ -40,12 +40,12 @@ public class StockScreenController implements Initializable {
     private TableView<StockTableEntry> stockTable = new TableView<>();
     private TableView<ItemTableEntry> itemTable = new TableView<>();
     private TableView<OrderTableEntry> orderTable = new TableView<>();
-    private TableView<MenuItemTableEntry> menuTable = new TableView<>();
+    private TableView<MenuTableEntry> menuTable = new TableView<>();
 
     private ObservableList<StockTableEntry> stockEntries = FXCollections.observableArrayList();
     private ObservableList<ItemTableEntry> itemEntries = FXCollections.observableArrayList();
-    private ObservableList<OrderTableEntry> observableOrders = FXCollections.observableArrayList();
-
+    private ObservableList<OrderTableEntry> orderEntries = FXCollections.observableArrayList();
+    private ObservableList<MenuTableEntry> menuEntries = FXCollections.observableArrayList();
 
     @FXML
     private StackPane stockTabPane;
@@ -167,17 +167,20 @@ public class StockScreenController implements Initializable {
      * Refreshes data for tables
      */
     public void refreshData() {
-        DataQuery<StockInstance> stockQuery = new DataQuery<>(StockInstance.class);
-        DataQuery<Item> itemQuery = new DataQuery<>(Item.class);
-        stockList = stockQuery.runQuery();
-        itemList = itemQuery.runQuery();
-
+        DataQuery<StockInstance> stockDataQuery = new DataQuery<>(StockInstance.class);
+        DataQuery<Item> itemDataQuery = new DataQuery<>(Item.class);
         DataQuery<Order> orderDataQuery = new DataQuery<>(Order.class);
+        DataQuery<Menu> menuDataQuery = new DataQuery<>(Menu.class);
+
+        stockList = stockDataQuery.runQuery();
+        itemList = itemDataQuery.runQuery();
         orderList = orderDataQuery.runQuery();
-        System.out.print(orderList.size());
-        getObservableOrderTableEntryList(observableOrders);
+        menuList = menuDataQuery.runQuery();
+
+        getObservableOrderTableEntryList(orderEntries);
         getObservableStockTableEntryList(stockEntries);
         getObservableItemTableEntryList(itemEntries);
+        getObservableMenuTableEntryList(menuEntries);
     }
 
     public void searchItems() {
@@ -213,6 +216,7 @@ public class StockScreenController implements Initializable {
         createStockTable();
         createItemTable();
         createOrderTable();
+        createMenuTable();
     }
 
     /**
@@ -256,57 +260,81 @@ public class StockScreenController implements Initializable {
 
         //Add name column
         TableColumn<ItemTableEntry, String> nameColumn = new TableColumn<>("Name");
-        nameColumn.setMinWidth(300);
+        nameColumn.setMinWidth(200);
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         itemTable.getColumns().add(nameColumn);
 
         //Add description column
         TableColumn<ItemTableEntry, String> descColumn = new TableColumn<>("Description");
-        descColumn.setMinWidth(100);
+        descColumn.setMinWidth(200);
         descColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
         itemTable.getColumns().add(descColumn);
 
         //Add base price column
         TableColumn<ItemTableEntry, String> basePriceColumn = new TableColumn<>("Cost Price");
-        basePriceColumn.setMinWidth(100);
+        basePriceColumn.setMinWidth(80);
         basePriceColumn.setCellValueFactory(new PropertyValueFactory<>("base_price"));
         itemTable.getColumns().add(basePriceColumn);
 
         //Add markup price column
         TableColumn<ItemTableEntry, String> markUpColumn = new TableColumn<>("Sale Price");
-        markUpColumn.setMinWidth(100);
+        markUpColumn.setMinWidth(80);
         markUpColumn.setCellValueFactory(new PropertyValueFactory<>("markup_price"));
         itemTable.getColumns().add(markUpColumn);
 
         //Add unit column
         TableColumn<ItemTableEntry, String> unitColumn = new TableColumn<>("Qty units");
-        unitColumn.setMinWidth(100);
+        unitColumn.setMinWidth(60);
         unitColumn.setCellValueFactory(new PropertyValueFactory<>("qty_unit"));
         itemTable.getColumns().add(unitColumn);
 
         //Add button column
         TableColumn<ItemTableEntry, Button> addStockButtonColumn = new TableColumn<>();
-        addStockButtonColumn.setMinWidth(100);
+        addStockButtonColumn.setMinWidth(70);
         addStockButtonColumn.setCellValueFactory(new PropertyValueFactory<>("addStockInstance"));
         itemTable.getColumns().add(addStockButtonColumn);
 
         //Add edit button column
         TableColumn<ItemTableEntry, Button> addEditButtonColumn = new TableColumn<>();
-        addEditButtonColumn.setMinWidth(100);
+        addEditButtonColumn.setMinWidth(70);
         addEditButtonColumn.setCellValueFactory(new PropertyValueFactory<>("editItem"));
         itemTable.getColumns().add(addEditButtonColumn);
     }
 
+    /**
+     * Creates past order table
+     */
     public void createOrderTable() {
         orderTable = new TableView<>();
-        orderTable.setItems(observableOrders);
+        orderTable.setItems(orderEntries);
 
         TableColumn<OrderTableEntry, String> dateColumn = new TableColumn<>("Date");
         dateColumn.setMinWidth(100);
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         orderTable.getColumns().add(dateColumn);
 
+        TableColumn<OrderTableEntry, String> priceColumn = new TableColumn<>("Price");
+        priceColumn.setMinWidth(100);
+        priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        orderTable.getColumns().add(priceColumn);
+    }
 
+    /**
+     * Creates menu table
+     */
+    public void createMenuTable() {
+        menuTable = new TableView<>();
+        menuTable.setItems(menuEntries);
+
+        TableColumn<MenuTableEntry, String> nameColumn = new TableColumn<>("Name");
+        nameColumn.setMinWidth(100);
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        menuTable.getColumns().add(nameColumn);
+
+        TableColumn<MenuTableEntry, String> descColumn = new TableColumn<>("Description");
+        descColumn.setMinWidth(500);
+        descColumn.setCellValueFactory(new PropertyValueFactory<>("desc"));
+        menuTable.getColumns().add(descColumn);
     }
 
     private void getObservableItemTableEntryList(ObservableList<ItemTableEntry> items) {
@@ -334,11 +362,11 @@ public class StockScreenController implements Initializable {
         }
     }
 
-    private void getObservableMenuTableEntryList(ObservableList<MenuItem> menuEntries) {
+    private void getObservableMenuTableEntryList(ObservableList<MenuTableEntry> menuEntries) {
         menuEntries.clear();
         for (UUID_Entity entity: menuList) {
             Menu menu = StorageAccess.instance().getMenu(new Menu_Ref(entity));
-//            menuEntries.add(new MenuItemTableEntry(menu));
+            menuEntries.add(new MenuTableEntry(menu));
         }
     }
 
@@ -404,31 +432,39 @@ public class StockScreenController implements Initializable {
 
     public static class OrderTableEntry {
         private final SimpleStringProperty date;
+        private final SimpleStringProperty price;
 
         private OrderTableEntry(Order order) {
             DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
             this.date = new SimpleStringProperty(df.format(order.getTimestamp()));
+            this.price = new SimpleStringProperty(order.getCashRequired().toString());
         }
 
         public String getDate() {
             return date.get();
         }
+        public String getPrice() {
+            return price.get();
+        }
     }
 
-    public static class MenuItemTableEntry {
+    public static class MenuTableEntry {
         private final SimpleStringProperty name;
         private final SimpleStringProperty desc;
+        private final Button viewButton;
 
-        private MenuItemTableEntry(Menu menu){
+        private MenuTableEntry(Menu menu){
             name = new SimpleStringProperty(menu.getName());
             desc = new SimpleStringProperty(menu.getDescription());
+
+            viewButton = new Button("Edit Menu");
         }
 
-        public String getPrice() {
+        public String getName() {
             return name.get();
         }
 
-        public String getname() {
+        public String getDesc() {
             return desc.get();
         }
     }
