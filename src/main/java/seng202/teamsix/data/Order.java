@@ -61,8 +61,10 @@ public class Order extends Order_Ref{
      * This method prints the order, just the item names and quantity. Currently prints to the command line.
      */
     public String getChefOrder() {
-        String returnString = "Order Number: "+localTicketNumber+"\n\nContents:\n";
+        String returnString = "/**********  Chef's Order  **********/\n";
+        returnString += "Order Number: "+localTicketNumber+"\nContents:\n";
         returnString += getOrderTree().getCleanOrderRepresentation(0, false);
+        returnString +=       "/************************************/";
         return returnString;
     }
 
@@ -71,9 +73,12 @@ public class Order extends Order_Ref{
      */
     public String getReceipt() {
         // similar to the printChefOrder, more details.
-        String returnString = "FoodByte\nReceipt\n\nContents:\n";
+        String returnString = "/************  Receipt  *************/\n";
+        returnString += "FoodByte\n"+timestamp+"\n";
+        returnString += "Receipt (Order Number: "+localTicketNumber+")\nContents:\n";
         returnString += getOrderTree().getCleanOrderRepresentation(0, true);
         returnString += "Total Amount Paid: "+getTotalCost()+"\n";
+        returnString +=       "/************************************/";
         return returnString;
     }
 

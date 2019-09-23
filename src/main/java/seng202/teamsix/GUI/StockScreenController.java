@@ -450,7 +450,7 @@ public class StockScreenController implements Initializable {
         private OrderTableEntry(Order order) {
             DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
             this.date = new SimpleStringProperty(df.format(order.getTimestamp()));
-            this.price = new SimpleStringProperty(order.getCashRequired().toString());
+            this.price = new SimpleStringProperty(order.getTotalCost().toString());
         }
 
         public String getDate() {

@@ -115,15 +115,13 @@ public class OrderManager {
     public void finaliseOrder() {
         // Save the order with StorageAccess/
         cart.setTimestamp(new Date());
-        System.out.println(cart.getTimestamp());
         StorageAccess.instance().updateOrder(cart);
 
-        // Send order to kitchen via order ticket which is to be printed.
-        System.out.println(cart.getChefOrder());
+        // Send order to kitchen via order ticket which is to be printed. Also prints a new line.
+        System.out.println(cart.getChefOrder()+"\n");
 
         //Update the cash register
-        cashRegister.addRegisterAmount(this.getCart().getTotalCost());
-        System.out.println(String.format("Cash register: %.2f", cashRegister.getRegisterAmount()));
+        cashRegister.addRegisterAmount(cart.getTotalCost());
 
         // Print customers receipt.
         System.out.println(cart.getReceipt());
