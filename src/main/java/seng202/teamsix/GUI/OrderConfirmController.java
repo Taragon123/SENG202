@@ -159,6 +159,7 @@ public class OrderConfirmController implements Initializable {
      */
     public void confirm_order(ActionEvent event) throws IOException {
         orderManager.finaliseOrder();
+        confirmButton.setDisable(true);
         orderScreenController.clear_order();
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.close();

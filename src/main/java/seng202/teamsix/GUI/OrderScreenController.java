@@ -316,7 +316,6 @@ public class OrderScreenController implements Initializable {
             orderList.add(entry);
         }
         OrderConfirmController orderConfirmController = new OrderConfirmController(orderList);
-
         loadConfirmOrder.setController(orderConfirmController);
         Parent confirmOrder = loadConfirmOrder.load();
         orderConfirmController.setOrderManager(orderManager, this);
@@ -335,6 +334,7 @@ public class OrderScreenController implements Initializable {
         order_list_display.getItems().clear();
         cost_field.setText("Cost: " + orderManager.getCart().getTotalCost());
         confirmButton.setDisable(true);
+
     }
 
     /**
@@ -342,9 +342,8 @@ public class OrderScreenController implements Initializable {
      * called when the cancel button is clicked from the main order screen
      */
     public void cancel_order() {
-        order_list_display.getItems().clear();
         orderManager.resetCart();
-        cost_field.setText("Cost: " + orderManager.getCart().getTotalCost());
+        clear_order();
         confirmButton.setDisable(true);
     }
 

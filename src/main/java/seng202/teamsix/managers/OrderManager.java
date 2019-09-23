@@ -122,7 +122,7 @@ public class OrderManager {
         printChefOrder();
 
         //Update the cash register
-        cashRegister.addRegisterAmount(this.getCart().getTotalCost());
+        cashRegister.addRegisterAmount(getCart().getTotalCost());
         System.out.println(String.format("Cash register: %.2f", cashRegister.getRegisterAmount()));
 
         // Print customers receipt.

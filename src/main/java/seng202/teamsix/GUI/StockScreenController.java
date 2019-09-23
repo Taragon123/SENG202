@@ -74,7 +74,12 @@ public class StockScreenController implements Initializable {
     @FXML
     public void addItemAction(ActionEvent event ) {
         CreateItemController itemController = new CreateItemController(null);
-        itemController.createNewWindow();
+        itemController.createNewWindow(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                refreshData();
+            }
+        });
     }
 
     public void addMenuAction() {
@@ -91,7 +96,8 @@ public class StockScreenController implements Initializable {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle(title);
             stage.setScene(new Scene(root));
-            stage.show();
+            stage.showAndWait();
+            refreshData();
         } catch (java.io.IOException e) {
             System.out.println("Failed to launch dialog: " + e);
         }
@@ -137,6 +143,13 @@ public class StockScreenController implements Initializable {
     }
 
     /**
+     * Saves system data
+     */
+    public void saveData() {
+        StorageAccess.instance().saveData();
+    }
+
+    /**
      * Switches to order view
      */
     public void openOrderView() {
@@ -154,10 +167,14 @@ public class StockScreenController implements Initializable {
         this.orderScene = orderScene;
     }
 
+    private void refreshData() {
+        refreshData(false);
+    }
+
     /**
-     * Refreshes data for tables
+     * Refreshes data for tables and searches
      */
-    public void refreshData() {
+    private void refreshData(boolean doSearch) {
         DataQuery<StockInstance> stockDataQuery = new DataQuery<>(StockInstance.class);
         DataQuery<Item> itemDataQuery = new DataQuery<>(Item.class);
         DataQuery<Order> orderDataQuery = new DataQuery<>(Order.class);
@@ -402,7 +419,12 @@ public class StockScreenController implements Initializable {
                 @Override
                 public void handle(ActionEvent actionEvent) {
                     CreateItemController itemController = new CreateItemController(item_ref);
-                    itemController.createNewWindow();
+                    itemController.createNewWindow(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent actionEvent) {
+                            parent.refreshData();
+                        }
+                    });
                 }
             });
             this.addToMenu = new Button("Add to menu");
@@ -450,7 +472,7 @@ public class StockScreenController implements Initializable {
         private OrderTableEntry(Order order) {
             DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
             this.date = new SimpleStringProperty(df.format(order.getTimestamp()));
-            this.price = new SimpleStringProperty(order.getCashRequired().toString());
+            this.price = new SimpleStringProperty(order.getTotalCost().toString());
         }
 
         public String getDate() {
