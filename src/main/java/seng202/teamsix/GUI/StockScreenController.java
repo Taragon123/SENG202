@@ -97,14 +97,22 @@ public class StockScreenController implements Initializable {
         }
     }
 
-    public void addStockInstance(StockInstance stockInstance) {
-        StorageAccess.instance().updateStockInstance(stockInstance);
-        refreshData();
+    private void createAddItemToMenuDialog(Item_Ref item_ref) {
+        try {
+            AddToMenuController controller = new AddToMenuController(item_ref, menuList);
+            FXMLLoader menuAddDialogLoader = new FXMLLoader(getClass().getResource("add_to_menu.fxml"));
+            menuAddDialogLoader.setController(controller);
+            Stage stage = new Stage();
+            controller.preSet(stage);
+            Parent root = menuAddDialogLoader.load();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Add to Menu");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (java.io.IOException e) {
+            System.out.println("Failed to launch dialog: " + e);
+        }
     }
-
-//    public void closePopup(ActionEvent event) throws IOException {
-//        dialogPopup.hide();
-//    }
 
     /**
      * Export StorageAccess data called from export button
@@ -299,6 +307,12 @@ public class StockScreenController implements Initializable {
         addEditButtonColumn.setMinWidth(70);
         addEditButtonColumn.setCellValueFactory(new PropertyValueFactory<>("editItem"));
         itemTable.getColumns().add(addEditButtonColumn);
+
+        //Add menu button column
+        TableColumn<ItemTableEntry, Button> addToMenuButtonColumn = new TableColumn<>();
+        addToMenuButtonColumn.setMinWidth(70);
+        addToMenuButtonColumn.setCellValueFactory(new PropertyValueFactory<>("addToMenu"));
+        itemTable.getColumns().add(addToMenuButtonColumn);
     }
 
     /**
@@ -379,6 +393,7 @@ public class StockScreenController implements Initializable {
         private final SimpleStringProperty qty_unit;
         private final Button addStockInstance;
         private final Button editItem;
+        private final Button addToMenu;
 
         private ItemTableEntry(Item item, StockScreenController parent) {
             this.item_ref = item;
@@ -400,6 +415,13 @@ public class StockScreenController implements Initializable {
                 public void handle(ActionEvent actionEvent) {
                     CreateItemController itemController = new CreateItemController(item_ref);
                     itemController.createNewWindow();
+                }
+            });
+            this.addToMenu = new Button("Add to menu");
+            this.addToMenu.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    parent.createAddItemToMenuDialog(item_ref);
                 }
             });
         }
@@ -427,6 +449,9 @@ public class StockScreenController implements Initializable {
         }
         public Button getEditItem() {
             return editItem;
+        }
+        public Button getAddToMenu() {
+            return addToMenu;
         }
     }
 
@@ -458,6 +483,12 @@ public class StockScreenController implements Initializable {
             desc = new SimpleStringProperty(menu.getDescription());
 
             viewButton = new Button("Edit Menu");
+            viewButton.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+
+                }
+            });
         }
 
         public String getName() {

@@ -56,7 +56,7 @@ public class StockInstanceDialogController implements Initializable {
             }
             float quantity = Float.parseFloat(quantityInput.getText());
             Date currentDate = new Date();
-            parent.addStockInstance(new StockInstance(currentDate, !notHasExpiryInput.selectedProperty().get(), expiryDate, quantity, item_ref));
+            StorageAccess.instance().updateStockInstance(new StockInstance(currentDate, !notHasExpiryInput.selectedProperty().get(), expiryDate, quantity, item_ref));
             stage.close();
         }
     }
