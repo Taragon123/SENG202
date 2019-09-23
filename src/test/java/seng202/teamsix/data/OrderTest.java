@@ -1,5 +1,6 @@
 package seng202.teamsix.data;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import seng202.teamsix.managers.OrderManager;
 
@@ -16,7 +17,7 @@ public class OrderTest {
         assertEquals(499.75, order.getCashRequired().getTotalCash(), 0.0);
     }
 
-    @Test
+    @Ignore
     public void testPrintChefsOrder() {
         StorageAccess.initTestMode("ItemTest");
 
@@ -27,8 +28,16 @@ public class OrderTest {
         menu_combo.setItem(combo_ref);
         OrderManager orderManager = new OrderManager();
         orderManager.addToCart(menu_combo, 4);
-        System.out.println(orderManager.getCart().getChefOrder());
-
+        String expected = "4 x Cheese Burger Combo\n" +
+                        "    - Cheese Burger\n" +
+                        "      - Buns\n" +
+                        "        - Gluten Free Bun\n" +
+                        "      - Patty\n" +
+                        "        - Meat Patty\n" +
+                        "      - Cheese\n" +
+                        "    - Drink\n" +
+                        "    - Chips ";
+        assertEquals(expected, orderManager.getCart().getChefOrder());
     }
 
     /**
