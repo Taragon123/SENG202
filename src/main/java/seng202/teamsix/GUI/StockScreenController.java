@@ -17,7 +17,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import seng202.teamsix.data.*;
 
 import java.net.URL;
@@ -66,18 +65,8 @@ public class StockScreenController implements Initializable {
 
     @FXML
     public void addItemAction(ActionEvent event ) {
-        try {
-            loader = new FXMLLoader(getClass().getResource("dialogBox.fxml"));
-            Parent root1 = (Parent) loader.load();
-            Stage stage = new Stage();
-            stage.initStyle(StageStyle.DECORATED);
-            stage.setTitle("Item to be Added");
-            stage.setScene(new Scene(root1));
-            //dialogPopup.show();
-            stage.show();
-        } catch (java.io.IOException e) {
-            System.out.println("Failed to launch dialog: " + e);
-        }
+        CreateItemController itemController = new CreateItemController(null);
+        itemController.createNewWindow();
     }
 
     public void createAddStockInstanceDialog(Item_Ref item_ref) {
@@ -100,6 +89,15 @@ public class StockScreenController implements Initializable {
     public void addStockInstance(StockInstance stockInstance) {
         StorageAccess.instance().updateStockInstance(stockInstance);
         refreshData();
+    }
+
+//    public void closePopup(ActionEvent event) throws IOException {
+//        dialogPopup.hide();
+//    }
+
+    public void exportXML() {
+        //TODO implement this
+        System.out.println("EXPORT");
     }
 
     /**
@@ -221,9 +219,15 @@ public class StockScreenController implements Initializable {
 
         //Add button column
         TableColumn<ItemTableEntry, Button> addStockButtonColumn = new TableColumn<>();
-        unitColumn.setMinWidth(100);
-        unitColumn.setCellValueFactory(new PropertyValueFactory<>("addStockInstance"));
+        addStockButtonColumn.setMinWidth(100);
+        addStockButtonColumn.setCellValueFactory(new PropertyValueFactory<>("addStockInstance"));
         itemTable.getColumns().add(addStockButtonColumn);
+
+        //Add edit button column
+        TableColumn<ItemTableEntry, Button> addEditButtonColumn = new TableColumn<>();
+        addEditButtonColumn.setMinWidth(100);
+        addEditButtonColumn.setCellValueFactory(new PropertyValueFactory<>("editItem"));
+        itemTable.getColumns().add(addEditButtonColumn);
     }
 
     public void createOrderTable() {
@@ -275,6 +279,7 @@ public class StockScreenController implements Initializable {
         private final SimpleStringProperty markup_price;
         private final SimpleStringProperty qty_unit;
         private final Button addStockInstance;
+        private final Button editItem;
 
         private ItemTableEntry(Item item, StockScreenController parent) {
             this.item_ref = item;
@@ -283,11 +288,19 @@ public class StockScreenController implements Initializable {
             this.base_price = new SimpleStringProperty(item.getBasePrice().toString());
             this.markup_price = new SimpleStringProperty(item.getMarkupPrice().toString());
             this.qty_unit = new SimpleStringProperty(item.getQtyUnit().toString());
-            this.addStockInstance = new Button("Create new stock item");
+            this.addStockInstance = new Button("Add Stock");
             this.addStockInstance.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
                     parent.createAddStockInstanceDialog(item_ref);
+                }
+            });
+            this.editItem = new Button("Edit Item");
+            this.editItem.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    CreateItemController itemController = new CreateItemController(item_ref);
+                    itemController.createNewWindow();
                 }
             });
         }
@@ -312,6 +325,9 @@ public class StockScreenController implements Initializable {
         }
         public Button getAddStockInstance() {
             return addStockInstance;
+        }
+        public Button getEditItem() {
+            return editItem;
         }
     }
 

@@ -6,10 +6,10 @@
 
 package seng202.teamsix.data;
 
-import com.sun.xml.txw2.annotation.XmlElement;
-
-import javax.xml.bind.annotation.*;
-import java.math.BigDecimal;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
@@ -18,6 +18,10 @@ public class Currency implements Comparable<Currency> {
     private int cents = 0;
 
     public Currency() { }
+
+    public Currency(double value) {
+        setTotalCash(value);
+    }
 
     public Currency(int dollars, int cents) {
         addCash(dollars, cents);

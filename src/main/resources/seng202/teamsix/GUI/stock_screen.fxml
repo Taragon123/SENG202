@@ -83,7 +83,13 @@
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
             <Button fx:id="switchToOrderViewBtn" mnemonicParsing="false" onAction="#openOrderView" text="Switch to Order View" />
-            <Button mnemonicParsing="false" text="Switch to Past Order View" />
+            <Button mnemonicParsing="false" onAction="#openPastOrderView" text="Switch to Past Order View" />
+            <Button mnemonicParsing="false" onAction="#exportXML" prefHeight="25.0" prefWidth="81.0" text="Export XML" />
+         </children>
+      </HBox>
+      <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+         <children>
+            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="81.0" text="Import XML" />
          </children>
       </HBox>
    </children>
