@@ -227,7 +227,7 @@ public class OrderItem {
         StringBuilder output = new StringBuilder();
         output.append(line);
         for (OrderItem dependant : getDependants()) {
-            output.append(dependant.getOrderTreeRepr(current_depth + 1));
+            output.append(dependant.getCleanOrderRepresentation(current_depth + 1));
         }
         output.append("" + String.join("", Collections.nCopies(Math.max(current_depth - 1, 0), "   ")) + "\n");
 
