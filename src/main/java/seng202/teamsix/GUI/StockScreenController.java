@@ -61,6 +61,8 @@ public class StockScreenController implements Initializable {
             Parent root1 = (Parent) loader.load();
             Stage stage = new Stage();
             stage.initStyle(StageStyle.DECORATED);
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.initOwner(window);
             stage.setTitle("Item to be Added");
             stage.setScene(new Scene(root1));
             //dialogPopup.show();
@@ -95,6 +97,11 @@ public class StockScreenController implements Initializable {
 //    public void closePopup(ActionEvent event) throws IOException {
 //        dialogPopup.hide();
 //    }
+
+    public void exportXML() {
+        //TODO implement this
+        System.out.println("EXPORT");
+    }
 
     /**
      * Switches to past order view
