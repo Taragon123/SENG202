@@ -68,12 +68,22 @@
                   <StackPane fx:id="itemTabPane" />
             </content>
           </Tab>
+            <Tab text="Menu">
+              <content>
+                  <StackPane fx:id="menuTabPane" />
+              </content>
+            </Tab>
+            <Tab text="Past Orders">
+              <content>
+                  <StackPane fx:id="orderTabPane" />
+              </content>
+            </Tab>
         </tabs>
       </TabPane>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
             <Button fx:id="switchToOrderViewBtn" mnemonicParsing="false" onAction="#openOrderView" text="Switch to Order View" />
-            <Button mnemonicParsing="false" onAction="#openPastOrderView" text="Switch to Past Order View" />
+            <Button mnemonicParsing="false" text="Switch to Past Order View" />
          </children>
       </HBox>
    </children>

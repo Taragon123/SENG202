@@ -23,7 +23,6 @@ public class OrderScreenApplication extends Application {
         primaryStage.setMinHeight(600);
         OrderScreenController orderController = new OrderScreenController();
         StockScreenController stockController = new StockScreenController();
-        PastOrderScreenController pastOrderController = new PastOrderScreenController();
 
         FXMLLoader loaderOrder = new FXMLLoader(getClass().getResource("main_order_screen.fxml"));
         orderController.setOrderManager(orderManager);
@@ -43,13 +42,8 @@ public class OrderScreenApplication extends Application {
         Parent managementParent = loadManagement.load();
         Scene managementScene = new Scene(managementParent, 1300, 800);
 
-        FXMLLoader loadPastOrderManagement = new FXMLLoader(getClass().getResource("past_order_screen.fxml"));
-        loadPastOrderManagement.setController(pastOrderController);
-        Parent pastOrderManagement = loadPastOrderManagement.load();
-        Scene pastOrderScene = new Scene(pastOrderManagement, 1300, 800);
-
         orderController.preSet(primaryStage, managementScene);
-        stockController.preSet(primaryStage, orderScene, pastOrderScene);
+        stockController.preSet(primaryStage, orderScene);
 
         CreateItemController itemController = new CreateItemController(new Item_Ref());
         itemController.createNewWindow();

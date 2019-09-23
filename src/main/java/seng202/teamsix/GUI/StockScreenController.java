@@ -28,20 +28,29 @@ import java.util.ResourceBundle;
 public class StockScreenController implements Initializable {
     private List<UUID_Entity> stockList;
     private List<UUID_Entity> itemList;
+    private List<UUID_Entity> orderList;
+
     private Stage window;
     private Scene orderScene;
-    private Scene pastOrderScene;
+
     private TableView<StockTableEntry> stockTable = new TableView<>();
     private TableView<ItemTableEntry> itemTable = new TableView<>();
+    private TableView<OrderTableEntry> orderTable = new TableView<>();
+    private TableView<MenuItemTableEntry> menuTable = new TableView<>();
+
     private ObservableList<StockTableEntry> stockEntries = FXCollections.observableArrayList();
     private ObservableList<ItemTableEntry> itemEntries = FXCollections.observableArrayList();
+    private ObservableList<OrderTableEntry> observableOrders = FXCollections.observableArrayList();
+
 
     @FXML
     private StackPane stockTabPane;
     @FXML
     private StackPane itemTabPane;
-
-    //public Popup dialogPopup = new Popup();
+    @FXML
+    private StackPane menuTabPane;
+    @FXML
+    private StackPane orderTabPane;
 
     private FXMLLoader loader;
 
@@ -52,6 +61,7 @@ public class StockScreenController implements Initializable {
         // Add tables to panes in tabs
         itemTabPane.getChildren().addAll(itemTable);
         stockTabPane.getChildren().addAll(stockTable);
+        orderTabPane.getChildren().addAll(orderTable);
     }
 
     @FXML
@@ -92,18 +102,6 @@ public class StockScreenController implements Initializable {
         refreshData();
     }
 
-//    public void closePopup(ActionEvent event) throws IOException {
-//        dialogPopup.hide();
-//    }
-
-    /**
-     * Switches to past order view
-     */
-    public void openPastOrderView() {
-        System.out.println("Past Orders");
-        window.setScene(pastOrderScene);
-    }
-
     /**
      * Switches to order view
      */
@@ -116,12 +114,10 @@ public class StockScreenController implements Initializable {
      * Sets references to other scenes
      * @param primaryStage The root screen
      * @param orderScene Reference to order screen
-     * @param pastOrderScene Reference to past order scene
      */
-    public void preSet(Stage primaryStage, Scene orderScene, Scene pastOrderScene) {
+    public void preSet(Stage primaryStage, Scene orderScene) {
         this.window = primaryStage;
         this.orderScene = orderScene;
-        this.pastOrderScene = pastOrderScene;
     }
 
     /**
@@ -134,6 +130,10 @@ public class StockScreenController implements Initializable {
         itemList = itemQuery.runQuery();
         getObservableStockTableEntryList(stockEntries);
         getObservableItemTableEntryList(itemEntries);
+        DataQuery<Order> orderDataQuery = new DataQuery<>(Order.class);
+        orderList = orderDataQuery.runQuery();
+        System.out.print(orderList.size());
+        getObservableOrderTableEntryList(observableOrders);
     }
 
     public void searchItems() {
@@ -147,6 +147,7 @@ public class StockScreenController implements Initializable {
     private void createPanes() {
         createStockTable();
         createItemTable();
+        createOrderTable();
     }
 
     /**
@@ -225,6 +226,18 @@ public class StockScreenController implements Initializable {
         itemTable.getColumns().add(addStockButtonColumn);
     }
 
+    public void createOrderTable() {
+        orderTable = new TableView<>();
+        orderTable.setItems(observableOrders);
+
+        TableColumn<OrderTableEntry, String> dateColumn = new TableColumn<>("Date");
+        dateColumn.setMinWidth(100);
+        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+        orderTable.getColumns().add(dateColumn);
+
+
+    }
+
     private void getObservableItemTableEntryList(ObservableList<ItemTableEntry> items) {
         items.clear();
         for (UUID_Entity entity: itemList) {
@@ -240,6 +253,18 @@ public class StockScreenController implements Initializable {
             Item item = StorageAccess.instance().getItem(stockInstance.getStockItem());
             stocks.add(new StockTableEntry(stockInstance, item));
         }
+    }
+
+    private void getObservableOrderTableEntryList(ObservableList<OrderTableEntry> orderEntries) {
+        orderEntries.clear();
+        for (UUID_Entity entity: orderList) {
+            Order order = StorageAccess.instance().getOrder(new Order_Ref(entity));
+            orderEntries.add(new OrderTableEntry(order));
+        }
+    }
+
+    private void getObservableMenuTableEntryList(ObservableList<MenuItem> menuList) {
+
     }
 
     public static class ItemTableEntry {
@@ -287,6 +312,37 @@ public class StockScreenController implements Initializable {
         }
         public Button getAddStockInstance() {
             return addStockInstance;
+        }
+    }
+
+    public static class OrderTableEntry {
+        private final SimpleStringProperty date;
+
+        private OrderTableEntry(Order order) {
+            DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
+            this.date = new SimpleStringProperty(df.format(order.getTimestamp()));
+        }
+
+        public String getDate() {
+            return date.get();
+        }
+    }
+
+    public static class MenuItemTableEntry {
+        private final SimpleStringProperty price;
+        private final SimpleStringProperty name;
+
+        private MenuItemTableEntry(MenuItem menuItem){
+            price = new SimpleStringProperty(menuItem.getPrice().toString());
+            name = new SimpleStringProperty(StorageAccess.instance().getItem(menuItem.getItem()).getName());
+        }
+
+        public String getPrice() {
+            return price.get();
+        }
+
+        public String getname() {
+            return name.get();
         }
     }
 
