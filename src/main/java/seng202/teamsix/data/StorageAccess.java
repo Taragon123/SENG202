@@ -9,10 +9,7 @@ package seng202.teamsix.data;
 
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
-import java.util.Dictionary;
-import java.util.List;
 import java.util.Set;
-import java.util.UUID;
 
 /**
  * Storage Access is the template of data storage classes as well as a singleton with a reference to current storage access used.
@@ -116,6 +113,9 @@ public abstract class StorageAccess {
     public abstract Set<StockInstance_Ref> getAllStockInstances();
 
     // Storage methods
-    public abstract void loadData();
+    public abstract boolean loadData();
     public abstract void saveData();
+    public abstract boolean exportData(String filename);
+
+    public abstract boolean importData(String import_filename);
 }

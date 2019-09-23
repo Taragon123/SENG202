@@ -1,15 +1,15 @@
 package seng202.teamsix.data;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.*;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Set;
 
 
 @XmlRootElement(name="data")
@@ -20,23 +20,31 @@ class XML_Cache {
     HashMap<Menu_Ref, Menu> menu_map = new HashMap<>();
     HashMap<Order_Ref, Order> order_map = new HashMap<>();
     HashMap<StockInstance_Ref, StockInstance> stock_instance_map = new HashMap<>();
+
+    public void mergeWith(XML_Cache cache) {
+        this.item_map.putAll(cache.item_map);
+        this.item_tag_map.putAll(cache.item_tag_map);
+        this.menu_map.putAll(cache.menu_map);
+        this.order_map.putAll(cache.order_map);
+        this.stock_instance_map.putAll(cache.stock_instance_map);
+    }
 }
 
 /**
  * Implementation of StorageAccess that uses XML to save and load data
  */
 public class XML_StorageAccess extends StorageAccess{
-    // Filename constants
-    private static final String data_filename = "data.xml";
-
     // Members
-    private String xml_dir;
+    private String data_filename = "data.xml";
 
     private Boolean cache_modified = false;
     private XML_Cache cache = new XML_Cache();
 
     private JAXBContext  contextCache;
 
+    public XML_StorageAccess() throws JAXBException {
+        contextCache = JAXBContext.newInstance(XML_Cache.class);
+    }
 
     /**
      * @param source_dir source directory where xml files should be saved and loaded
@@ -137,20 +145,19 @@ public class XML_StorageAccess extends StorageAccess{
 
     // Generates file if it does not exist
     private void initFileStructure(String source_dir) throws IOException {
-        xml_dir = source_dir;
+        data_filename = source_dir + "/data.xml";
 
         // Create folder if does not exist
-        File dir = new File(xml_dir);
+        File dir = new File(data_filename);
         if (!dir.exists()) {
             // If cannot create folder create exception
             if(!dir.mkdir()) {
-                throw new IOException(String.format("Cannot create xml directory '%s'", xml_dir));
+                throw new IOException(String.format("Cannot create xml directory '%s'", source_dir));
             }
         }
 
         // Create file if does not exist
-        String filename = xml_dir + "/" + data_filename;
-        File file = new File(filename);
+        File file = new File(data_filename);
 
         if(!file.exists()) {
             cache_modified = true;
@@ -160,11 +167,12 @@ public class XML_StorageAccess extends StorageAccess{
 
     /**
      * Loads xml data from file and into cache
+     * @return
      */
-    public void loadData() {
+    @Override
+    public boolean loadData() {
         // Load File
-        String filename = xml_dir + "/" + data_filename;
-        File file = new File(filename);
+        File file = new File(data_filename);
 
         // Load Cache to File
         try {
@@ -173,19 +181,21 @@ public class XML_StorageAccess extends StorageAccess{
         } catch (JAXBException e) {
             // TODO(Connor): Exit program safely
             System.err.println("Could not load xml cache");
+            return false;
         }
+        return true;
     }
 
     /**
      * Saves cache to xml data
      */
+    @Override
     public void saveData() {
         if(cache_modified) {
             cache_modified = false;
 
             // Create File
-            String filename = xml_dir + "/" + data_filename;
-            File file = new File(filename);
+            File file = new File(data_filename);
 
             // Write Cache to File
             try {
@@ -196,6 +206,60 @@ public class XML_StorageAccess extends StorageAccess{
                 System.err.println("Could not save xml cache");
             }
         }
+    }
+
+
+    /**
+     * Exports data to xml file
+     * @param filename destination of xml file
+     * @return true on success
+     */
+    @Override
+    public boolean exportData(String filename) {
+        // Create File
+        File file = new File(filename);
+
+        // Write Cache to File
+        try {
+            Marshaller m = contextCache.createMarshaller();
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            m.marshal(cache, file);
+        } catch (JAXBException e) {
+            System.err.println("Could not export xml file");
+            return false;
+        }
+
+        return true;
+    }
+
+
+    /**
+     * Combines external xml files into this storage access
+     * @param import_filename filename of xml file you want to import
+     * @return true on success
+     */
+    @Override
+    public boolean importData(String import_filename) {
+        // Create imported StorageAccess
+        XML_StorageAccess import_storage = null;
+        try {
+            import_storage = new XML_StorageAccess();
+        } catch (JAXBException e) {
+            System.err.println("Could not initialise JAXB for file import");
+            return false;
+        }
+
+        // Load data into storage access
+        import_storage.data_filename = import_filename;
+        if(!import_storage.loadData()) {
+            System.err.println("Could not load contents of xml file for import");
+            return false;
+        }
+
+        // Combine with this Storage
+        cache.mergeWith(import_storage.cache);
+
+        return true;
     }
 
 }
