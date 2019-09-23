@@ -127,7 +127,7 @@ public class OrderManager {
 
         //Reset the cart
         resetCart();
-        
+
         // Print customers receipt.
         printReceipt();
         localTicketCount += 1;

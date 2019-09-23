@@ -65,7 +65,7 @@ public class OrderScreenController implements Initializable {
     private OrderManager orderManager;
     public Popup optionPopup = new Popup();
     private Stage window;
-    private Scene managmentScene;
+    private Scene managementScene;
     private boolean isPopupInit = false;
     private boolean isInit = false;
 
@@ -307,7 +307,6 @@ public class OrderScreenController implements Initializable {
      * @throws IOException
      */
     public void confirm_order() throws IOException {
-        System.out.println("Confirming");
         FXMLLoader loadConfirmOrder = new FXMLLoader(getClass().getResource("confirm_order.fxml"));
 
         /* Retrieve all the OrderTableEntry's from the order_list_display so they can
@@ -339,7 +338,8 @@ public class OrderScreenController implements Initializable {
     }
 
     /**
-     * Clears all items from the current order display table and removes all items from the order cart
+     * Clears all items from the current order display table and removes all items from the order cart,
+     * called when the cancel button is clicked from the main order screen
      */
     public void cancel_order() {
         orderManager.resetCart();
@@ -351,16 +351,14 @@ public class OrderScreenController implements Initializable {
      * Opens the management screen, called when the Management button is clicked
      */
     public void open_management() {
-        System.out.println("Management");
         optionPopup.hide();
-        window.setScene(managmentScene);
+        window.setScene(managementScene);
     }
 
     /**
      * Opens the options popup, called when the Options button is clicked
      */
     public void toggle_options() {
-        System.out.println("options");
         if (optionPopup.isShowing()) {
             optionPopup.hide();
         } else {
@@ -371,13 +369,13 @@ public class OrderScreenController implements Initializable {
     }
 
     /**
-     * Opens the filters screen
+     * Opens the filters screen, called when the filter button is clicked from the main order screen
      */
-    public void open_filters() { System.out.println("filter"); }
+    public void open_filters() {}
 
     public void preSet(Stage primaryStage, Scene management) {
         window = primaryStage;
-        managmentScene = management;
+        managementScene = management;
     }
 
     public void setOrderManager(OrderManager orderManager1) {
