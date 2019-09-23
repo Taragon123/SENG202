@@ -10,6 +10,7 @@ package seng202.teamsix.managers;
 
 import seng202.teamsix.data.*;
 
+import java.util.Date;
 import java.util.List;
 
 public class OrderManager {
@@ -111,6 +112,8 @@ public class OrderManager {
      */
     public void finaliseOrder() {
         // Save the order with StorageAccess/
+        cart.setTimestamp(new Date());
+        System.out.println(cart.getTimestamp());
         StorageAccess.instance().updateOrder(cart);
 
         // Send order to kitchen via order ticket which is to be printed.
@@ -137,6 +140,7 @@ public class OrderManager {
      */
     private void printChefOrder() {
         // need to find the depth of the order so that we can use the method getOrderTreeRepr() of the class OrderItem.
+
     }
 
     /**

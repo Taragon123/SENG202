@@ -6,10 +6,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -30,7 +27,7 @@
     <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="524.0" vgrow="ALWAYS" />
   </rowConstraints>
    <children>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Create Item">
+      <Text fx:id="label_title" strokeType="OUTSIDE" strokeWidth="0.0" text="Create Item">
          <font>
             <Font name="System Bold" size="48.0" />
          </font>
@@ -44,7 +41,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" style="-fx-border-width: 0-0-0-0;" GridPane.columnIndex="1">
+            <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" style="-fx-box-border: transparent;" GridPane.columnIndex="1">
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="347.0" prefWidth="448.0">
                      <children>
@@ -62,18 +59,11 @@
                                     <Font size="19.0" />
                                  </font>
                               </Label>
-                              <TableView fx:id="table_selected_items" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="164.0" prefWidth="403.0" GridPane.rowIndex="1">
-                                <columns>
-                                  <TableColumn editable="false" prefWidth="324.0" text="Name" />
-                                  <TableColumn editable="false" maxWidth="1.7976931348623157E308" prefWidth="77.0" resizable="false" sortable="false" />
-                                </columns>
+                              <ListView fx:id="listview_selected_items" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                                  <GridPane.margin>
                                     <Insets bottom="10.0" />
                                  </GridPane.margin>
-                                 <columnResizePolicy>
-                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                 </columnResizePolicy>
-                              </TableView>
+                              </ListView>
                            </children>
                         </GridPane>
                      </children>
@@ -89,19 +79,36 @@
                             <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="369.0" vgrow="ALWAYS" />
                           </rowConstraints>
                            <children>
-                              <TextField fx:id="textfield_search_items" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="25.0" prefWidth="438.0" promptText="Search Ingredients" GridPane.vgrow="NEVER">
+                              <HBox GridPane.vgrow="NEVER">
                                  <GridPane.margin>
                                     <Insets />
-                                 </GridPane.margin></TextField>
-                              <TableView fx:id="table_searchable_items" prefHeight="230.0" prefWidth="438.0" GridPane.rowIndex="1">
-                                <columns>
-                                  <TableColumn fx:id="tablecol_itemname_search" editable="false" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="322.0" resizable="false" sortable="false" text="Name" />
-                                    <TableColumn fx:id="tablecol_item_add" editable="false" maxWidth="331.0" minWidth="-Infinity" prefWidth="84.0" resizable="false" sortable="false" />
-                                </columns>
-                                 <columnResizePolicy>
-                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                 </columnResizePolicy>
-                              </TableView>
+                                 </GridPane.margin>
+                                 <children>
+                                    <TextField fx:id="textfield_search_items" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="25.0" promptText="Search Ingredients" HBox.hgrow="ALWAYS">
+                                       <HBox.margin>
+                                          <Insets right="10.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                    <Button mnemonicParsing="false" onAction="#addItemClicked" text=" ▲ " textAlignment="CENTER">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets right="5.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button mnemonicParsing="false" onAction="#removeItemClicked" text=" ▼ ">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <ListView fx:id="listview_item_search" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+                                 <GridPane.margin>
+                                    <Insets bottom="10.0" />
+                                 </GridPane.margin>
+                              </ListView>
                            </children>
                         </GridPane>
                      </children>
@@ -115,11 +122,12 @@
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="107.0" vgrow="ALWAYS" />
-                <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="147.0" vgrow="ALWAYS" />
+                <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="114.0" vgrow="ALWAYS" />
+                <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="131.0" vgrow="ALWAYS" />
                   <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="185.0" vgrow="ALWAYS" />
-                  <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="70.0" minHeight="70.0" prefHeight="70.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="62.0" minHeight="50.0" prefHeight="62.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="50.0" minHeight="24.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="89.0" minHeight="66.0" prefHeight="66.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
                   <VBox prefHeight="200.0" prefWidth="100.0">
@@ -199,12 +207,15 @@
                         </Label>
                         <HBox maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="100.0">
                            <children>
-                              <TextField fx:id="textfield_wholesale" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="26.0" HBox.hgrow="NEVER" />
                               <Label text=" $">
                                  <font>
-                                    <Font size="18.0" />
+                                    <Font size="19.0" />
                                  </font>
+                                 <HBox.margin>
+                                    <Insets right="5.0" />
+                                 </HBox.margin>
                               </Label>
+                              <TextField fx:id="textfield_wholesale" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="26.0" HBox.hgrow="NEVER" />
                            </children>
                            <padding>
                               <Insets right="20.0" />
@@ -223,12 +234,15 @@
                               </Label>
                               <HBox maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="100.0">
                                  <children>
-                                    <TextField fx:id="textfield_retail" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="26.0" HBox.hgrow="NEVER" />
                                     <Label text=" $">
                                        <font>
-                                          <Font size="18.0" />
+                                          <Font size="19.0" />
                                        </font>
+                                       <HBox.margin>
+                                          <Insets right="5.0" />
+                                       </HBox.margin>
                                     </Label>
+                                    <TextField fx:id="textfield_retail" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="26.0" HBox.hgrow="NEVER" />
                                  </children>
                                  <padding>
                                     <Insets right="20.0" />
@@ -238,7 +252,7 @@
                         </VBox>
                      </children>
                   </VBox>
-                  <Button fx:id="button_cancel" alignment="BOTTOM_LEFT" cancelButton="true" contentDisplay="BOTTOM" mnemonicParsing="false" text="Cancel" GridPane.rowIndex="5">
+                  <Button fx:id="button_cancel" alignment="BOTTOM_LEFT" cancelButton="true" contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#cancelClicked" text="Cancel" GridPane.rowIndex="6">
                      <GridPane.margin>
                         <Insets right="20.0" />
                      </GridPane.margin>
@@ -246,7 +260,7 @@
                         <Font size="17.0" />
                      </font>
                   </Button>
-                  <Button fx:id="button_confirm" defaultButton="true" mnemonicParsing="false" text="Confirm" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
+                  <Button fx:id="button_confirm" defaultButton="true" mnemonicParsing="false" onAction="#confirmClicked" text="Confirm" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
                      <GridPane.margin>
                         <Insets left="20.0" right="20.0" />
                      </GridPane.margin>
@@ -264,16 +278,14 @@
                               <Font size="15.0" />
                            </font>
                         </Label>
-                        <ScrollPane hbarPolicy="NEVER">
-                           <content>
-                              <ListView fx:id="listview_tags" minHeight="-Infinity" minWidth="-Infinity" prefHeight="134.0" prefWidth="585.0" />
-                           </content>
-                           <VBox.margin>
-                              <Insets bottom="20.0" />
-                           </VBox.margin>
-                        </ScrollPane>
+                        <ListView fx:id="listview_tags" minHeight="-Infinity" minWidth="-Infinity" prefHeight="134.0" prefWidth="585.0" />
                      </children>
                   </VBox>
+                  <Label fx:id="label_errormessage" textFill="RED" GridPane.columnSpan="2" GridPane.rowIndex="5">
+                     <font>
+                        <Font name="System Bold Italic" size="17.0" />
+                     </font>
+                  </Label>
                </children>
             </GridPane>
          </children>

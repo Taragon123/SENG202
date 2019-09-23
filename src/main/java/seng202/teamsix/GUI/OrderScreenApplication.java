@@ -7,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import seng202.teamsix.data.Item_Ref;
 import seng202.teamsix.managers.OrderManager;
 
 import java.io.IOException;
@@ -23,7 +22,6 @@ public class OrderScreenApplication extends Application {
         primaryStage.setMinHeight(600);
         OrderScreenController orderController = new OrderScreenController();
         StockScreenController stockController = new StockScreenController();
-        PastOrderScreenController pastOrderController = new PastOrderScreenController();
 
         FXMLLoader loaderOrder = new FXMLLoader(getClass().getResource("main_order_screen.fxml"));
         orderController.setOrderManager(orderManager);
@@ -43,16 +41,8 @@ public class OrderScreenApplication extends Application {
         Parent managementParent = loadManagement.load();
         Scene managementScene = new Scene(managementParent, 1300, 800);
 
-        FXMLLoader loadPastOrderManagement = new FXMLLoader(getClass().getResource("past_order_screen.fxml"));
-        loadPastOrderManagement.setController(pastOrderController);
-        Parent pastOrderManagement = loadPastOrderManagement.load();
-        Scene pastOrderScene = new Scene(pastOrderManagement, 1300, 800);
-
         orderController.preSet(primaryStage, managementScene);
-        stockController.preSet(primaryStage, orderScene, pastOrderScene);
-
-        CreateItemController itemController = new CreateItemController(new Item_Ref());
-        itemController.createNewWindow();
+        stockController.preSet(primaryStage, orderScene);
 
         primaryStage.setTitle("FoodByte");
         primaryStage.setScene(orderScene);

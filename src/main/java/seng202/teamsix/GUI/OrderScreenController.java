@@ -89,6 +89,7 @@ public class OrderScreenController<priavte> implements Initializable {
             order_list_display.getColumns().clear();
             order_list_display.getColumns().addAll(itemCol, priceCol, deleteCol);
 
+            menu_tabs.getTabs().clear();
             Set<Menu_Ref> menu_refSet = StorageAccess.instance().getAllMenus(); //retrieve uuid of all menus
             for (Menu_Ref menu_ref : menu_refSet) {
 
@@ -239,7 +240,6 @@ public class OrderScreenController<priavte> implements Initializable {
 
     public void add_to_order(MenuItem menu_item) {
         //OrderManager will add the specified item to cart #backend
-        System.out.println(menu_item.getPrice().getTotalCash());
         orderManager.addToCart(menu_item, 1);
         OrderTableEntry entry = new OrderTableEntry(menu_item, this);
         order_list_display.getItems().add(entry); //add the menu_item to the tableview

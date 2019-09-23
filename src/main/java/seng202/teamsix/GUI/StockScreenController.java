@@ -17,7 +17,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import seng202.teamsix.data.*;
 
 import java.net.URL;
@@ -28,20 +27,29 @@ import java.util.ResourceBundle;
 public class StockScreenController implements Initializable {
     private List<UUID_Entity> stockList;
     private List<UUID_Entity> itemList;
+    private List<UUID_Entity> orderList;
+
     private Stage window;
     private Scene orderScene;
-    private Scene pastOrderScene;
+
     private TableView<StockTableEntry> stockTable = new TableView<>();
     private TableView<ItemTableEntry> itemTable = new TableView<>();
+    private TableView<OrderTableEntry> orderTable = new TableView<>();
+    private TableView<MenuItemTableEntry> menuTable = new TableView<>();
+
     private ObservableList<StockTableEntry> stockEntries = FXCollections.observableArrayList();
     private ObservableList<ItemTableEntry> itemEntries = FXCollections.observableArrayList();
+    private ObservableList<OrderTableEntry> observableOrders = FXCollections.observableArrayList();
+
 
     @FXML
     private StackPane stockTabPane;
     @FXML
     private StackPane itemTabPane;
-
-    //public Popup dialogPopup = new Popup();
+    @FXML
+    private StackPane menuTabPane;
+    @FXML
+    private StackPane orderTabPane;
 
     private FXMLLoader loader;
 
@@ -52,24 +60,13 @@ public class StockScreenController implements Initializable {
         // Add tables to panes in tabs
         itemTabPane.getChildren().addAll(itemTable);
         stockTabPane.getChildren().addAll(stockTable);
+        orderTabPane.getChildren().addAll(orderTable);
     }
 
     @FXML
     public void addItemAction(ActionEvent event ) {
-        try {
-            loader = new FXMLLoader(getClass().getResource("dialogBox.fxml"));
-            Parent root1 = (Parent) loader.load();
-            Stage stage = new Stage();
-            stage.initStyle(StageStyle.DECORATED);
-            stage.initModality(Modality.WINDOW_MODAL);
-            stage.initOwner(window);
-            stage.setTitle("Item to be Added");
-            stage.setScene(new Scene(root1));
-            //dialogPopup.show();
-            stage.show();
-        } catch (java.io.IOException e) {
-            System.out.println("Failed to launch dialog: " + e);
-        }
+        CreateItemController itemController = new CreateItemController(null);
+        itemController.createNewWindow();
     }
 
     public void createAddStockInstanceDialog(Item_Ref item_ref) {
@@ -104,14 +101,6 @@ public class StockScreenController implements Initializable {
     }
 
     /**
-     * Switches to past order view
-     */
-    public void openPastOrderView() {
-        System.out.println("Past Orders");
-        window.setScene(pastOrderScene);
-    }
-
-    /**
      * Switches to order view
      */
     public void openOrderView() {
@@ -123,12 +112,10 @@ public class StockScreenController implements Initializable {
      * Sets references to other scenes
      * @param primaryStage The root screen
      * @param orderScene Reference to order screen
-     * @param pastOrderScene Reference to past order scene
      */
-    public void preSet(Stage primaryStage, Scene orderScene, Scene pastOrderScene) {
+    public void preSet(Stage primaryStage, Scene orderScene) {
         this.window = primaryStage;
         this.orderScene = orderScene;
-        this.pastOrderScene = pastOrderScene;
     }
 
     /**
@@ -141,6 +128,10 @@ public class StockScreenController implements Initializable {
         itemList = itemQuery.runQuery();
         getObservableStockTableEntryList(stockEntries);
         getObservableItemTableEntryList(itemEntries);
+        DataQuery<Order> orderDataQuery = new DataQuery<>(Order.class);
+        orderList = orderDataQuery.runQuery();
+        System.out.print(orderList.size());
+        getObservableOrderTableEntryList(observableOrders);
     }
 
     public void searchItems() {
@@ -154,6 +145,7 @@ public class StockScreenController implements Initializable {
     private void createPanes() {
         createStockTable();
         createItemTable();
+        createOrderTable();
     }
 
     /**
@@ -227,9 +219,27 @@ public class StockScreenController implements Initializable {
 
         //Add button column
         TableColumn<ItemTableEntry, Button> addStockButtonColumn = new TableColumn<>();
-        unitColumn.setMinWidth(100);
-        unitColumn.setCellValueFactory(new PropertyValueFactory<>("addStockInstance"));
+        addStockButtonColumn.setMinWidth(100);
+        addStockButtonColumn.setCellValueFactory(new PropertyValueFactory<>("addStockInstance"));
         itemTable.getColumns().add(addStockButtonColumn);
+
+        //Add edit button column
+        TableColumn<ItemTableEntry, Button> addEditButtonColumn = new TableColumn<>();
+        addEditButtonColumn.setMinWidth(100);
+        addEditButtonColumn.setCellValueFactory(new PropertyValueFactory<>("editItem"));
+        itemTable.getColumns().add(addEditButtonColumn);
+    }
+
+    public void createOrderTable() {
+        orderTable = new TableView<>();
+        orderTable.setItems(observableOrders);
+
+        TableColumn<OrderTableEntry, String> dateColumn = new TableColumn<>("Date");
+        dateColumn.setMinWidth(100);
+        dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+        orderTable.getColumns().add(dateColumn);
+
+
     }
 
     private void getObservableItemTableEntryList(ObservableList<ItemTableEntry> items) {
@@ -249,6 +259,18 @@ public class StockScreenController implements Initializable {
         }
     }
 
+    private void getObservableOrderTableEntryList(ObservableList<OrderTableEntry> orderEntries) {
+        orderEntries.clear();
+        for (UUID_Entity entity: orderList) {
+            Order order = StorageAccess.instance().getOrder(new Order_Ref(entity));
+            orderEntries.add(new OrderTableEntry(order));
+        }
+    }
+
+    private void getObservableMenuTableEntryList(ObservableList<MenuItem> menuList) {
+
+    }
+
     public static class ItemTableEntry {
         private final Item_Ref item_ref;
         private final SimpleStringProperty name;
@@ -257,6 +279,7 @@ public class StockScreenController implements Initializable {
         private final SimpleStringProperty markup_price;
         private final SimpleStringProperty qty_unit;
         private final Button addStockInstance;
+        private final Button editItem;
 
         private ItemTableEntry(Item item, StockScreenController parent) {
             this.item_ref = item;
@@ -265,11 +288,19 @@ public class StockScreenController implements Initializable {
             this.base_price = new SimpleStringProperty(item.getBasePrice().toString());
             this.markup_price = new SimpleStringProperty(item.getMarkupPrice().toString());
             this.qty_unit = new SimpleStringProperty(item.getQtyUnit().toString());
-            this.addStockInstance = new Button("Create new stock item");
+            this.addStockInstance = new Button("Add Stock");
             this.addStockInstance.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
                     parent.createAddStockInstanceDialog(item_ref);
+                }
+            });
+            this.editItem = new Button("Edit Item");
+            this.editItem.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    CreateItemController itemController = new CreateItemController(item_ref);
+                    itemController.createNewWindow();
                 }
             });
         }
@@ -294,6 +325,40 @@ public class StockScreenController implements Initializable {
         }
         public Button getAddStockInstance() {
             return addStockInstance;
+        }
+        public Button getEditItem() {
+            return editItem;
+        }
+    }
+
+    public static class OrderTableEntry {
+        private final SimpleStringProperty date;
+
+        private OrderTableEntry(Order order) {
+            DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
+            this.date = new SimpleStringProperty(df.format(order.getTimestamp()));
+        }
+
+        public String getDate() {
+            return date.get();
+        }
+    }
+
+    public static class MenuItemTableEntry {
+        private final SimpleStringProperty price;
+        private final SimpleStringProperty name;
+
+        private MenuItemTableEntry(MenuItem menuItem){
+            price = new SimpleStringProperty(menuItem.getPrice().toString());
+            name = new SimpleStringProperty(StorageAccess.instance().getItem(menuItem.getItem()).getName());
+        }
+
+        public String getPrice() {
+            return price.get();
+        }
+
+        public String getname() {
+            return name.get();
         }
     }
 
