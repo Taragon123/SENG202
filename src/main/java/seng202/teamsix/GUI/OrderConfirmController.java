@@ -179,7 +179,7 @@ public class OrderConfirmController implements Initializable {
         Parent pop = loaderOptions.load();
         changePopup.getContent().add(pop);
         changePopup.setAutoHide(true);
-        changeDueField.setText(String.format("$%.2f",(float) orderCost.compareTo(totalChange)/100));
+        changeDueField.setText(String.format("$%.1f0",(float) orderCost.compareTo(totalChange)/100));
         Double centreHeight = mainScreen.getHeight()/2 - 250;
         Double centreWidth = mainScreen.getWidth()/2 - 270;
         changePopup.show(mainScreen, mainScreen.getX()+centreWidth, mainScreen.getY()+centreHeight);
