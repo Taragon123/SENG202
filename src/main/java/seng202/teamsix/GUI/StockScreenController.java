@@ -25,14 +25,17 @@ import java.text.DateFormat;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * StockScreenController manages the elements in the stock management screen
+ */
 public class StockScreenController implements Initializable {
     private List<UUID_Entity> stockList;
     private List<UUID_Entity> itemList;
     private List<UUID_Entity> orderList;
     private List<UUID_Entity> menuList;
 
+    private OrderScreenApplication parent;
     private Stage window;
-    private Scene orderScene;
 
     private TableView<StockTableEntry> stockTable = new TableView<>();
     private TableView<ItemTableEntry> itemTable = new TableView<>();
@@ -59,10 +62,13 @@ public class StockScreenController implements Initializable {
 
     private FXMLLoader loader;
 
-
+    /**
+     * Initialise the GUI
+     * @param url url
+     * @param resourceBundle resource
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        refreshData();
         createPanes();
         // Add tables to panes in tabs
         itemTabPane.getChildren().addAll(itemTable);
@@ -71,16 +77,36 @@ public class StockScreenController implements Initializable {
         menuTabPane.getChildren().addAll(menuTable);
     }
 
+    /**
+     * Switches to order view by calling method in parent
+     */
+    public void openOrderView() {
+        parent.switchToOrderScreen();
+    }
+
+    /**
+     * Opens create item screen
+     * @param event event that triggered this function.
+     */
     @FXML
     public void addItemAction(ActionEvent event ) {
         CreateItemController itemController = new CreateItemController(null);
         itemController.createNewWindow();
     }
 
+    /**
+     * Creates a dialog for adding a new menu
+     */
     public void addMenuAction() {
         createDialog(new EditMenu(null), "edit_menu.fxml", "Add Menu");
     }
 
+    /**
+     * Creates a dialog window and uses refreshData when it closes.
+     * @param controller controller that implements CustomDialogInterface
+     * @param fxml String name of FXML file in classpath e.g: edit_menu.fxml
+     * @param title String title of window
+     */
     private void createDialog(CustomDialogInterface controller, String fxml, String title) {
         try {
             FXMLLoader menuEditDialogLoader = new FXMLLoader(getClass().getResource(fxml));
@@ -138,25 +164,13 @@ public class StockScreenController implements Initializable {
     }
 
     /**
-     * Switches to order view
+     * Sets up the parent application and window
+     * @param window Stage this controller is in.
+     * @param parent Parent application.
      */
-    public void openOrderView() {
-        System.out.println("Ordering");
-        window.setScene(orderScene);
-    }
-
-    /**
-     * Sets references to other scenes
-     * @param primaryStage The root screen
-     * @param orderScene Reference to order screen
-     */
-    public void preSet(Stage primaryStage, Scene orderScene) {
-        this.window = primaryStage;
-        this.orderScene = orderScene;
-    }
-
-    private void refreshData() {
-        refreshData(false);
+    public void preSet(Stage window, OrderScreenApplication parent) {
+        this.parent = parent;
+        this.window = window;
     }
 
     /**
@@ -177,6 +191,13 @@ public class StockScreenController implements Initializable {
         getObservableStockTableEntryList(stockEntries);
         getObservableItemTableEntryList(itemEntries);
         getObservableMenuTableEntryList(menuEntries);
+    }
+
+    /**
+     * Overloaded function for refreshData to make default option for doSearch false
+     */
+    public void refreshData() {
+        refreshData(false);
     }
 
     public void searchItems() {
