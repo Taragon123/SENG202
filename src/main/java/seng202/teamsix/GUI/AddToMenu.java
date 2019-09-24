@@ -46,8 +46,10 @@ public class AddToMenu implements Initializable, CustomDialogInterface {
         stage.close();
     }
 
+    /**
+     * Checks that the inputs are valid and updates the menu with the new item
+     */
     public void confirm() {
-        Date expiryDate = null;
         if (checkInputs()) {
             float rawPrice = Float.parseFloat(priceInput.getText());
             Currency price = new Currency(rawPrice);
@@ -64,17 +66,28 @@ public class AddToMenu implements Initializable, CustomDialogInterface {
         }
     }
 
+    /**
+     * Checks inputs
+     * @return true if inputs valid
+     */
     private boolean checkInputs() {
         try {
             double quantity = Double.parseDouble(priceInput.getText());
-            return true;
+            if (menuDropdown.getSelectionModel().getSelectedIndex() != -1) {
+                return true;
+            } else {
+                return false;
+            }
         } catch (NumberFormatException e) {
             //TODO add error to GUI
             return false;
         }
     }
 
-
+    /**
+     * Sets parent stage
+     * @param stage
+     */
     public void preSet(Stage stage) {
         this.stage = stage;
     }

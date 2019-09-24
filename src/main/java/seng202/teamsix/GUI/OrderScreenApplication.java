@@ -12,22 +12,25 @@ import seng202.teamsix.managers.OrderManager;
 import java.io.IOException;
 
 public class OrderScreenApplication extends Application {
-
+    private Stage primaryStage;
+    private Scene orderScene;
+    private Scene managementScene;
+    private OrderScreenController orderController = new OrderScreenController();
+    private StockScreenController stockController = new StockScreenController();
     private OrderManager orderManager = new OrderManager();
 
     @Override
-    public void start(Stage primaryStage) throws IOException {
-
+    public void start(Stage stage) throws IOException {
+        this.primaryStage = stage;
         primaryStage.setMinWidth(800);
         primaryStage.setMinHeight(600);
-        OrderScreenController orderController = new OrderScreenController();
-        StockScreenController stockController = new StockScreenController();
+
 
         FXMLLoader loaderOrder = new FXMLLoader(getClass().getResource("main_order_screen.fxml"));
         orderController.setOrderManager(orderManager);
         loaderOrder.setController(orderController);
         Parent orderParent = loaderOrder.load();
-        Scene orderScene = new Scene(orderParent, 1300, 800);
+        orderScene = new Scene(orderParent, 1300, 800);
         orderScene.setFill(Color.TRANSPARENT);
 
         FXMLLoader loaderOptions = new FXMLLoader(getClass().getResource("options_screen.fxml"));
@@ -39,16 +42,32 @@ public class OrderScreenApplication extends Application {
         FXMLLoader loadManagement = new FXMLLoader(getClass().getResource("stock_screen.fxml"));
         loadManagement.setController(stockController);
         Parent managementParent = loadManagement.load();
-        Scene managementScene = new Scene(managementParent, 1300, 800);
+        managementScene = new Scene(managementParent, 1300, 800);
 
-        orderController.preSet(primaryStage, managementScene);
-        stockController.preSet(primaryStage, orderScene);
+        orderController.preSet(primaryStage, this);
+        stockController.preSet(primaryStage, this);
 
         primaryStage.setTitle("FoodByte");
         primaryStage.setScene(orderScene);
         primaryStage.getIcons().add(new Image("file:assets/icons/icon.png"));
         primaryStage.show();
 
+    }
+
+    /**
+     * Switched scene to order screen
+     */
+    public void switchToOrderScreen() {
+        primaryStage.setScene(orderScene);
+        orderController.populateGrid();
+    }
+
+    /**
+     * Switches scene to management screen
+     */
+    public void switchToManagementScreen() {
+        primaryStage.setScene(managementScene);
+        stockController.refreshData();
     }
 
     public static void main(String[] args) {

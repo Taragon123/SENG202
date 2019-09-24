@@ -30,6 +30,10 @@ public class StockInstanceDialog implements Initializable, CustomDialogInterface
     @FXML
     private Label titleLbl;
 
+    /**
+     * Constructor that sets the item_ref for stock instance
+     * @param item_ref stock instance will be created with this Item_Ref
+     */
     public StockInstanceDialog(Item_Ref item_ref) {
         this.item_ref = item_ref;
     }
@@ -40,11 +44,17 @@ public class StockInstanceDialog implements Initializable, CustomDialogInterface
         titleLbl.setText("Add Stock of " + name);
     }
 
+    /**
+     * Closes window
+     */
     public void cancel() {
         System.out.println("hit");
         stage.close();
     }
 
+    /**
+     * Checks inputs adds StockInstance and closes window
+     */
     public void confirm() {
         Date expiryDate = null;
         if (checkInputs()) {
@@ -59,6 +69,10 @@ public class StockInstanceDialog implements Initializable, CustomDialogInterface
         }
     }
 
+    /**
+     * Checks inputs
+     * @return true if valid
+     */
     private boolean checkInputs() {
         try {
             Double.parseDouble(quantityInput.getText());
@@ -69,10 +83,17 @@ public class StockInstanceDialog implements Initializable, CustomDialogInterface
         }
     }
 
+    /**
+     * Sets parent stage
+     * @param stage parent stage
+     */
     public void preSet(Stage stage) {
         this.stage = stage;
     }
 
+    /**
+     * Disables DatePicker if checkbox selected
+     */
     public void updateCheckbox() {
         if (notHasExpiryInput.selectedProperty().get()) {
             dateInput.setDisable(true);

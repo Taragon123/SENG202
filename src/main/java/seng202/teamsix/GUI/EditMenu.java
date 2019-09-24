@@ -18,6 +18,9 @@ import seng202.teamsix.data.StorageAccess;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for edit menu dialog
+ */
 public class EditMenu implements Initializable, CustomDialogInterface {
     private Menu menu;
     private Stage window;
@@ -45,10 +48,17 @@ public class EditMenu implements Initializable, CustomDialogInterface {
         createMenuItemTable();
     }
 
+    /**
+     * Refreshes table data that displays MenuItems
+     */
     private void refresh() {
         getObservableMenuItemList(menuItemEntries);
     }
 
+    /**
+     * Constructor that sets the mode to either edit or create
+     * @param menu_ref Menu_Ref to edit, null for create mode
+     */
     public EditMenu(Menu_Ref menu_ref) {
         if (menu_ref == null) {
             menu = new Menu();
@@ -59,10 +69,16 @@ public class EditMenu implements Initializable, CustomDialogInterface {
         }
     }
 
+    /**
+     * Closes window
+     */
     public void cancel() {
         window.close();
     }
 
+    /**
+     * Checks inputs then updates StorageAccess and closes window
+     */
     public void confirm() {
         if (nameInput.getText().length() > 0) {
             menu.setName(nameInput.getText());
@@ -72,12 +88,18 @@ public class EditMenu implements Initializable, CustomDialogInterface {
         }
     }
 
+    /**
+     * Sets the parent window
+     * @param window parent of the scene this controls
+     */
     public void preSet(Stage window) {
         this.window = window;
     }
 
+    /**
+     * Creates the menuItemTable
+     */
     private void createMenuItemTable() {
-//        menuItemTable = new TableView<>();
         menuItemTable.setItems(menuItemEntries);
 
         TableColumn<MenuItemTableEntry, String> nameColumn = new TableColumn<>("Item Name");
@@ -101,13 +123,20 @@ public class EditMenu implements Initializable, CustomDialogInterface {
         menuItemTable.getColumns().add(btnColumn);
     }
 
-    private void getObservableMenuItemList(ObservableList<MenuItemTableEntry> observableListlist) {
-        observableListlist.clear();
+    /**
+     * Edits observable list of MenuItemTableEntries so that the TableView updates
+     * @param observableList Observable list of MenuItemTableEntries
+     */
+    private void getObservableMenuItemList(ObservableList<MenuItemTableEntry> observableList) {
+        observableList.clear();
         for (MenuItem menuitem: menu.getMenuItems()) {
-            observableListlist.add(new MenuItemTableEntry(menuitem, menu, this));
+            observableList.add(new MenuItemTableEntry(menuitem, menu, this));
         }
     }
 
+    /**
+     * Class that stores information required to create the TableView of MenuItems
+     */
     public static class MenuItemTableEntry {
         private final SimpleStringProperty name;
         private final SimpleStringProperty description;
