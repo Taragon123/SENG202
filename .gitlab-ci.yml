@@ -13,7 +13,7 @@ generate_artifacts:
 generate_javadoc:
   stage: build
   before_script:
-  - export JAVA_HOME="/usr/lib/jvm/default-java"
+  - export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64/"
   script:
   - mvn -B javadoc:javadoc
   after_script:
