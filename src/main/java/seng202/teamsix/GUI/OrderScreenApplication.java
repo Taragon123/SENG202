@@ -66,7 +66,6 @@ public class OrderScreenApplication extends Application {
      * Switches scene to management screen
      */
     public void switchToManagementScreen() {
-        System.out.println("Switching");
         primaryStage.setScene(managementScene);
         stockController.refreshData();
     }

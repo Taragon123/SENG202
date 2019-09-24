@@ -228,10 +228,16 @@ public class StockScreenController implements Initializable {
         refreshData(false);
     }
 
+    /**
+     * Refreshes data with the doSearch true
+     */
     public void searchItems() {
         refreshData(true);
     }
 
+    /**
+     * Refreshes data and clears search box
+     */
     public void clearSearch() {
         refreshData();
         searchBox.setText("");
@@ -376,6 +382,10 @@ public class StockScreenController implements Initializable {
         menuTable.getColumns().add(editBtnColumn);
     }
 
+    /**
+     * Updates observable list for ItemTableEntries
+     * @param items Observable list of ItemTableEntries to edit
+     */
     private void getObservableItemTableEntryList(ObservableList<ItemTableEntry> items) {
         items.clear();
         for (UUID_Entity entity: itemList) {
@@ -384,6 +394,10 @@ public class StockScreenController implements Initializable {
         }
     }
 
+    /**
+     * Updates observable list for StockTableEntries
+     * @param stocks Observable list of StockTableEntries to edit
+     */
     private void getObservableStockTableEntryList(ObservableList<StockTableEntry> stocks) {
         stocks.clear();
         for (UUID_Entity entity: stockList) {
@@ -393,6 +407,10 @@ public class StockScreenController implements Initializable {
         }
     }
 
+    /**
+     * Updates observable list for OrderTableEntries
+     * @param orderEntries Observable list of OrderTableEntries to edit
+     */
     private void getObservableOrderTableEntryList(ObservableList<OrderTableEntry> orderEntries) {
         orderEntries.clear();
         for (UUID_Entity entity: orderList) {
@@ -401,6 +419,10 @@ public class StockScreenController implements Initializable {
         }
     }
 
+    /**
+     * Updates observable list for MenuTableEntries
+     * @param menuEntries Observable list of MenuTableEntries to edit
+     */
     private void getObservableMenuTableEntryList(ObservableList<MenuTableEntry> menuEntries) {
         menuEntries.clear();
         for (UUID_Entity entity: menuList) {
@@ -409,6 +431,9 @@ public class StockScreenController implements Initializable {
         }
     }
 
+    /**
+     * Class that stores the information needed for each row of the ItemTable
+     */
     public static class ItemTableEntry {
         private final Item_Ref item_ref;
         private final SimpleStringProperty name;
@@ -485,6 +510,9 @@ public class StockScreenController implements Initializable {
         }
     }
 
+    /**
+     * Class that stores the information needed for each row of the OrderTable
+     */
     public static class OrderTableEntry {
         private final SimpleStringProperty date;
         private final SimpleStringProperty price;
@@ -503,6 +531,9 @@ public class StockScreenController implements Initializable {
         }
     }
 
+    /**
+     * Class that stores the information needed for each row of the MenuTable
+     */
     public static class MenuTableEntry {
         private final Menu_Ref menu_ref;
         private final SimpleStringProperty name;
@@ -534,6 +565,9 @@ public class StockScreenController implements Initializable {
         }
     }
 
+    /**
+     * Class that stores the information needed for each row of the StockTable
+     */
     public static class StockTableEntry {
         private final StockInstance_Ref stockInstance_ref;
         private final SimpleStringProperty name;
