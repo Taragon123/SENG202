@@ -1,7 +1,5 @@
 junit:
   stage: test
-  before_script:
-  - export JAVA_HOME="/usr/lib/jvm/default-java"
   script:
   - mvn -B clean test
   - cat target/site/jacoco/index.html
@@ -14,6 +12,8 @@ generate_artifacts:
     - target/FoodByte*.jargit
 generate_javadoc:
   stage: build
+  before_script:
+  - export JAVA_HOME="/usr/lib/jvm/default-java"
   script:
   - mvn -B javadoc:javadoc
   after_script:
