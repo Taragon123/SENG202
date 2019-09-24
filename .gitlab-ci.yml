@@ -10,12 +10,3 @@ generate_artifacts:
   artifacts:
     paths:
     - target/FoodByte*.jargit
-generate_javadoc:
-  stage: build
-  before_script:
-  - export JAVA_HOME="/usr/lib/jvm/default-java"
-  script:
-  - mvn -B javadoc:javadoc
-  after_script:
-  - rm doc/ -R
-  - cp target/site/apidocs doc -R
