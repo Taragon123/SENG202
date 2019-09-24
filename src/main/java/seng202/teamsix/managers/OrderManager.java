@@ -1,7 +1,7 @@
 /**
  * Name: OrderManager.java
  * Date: September, 2019
- * Author(s): Hamesh Ravji, George Stephenson
+ * Author(s): Hamesh Ravji, George Stephenson, Taran Jennison
  *
  * This class is used to manage Orders and is instantiated once each time the app is launched. The class keeps track of
  * the current order, a local ticket number which is initially set to 1 and increments as orders are finalised, and a

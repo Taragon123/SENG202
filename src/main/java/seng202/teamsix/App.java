@@ -3,22 +3,21 @@ package seng202.teamsix;
 import seng202.teamsix.GUI.*;
 
 /**
- * Hello world!
- * Put Your name here:
- * Connor Macdonald
- * Taran Jennison
- * Hamish Ravji
- * George Stephenson
- * Anzac Morel
- * Andrew Clifford
- * Rchi Lugtu
+ * Name: App.java
+ *
+ * Contributors:
+         * Connor Macdonald
+         * Taran Jennison
+         * Hamesh Ravji
+         * George Stephenson
+         * Anzac Morel
+         * Andrew Clifford
+         * Rchi Lugtu
+ *
+ * Description: Where we start the application.
+ * Date: August - September, 2019
  */
-public class App 
-{
-    boolean foo() {
-        return true;
-    }
-
+public class App {
     public static void main( String[] args )
     {
         OrderScreenApplication.main(args);
