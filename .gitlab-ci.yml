@@ -1,11 +1,21 @@
 junit:
-    stage: test
-    script:
-        - mvn -B clean test
+  stage: test
+  script:
+  - mvn -B clean test
+  - cat target/site/jacoco/index.html
 generate_artifacts:
-    stage: deploy
-    script:
-        - mvn -B clean site package
-    artifacts:
-        paths:
-        - target/FoodByte*.jar
+  stage: deploy
+  script:
+  - mvn -B clean site package
+  artifacts:
+    paths:
+    - target/FoodByte*.jargit
+generate_javadoc:
+  stage: build
+  before_script:
+  - export JAVA_HOME="/usr/lib/jvm/default-java"
+  script:
+  - mvn -B javadoc:javadoc
+  after_script:
+  - rm doc/ -R
+  - cp target/site/apidocs doc -R

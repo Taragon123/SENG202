@@ -89,7 +89,7 @@ public class OrderScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         if (!isInit) {
-            cost_field.setText("Cost: " + orderManager.getCashRequired().toString());
+            cost_field.setText("Cost: " + orderManager.getCart().getTotalCost().toString());
             Timeline clock = new Timeline(new KeyFrame(Duration.ZERO, e -> {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy   HH:mm");
                 date_time.setText(LocalDateTime.now().format(formatter));

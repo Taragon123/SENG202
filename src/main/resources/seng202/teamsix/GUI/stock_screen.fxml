@@ -44,7 +44,7 @@
                <children>
                   <Button fx:id="searchBtn" alignment="CENTER" cancelButton="true" mnemonicParsing="false" onAction="#searchItems" prefHeight="25.0" prefWidth="133.0" text="Search" GridPane.columnIndex="2" />
                   <TextField fx:id="searchBox" />
-                  <Button fx:id="clearSearchBtn" mnemonicParsing="false" onAction="#clearSearchBar" text="X" GridPane.columnIndex="1" />
+                  <Button fx:id="clearSearchBtn" mnemonicParsing="false" onAction="#clearSearch" text="X" GridPane.columnIndex="1" />
                </children>
                <GridPane.margin>
                   <Insets left="5.0" />
@@ -90,12 +90,28 @@
       </TabPane>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Button fx:id="switchToOrderViewBtn" mnemonicParsing="false" onAction="#openOrderView" text="Switch to Order View" />
-            <Button mnemonicParsing="false" onAction="#exportXML" prefHeight="25.0" prefWidth="81.0" text="Export XML" />
-            <Button mnemonicParsing="false" onAction="#importXML" prefHeight="25.0" prefWidth="81.0" text="Import XML" />
+            <Button fx:id="switchToOrderViewBtn" mnemonicParsing="false" onAction="#openOrderView" text="Switch to Order View">
+               <HBox.margin>
+                  <Insets top="10.0" />
+               </HBox.margin></Button>
+            <Button mnemonicParsing="false" onAction="#exportXML" prefHeight="25.0" prefWidth="81.0" text="Export XML">
+               <HBox.margin>
+                  <Insets top="10.0" />
+               </HBox.margin></Button>
+            <Button mnemonicParsing="false" onAction="#importXML" prefHeight="25.0" prefWidth="81.0" text="Import XML">
+               <HBox.margin>
+                  <Insets top="10.0" />
+               </HBox.margin></Button>
          </children>
       </HBox>
-      <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" />
+      <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+         <children>
+            <Button mnemonicParsing="false" onAction="#saveData" prefHeight="25.0" prefWidth="81.0" text="Save">
+               <HBox.margin>
+                  <Insets top="10.0" />
+               </HBox.margin>
+            </Button>
+         </children></HBox>
    </children>
    <padding>
       <Insets bottom="5.0" left="10.0" right="10.0" />
