@@ -1,6 +1,6 @@
 /**
  * Name: CompositeItem.java
- * Authors: George Stephenson
+ * Authors: George Stephenson, Connor Macdonald, Hamesh Ravji
  * Date: 22/08/2019
  */
 package seng202.teamsix.data;
@@ -35,7 +35,6 @@ public class CompositeItem extends Item{
         this.item_list = item_list;
     }
 
-
     /**
      * Sets list of components.
      * @param item_list List of UUID_Entity components
@@ -53,7 +52,7 @@ public class CompositeItem extends Item{
     }
 
     /**
-     *
+     * Checks if the CompositeItem has the given tag.
      * @param ref tag to check
      * @return true if item contains tag
      */
@@ -65,7 +64,6 @@ public class CompositeItem extends Item{
                 return true;
             }
         }
-
         // Check if item inherits tag from children
         if(getItems().size() > 0) {
             ItemTag tag = StorageAccess.instance().getItemTag(ref);
@@ -80,10 +78,8 @@ public class CompositeItem extends Item{
                     parent_has_tag |= child_has_tag;
                 }
             }
-
             return parent_has_tag;
         }
-        
         return false;
     }
 

@@ -1,12 +1,14 @@
-package seng202.teamsix.managers;
-
 /**
  * Name: OrderManager.java
  * Date: September, 2019
  * Author(s): Hamesh Ravji, George Stephenson
  *
- * This class
+ * This class is used to manage Orders and is instantiated once each time the app is launched. The class keeps track of
+ * the current order, a local ticket number which is initially set to 1 and increments as orders are finalised, and a
+ * CashRegister object to keep track of how much is currently in the register.
  */
+
+package seng202.teamsix.managers;
 
 import seng202.teamsix.data.*;
 
@@ -16,11 +18,28 @@ public class OrderManager {
 
     private Order cart;
     private int localTicketCount = 1;
-    // initialize chas register with $200
+
+    /**
+     * Initialise the Cash Register with $200 by default. This can be changed.
+     */
     private CashRegister cashRegister = new CashRegister(200);
 
     /**
-     * Whenever a OrderManager is constructed, the local order number must be set to 1.
+     * This method sets the cashRegister attribute to a the given newCashRegister attribute.
+     * @param newCashRegister The CashRegister object we wish to set to the attribute cashRegister.
+     * @return true if the given newCashRegister amount is greater than or equal to 0, else false.
+     */
+    public boolean setCashRegister(CashRegister newCashRegister) {
+        if (newCashRegister.getRegisterAmount() < 0) {
+            return false;
+        }
+        cashRegister = newCashRegister;
+        return true;
+    }
+
+    /**
+     * Constructor for OrderManager, whenever a OrderManager is constructed, the local order number must be set to 1.
+     * Initially the OrderManager will need to start with an empty cart as well.
      */
     public OrderManager() {
         cart = new Order();
@@ -52,7 +71,7 @@ public class OrderManager {
     }
 
     /**
-     * Returns the order.
+     * Returns the Order object contained in the cart attribute.
      * @return The order.
      */
     public Order getCart() {
@@ -68,6 +87,7 @@ public class OrderManager {
 
     /**
      * Finalises the order by saving it so it can be viewed in future if needed, sends order to chefs, prints receipt.
+     * Also resets the cart and increments the localTicketCount by one and setting the new cart's localTicketNumber to 1.
      */
     public void finaliseOrder() {
         // Save the order with StorageAccess/
@@ -86,8 +106,4 @@ public class OrderManager {
         resetCart();
         cart.localTicketNumber = localTicketCount;
     }
-
-    /*public Currency getCashRequired() {
-        return cart.getCashRequired();
-    }*/
 }

@@ -192,15 +192,10 @@ public class Item extends Item_Ref {
         return result;
     }
 
-    public boolean equals(Item other) {
-        return (this.name == other.name &&
-            this.description == other.description &&
-            this.base_price == other.base_price &&
-            this.markup_price == other.markup_price &&
-            this.tags == other.tags &&
-            this.qty_unit == other.qty_unit);
-    }
-
+    /**
+     * Overrides the toString function so when we print items, it just prints the name corresponding to the item.
+     * @return The name corresponding to the item.
+     */
     @Override
     public String toString() {
         return getName();

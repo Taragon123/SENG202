@@ -1,6 +1,9 @@
 /**
- * Name: UUID_Entity.java
- * Authors: Anzac Morel
+ * Name: Menu.java
+ * Authors: Anzac Morel, Connor Macdonald
+ *
+ * A menu contains a list of menu items as well a name and a description.
+ *
  * Date: 19/08/2019
  */
 

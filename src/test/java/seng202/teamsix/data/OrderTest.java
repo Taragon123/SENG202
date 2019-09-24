@@ -8,12 +8,12 @@ import static org.junit.Assert.assertEquals;
 public class OrderTest {
 
     @Test
-    public void testGetCashRequiredTest() {
+    public void getTotalCostTest() {
         Order order = new Order();
         Item_Ref burger_ref = initialiseItem1(); // returns a reference to a burger item already one of the xml files.
         OrderItem root = order.getOrderTree();
         root.addToOrder(burger_ref, 25, null, 0); // Each burger has a selling price of $19.99. By multiplying this by 25 we get $499.75.
-        assertEquals(499.75, order.getCashRequired().getTotalCash(), 0.0);
+        assertEquals(499.75, order.getTotalCost().getTotalCash(), 0.0);
     }
 
     //@Ignore

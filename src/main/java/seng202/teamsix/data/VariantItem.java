@@ -1,5 +1,5 @@
 /**
- * Name: UUID_Entity.java
+ * Name: VariantItem.java
  * Authors: Anzac Morel
  * Date: 19/08/2019
  */

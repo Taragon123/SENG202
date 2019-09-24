@@ -1,6 +1,7 @@
 /**
- * Name: UUID_Entity.java
- * Authors: Anzac Morel
+ * Name: Currency.java
+ *
+ * Authors: Anzac Morel, Hamesh Ravji, Taran Jennison
  * Date: 19/08/2019
  */
 

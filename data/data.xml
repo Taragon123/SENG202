@@ -250,6 +250,55 @@
                 <timestamp>2019-09-23T22:00:35.817+12:00</timestamp>
             </value>
         </entry>
+        <entry>
+            <key uuid="0a247700-a2de-456b-80fb-261ce414600b"/>
+            <value uuid="0a247700-a2de-456b-80fb-261ce414600b">
+                <order_tree>
+                    <dependants>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <dependants>
+                            <item uuid="79e1c5af-ecca-4d8b-a3a5-1c0166c9f994"/>
+                            <dependants>
+<item uuid="a623c8de-ec5d-4636-bfa0-fe6168c33f30"/>
+<dependants>
+    <item uuid="8321e692-6b3a-4321-ad6f-c5e6e22a33c5"/>
+    <quantity>1</quantity>
+</dependants>
+<quantity>1</quantity>
+                            </dependants>
+                            <dependants>
+<item uuid="a723c8de-ec5d-4636-bfa0-fe6168c33f30"/>
+<dependants>
+    <item uuid="8521e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+    <quantity>1</quantity>
+</dependants>
+<quantity>1</quantity>
+                            </dependants>
+                            <dependants>
+<item uuid="8721e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+<quantity>1</quantity>
+                            </dependants>
+                            <quantity>1</quantity>
+                        </dependants>
+                        <dependants>
+                            <item uuid="8821e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                            <quantity>1</quantity>
+                        </dependants>
+                        <dependants>
+                            <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                            <quantity>1</quantity>
+                        </dependants>
+                        <quantity>3</quantity>
+                    </dependants>
+                    <dependants>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <quantity>2</quantity>
+                    </dependants>
+                    <quantity>0</quantity>
+                </order_tree>
+                <timestamp>2019-09-24T13:46:57.876+12:00</timestamp>
+            </value>
+        </entry>
     </order_map>
     <stock_instance_map>
         <entry>

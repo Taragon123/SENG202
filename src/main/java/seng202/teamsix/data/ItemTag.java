@@ -9,7 +9,13 @@ package seng202.teamsix.data;
 import javax.xml.bind.annotation.*;
 
 /**
- * Class for tags
+ * Name: ItemTag.java
+ *
+ * Class for tags, an item tag can contain a name such as Gluten-Free which when added to a list of tags for an item,
+ * shows us that the item is Gluten-Free.
+ *
+ * Date: August - September, 2019
+ * Author(s): George Stephenson
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)

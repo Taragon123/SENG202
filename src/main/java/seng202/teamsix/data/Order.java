@@ -1,6 +1,6 @@
 /**
  * Name: Order.java
- * Authors: Connor Macdonald
+ * Authors: Connor Macdonald, Hamesh Ravji
  * Date: 30/08/2019
  */
 
@@ -36,35 +36,27 @@ public class Order extends Order_Ref{
         this.timestamp = timestamp;
     }
 
+    /**
+     * This attribute is not a unique identifier, it is only unique within each instance of OrderManager. This helps to
+     * keep track of the order number so that we can send chef orders, the order numbers are also printed on the receipts.
+     */
     public int localTicketNumber;
 
+    /**
+     * @return the Currency object contained in the price attribute of the root OrderItem.
+     */
     public Currency getTotalCost() {
         return order_tree.getPrice();
     }
 
     /**
-     * Returns a Currency object corresponding to the cash required to pay for the order.
-     */
-    public Currency getCashRequired() {
-        ArrayList<OrderItem> orderItems = getOrderTree().getDependants();
-        double cashCountTemp = 0.0;
-        Currency cashRequired = new Currency();
-        for (OrderItem orderItem: orderItems) {
-            Item item = StorageAccess.instance().getItem(orderItem.getItem());
-            cashCountTemp += item.getMarkupPrice().getTotalCash() * orderItem.getQuantity();
-        }
-        cashRequired.setTotalCash(cashCountTemp);
-        return cashRequired;
-    }
-
-    /**
-     * This method prints the order, just the item names and quantity. Currently prints to the command line.
+     * This method prints the order as well as the local ticket number as the order number.
      */
     public String getChefOrder() {
         String returnString = "/**********  Chef's Order  **********/\n";
-        returnString += "Order Number: "+localTicketNumber+"\nContents:\n";
+        returnString += "Order Number: " + localTicketNumber + "\nContents:\n";
         returnString += getOrderTree().getCleanOrderRepresentation(0, false);
-        returnString +=       "/************************************/";
+        returnString += "/************************************/";
         return returnString;
     }
 
