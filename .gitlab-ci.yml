@@ -1,5 +1,7 @@
 junit:
   stage: test
+  before_script:
+  - export JAVA_HOME="/usr/lib/jvm/default-java"
   script:
   - mvn -B clean test
   - cat target/site/jacoco/index.html
