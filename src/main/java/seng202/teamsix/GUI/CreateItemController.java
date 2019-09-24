@@ -20,6 +20,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * CreateItemController is the controller for the Edit/Create Item window.
+ * If it is constructed with a item_ref it will change to a modify window else create.
+ */
 public class CreateItemController implements Initializable {
     private Item_Ref modifying_item = null;
     private Stage controller_window;
@@ -73,6 +77,10 @@ public class CreateItemController implements Initializable {
     @FXML
     private Label label_errormessage;
 
+    /**
+     * Loads and creates a new window of modify_item_screen.fxml
+     * @param callback_handler this event handler is called on successful confirm exit of window.
+     */
     void createNewWindow(EventHandler<ActionEvent> callback_handler) {
         FXMLLoader loaderCreateItem = new FXMLLoader(getClass().getResource("modify_item_screen.fxml"));
         loaderCreateItem.setController(this);
@@ -103,6 +111,10 @@ public class CreateItemController implements Initializable {
         controller_window.show();
     }
 
+    /**
+     * Default Constructor
+     * @param item_ref set to null if creating a new item or to the item to edit.
+     */
     CreateItemController(Item_Ref item_ref) {
         modifying_item = item_ref;
     }
@@ -203,6 +215,10 @@ public class CreateItemController implements Initializable {
         }
     }
 
+    /**
+     * Sets the items in listview_item_search based on search results from textfield_search_items. Also
+     * removes current selected items from list.
+     */
     @FXML
     private void updateItemSearchList() {
         String searchText = textfield_search_items.getText();
@@ -224,8 +240,12 @@ public class CreateItemController implements Initializable {
         }
     }
 
+    /**
+     * Action handler of type checkbox.
+     * Sets vanity text in stage to be more representive
+     */
     @FXML
-    void itemTypeChanged(ActionEvent event) {
+    void itemTypeChanged() {
         if (checkbox_is_variant.isSelected()) {
             label_ingredients.setText("Variant Items");
             textfield_search_items.setPromptText("Search Items");
@@ -235,29 +255,43 @@ public class CreateItemController implements Initializable {
         }
     }
 
+    /**
+     * Action handler of addItem arrow.
+     * Shifts item from item search to selected_items
+     */
     @FXML
-    void addItemClicked(ActionEvent event) {
+    void addItemClicked() {
         if (listview_item_search.getSelectionModel().getSelectedItem() != null) {
             listview_selected_items.getItems().add(listview_item_search.getSelectionModel().getSelectedItem());
             listview_item_search.getItems().remove(listview_item_search.getSelectionModel().getSelectedItem());
         }
     }
 
-
+    /**
+     * Action handler of removeItem arrow.
+     * Shifts item from selected items and updates item search
+     */
     @FXML
-    void removeItemClicked(ActionEvent event) {
+    void removeItemClicked() {
         if (listview_selected_items.getSelectionModel().getSelectedItem() != null) {
             listview_selected_items.getItems().remove(listview_selected_items.getSelectionModel().getSelectedItem());
             updateItemSearchList();
         }
     }
 
+    /**
+     * Action handler of cancel button.
+     * closes window without calling callback
+     */
     @FXML
-    void cancelClicked(ActionEvent event) {
+    void cancelClicked() {
         controller_window.close();
     }
 
-    ArrayList<Item_Ref> getSelectedItems() {
+    /**
+     * @return selected items as Item_Ref
+     */
+    private ArrayList<Item_Ref> getSelectedItems() {
         // Down casting to just be item_references
         ArrayList<Item_Ref> selected = new ArrayList<>();
         for(Item item : listview_selected_items.getItems()) {
@@ -267,7 +301,10 @@ public class CreateItemController implements Initializable {
         return selected;
     }
 
-    ArrayList<ItemTag_Ref> getSelectedTags() {
+    /**
+     * @return selected tags as ItemTag_Ref
+     */
+    private ArrayList<ItemTag_Ref> getSelectedTags() {
         ArrayList<ItemTag_Ref> selected = new ArrayList<>();
         for(ItemTag tag : listview_tags.getSelectionModel().getSelectedItems()) {
             selected.add(new ItemTag_Ref(tag));
@@ -276,8 +313,12 @@ public class CreateItemController implements Initializable {
         return selected;
     }
 
+    /**
+     * Action handler of confirm button.
+     * Creates or gets modifying item and sets class fields based on gui controls and updates StorageAccess.
+     */
     @FXML
-    void confirmClicked(ActionEvent event) {
+    void confirmClicked() {
         Item item = null;
 
         if(modifying_item != null) {
