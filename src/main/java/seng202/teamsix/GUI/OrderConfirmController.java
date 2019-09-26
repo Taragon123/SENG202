@@ -177,8 +177,8 @@ public class OrderConfirmController implements Initializable {
         Window mainScreen = window.getOwner();
         FXMLLoader loaderOptions = new FXMLLoader(getClass().getResource("change_due.fxml"));
         loaderOptions.setController(this);
-        Parent pop = loaderOptions.load();
-        changePopup.getContent().add(pop);
+        Parent changeNode = loaderOptions.load();
+        changePopup.getContent().add(changeNode);
         changePopup.setAutoHide(true);
         changeDueField.setText(String.format("$%.1f0",(float) orderCost.compareTo(totalChange)/100));
         Double centreHeight = mainScreen.getHeight()/2 - 250;

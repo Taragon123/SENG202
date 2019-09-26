@@ -324,6 +324,10 @@ public class OrderScreenController implements Initializable {
         confirmWindow.initModality(Modality.WINDOW_MODAL);
         confirmWindow.initOwner(window);
         confirmWindow.setScene(confirmOrderScene);
+        Double centreWidth = window.getWidth()/2 - 380;
+        Double centreHeight = window.getHeight()/2 - 320;
+        confirmWindow.setX(window.getX() + centreWidth);
+        confirmWindow.setY(window.getY() + centreHeight);
         confirmWindow.show();
     }
 

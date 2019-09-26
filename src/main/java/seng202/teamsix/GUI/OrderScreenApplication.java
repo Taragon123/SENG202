@@ -22,7 +22,7 @@ public class OrderScreenApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         this.primaryStage = stage;
-        primaryStage.setMinWidth(800);
+        primaryStage.setMinWidth(900);
         primaryStage.setMinHeight(600);
 
 
