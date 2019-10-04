@@ -10,6 +10,7 @@ import seng202.teamsix.data.MenuItem;
 
 import java.net.URL;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -25,6 +26,8 @@ public class AddToMenu implements Initializable, CustomDialogInterface {
     @FXML
     private ComboBox<String> menuDropdown;
     @FXML
+    private ComboBox<String> colourDropDown;
+    @FXML
     private Label titleLbl;
 
     public AddToMenu(Item_Ref item_ref, List<UUID_Entity> menu) {
@@ -39,6 +42,7 @@ public class AddToMenu implements Initializable, CustomDialogInterface {
         for (UUID_Entity entity: menus) {
             menuDropdown.getItems().add(StorageAccess.instance().getMenu(new Menu_Ref(entity)).getName());
         }
+        colourDropDown.getItems().addAll("Black", "White", "Yellow", "Red", "Blue", "Green");
     }
 
     public void cancel() {
@@ -59,6 +63,7 @@ public class AddToMenu implements Initializable, CustomDialogInterface {
             newMenuItem.setDescription(descriptionInput.getText());
             newMenuItem.setName(StorageAccess.instance().getItem(item_ref).getName());
             newMenuItem.setPrice(price);
+            newMenuItem.setColour(colourDropDown.getSelectionModel().getSelectedItem());
             menu.addToMenu(newMenuItem);
 
             StorageAccess.instance().updateMenu(menu);
@@ -73,7 +78,7 @@ public class AddToMenu implements Initializable, CustomDialogInterface {
     private boolean checkInputs() {
         try {
             double quantity = Double.parseDouble(priceInput.getText());
-            if (menuDropdown.getSelectionModel().getSelectedIndex() != -1) {
+            if (menuDropdown.getSelectionModel().getSelectedIndex() != -1 && colourDropDown.getSelectionModel().getSelectedIndex() != -1) {
                 return true;
             } else {
                 return false;

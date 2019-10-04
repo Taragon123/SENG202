@@ -1,10 +1,8 @@
 package seng202.teamsix.GUI;
 
-import com.sun.istack.localization.NullLocalizable;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -13,7 +11,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -21,9 +18,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.SwipeEvent;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
@@ -36,10 +32,10 @@ import seng202.teamsix.managers.OrderManager;
 
 import java.io.IOException;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.Set;
 
@@ -68,6 +64,7 @@ public class OrderScreenController implements Initializable {
     private OrderScreenApplication parent;
     private boolean isPopupInit = false;
     private boolean isInit = false;
+    private HashMap<String, String> colourMap;
 
     @FXML
     private Label date_time;
@@ -79,6 +76,17 @@ public class OrderScreenController implements Initializable {
     private TableView<OrderTableEntry> order_list_display;
     @FXML
     private Button confirmButton;
+    private int x;
+
+    public OrderScreenController() {
+        colourMap = new HashMap<>();
+        colourMap.put("Black", "#000000");
+        colourMap.put("White", "#FFFFFF");
+        colourMap.put("Yellow", "#fcfc03");
+        colourMap.put("Red", "#fc0303");
+        colourMap.put("Blue", "#03a1fc");
+        colourMap.put("Green", "#44bd11");
+    }
 
 
     /**
@@ -177,7 +185,6 @@ public class OrderScreenController implements Initializable {
         Button button = new Button();
         String buttonText = menu_item.getName();
         button.setText(buttonText);
-        button.setTextFill(Paint.valueOf("#FFFFFF"));
         button.setUserData(menu_item); //sets the user data of the button to the item reference (uuid)
 
         //Setup onAction event fort the button i.e. add_to_order
@@ -200,8 +207,21 @@ public class OrderScreenController implements Initializable {
         button.setContentDisplay(ContentDisplay.CENTER);
         button.setTextAlignment(TextAlignment.CENTER);
         button.setTextOverrun(OverrunStyle.CENTER_ELLIPSIS);
-        button.setStyle("-fx-background-color: #66390b; -fx-font-size: 20; -fx-background-radius: 10;");
-        return button;    //set button colour here ^
+        button.setStyle("-fx-background-color: " + colourMap.get(menu_item.getColour()) + "; -fx-font-size: 20; -fx-background-radius: 10;");
+
+        //Decide on the colour of the text based on the colour of the button
+        String background = colourMap.get(menu_item.getColour());
+        int red = Integer.decode("0x" + background.substring(1, 3));
+        int green = Integer.decode("0x" + background.substring(3, 5));
+        int blue = Integer.decode("0x" + background.substring(5, 7));
+
+        if ((red*0.299 + green*0.587 + blue*0.114) > 150) {
+            button.setTextFill(Paint.valueOf("#000000"));
+        } else {
+            button.setTextFill(Paint.valueOf("#FFFFFF"));
+        }
+
+        return button;    //set button colour here
     }
 
     /**
