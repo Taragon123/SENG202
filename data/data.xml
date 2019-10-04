@@ -212,6 +212,90 @@
                         <colour>Blue</colour>
                         <price cents="1000"/>
                     </menuitem>
+                    <menuitem>
+                        <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="item" uuid="8621e663-6b3a-4321-ad6f-c5e6e22a33c5">
+                            <name>Veggie Patty</name>
+                            <description></description>
+                            <base_price cents="0"/>
+                            <markup_price cents="0"/>
+                            <recipe>
+<method></method>
+                            </recipe>
+                            <qty_unit>NUM</qty_unit>
+                        </item>
+                        <name>Veggie Patty</name>
+                        <description></description>
+                        <colour>Yellow</colour>
+                        <price cents="1000"/>
+                    </menuitem>
+                    <menuitem>
+                        <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="item" uuid="8721e663-6b3a-4321-ad6f-c5e6e22a33c5">
+                            <name>Cheese</name>
+                            <description></description>
+                            <base_price cents="0"/>
+                            <markup_price cents="0"/>
+                            <recipe>
+<method></method>
+                            </recipe>
+                            <qty_unit>NUM</qty_unit>
+                        </item>
+                        <name>Cheese</name>
+                        <description></description>
+                        <colour>White</colour>
+                        <price cents="500"/>
+                    </menuitem>
+                    <menuitem>
+                        <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="item" uuid="8421e663-6b3a-4321-ad6f-c5e6e22a33c5">
+                            <name>Regular Bread Bun</name>
+                            <description></description>
+                            <base_price cents="0"/>
+                            <markup_price cents="0"/>
+                            <recipe>
+<method></method>
+                            </recipe>
+                            <qty_unit>NUM</qty_unit>
+                        </item>
+                        <name>Regular Bread Bun</name>
+                        <description></description>
+                        <colour>White</colour>
+                        <price cents="500"/>
+                    </menuitem>
+                    <menuitem>
+                        <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="variantItem" uuid="a723c8de-ec5d-4636-bfa0-fe6168c33f30">
+                            <name>Patty</name>
+                            <description>Nice generic patty</description>
+                            <base_price cents="1080"/>
+                            <markup_price cents="1999"/>
+                            <recipe>
+<method></method>
+                            </recipe>
+                            <qty_unit>NUM</qty_unit>
+                            <variant_list>
+<variant uuid="8521e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+<variant uuid="8621e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                            </variant_list>
+                        </item>
+                        <name>Patty</name>
+                        <description></description>
+                        <colour>Black</colour>
+                        <price cents="500"/>
+                    </menuitem>
+                    <menuitem>
+                        <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="item" uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5">
+                            <name>Chips</name>
+                            <description></description>
+                            <base_price cents="0"/>
+                            <markup_price cents="0"/>
+                            <recipe>
+<method></method>
+                            </recipe>
+                            <qty_unit>NUM</qty_unit>
+                        </item>
+                        <name>Chips</name>
+                        <description></description>
+                        <colour>Yellow</colour>
+                        <price cents="500"/>
+                    </menuitem>
                 </menuitem_list>
                 <name>Lunch Menu</name>
                 <description>Hello I am a menu description</description>
