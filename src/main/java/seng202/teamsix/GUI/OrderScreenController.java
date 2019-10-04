@@ -221,7 +221,7 @@ public class OrderScreenController implements Initializable {
             button.setTextFill(Paint.valueOf("#FFFFFF"));
         }
 
-        return button;    //set button colour here
+        return button;
     }
 
     /**

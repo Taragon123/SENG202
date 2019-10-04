@@ -1,5 +1,5 @@
 # SENG202-TeamSix
-FoodByte is a popup point of food sale application suitable for food trucks or other similar platforms. It was created by a group of seven students from the University of Canterbury.
+FoodByte is a popup point of food sale application suitable for food trucks or other similar platforms. It was created by a group of seven students from the University of Canterbury as part of the SENG202 course.
 
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for personal use.
