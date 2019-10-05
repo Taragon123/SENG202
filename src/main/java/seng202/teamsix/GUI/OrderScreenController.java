@@ -163,14 +163,18 @@ public class OrderScreenController implements Initializable {
             setColumnConstraints(grid, colMax);
 //                setRowConstraints(grid, rowMax);
 
-            //Now populate buttons
+            /* Populate buttons in groups of colours */
             int currIndex = 0;
             ArrayList<MenuItem> menu_items = StorageAccess.instance().getMenu(menu_ref).getMenuItems();
-            for (MenuItem menu_item : menu_items) {
-                Button button = createButton(menu_item);
-                button.setMinHeight(100);
-                grid.add(button, currIndex % colMax, currIndex/colMax);
-                currIndex++;
+            for (String colour: colourMap.keySet()) {
+                for (MenuItem menu_item: menu_items) {
+                    if (menu_item.getColour().equals(colour)) {
+                        Button button = createButton(menu_item);
+                        button.setMinHeight(100);
+                        grid.add(button, currIndex % colMax, currIndex/colMax);
+                        currIndex++;
+                    }
+                }
             }
         }
     }

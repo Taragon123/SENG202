@@ -197,6 +197,22 @@
                         <price cents="1000"/>
                     </menuitem>
                     <menuitem>
+                        <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="item" uuid="8421e663-6b3a-4321-ad6f-c5e6e22a33c5">
+                            <name>Regular Bread Bun</name>
+                            <description></description>
+                            <base_price cents="0"/>
+                            <markup_price cents="0"/>
+                            <recipe>
+<method></method>
+                            </recipe>
+                            <qty_unit>NUM</qty_unit>
+                        </item>
+                        <name>Regular Bread Bun</name>
+                        <description></description>
+                        <colour>Yellow</colour>
+                        <price cents="500"/>
+                    </menuitem>
+                    <menuitem>
                         <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="item" uuid="8621e663-6b3a-4321-ad6f-c5e6e22a33c5">
                             <name>Veggie Patty</name>
                             <description></description>
@@ -209,8 +225,8 @@
                         </item>
                         <name>Veggie Patty</name>
                         <description></description>
-                        <colour>Blue</colour>
-                        <price cents="1000"/>
+                        <colour>Red</colour>
+                        <price cents="500"/>
                     </menuitem>
                 </menuitem_list>
                 <name>Lunch Menu</name>
