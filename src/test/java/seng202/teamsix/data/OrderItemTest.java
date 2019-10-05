@@ -49,7 +49,7 @@ public class OrderItemTest {
         //Item chips = (Item) StorageAccess.instance().getItem(chips_ref);
 
         Item_Ref combo_ref = initialiseItem2();
-        CompositeItem combo_item = (CompositeItem) StorageAccess.instance().getItem(combo_ref);
+        Item combo_item = StorageAccess.instance().getItem(combo_ref);
 
         OrderItem bag = new OrderItem();
         //bag.addToOrder(chips, 5, null);

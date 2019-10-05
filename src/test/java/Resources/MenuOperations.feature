@@ -2,10 +2,8 @@ Feature: Menu operations
 
   Scenario: Change the price of menu item
     Given The current price of a burger is $10
-    When The user selects change price
-    And Enters new price value ($12)
-    And Selects save changes
-    Then The current price of a burger is now the new price ($12)
+    When The user selects change price and enters $12
+    Then The current price of a burger is now the new price $12
 
   Scenario: Upload a new menu to the system
     Given A new menu has been created
@@ -32,7 +30,6 @@ Feature: Menu operations
   Scenario: Add item to existing menu
     Given A new burger is created
     When Edit menu is selected
-    And Burger information added
     Then New burger now in menu
 
   Scenario: Remove item from existing menu
@@ -44,7 +41,5 @@ Feature: Menu operations
   Scenario: Add recipe to accompany a existing menu item
     Given A new recipe for an item is created
     When Add recipe is selected
-    And Recipe is selected
-    And Add is selected
     Then Recipe is now in the menu
 

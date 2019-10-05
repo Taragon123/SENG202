@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<data>
+    <item_map>
+        <entry>
+            <key uuid="fd2cd4d1-b00a-4184-9d58-dafcd541f88d"/>
+            <value uuid="fd2cd4d1-b00a-4184-9d58-dafcd541f88d">
+                <name>Burger</name>
+                <description>This item is being used to test the order operations</description>
+                <base_price cents="1050"/>
+                <markup_price cents="1499"/>
+                <recipe>
+                    <method>1. Create a test
+2. Run test
+3. See if build passes
+</method>
+                </recipe>
+                <qty_unit>NUM</qty_unit>
+            </value>
+        </entry>
+        <entry>
+            <key uuid="3c48702a-d7e6-4ea1-9dad-27e64d98fdf3"/>
+            <value uuid="3c48702a-d7e6-4ea1-9dad-27e64d98fdf3">
+                <name>Burger</name>
+                <description>This item is being used to test the order operations</description>
+                <base_price cents="1050"/>
+                <markup_price cents="1499"/>
+                <recipe>
+                    <method>1. Create a test
+2. Run test
+3. See if build passes
+</method>
+                </recipe>
+                <qty_unit>NUM</qty_unit>
+            </value>
+        </entry>
+    </item_map>
+    <item_tag_map/>
+    <menu_map/>
+    <order_map/>
+    <stock_instance_map/>
+</data>
