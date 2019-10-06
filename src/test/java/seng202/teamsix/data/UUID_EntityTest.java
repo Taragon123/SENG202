@@ -64,7 +64,7 @@ public class UUID_EntityTest {
 
         Item item = StorageAccess.instance().getItem(new Item_Ref(entity));
         assertNotNull(item);
-        //assertTrue(item instanceof CompositeItem);
+        assertTrue(item instanceof CompositeItem);
         assertEquals(item.getName(), "Cheese Burger Combo");
     }
 }

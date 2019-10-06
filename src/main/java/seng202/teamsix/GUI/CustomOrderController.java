@@ -1,4 +1,5 @@
 package seng202.teamsix.GUI;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -8,9 +9,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import seng202.teamsix.data.Order;
 import seng202.teamsix.data.OrderItem;
 
 import java.io.IOException;
@@ -23,7 +23,7 @@ public class CustomOrderController implements Initializable {
     private OrderItem modifying_order;
 
     @FXML
-    private AnchorPane anchorpane_order;
+    private Pane pane_order;
 
     @FXML
     private Button button_cancel;
@@ -59,7 +59,10 @@ public class CustomOrderController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //anchorpane_order.getChildren()add();
+        OrderTreeView tree_view = new OrderTreeView(modifying_order);
+        tree_view.prefWidthProperty().bind(pane_order.widthProperty());
+        tree_view.prefHeightProperty().bind(pane_order.heightProperty());
+        pane_order.getChildren().add(tree_view);
     }
 
     @FXML

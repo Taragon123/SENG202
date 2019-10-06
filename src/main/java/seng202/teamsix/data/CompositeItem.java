@@ -13,7 +13,7 @@ import java.util.Collections;
 import java.util.List;
 
 @XmlRootElement
-public class CompositeItem extends Item {
+public class CompositeItem extends Item{
     @XmlElementWrapper(name = "composite_item_list")
     @XmlElement(name = "item")
     private ArrayList<Item_Ref> item_list;
@@ -21,7 +21,7 @@ public class CompositeItem extends Item {
     /**
      * Constructor for blank composite item.
      */
-    public CompositeItem()  {
+    public CompositeItem() {
         super("NA", "NA", new Currency(), new Currency(), new Recipe("NA"), new ArrayList<ItemTag_Ref>(), UnitType.KG);
     }
 
