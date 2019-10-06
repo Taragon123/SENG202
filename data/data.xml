@@ -165,6 +165,20 @@
                 </composite_item_list>
             </value>
         </entry>
+        <entry>
+            <key uuid="e612752d-efa1-4940-93c0-5af59ac8d8f5"/>
+            <value uuid="e612752d-efa1-4940-93c0-5af59ac8d8f5">
+                <name>Sicko mode</name>
+                <description></description>
+                <base_price cents="900"/>
+                <markup_price cents="90000"/>
+                <recipe>
+                    <method></method>
+                </recipe>
+                <tags uuid="e8c12c88-62cc-4bc1-89a5-4d5b335456c0"/>
+                <qty_unit>NUM</qty_unit>
+            </value>
+        </entry>
     </item_map>
     <item_tag_map>
         <entry>
@@ -282,6 +296,68 @@
                     <quantity>0</quantity>
                 </order_tree>
                 <timestamp>2019-09-23T22:00:35.817+12:00</timestamp>
+            </value>
+        </entry>
+        <entry>
+            <key uuid="d487b02c-7161-4b83-9e7e-756018b3a1d5"/>
+            <value uuid="d487b02c-7161-4b83-9e7e-756018b3a1d5">
+                <order_tree>
+                    <dependants>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <quantity>1</quantity>
+                    </dependants>
+                    <dependants>
+                        <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <dependants>
+                            <item uuid="79e1c5af-ecca-4d8b-a3a5-1c0166c9f994"/>
+                            <dependants>
+<item uuid="a623c8de-ec5d-4636-bfa0-fe6168c33f30"/>
+<dependants>
+    <item uuid="8321e692-6b3a-4321-ad6f-c5e6e22a33c5"/>
+    <quantity>1</quantity>
+</dependants>
+<quantity>1</quantity>
+                            </dependants>
+                            <dependants>
+<item uuid="a723c8de-ec5d-4636-bfa0-fe6168c33f30"/>
+<dependants>
+    <item uuid="8521e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+    <quantity>1</quantity>
+</dependants>
+<quantity>1</quantity>
+                            </dependants>
+                            <dependants>
+<item uuid="8721e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+<quantity>1</quantity>
+                            </dependants>
+                            <quantity>1</quantity>
+                        </dependants>
+                        <dependants>
+                            <item uuid="8821e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                            <quantity>1</quantity>
+                        </dependants>
+                        <dependants>
+                            <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                            <quantity>1</quantity>
+                        </dependants>
+                        <quantity>4</quantity>
+                    </dependants>
+                    <quantity>0</quantity>
+                </order_tree>
+                <timestamp>2019-10-02T14:48:20.230+13:00</timestamp>
+            </value>
+        </entry>
+        <entry>
+            <key uuid="013add54-3470-46a0-a321-f0ece7c4077c"/>
+            <value uuid="013add54-3470-46a0-a321-f0ece7c4077c">
+                <order_tree>
+                    <dependants>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <quantity>1</quantity>
+                    </dependants>
+                    <quantity>0</quantity>
+                </order_tree>
+                <timestamp>2019-10-02T15:03:09.114+13:00</timestamp>
             </value>
         </entry>
         <entry>

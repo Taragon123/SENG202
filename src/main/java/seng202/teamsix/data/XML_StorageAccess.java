@@ -11,6 +11,18 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Set;
 
+/**
+ * A note on auto save.
+ * As the class stands it will save the data upon any update to its members this guarantees that
+ * the file will always be up to date but has a few caveats that I would like to note for any future development.
+ * Firstly this style of auto save suffers under batch updating as it will attempt to save every update. This could
+ * Be mitigated by an option to disable auto save for a time but still shows a flaw in this kind of design.
+ * Secondly this will make all program updates get slower and slower over time as the file grows and takes longer to save.
+ * This solution may be fine for small files but as they grow the program would become much slower. For this to be solved
+ * you would have to create a far more complex xml saving system using chunk based loading and saving to ensure you only
+ * edit parts of the xml file. A medium solution between these extremes would be to spilt orders from the main XML_cache
+ * as this part of the application is the most likely to grow to large proportions.
+ */
 
 @XmlRootElement(name="data")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -91,30 +103,35 @@ public class XML_StorageAccess extends StorageAccess{
     public void updateItem(Item item) {
         cache.item_map.put(item.copyRef(), item);
         cache_modified = true;
+        saveData();
     }
 
     @Override
     public void updateItemTag(ItemTag tag) {
         cache.item_tag_map.put(tag.copyRef(), tag);
         cache_modified = true;
+        saveData();
     }
 
     @Override
     public void updateMenu(Menu menu) {
         cache.menu_map.put(menu.copyRef(), menu);
         cache_modified = true;
+        saveData();
     }
 
     @Override
     public void updateOrder(Order order) {
         cache.order_map.put(order.copyRef(), order);
         cache_modified = true;
+        saveData();
     }
 
     @Override
     public void updateStockInstance(StockInstance stock) {
         cache.stock_instance_map.put(stock.copyRef(), stock);
         cache_modified = true;
+        saveData();
     }
 
 
