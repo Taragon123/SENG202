@@ -137,7 +137,7 @@
                 <recipe>
                     <method>Put it all in the bag</method>
                 </recipe>
-                <tags uuid="2c16418b-5d47-43f3-bcae-2061a7893ad6"/>
+                <tags uuid="e8c12c88-62cc-4bc1-89a5-4d5b335456c0"/>
                 <qty_unit>NUM</qty_unit>
                 <composite_item_list>
                     <item uuid="79e1c5af-ecca-4d8b-a3a5-1c0166c9f994"/>
@@ -227,6 +227,28 @@
                         <description></description>
                         <colour>Red</colour>
                         <price cents="500"/>
+                    </menuitem>
+                    <menuitem>
+                        <item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="compositeItem" uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994">
+                            <name>Cheese Burger Combo</name>
+                            <description>Avaliable in small, medium and large</description>
+                            <base_price cents="1080"/>
+                            <markup_price cents="1999"/>
+                            <recipe>
+<method>Put it all in the bag</method>
+                            </recipe>
+                            <tags uuid="e8c12c88-62cc-4bc1-89a5-4d5b335456c0"/>
+                            <qty_unit>NUM</qty_unit>
+                            <composite_item_list>
+<item uuid="79e1c5af-ecca-4d8b-a3a5-1c0166c9f994"/>
+<item uuid="8821e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+<item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                            </composite_item_list>
+                        </item>
+                        <name>Cheese Burger Combo</name>
+                        <description></description>
+                        <colour>Green</colour>
+                        <price cents="1999"/>
                     </menuitem>
                 </menuitem_list>
                 <name>Lunch Menu</name>

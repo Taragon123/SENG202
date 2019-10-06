@@ -125,7 +125,7 @@ public class OrderScreenController implements Initializable {
         buttonCol.setMaxWidth(75);
         itemCol.setCellValueFactory(new PropertyValueFactory("name"));
         priceCol.setCellValueFactory(new PropertyValueFactory("price"));
-        buttonCol.setCellValueFactory(new PropertyValueFactory("deleteButton"));
+        buttonCol.setCellValueFactory(new PropertyValueFactory("buttonHBox"));
 
         itemCol.setSortable(false);
         priceCol.setSortable(false);
@@ -421,6 +421,8 @@ public class OrderScreenController implements Initializable {
         private final SimpleStringProperty name;
         private final SimpleStringProperty price;
         private final Button deleteButton;
+        private final Button editButton;
+        private final HBox   buttonHBox;
 
         private OrderTableEntry(MenuItem menu_item, OrderItem order_item, OrderScreenController parent) {
             final ImageView deleteIcon = new ImageView(getClass().getResource("icons/trash.png").toString());
@@ -436,15 +438,38 @@ public class OrderScreenController implements Initializable {
             this.name = new SimpleStringProperty(menu_item.getName());
             this.price = new SimpleStringProperty(order_item.getPrice().toString());
 
+            this.buttonHBox = new HBox(5);
+
+            // Delete Button
             this.deleteButton = new Button("");
+            this.buttonHBox.getChildren().add(this.deleteButton);
+
             this.deleteButton.setGraphic(deleteIcon);
             this.deleteButton.setPadding(new Insets(4,4,4,4));
             this.deleteButton.setStyle("-fx-background-color: #FF0000");
+
             this.deleteButton.setUserData(this);
             this.deleteButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
                     parent.remove_from_order(menu_item, (OrderTableEntry) deleteButton.getUserData());
+                }
+            });
+
+            // Edit button
+            this.editButton = new Button("");
+            this.buttonHBox.getChildren().add(0, this.editButton);
+
+            this.editButton.setGraphic(editIcon);
+            this.editButton.setPadding(new Insets(4,4,4,4));
+            this.editButton.setStyle("-fx-background-color: #FFAA00");
+
+            this.editButton.setUserData(this);
+            this.editButton.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent actionEvent) {
+                    CustomOrderController controller = new CustomOrderController(order_item);
+                    controller.createNewWindow(null);
                 }
             });
         }
@@ -454,6 +479,7 @@ public class OrderScreenController implements Initializable {
         public String getName() { return name.get(); }
         public String getPrice() { return price.get(); }
         public Button getDeleteButton() { return deleteButton; }
+        public HBox getButtonHBox() { return buttonHBox; }
 
     }
 }
