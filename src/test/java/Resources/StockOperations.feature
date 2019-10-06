@@ -3,8 +3,6 @@ Feature: Stock operations
   Scenario: Add items to stock
     Given New stock items arrive
     When Add stock is selected
-    And Data is entered
-    And Confirm is selected
     Then Stock is added to the inventory
 
   Scenario: Remove items from stock

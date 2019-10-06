@@ -34,8 +34,7 @@ Feature: Menu operations
 
   Scenario: Remove item from existing menu
     Given A burger is no longer being sold
-    When Edit menu is selected
-    And Burger is removed
+    When Edit menu is clicked
     Then Burger no longer in menu
 
   Scenario: Add recipe to accompany a existing menu item

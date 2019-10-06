@@ -130,7 +130,7 @@
         <entry>
             <key uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
             <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="compositeItem" uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994">
-                <name>Cheese Burger Combo</name>
+                <name>Burger</name>
                 <description>Avaliable in small, medium and large</description>
                 <base_price cents="1080"/>
                 <markup_price cents="1999"/>
@@ -253,6 +253,14 @@
                 </menuitem_list>
                 <name>Lunch Menu</name>
                 <description>Hello I am a menu description</description>
+            </value>
+        </entry>
+        <entry>
+            <key uuid="e8c0a24f-4dd4-41ea-9b6a-4d77c5436a87"/>
+            <value uuid="e8c0a24f-4dd4-41ea-9b6a-4d77c5436a87">
+                <menuitem_list>
+                    <menuitem/>
+                </menuitem_list>
             </value>
         </entry>
     </menu_map>

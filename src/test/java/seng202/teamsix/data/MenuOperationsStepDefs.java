@@ -10,11 +10,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class MenuOperationsStepDefs {
     Currency price = new Currency();
     MenuItem menu_burger = new MenuItem();
-    Menu testMenu = new Menu();
+    Menu_Ref menu_ref;
     Recipe testRecipe;
     Item burger = new Item();
-    Item burger2 = new Item();
-    Item burger3 = new Item();
+    int currentLen = 0;
 
     @Given("The current price of a burger is ${int}")
     public void theCurrentPriceOfABurgerIs$(int arg0) {
@@ -47,41 +46,41 @@ public class MenuOperationsStepDefs {
     public void menuIsOpenAndTheUserNeedsToCheckTheRecipeForABurger() {
         Item_Ref burger_ref = new Item_Ref();
         burger_ref.setUUID(8782518176451284363l, -6654882082024982124l);
-        burger2 = StorageAccess.instance().getItem(burger_ref);
+        burger = StorageAccess.instance().getItem(burger_ref);
 
         menu_burger.setItem(burger_ref);
     }
 
     @When("A burger is selected")
     public void aBurgerIsSelected() {
-        menu_burger.getItem();
-        burger2 = StorageAccess.instance().getItem(menu_burger.getItem());
+        burger = StorageAccess.instance().getItem(menu_burger.getItem());
     }
 
     @Then("The recipe for a burger is displayed")
     public void theRecipeForABurgerIsDisplayed() {
-        assertEquals("Put it all in the bag", burger2.getRecipe().getMethod());
+        assertEquals("Put it all in the bag", burger.getRecipe().getMethod());
     }
 
     @Given("A new burger is created")
     public void aNewBurgerIsCreated() {
         Item_Ref burger_ref = new Item_Ref();
-        burger_ref.setUUID(8782518176451284363l, -6654882082024982124l);
-        StorageAccess.instance().getItem(burger_ref).setName("Burger");
+        burger_ref.setUUID("79e1c5af-ecca-4d8b-a3a5-1c0166c9f994");
+        burger = StorageAccess.instance().getItem(burger_ref);
+
+        menu_burger.setItem(burger_ref);
     }
 
     @When("Edit menu is selected")
     public void editMenuIsSelected() {
-        testMenu.addToMenu(menu_burger);
-        StorageAccess.instance().updateMenu(testMenu);
+        menu_ref = new Menu_Ref();
+        menu_ref.setUUID("096abbbe-2134-4841-939a-e6922e202a97");
+        StorageAccess.instance().getMenu(menu_ref).addToMenu(menu_burger);
     }
 
 
     @Then("New burger now in menu")
     public void newBurgerNowInMenu() {
-        burger2 = StorageAccess.instance().getItem(menu_burger.getItem());
-        System.out.println(burger2.getName());
-        assertEquals("Burger", testMenu.getMenuItems().get(0).getName());
+        assertEquals("Cheese Burger",  StorageAccess.instance().getItem(StorageAccess.instance().getMenu(menu_ref).getMenuItems().get(4).getItem()).getName());
     }
 
     @Given("A new recipe for an item is created")
@@ -96,12 +95,37 @@ public class MenuOperationsStepDefs {
 
     @When("Add recipe is selected")
     public void addRecipeIsSelected() {
-        burger3 = StorageAccess.instance().getItem(menu_burger.getItem());
-        burger3.setRecipe(testRecipe);
+        burger = StorageAccess.instance().getItem(menu_burger.getItem());
+        burger.setRecipe(testRecipe);
     }
 
     @Then("Recipe is now in the menu")
     public void recipeIsNowInTheMenu() {
-        assertEquals("Test that setting recipes works", burger3.getRecipe().getMethod());
+        assertEquals("Test that setting recipes works", burger.getRecipe().getMethod());
+    }
+
+    @Given("A burger is no longer being sold")
+    public void aBurgerIsNoLongerBeingSold() {
+        Item_Ref burger_ref = new Item_Ref();
+        burger_ref.setUUID("79e1c5af-ecca-4d8b-a3a5-1c0166c9f994");
+        burger = StorageAccess.instance().getItem(burger_ref);
+
+        menu_burger.setItem(burger_ref);
+    }
+
+    @When("Edit menu is clicked")
+    public void editMenuIsClicked() {
+        menu_ref = new Menu_Ref();
+        menu_ref.setUUID("096abbbe-2134-4841-939a-e6922e202a97");
+        StorageAccess.instance().getMenu(menu_ref).addToMenu(menu_burger);
+        currentLen = StorageAccess.instance().getMenu(menu_ref).getMenuItems().size();
+        StorageAccess.instance().getMenu(menu_ref).removeFromMenu(menu_burger);
+
+    }
+
+    @Then("Burger no longer in menu")
+    public void burgerNoLongerInMenu() {
+        assertEquals(currentLen - 1, StorageAccess.instance().getMenu(menu_ref).getMenuItems().size());
+        assertEquals(StorageAccess.instance().getMenu(menu_ref).getMenuItems().contains(menu_burger), false);
     }
 }
