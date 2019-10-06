@@ -18,8 +18,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
@@ -119,22 +119,22 @@ public class OrderScreenController implements Initializable {
     public void initializeOrderDisplayTable() {
         TableColumn itemCol = new TableColumn<MenuItem, String>("Item");
         TableColumn priceCol = new TableColumn<MenuItem, String>("Price");
-        TableColumn deleteCol = new TableColumn<MenuItem, Button>("");
+        TableColumn buttonCol = new TableColumn<MenuItem, Button>("");
         itemCol.setMinWidth(190);
         priceCol.setMinWidth(92);
-        deleteCol.setMaxWidth(75);
+        buttonCol.setMaxWidth(75);
         itemCol.setCellValueFactory(new PropertyValueFactory("name"));
         priceCol.setCellValueFactory(new PropertyValueFactory("price"));
-        deleteCol.setCellValueFactory(new PropertyValueFactory("deleteButton"));
+        buttonCol.setCellValueFactory(new PropertyValueFactory("deleteButton"));
 
         itemCol.setSortable(false);
         priceCol.setSortable(false);
-        deleteCol.setSortable(false);
+        buttonCol.setSortable(false);
 
         order_list_display.setEditable(false);
         order_list_display.setSelectionModel(null);
         order_list_display.getColumns().clear();
-        order_list_display.getColumns().addAll(itemCol, priceCol, deleteCol);
+        order_list_display.getColumns().addAll(itemCol, priceCol, buttonCol);
     }
 
     /**
@@ -302,9 +302,9 @@ public class OrderScreenController implements Initializable {
      */
     public void add_to_order(MenuItem menu_item) {
         //OrderManager will add the specified item to cart #backend
-        orderManager.addToCart(menu_item, 1);
-        OrderTableEntry entry = new OrderTableEntry(menu_item, this);
-        order_list_display.getItems().add(entry); //add the menu_item to the table
+        OrderItem order_item = orderManager.addToCart(menu_item, 1);
+        OrderTableEntry entry = new OrderTableEntry(menu_item, order_item, this);
+        order_list_display.getItems().add(entry); //add the order_item to the table
         cost_field.setText("Cost: " + orderManager.getCart().getTotalCost());
         confirmButton.setDisable(false);
     }
@@ -416,16 +416,30 @@ public class OrderScreenController implements Initializable {
      * Class OrderTableEntry, used to store items in a TableView that displays the current order
      */
     public static class OrderTableEntry {
+        private final OrderItem order_item;
         private final MenuItem menu_item;
         private final SimpleStringProperty name;
         private final SimpleStringProperty price;
         private final Button deleteButton;
 
-        private OrderTableEntry(MenuItem menu_item, OrderScreenController parent) {
+        private OrderTableEntry(MenuItem menu_item, OrderItem order_item, OrderScreenController parent) {
+            final ImageView deleteIcon = new ImageView(getClass().getResource("icons/trash.png").toString());
+            deleteIcon.setFitWidth(16);
+            deleteIcon.setFitHeight(16);
+
+            final ImageView editIcon = new ImageView(getClass().getResource("icons/editpen.png").toString());
+            editIcon.setFitWidth(16);
+            editIcon.setFitHeight(16);
+
+            this.order_item = order_item;
             this.menu_item = menu_item;
             this.name = new SimpleStringProperty(menu_item.getName());
-            this.price = new SimpleStringProperty(menu_item.getPrice().toString());
-            this.deleteButton = new Button("Delete");
+            this.price = new SimpleStringProperty(order_item.getPrice().toString());
+
+            this.deleteButton = new Button("");
+            this.deleteButton.setGraphic(deleteIcon);
+            this.deleteButton.setPadding(new Insets(4,4,4,4));
+            this.deleteButton.setStyle("-fx-background-color: #FF0000");
             this.deleteButton.setUserData(this);
             this.deleteButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
@@ -435,7 +449,8 @@ public class OrderScreenController implements Initializable {
             });
         }
 
-        public MenuItem getMenuItem() { return menu_item; }
+        public MenuItem getMenuItem() {return menu_item; }
+        public OrderItem getOrderItem() { return order_item; }
         public String getName() { return name.get(); }
         public String getPrice() { return price.get(); }
         public Button getDeleteButton() { return deleteButton; }

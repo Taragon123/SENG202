@@ -99,21 +99,28 @@ public class OrderItem {
      * Adds an Item to the Order, given an Item_Ref item_ref, int qty, and ItemTag_Ref default tag.
      * @param item_ref Refers to the Item of which we want to add to the order.
      * @param qty      The number of items we want to add too the order.
+     * @return the added or existing OrderItem reference
      */
-    public void addToOrder(Item_Ref item_ref, int qty, Currency new_item_price, int recurse_depth) {
+    public OrderItem addToOrder(Item_Ref item_ref, int qty, Currency new_item_price, int recurse_depth) {
         boolean is_added = false;
+        OrderItem reference = null;
+
         Item item = StorageAccess.instance().getItem(item_ref);
         for (OrderItem orderItem : dependants) {
             if (orderItem.getItem() == item_ref) {
                 orderItem.quantity += qty;
                 is_added = true;
+                reference = orderItem;
             }
         }
+
         if (!is_added) {
             OrderItem parent = new OrderItem();
             parent.setItem(item_ref);
             parent.setQuantity(qty);
             this.dependants.add(parent);
+            reference = parent;
+
             if (new_item_price != null) {
                 Currency temp_price = parent.getPrice();
                 temp_price.addCash(new_item_price);
@@ -137,6 +144,8 @@ public class OrderItem {
                 }
             }
         }
+
+        return reference;
     }
 
     /**

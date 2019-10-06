@@ -51,11 +51,9 @@ public class OrderManager {
      * @param menu_item A reference to the menu item that we wish to add to the cart.
      * @param qty The quantity corresponding to the number of Items.
      */
-    public void addToCart(MenuItem menu_item, int qty) {
+    public OrderItem addToCart(MenuItem menu_item, int qty) {
         Item_Ref item_ref = menu_item.getItem();
-        OrderItem new_root = cart.getOrderTree();
-        new_root.addToOrder(item_ref, qty, menu_item.getPrice(), 0);
-        cart.setOrderTree(new_root);
+        return cart.getOrderTree().addToOrder(item_ref, qty, menu_item.getPrice(), 0);
     }
 
     /**
@@ -65,9 +63,7 @@ public class OrderManager {
      */
     public void removeFromCart(MenuItem menu_item, int qty) {
         Item_Ref item_ref = StorageAccess.instance().getItem(menu_item.getItem());
-        OrderItem new_root = cart.getOrderTree();
-        new_root.removeFromOrder(item_ref, qty, menu_item.getPrice());
-        cart.setOrderTree(new_root);
+        cart.getOrderTree().removeFromOrder(item_ref, qty, menu_item.getPrice());
     }
 
     /**

@@ -37,8 +37,12 @@ public class AddToMenu implements Initializable, CustomDialogInterface {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        String name = StorageAccess.instance().getItem(item_ref).getName();
+        Item item = StorageAccess.instance().getItem(item_ref);
+        String name = item.getName();
         titleLbl.setText("Add \"" + name + "\" to a Menu");
+
+        priceInput.setText(Double.toString(item.getMarkupPrice().getTotalCash()));
+
         for (UUID_Entity entity: menus) {
             menuDropdown.getItems().add(StorageAccess.instance().getMenu(new Menu_Ref(entity)).getName());
         }

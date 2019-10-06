@@ -54,7 +54,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
          <image>
-            <Image url="@../icons/logo_thin.png" />
+            <Image url="@icons/logo_thin.png" />
          </image>
       </ImageView>
       <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
