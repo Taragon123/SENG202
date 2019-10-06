@@ -94,7 +94,11 @@
         </entry>
         <entry>
             <key uuid="a623c8de-ec5d-4636-bfa0-fe6168c33f30"/>
+<<<<<<< HEAD
             <value uuid="a623c8de-ec5d-4636-bfa0-fe6168c33f30">
+=======
+            <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="variantItem" uuid="a623c8de-ec5d-4636-bfa0-fe6168c33f30">
+>>>>>>> parent of 051e45e... Added some more acceptance tests found that there is an issue that causes some tests to fail where an item cannot be cast to a composite item because it is in an unamed module in the loader 'app' not sure why this is
                 <name>Buns</name>
                 <description>Carbs for days</description>
                 <base_price cents="1080"/>
@@ -108,7 +112,11 @@
         </entry>
         <entry>
             <key uuid="a723c8de-ec5d-4636-bfa0-fe6168c33f30"/>
+<<<<<<< HEAD
             <value uuid="a723c8de-ec5d-4636-bfa0-fe6168c33f30">
+=======
+            <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="variantItem" uuid="a723c8de-ec5d-4636-bfa0-fe6168c33f30">
+>>>>>>> parent of 051e45e... Added some more acceptance tests found that there is an issue that causes some tests to fail where an item cannot be cast to a composite item because it is in an unamed module in the loader 'app' not sure why this is
                 <name>Patty</name>
                 <description>Nice generic patty</description>
                 <base_price cents="1080"/>
@@ -121,7 +129,11 @@
         </entry>
         <entry>
             <key uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+<<<<<<< HEAD
             <value uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994">
+=======
+            <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="compositeItem" uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994">
+>>>>>>> parent of 051e45e... Added some more acceptance tests found that there is an issue that causes some tests to fail where an item cannot be cast to a composite item because it is in an unamed module in the loader 'app' not sure why this is
                 <name>Cheese Burger Combo</name>
                 <description>Avaliable in small, medium and large</description>
                 <base_price cents="1080"/>
@@ -135,7 +147,11 @@
         </entry>
         <entry>
             <key uuid="79e1c5af-ecca-4d8b-a3a5-1c0166c9f994"/>
+<<<<<<< HEAD
             <value uuid="79e1c5af-ecca-4d8b-a3a5-1c0166c9f994">
+=======
+            <value xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="compositeItem" uuid="79e1c5af-ecca-4d8b-a3a5-1c0166c9f994">
+>>>>>>> parent of 051e45e... Added some more acceptance tests found that there is an issue that causes some tests to fail where an item cannot be cast to a composite item because it is in an unamed module in the loader 'app' not sure why this is
                 <name>Cheese Burger</name>
                 <description>Mhmmm sounds good</description>
                 <base_price cents="1080"/>
