@@ -416,7 +416,7 @@ public class OrderScreenController implements Initializable {
      * Class OrderTableEntry, used to store items in a TableView that displays the current order
      */
     public static class OrderTableEntry {
-        private final OrderItem order_item;
+        private OrderItem order_item;
         private final MenuItem menu_item;
         private final SimpleStringProperty name;
         private final SimpleStringProperty price;

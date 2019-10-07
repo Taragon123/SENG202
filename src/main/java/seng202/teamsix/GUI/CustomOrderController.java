@@ -74,6 +74,6 @@ public class CustomOrderController implements Initializable {
     void confirmClicked(ActionEvent event) {
         // Quit window
         controller_window.close();
-        callback.handle(new ActionEvent());
+        //callback.handle(new ActionEvent());
     }
 }
