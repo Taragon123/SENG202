@@ -28,6 +28,8 @@ public class CreateItemController implements Initializable {
     private Item_Ref modifying_item = null;
     private Stage controller_window;
     private EventHandler<ActionEvent> callback = null;
+    private Currency salePrice;
+    private Currency costPrice;
 
     @FXML
     private Label label_ingredients;
@@ -131,10 +133,10 @@ public class CreateItemController implements Initializable {
         // Initialise tags
         DataQuery<ItemTag> query = new DataQuery<>(ItemTag.class);
         query.sort_by("name", true);
-        List<UUID_Entity> tagref_list = query.runQuery();
+        List<UUID_Entity> tagret_list = query.runQuery();
 
         listview_tags.getItems().clear();
-        for(UUID_Entity tag_ref : tagref_list) {
+        for(UUID_Entity tag_ref : tagret_list) {
             ItemTag tag = StorageAccess.instance().getItemTag(new ItemTag_Ref(tag_ref));
             listview_tags.getItems().add(tag);
         }
@@ -340,7 +342,12 @@ public class CreateItemController implements Initializable {
         }
 
         // Set name
-        item.setName(textfield_name.getText());
+        if (textfield_name.getText().equals("")) {
+            label_errormessage.setText("Item must have a name");
+            return;
+        } else {
+            item.setName(textfield_name.getText());
+        }
 
         // Set unit type
         item.setQtyUnit(combobox_unit.getValue());
@@ -356,19 +363,31 @@ public class CreateItemController implements Initializable {
 
         // Set Base Price
         try {
-            Currency baseprice = new Currency(Double.parseDouble(textfield_wholesale.getText()));
-            item.setBasePrice(baseprice);
+            costPrice = new Currency(Double.parseDouble(textfield_wholesale.getText()));
+            if (costPrice.getTotalCash() <= 0) {
+                label_errormessage.setText("Cost price must be greater than $0");
+                return;
+            } else {
+                item.setBasePrice(costPrice);
+            }
         } catch(NumberFormatException e) {
-            label_errormessage.setText("Wholesale price must be a number");
+            label_errormessage.setText("Cost price must be a number");
             return;
         }
 
         // Set Retail Price
         try {
-            Currency retailPrice = new Currency(Double.parseDouble(textfield_retail.getText()));
-            item.setMarkupPrice(retailPrice);
+            salePrice = new Currency(Double.parseDouble(textfield_retail.getText()));
+            if (salePrice.getTotalCash() <= 0) {
+                label_errormessage.setText("Sale price must be greater than $0");
+                return;
+            } else if (salePrice.compareTo(costPrice) < 0){
+                label_errormessage.setText("Sale price must be at least as high as cost price");
+                return;
+            }
+            item.setMarkupPrice(salePrice);
         } catch(NumberFormatException e) {
-            label_errormessage.setText("Retail price must be a number");
+            label_errormessage.setText("Sale price must be a number");
             return;
         }
 

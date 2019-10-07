@@ -19,7 +19,7 @@ public class MenuItem {
     @XmlElement
     private String description;
     @XmlElement
-    private String colour;
+    private String colour = "#FFFFFF";
     @XmlElement
     private Currency price;
     /**

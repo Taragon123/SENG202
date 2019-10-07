@@ -200,7 +200,7 @@
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="4">
                      <children>
-                        <Label text="Wholesale Price:">
+                        <Label text="Cost Price:">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -227,7 +227,7 @@
                      <children>
                         <VBox prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <Label text="Retail Price:">
+                              <Label text="Sale Price:">
                                  <font>
                                     <Font size="15.0" />
                                  </font>

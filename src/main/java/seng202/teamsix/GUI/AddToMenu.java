@@ -18,6 +18,7 @@ public class AddToMenu implements Initializable, CustomDialogInterface {
     private Stage stage;
     private Item_Ref item_ref;
     private final List<UUID_Entity> menus;
+    private Boolean extraConfirm = false;
 
     @FXML
     private TextField priceInput;
@@ -29,6 +30,8 @@ public class AddToMenu implements Initializable, CustomDialogInterface {
     private ComboBox<String> colourDropDown;
     @FXML
     private Label titleLbl;
+    @FXML
+    private Label errorBox;
 
     public AddToMenu(Item_Ref item_ref, List<UUID_Entity> menu) {
         this.item_ref = item_ref;
@@ -80,15 +83,29 @@ public class AddToMenu implements Initializable, CustomDialogInterface {
      * @return true if inputs valid
      */
     private boolean checkInputs() {
+        errorBox.setText("");
+        Item item = StorageAccess.instance().getItem(item_ref);
         try {
-            double quantity = Double.parseDouble(priceInput.getText());
+            if (extraConfirm) {
+                extraConfirm = false;
+                return true;
+            }
+            double price = Double.parseDouble(priceInput.getText());
+            if (price <= 0) {
+                errorBox.setText("Price must be\ngreater than $0");
+                return false;
+            } else if (price < item.getMarkupPrice().getTotalCash()) {
+                errorBox.setText("Warning!\nCurrent price is lower\nthan recorded sale price");
+                extraConfirm = true;
+                return false;
+            }
             if (menuDropdown.getSelectionModel().getSelectedIndex() != -1 && colourDropDown.getSelectionModel().getSelectedIndex() != -1) {
                 return true;
             } else {
                 return false;
             }
         } catch (NumberFormatException e) {
-            //TODO add error to GUI
+            errorBox.setText("Price must be a number");
             return false;
         }
     }

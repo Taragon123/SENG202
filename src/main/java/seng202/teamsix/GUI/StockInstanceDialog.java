@@ -29,6 +29,8 @@ public class StockInstanceDialog implements Initializable, CustomDialogInterface
     private CheckBox notHasExpiryInput;
     @FXML
     private Label titleLbl;
+    @FXML
+    private Label errorBox;
 
     /**
      * Constructor that sets the item_ref for stock instance
@@ -60,7 +62,10 @@ public class StockInstanceDialog implements Initializable, CustomDialogInterface
         if (checkInputs()) {
             if (!notHasExpiryInput.selectedProperty().get()) {
                 LocalDate localDate = dateInput.getValue();
+                System.out.println(localDate);
                 expiryDate = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            } else {
+                errorBox.setText("Select date");
             }
             float quantity = Float.parseFloat(quantityInput.getText());
             Date currentDate = new Date();
@@ -74,11 +79,20 @@ public class StockInstanceDialog implements Initializable, CustomDialogInterface
      * @return true if valid
      */
     private boolean checkInputs() {
+        errorBox.setText("");
         try {
-            Double.parseDouble(quantityInput.getText());
+            double quantity = Double.parseDouble(quantityInput.getText());
+            if (quantity <= 0) {
+                errorBox.setText("Quantity must be\ngreater than 0");
+                return false;
+            }
+            if (dateInput.getValue() == null && !notHasExpiryInput.selectedProperty().get()) {
+                errorBox.setText("Select an expiry date");
+                return false;
+            }
             return true;
         } catch (NumberFormatException e) {
-            //TODO add error to GUI
+            errorBox.setText("Quantity must be\na number");
             return false;
         }
     }
