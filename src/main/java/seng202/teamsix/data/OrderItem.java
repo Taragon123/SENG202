@@ -111,39 +111,26 @@ public class OrderItem {
      * @return the added or existing OrderItem reference
      */
     public OrderItem addToOrder(Item_Ref item_ref, int qty, Currency new_item_price, int recurse_depth) {
-        boolean is_added = false;
-        OrderItem reference = null;
-
         Item item = StorageAccess.instance().getItem(item_ref);
-        for (OrderItem orderItem : dependants) {
-            if (orderItem.getItem() == item_ref) {
-                orderItem.quantity += qty;
-                is_added = true;
-                reference = orderItem;
-            }
+
+        OrderItem new_orderitem = new OrderItem();
+        new_orderitem.setItem(item_ref);
+        new_orderitem.setQuantity(qty);
+        new_orderitem.parent_order = this;
+        this.dependants.add(new_orderitem);
+
+        if (new_item_price != null) {
+            Currency temp_price = new_orderitem.getPrice();
+            temp_price.addCash(new_item_price);
+            new_orderitem.setPrice(temp_price);
         }
-
-        if (!is_added) {
-            OrderItem new_orderitem = new OrderItem();
-            new_orderitem.setItem(item_ref);
-            new_orderitem.setQuantity(qty);
-            new_orderitem.parent_order = this;
-            this.dependants.add(new_orderitem);
-            reference = new_orderitem;
-
-            if (new_item_price != null) {
-                Currency temp_price = new_orderitem.getPrice();
-                temp_price.addCash(new_item_price);
-                new_orderitem.setPrice(temp_price);
+        if (item instanceof CompositeItem) {
+            for (Item_Ref child_ref : ((CompositeItem) item).getItems()) {
+                new_orderitem.addToOrder(child_ref, 1, new_item_price, recurse_depth + 1);
             }
-            if (item instanceof CompositeItem) {
-                for (Item_Ref child_ref : ((CompositeItem) item).getItems()) {
-                    new_orderitem.addToOrder(child_ref, 1, new_item_price, recurse_depth + 1);
-                }
-            } else if (item instanceof VariantItem) {
-                new_orderitem.addToOrder(((VariantItem) item).getVariants().get(0), 1, null,
-                        recurse_depth + 1);
-            }
+        } else if (item instanceof VariantItem) {
+            new_orderitem.addToOrder(((VariantItem) item).getVariants().get(0), 1, null,
+                    recurse_depth + 1);
         }
         if (recurse_depth == 0) {
             for (int i = 0; i < qty; i++) {
@@ -155,7 +142,7 @@ public class OrderItem {
             }
         }
 
-        return reference;
+        return new_orderitem;
     }
 
     public boolean removeFromOrder(OrderItem order_item) {
@@ -199,6 +186,42 @@ public class OrderItem {
         } else {
             return false;
         }
+    }
+
+    /**
+     * If order item is variant item then swaps dependent to be the next variation.
+     * @return the new order item variant
+     */
+    public OrderItem swapWithNextVariant() {
+        Item item = StorageAccess.instance().getItem(getItem());
+
+        if (item instanceof VariantItem) {
+            int current_variant_index = ((VariantItem) item).getVariants().indexOf(this.getDependants().get(0).getItem());
+            int new_variant_index = (current_variant_index + 1) % ((VariantItem) item).getVariants().size();
+            Item_Ref variant_ref = ((VariantItem) item).getVariants().get(new_variant_index);
+
+            dependants.clear();
+            return this.addToOrder(variant_ref, 1, null, 0);
+        }
+        return null;
+    }
+
+    /**
+     * If order item is variant item then swaps dependent to be the prev variation.
+     * @return the new order item variant
+     */
+    public OrderItem swapWithPrevVariant() {
+        Item item = StorageAccess.instance().getItem(getItem());
+
+        if (item instanceof VariantItem) {
+            int current_variant_index = ((VariantItem) item).getVariants().indexOf(this.getDependants().get(0).getItem());
+            int new_variant_index = Math.floorMod((current_variant_index - 1), ((VariantItem) item).getVariants().size());
+            Item_Ref variant_ref = ((VariantItem) item).getVariants().get(new_variant_index);
+
+            dependants.clear();
+            return this.addToOrder(variant_ref, 1, null, 0);
+        }
+        return null;
     }
 
     /**

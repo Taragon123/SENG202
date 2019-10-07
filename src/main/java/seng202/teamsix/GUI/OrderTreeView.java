@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import seng202.teamsix.data.Item;
 import seng202.teamsix.data.OrderItem;
 import seng202.teamsix.data.StorageAccess;
+import seng202.teamsix.data.VariantItem;
 
 public class OrderTreeView extends TreeView<OrderItem> {
 
@@ -24,8 +25,12 @@ public class OrderTreeView extends TreeView<OrderItem> {
 
     private TreeItem<OrderItem> createTreeFromOrderItem(OrderItem root_order) {
         TreeItem<OrderItem> root = new TreeItem<>(root_order);
-        for(OrderItem dependant_order : root_order.getDependants()) {
-            root.getChildren().add(createTreeFromOrderItem(dependant_order));
+
+        Item item = StorageAccess.instance().getItem(root_order.getItem());
+        if(!(item instanceof VariantItem)) {
+            for (OrderItem dependant_order : root_order.getDependants()) {
+                root.getChildren().add(createTreeFromOrderItem(dependant_order));
+            }
         }
         return root;
     }
@@ -42,10 +47,6 @@ class OrderTreeCell extends TreeCell<OrderItem> {
             setGraphic(null);
             setText(null);
         } else {
-            Item item = StorageAccess.instance().getItem(order_item.getItem());
-
-            Label  label = new Label(item.getName() + " x " + order_item.getQuantity());
-
             Button addQuantityButton = new Button("+");
             addQuantityButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
@@ -79,7 +80,40 @@ class OrderTreeCell extends TreeCell<OrderItem> {
 
             HBox buttonHBox = new HBox(5);
             buttonHBox.setAlignment(Pos.CENTER_RIGHT);
+
+            Label label = null;
+
+            Item item = StorageAccess.instance().getItem(order_item.getItem());
+            if(item instanceof VariantItem) {
+                OrderItem current_variant_order = order_item.getDependants().get(0);
+                Item variant_item = StorageAccess.instance().getItem(current_variant_order.getItem());
+
+                label = new Label(variant_item.getName() + " x " + order_item.getQuantity());
+
+                Button nextVariantButton = new Button(">");
+                nextVariantButton.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent actionEvent) {
+                        order_item.swapWithNextVariant();
+                        getTreeView().refresh();
+                    }
+                });
+                Button prevVariantButton = new Button("<");
+                prevVariantButton.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent actionEvent) {
+                        order_item.swapWithPrevVariant();
+                        getTreeView().refresh();
+                    }
+                });
+                buttonHBox.getChildren().addAll(prevVariantButton, nextVariantButton);
+            }else{
+                label = new Label(item.getName() + " x " + order_item.getQuantity());
+
+            }
+
             buttonHBox.getChildren().addAll(subQuantityButton, addQuantityButton);
+
 
             BorderPane cellPane = new BorderPane();
             cellPane.setLeft(label);

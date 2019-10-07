@@ -27,9 +27,6 @@ public class CustomOrderController implements Initializable {
     private Pane pane_order;
 
     @FXML
-    private Button button_cancel;
-
-    @FXML
     private Button button_confirm;
 
     CustomOrderController(OrderItem order) {
@@ -66,11 +63,6 @@ public class CustomOrderController implements Initializable {
         tree_view.prefWidthProperty().bind(pane_order.widthProperty());
         tree_view.prefHeightProperty().bind(pane_order.heightProperty());
         pane_order.getChildren().add(tree_view);
-    }
-
-    @FXML
-    void cancelClicked(ActionEvent event) {
-        controller_window.close();
     }
 
     @FXML
