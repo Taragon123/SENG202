@@ -154,25 +154,16 @@ public class OrderScreenController implements Initializable {
             menu_tabs.getTabs().add(tab);
 
             //Create GridPane and set it as the content of the Tab
-            GridPane grid = createGridPane();
-            scrollpane.setContent(grid);
-
-            //Set the row and column constraints (this call enables the grid to have 5 columns and 5 rows)
-            int colMax = 5; // the max col number
-            int rowMax = 5; // the max row number
-            setColumnConstraints(grid, colMax);
-//                setRowConstraints(grid, rowMax);
+            FlowPane flowPane = createFlowPane();
+            scrollpane.setContent(flowPane);
 
             /* Populate buttons in groups of colours */
-            int currIndex = 0;
             ArrayList<MenuItem> menu_items = StorageAccess.instance().getMenu(menu_ref).getMenuItems();
             for (String colour: colourMap.keySet()) {
                 for (MenuItem menu_item: menu_items) {
                     if (menu_item.getColour().equals(colour)) {
                         Button button = createButton(menu_item);
-                        button.setMinHeight(100);
-                        grid.add(button, currIndex % colMax, currIndex/colMax);
-                        currIndex++;
+                        flowPane.getChildren().add(button);
                     }
                 }
             }
@@ -205,8 +196,6 @@ public class OrderScreenController implements Initializable {
         button.setMnemonicParsing(false);
         button.setPrefHeight(150.0);
         button.setPrefWidth(200.0);
-        button.setLayoutX(198.0);
-        button.setLayoutY(20.0);
         button.setWrapText(true);
         button.setContentDisplay(ContentDisplay.CENTER);
         button.setTextAlignment(TextAlignment.CENTER);
@@ -249,18 +238,18 @@ public class OrderScreenController implements Initializable {
      * OrderScreenController initializer
      * @return GridPane object
      */
-    private GridPane createGridPane() {
-        GridPane grid = new GridPane();
-        grid.setHgap(10.0);
-        grid.setVgap(10.0);
-        grid.setLayoutX(-1.0);
-        grid.setLayoutY(1.0);
-        grid.setPrefHeight(611.0);
-        grid.setPrefWidth(910.0);
-        grid.setStyle("-fx-background-color: #c8d6e5;");
-        grid.setMinWidth(10.0);
-        grid.setPadding(new Insets(10, 10, 10, 10));
-        return grid;
+    private FlowPane createFlowPane() {
+        FlowPane flowPane = new FlowPane();
+        flowPane.setHgap(10.0);
+        flowPane.setVgap(10.0);
+        flowPane.setLayoutX(-1.0);
+        flowPane.setLayoutY(1.0);
+        flowPane.setPrefHeight(611.0);
+        flowPane.setPrefWidth(910.0);
+        flowPane.setStyle("-fx-background-color: #c8d6e5;");
+        flowPane.setMinWidth(10.0);
+        flowPane.setPadding(new Insets(10, 10, 10, 10));
+        return flowPane;
     }
 
     /**
