@@ -111,14 +111,14 @@ public class Currency implements Comparable<Currency> {
 
     /**
      * Returns the difference between the two currencies
-     * If return is negative currencyB is larger
-     * If return is positive this currency is larger
+     * If return is positive currencyB is larger
+     * If return is negative this currency is larger
      * @param currencyB
-     * @return this.cents - currencyB.cents
+     * @return currencyB.cents - this.cents
      */
     @Override
     public int compareTo(Currency currencyB) {
-        return this.cents - currencyB.cents;
+        return currencyB.cents - this.cents;
     }
 
     @Override
