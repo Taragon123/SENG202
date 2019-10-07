@@ -102,11 +102,10 @@
                 <recipe>
                     <method>Pre made in bags</method>
                 </recipe>
-                <tags uuid="2c16418b-5d47-43f3-bcae-2061a7893ad6"/>
                 <qty_unit>NUM</qty_unit>
                 <variant_list>
-                    <variant uuid="8321e692-6b3a-4321-ad6f-c5e6e22a33c5"/>
                     <variant uuid="8421e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                    <variant uuid="8321e692-6b3a-4321-ad6f-c5e6e22a33c5"/>
                 </variant_list>
             </value>
         </entry>
@@ -253,14 +252,6 @@
                 </menuitem_list>
                 <name>Lunch Menu</name>
                 <description>Hello I am a menu description</description>
-            </value>
-        </entry>
-        <entry>
-            <key uuid="e8c0a24f-4dd4-41ea-9b6a-4d77c5436a87"/>
-            <value uuid="e8c0a24f-4dd4-41ea-9b6a-4d77c5436a87">
-                <menuitem_list>
-                    <menuitem/>
-                </menuitem_list>
             </value>
         </entry>
     </menu_map>

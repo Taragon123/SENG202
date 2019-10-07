@@ -92,8 +92,7 @@ public class MenuItem {
      * @param item_ref item reference to be added to the menu
      */
     public void setItem(Item_Ref item_ref) {
-        this.item = item_ref;
-        Item tempItem = StorageAccess.instance().getItem(item_ref);
+        this.item = new Item_Ref(item_ref);
     }
 
     /**
