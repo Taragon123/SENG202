@@ -101,7 +101,12 @@ public class Currency implements Comparable<Currency> {
      * @param subtrahend Currency containing the amount of cents to be deducted
      */
     public void subCash(Currency subtrahend) {
-        cents -= subtrahend.getValue();
+        if (cents - subtrahend.getValue() < 0) {
+            System.out.println("Not enough cash in register");
+        }
+        else {
+            cents -= subtrahend.getValue();
+        }
     }
 
     @Override

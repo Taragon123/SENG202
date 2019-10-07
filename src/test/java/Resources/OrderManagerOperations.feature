@@ -31,3 +31,7 @@ Feature: Order operations
     And Remove tomatoes is selected
     Then Burger no longer has the tomatoes tag, receipt reflects this
 
+  Scenario: A customer returns an item for a refund
+    Given A customer returns items bought from the food truck
+    When Total price of order is found and cash returned
+    Then New cash value in the register

@@ -52,4 +52,12 @@ public class CashRegister {
     public void addRegisterAmount(Currency amount) {
         registerAmount.addCash(amount);
     }
+
+    /**
+     * This method adds a Currency object, containing the number of cents to subtract, to the current registerAmount Currency
+     * @param amount The Currency to be subtracted containing the amount of cents that will be subtracted
+     */
+    public void subRegisterAmount(Currency amount) {
+        registerAmount.subCash(amount);
+    }
 }

@@ -27,6 +27,8 @@ public class OrderOperationsStepDefs {
     Item burger = new Item();
     Item_Ref chip_ref = new Item_Ref();
     Item_Ref burger_ref = new Item_Ref();
+    int totalPrice = 0;
+    CashRegister register = new CashRegister();
 
     @Given("Current order contains only one burger")
     public void currentOrderContainsOnlyOneBurger() {
@@ -142,5 +144,43 @@ public class OrderOperationsStepDefs {
         assertEquals(0, cart.getCart().getOrderTree().getDependants().size());
         assertEquals(true, cart.getCart().isEmpty());
         // TODO(Anzac): Check that the chefs order and receipts are correct
+    }
+
+    @Given("A customer returns items bought from the food truck")
+    public void aCustomerReturnsItemsBoughtFromTheFoodTruck() {
+        Currency chipPrice = new Currency(5);
+        Currency burgerPrice = new Currency(10);
+        register.setRegisterAmount(5000);
+
+        cart.getCart().setUUID("3aadca48-545b-40fc-90ce-f908284b93e8");
+        Item_Ref burger_ref = new Item_Ref();
+        burger_ref.setUUID("79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994");
+        burger = StorageAccess.instance().getItem(burger_ref);
+
+        Item_Ref chip_ref = new Item_Ref();
+        chip_ref.setUUID("8921e663-6b3a-4321-ad6f-c5e6e22a33c5");
+        chips = StorageAccess.instance().getItem(chip_ref);
+
+        cart.resetCart();
+
+        menuChip.setItem(chip_ref);
+        menuChip.setPrice(chipPrice);
+        cart.addToCart(menuChip, 1);
+
+        menuBurger.setItem(burger_ref);
+        menuBurger.setPrice(burgerPrice);
+        cart.addToCart(menuBurger, 1);
+    }
+
+    @When("Total price of order is found and cash returned")
+    public void totalPriceOfOrderIsFoundAndCashReturned() {
+        totalPrice = cart.getCart().getTotalCost().getDollars();
+        Currency refundAmount = new Currency(totalPrice);
+        register.subRegisterAmount(refundAmount);
+    }
+
+    @Then("New cash value in the register")
+    public void newCashValueInTheRegister() {
+        assertEquals(35, register.getRegisterAmount());
     }
 }
