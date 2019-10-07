@@ -458,7 +458,7 @@ public class OrderScreenController implements Initializable {
                 @Override
                 public void handle(ActionEvent actionEvent) {
                     CustomOrderController controller = new CustomOrderController(order_item);
-                    controller.createNewWindow(null);
+                    controller.createNewWindow(null, parent.window);
                 }
             });
         }

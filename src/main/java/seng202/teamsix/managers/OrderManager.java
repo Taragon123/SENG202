@@ -53,7 +53,9 @@ public class OrderManager {
      */
     public OrderItem addToCart(MenuItem menu_item, int qty) {
         Item_Ref item_ref = menu_item.getItem();
-        return cart.getOrderTree().addToOrder(item_ref, qty, menu_item.getPrice(), 0);
+        OrderItem order_item = cart.getOrderTree().addToOrder(item_ref, qty, menu_item.getPrice(), 0);
+
+        return order_item;
     }
 
     /**

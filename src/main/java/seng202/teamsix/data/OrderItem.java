@@ -25,6 +25,8 @@ public class OrderItem {
     @XmlElement
     private ArrayList<OrderItem> dependants = new ArrayList<OrderItem>();
     @XmlElement
+    private OrderItem parent_order = null;
+    @XmlElement
     private int quantity = 0;
 
     private Currency price = new Currency();
@@ -68,6 +70,13 @@ public class OrderItem {
      */
     public ArrayList<OrderItem> getDependants() {
         return this.dependants;
+    }
+
+    /**
+     * @return parent order for order item. Can be null if root order
+     */
+    public OrderItem getParent() {
+        return this.parent_order;
     }
 
     /**
@@ -115,23 +124,24 @@ public class OrderItem {
         }
 
         if (!is_added) {
-            OrderItem parent = new OrderItem();
-            parent.setItem(item_ref);
-            parent.setQuantity(qty);
-            this.dependants.add(parent);
-            reference = parent;
+            OrderItem new_orderitem = new OrderItem();
+            new_orderitem.setItem(item_ref);
+            new_orderitem.setQuantity(qty);
+            new_orderitem.parent_order = this;
+            this.dependants.add(new_orderitem);
+            reference = new_orderitem;
 
             if (new_item_price != null) {
-                Currency temp_price = parent.getPrice();
+                Currency temp_price = new_orderitem.getPrice();
                 temp_price.addCash(new_item_price);
-                parent.setPrice(temp_price);
+                new_orderitem.setPrice(temp_price);
             }
             if (item instanceof CompositeItem) {
                 for (Item_Ref child_ref : ((CompositeItem) item).getItems()) {
-                    parent.addToOrder(child_ref, 1, new_item_price, recurse_depth + 1);
+                    new_orderitem.addToOrder(child_ref, 1, new_item_price, recurse_depth + 1);
                 }
             } else if (item instanceof VariantItem) {
-                parent.addToOrder(((VariantItem) item).getVariants().get(0), 1, null,
+                new_orderitem.addToOrder(((VariantItem) item).getVariants().get(0), 1, null,
                         recurse_depth + 1);
             }
         }
@@ -146,6 +156,10 @@ public class OrderItem {
         }
 
         return reference;
+    }
+
+    public boolean removeFromOrder(OrderItem order_item) {
+        return dependants.remove(order_item);
     }
 
     /**

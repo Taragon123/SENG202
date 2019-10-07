@@ -37,7 +37,6 @@ class OrderTreeCell extends TreeCell<OrderItem> {
     protected void updateItem(OrderItem order_item, boolean empty) {
         super.updateItem(order_item, empty);
 
-
         // If the cell is empty we don't show anything.
         if (isEmpty()) {
             setGraphic(null);
@@ -45,13 +44,14 @@ class OrderTreeCell extends TreeCell<OrderItem> {
         } else {
             Item item = StorageAccess.instance().getItem(order_item.getItem());
 
-            Label  label = new Label(item.getName() + " x " + item.getQuantity());
+            Label  label = new Label(item.getName() + " x " + order_item.getQuantity());
 
             Button addQuantityButton = new Button("+");
             addQuantityButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
                     order_item.setQuantity(order_item.getQuantity() + 1);
+                    getTreeView().refresh();
                 }
             });
 
@@ -59,7 +59,21 @@ class OrderTreeCell extends TreeCell<OrderItem> {
             subQuantityButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
-                    order_item.setQuantity(order_item.getQuantity() - 1);
+                    if ((getTreeItem().getParent() == null && order_item.getQuantity() > 1) || getTreeItem().getParent() != null){
+                        order_item.setQuantity(order_item.getQuantity() - 1);
+                    }
+
+
+                    if (order_item.getQuantity() == 0) {
+                        if(order_item.getParent() != null) {
+                            order_item.getParent().removeFromOrder(order_item);
+                        }
+                        if(getTreeItem().getParent() != null) {
+                            getTreeItem().getParent().getChildren().remove(getTreeItem());
+                        }
+
+                    }
+                    getTreeView().refresh();
                 }
             });
 

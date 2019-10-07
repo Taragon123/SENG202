@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import seng202.teamsix.data.OrderItem;
 
@@ -35,7 +36,7 @@ public class CustomOrderController implements Initializable {
         modifying_order = order;
     }
 
-    void createNewWindow(EventHandler<ActionEvent> callback_handler) {
+    void createNewWindow(EventHandler<ActionEvent> callback_handler, Stage parent_window) {
         FXMLLoader loaderCreateItem = new FXMLLoader(getClass().getResource("custom_order.fxml"));
         loaderCreateItem.setController(this);
 
@@ -52,6 +53,8 @@ public class CustomOrderController implements Initializable {
         controller_window = new Stage();
         callback = callback_handler;
 
+        controller_window.initModality(Modality.WINDOW_MODAL);
+        controller_window.initOwner(parent_window);
         controller_window.setScene(root);
         controller_window.getIcons().add(new Image("file:assets/icons/icon.png"));
         controller_window.show();
