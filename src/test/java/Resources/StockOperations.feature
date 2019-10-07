@@ -8,8 +8,6 @@ Feature: Stock operations
   Scenario: Remove items from stock
     Given Stock items expire are used etc
     When Remove stock is selected
-    And Data is entered
-    And Confirm is selected
     Then Stock is removed to the inventory
 
   Scenario: View current inventory levels

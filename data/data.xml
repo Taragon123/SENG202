@@ -270,6 +270,10 @@
             <value uuid="3aadca48-545b-40fc-90ce-f908284b93e8">
                 <order_tree>
                     <dependants>
+                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <quantity>1</quantity>
+                    </dependants>
+                    <dependants>
                         <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
                         <dependants>
                             <item uuid="79e1c5af-ecca-4d8b-a3a5-1c0166c9f994"/>
@@ -305,13 +309,9 @@
                         </dependants>
                         <quantity>1</quantity>
                     </dependants>
-                    <dependants>
-                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
-                        <quantity>2</quantity>
-                    </dependants>
                     <quantity>0</quantity>
                 </order_tree>
-                <timestamp>2019-09-23T22:00:35.817+12:00</timestamp>
+                <timestamp>2019-10-07T18:46:37.044+13:00</timestamp>
             </value>
         </entry>
         <entry>

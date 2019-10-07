@@ -21,7 +21,7 @@ Feature: Order operations
     Then Current order is terminated and new order is started (empty)
 
   Scenario: Confirming an order
-    Given The customer has ordered all that they desire (Burger and chips, $15)
+    Given The customer has ordered all that they desire
     When The order is confirmed by the user
     Then The customer is asked to pay the full price which is then added to the cash register
 
