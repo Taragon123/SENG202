@@ -47,15 +47,15 @@ public class StockInstanceTest {
         assertEquals(100, stock_item.getQuantityRemaining(), 0.0001);
 
         //Test adding quantity
-        stock_item.setQuantityRemaining(10);
+        stock_item.addQuantity(10);
         assertEquals(110, stock_item.getQuantityRemaining(), 0.0001);
 
         //Test subtracting quantity
-        stock_item.setQuantityRemaining(-20);
+        stock_item.subQuantity(20);
         assertEquals(90, stock_item.getQuantityRemaining(), 0.0001);
 
         //Test subtracting more than what is remaining
-        stock_item.setQuantityRemaining(-100);
+        stock_item.subQuantity(100);
         assertEquals(0, stock_item.getQuantityRemaining(), 0.0001);
     }
 }

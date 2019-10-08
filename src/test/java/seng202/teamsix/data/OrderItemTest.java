@@ -94,9 +94,9 @@ public class OrderItemTest {
         Item_Ref item2 = initialiseItem2();
         OrderItem bag = new OrderItem();
         bag.addToOrder(item2, 5, null, 0);
-        assertTrue(bag.removeFromOrder(item2, 4, null));
+        assertTrue(bag.removeFromOrder(item2, 4, null, true));
         assertEquals(1, bag.getDependants().get(0).getQuantity());
-        assertFalse(bag.removeFromOrder(item2, 4, null));
+        assertFalse(bag.removeFromOrder(item2, 4, null, true));
     }
 
     /**

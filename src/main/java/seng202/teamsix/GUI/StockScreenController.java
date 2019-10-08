@@ -199,7 +199,9 @@ public class StockScreenController implements Initializable {
         if (doSearch) {
             String searchText = searchBox.getText();
 
+            stockDataQuery.addConstraintEqual("hidden", "false");
             stockDataQuery.sort_by("name", true);
+
             itemDataQuery.sort_by("name", true);
 
 

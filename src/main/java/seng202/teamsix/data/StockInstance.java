@@ -20,12 +20,14 @@ public class StockInstance extends StockInstance_Ref {
     private Item_Ref stock_item;
     @XmlElement @QueryField
     private Date date_added;
-    @XmlElement @QueryField
+    @XmlElement
     private Date date_expires;
-    @XmlElement @QueryField
+    @XmlElement
     private boolean does_expire;
     @XmlElement @QueryField
-    private float quantity_remaining;
+    private double quantity_remaining;
+    @XmlElement @QueryField
+    private String hidden;
 
     /**
      * Empty constructor
@@ -39,7 +41,7 @@ public class StockInstance extends StockInstance_Ref {
      * @param does_expire boolean does the StockInstance expire
      * @param date_expires the date that the StockInstance expires
      */
-    public StockInstance(Date date_added, boolean does_expire, Date date_expires, float quantity_remaining, Item_Ref item_ref) {
+    public StockInstance(Date date_added, boolean does_expire, Date date_expires, double quantity_remaining, Item_Ref item_ref) {
         super(); //generates uuid for the StockInstance
         this.stock_item = item_ref;
         this.date_added = date_added;
@@ -83,7 +85,7 @@ public class StockInstance extends StockInstance_Ref {
 
     public Date getDateExpired() {return date_expires;}
 
-    public float getQuantityRemaining() {return quantity_remaining;}
+    public double getQuantityRemaining() {return quantity_remaining;}
 
     public boolean getDoesExpire() {return does_expire;}
 
@@ -94,11 +96,8 @@ public class StockInstance extends StockInstance_Ref {
      * float as te parameter
      * @param quantity the quantity of the StockInstance to be added to the quantity remaining
      */
-    public void setQuantityRemaining(float quantity) {
-        quantity_remaining += quantity;
-        if (quantity_remaining < 0) {
-            quantity_remaining = 0;
-        }
+    public void setQuantityRemaining(double quantity) {
+        quantity_remaining = Math.max(0, quantity);
     }
     @QueryField("name")
     public String getName() {
@@ -107,5 +106,39 @@ public class StockInstance extends StockInstance_Ref {
             stockInstanceName = "null";
         }
         return stockInstanceName;
+    }
+
+    @QueryField("does_expire")
+    public String getDoesExpireString() {
+        String doesExpireString;
+        if (does_expire) {
+            doesExpireString = "true";
+        } else {
+            doesExpireString = "false";
+        }
+        return doesExpireString;
+    }
+
+    @QueryField("date_expires")
+    public String getDateExpiresString() {
+        String dateExpiresString;
+        if (date_expires == null) {
+            dateExpiresString = "null";
+        } else {
+            dateExpiresString = date_expires.toString();
+        }
+        return dateExpiresString;
+    }
+
+    public void setHidden(String hidden) {
+        this.hidden = hidden;
+    }
+
+    public void addQuantity(double i) {
+        quantity_remaining += Math.max(0.0, i);;
+    }
+
+    public void subQuantity(double i) {
+        quantity_remaining -= Math.max(0.0, i);
     }
 }

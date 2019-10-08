@@ -54,11 +54,20 @@ public class OrderManager {
      * @param menu_item A reference to the menu item that we wish to add to the cart.
      * @param qty The quantity corresponding to the number of Items.
      */
-    public OrderItem addToCart(MenuItem menu_item, int qty) {
+    public OrderItem addToCart(MenuItem menu_item, int qty, boolean check_stock) {
         Item_Ref item_ref = menu_item.getItem();
-        OrderItem order_item = cart.getOrderTree().addToOrder(item_ref, qty, menu_item.getPrice(), 0);
-
-        return order_item;
+        OrderItem new_root = cart.getOrderTree();
+        OrderItem orderItem = new_root.addToOrder(item_ref, qty, menu_item.getPrice(), 0);
+        boolean stockExists = new_root.checkOrRemoveStock(0, false);
+        System.out.println("Stock exists: "+stockExists);
+        if (!stockExists && check_stock) {
+            removeFromCart(menu_item, qty, false);
+            return null;
+        }
+        new_root.addToPrice(item_ref, qty, menu_item.getPrice());
+        cart.setOrderTree(new_root);
+        cart.updateTotalCost();
+        return orderItem;
     }
 
     /**
@@ -66,9 +75,12 @@ public class OrderManager {
      * @param menu_item A reference to the MenuItem that we wish to remove from the list.
      * @param qty The quantity corresponding to the number of Items.
      */
-    public void removeFromCart(MenuItem menu_item, int qty) {
+    public void removeFromCart(MenuItem menu_item, int qty, boolean removeFromPrice) {
         Item_Ref item_ref = StorageAccess.instance().getItem(menu_item.getItem());
-        cart.getOrderTree().removeFromOrder(item_ref, qty, menu_item.getPrice());
+        OrderItem new_root = cart.getOrderTree();
+        new_root.removeFromOrder(item_ref, qty, menu_item.getPrice(), removeFromPrice);
+        cart.setOrderTree(new_root);
+        cart.updateTotalCost();
     }
 
     /**
@@ -93,7 +105,12 @@ public class OrderManager {
     public void finaliseOrder() {
         // Save the order with StorageAccess/
         cart.setTimestamp(new Date());
+        cart.updateTotalCost();
         StorageAccess.instance().updateOrder(cart);
+
+        // Update the stock
+        System.out.println("Calling checkOrRemoveStock with remove set to true");
+        cart.getOrderTree().checkOrRemoveStock(0, true);
 
         // Send order to kitchen via order ticket which is to be printed. Also prints a new line.
         System.out.println(cart.getChefOrder()+"\n");
@@ -103,6 +120,8 @@ public class OrderManager {
 
         // Print customers receipt.
         System.out.println(cart.getReceipt());
+
+        // increment local ticket counter by 1 and get ready new cart
         localTicketCount += 1;
         resetCart();
         cart.localTicketNumber = localTicketCount;

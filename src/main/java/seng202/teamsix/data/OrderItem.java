@@ -16,6 +16,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
@@ -105,6 +106,105 @@ public class OrderItem {
     }
 
     /**
+     * Returns an arraylist of stockinstance reference objects ordered by date where each stockinstance relates to the
+     * given item reference.
+     *
+     * @param item_ref Item reference related to the stock instances we want to find.
+     * @return Arraylist of stockinstance refs.
+     */
+    public ArrayList<StockInstance_Ref> getOrderedRelevantStockInstances(Item_Ref item_ref) {
+        Item item = StorageAccess.instance().getItem(item_ref);
+        ArrayList<StockInstance_Ref> orderedRelevantStockInstanceRefs = new ArrayList<StockInstance_Ref>();
+
+        //Query 1
+        DataQuery<StockInstance> stockDataQuery1 = new DataQuery<>(StockInstance.class);
+        String regex = String.format("(?i).*(%s).*", item.getName());
+        stockDataQuery1.addConstraintRegex("name", regex);
+        //stockDataQuery1.addConstraintEqual("does_expire", "false");
+        //stockDataQuery1.addConstraintEqual("hidden", "false");
+        stockDataQuery1.sort_by("date_expires", true);
+        List<UUID_Entity> orderedRelevantUUIDEntities1 = stockDataQuery1.runQuery();
+        for (UUID_Entity uuid_entity: orderedRelevantUUIDEntities1) {
+            orderedRelevantStockInstanceRefs.add((StockInstance_Ref) uuid_entity);
+        }
+        /*
+        //Query 2
+        DataQuery<StockInstance> stockDataQuery2 = new DataQuery<>(StockInstance.class);
+        stockDataQuery2.addConstraintRegex("name", regex);
+        stockDataQuery2.addConstraintEqual("does_expire", "true");
+        stockDataQuery2.addConstraintEqual("hidden", "false");
+        List<UUID_Entity> orderedRelevantUUIDEntities2 = stockDataQuery2.runQuery();
+        for (UUID_Entity uuid_entity: orderedRelevantUUIDEntities2) {
+            orderedRelevantStockInstanceRefs.add((StockInstance_Ref) uuid_entity);
+        } */
+
+        return orderedRelevantStockInstanceRefs;
+    }
+
+    /**
+     * Used to update the stock when an order is completed, easier to remove stock once order is finalised as keeping track
+     * of dates once an instance is removed is unnecessary and difficult under the time constraints.
+     *
+     * Whenever this function is used, user should test to see if the stock exists using stockExists with the same params.
+     *
+     * @param current_depth
+     * @param remove If true, updates the stock accordingly. Else if false, does not update the stock.
+     * @return true if there is enough stock, false otherwise.
+     */
+    public boolean checkOrRemoveStock(int current_depth, boolean remove) {
+        boolean exists = true;
+
+        // test to see if this is the root node or
+        if (current_depth == 0) { // root layer
+            for (OrderItem dependant : dependants) {
+                exists &= dependant.checkOrRemoveStock(current_depth + 1, remove);
+            }
+            return exists;
+        }
+
+        // retrieve item from storage.
+        Item temp_item = StorageAccess.instance().getItem(item);
+        if (temp_item != null) { // anything below root layer
+            ArrayList<StockInstance_Ref> orderedRelevantStockInstances = getOrderedRelevantStockInstances(item);
+            int relevantInstanceIndex = 0;
+            int item_quantity = getQuantity();
+            while (relevantInstanceIndex < orderedRelevantStockInstances.size() && item_quantity > 0) {
+                StockInstance relevantInstance = StorageAccess.instance().getStockInstance(orderedRelevantStockInstances.get(relevantInstanceIndex));
+                if (item_quantity >= relevantInstance.getQuantityRemaining()) {
+                    item_quantity -= relevantInstance.getQuantityRemaining();
+
+                    if (remove) {
+                        relevantInstance.setQuantityRemaining(0);
+                        relevantInstance.setHidden("true");
+                        StorageAccess.instance().updateStockInstance(relevantInstance);
+                    }
+
+                    if (item_quantity == 0) {
+                        return true;
+                    }
+
+                } else {
+                    if (remove) {
+                        relevantInstance.subQuantity(item_quantity);
+                        StorageAccess.instance().updateStockInstance(relevantInstance);
+                    }
+                    return true;
+                }
+                relevantInstanceIndex++;
+            }
+
+            // compositeitem not in stock, check if each of the items to make it are in stock.
+            if (item_quantity > 0 && temp_item instanceof CompositeItem) {
+                for (OrderItem dependant : dependants) {
+                    exists &= dependant.checkOrRemoveStock(current_depth + 1, remove);
+                }
+                return exists;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Adds an Item to the Order, given an Item_Ref item_ref, int qty, and ItemTag_Ref default tag.
      * @param item_ref Refers to the Item of which we want to add to the order.
      * @param qty      The number of items we want to add too the order.
@@ -132,17 +232,26 @@ public class OrderItem {
             new_orderitem.addToOrder(((VariantItem) item).getVariants().get(0), 1, null,
                     recurse_depth + 1);
         }
-        if (recurse_depth == 0) {
-            for (int i = 0; i < qty; i++) {
-                if (new_item_price != null) {
-                    price.addCash(new_item_price);
-                } else {
-                    price.addCash(item.getMarkupPrice());
-                }
+        return new_orderitem;
+    }
+
+    /**
+     * This method updates the price of the current OrderItem, likely to be used on the root orderitem of the order.
+     * @param ref Used in case the OrderItem does not have an associated price to get the default markup price of the item
+     *            to be added.
+     * @param qty The number of items being added, such that we can add the price this many times.
+     * @param new_item_price Pass through null of not used, otherwise will be used to add the price to the current
+     *                       orderitem.
+     */
+    public void addToPrice(Item_Ref ref, int qty, Currency new_item_price) {
+        Item item = StorageAccess.instance().getItem(ref);
+        for (int i = 0; i < qty; i++) {
+            if (new_item_price != null) {
+                price.addCash(new_item_price);
+            } else {
+                price.addCash(item.getMarkupPrice());
             }
         }
-
-        return new_orderitem;
     }
 
     public boolean removeFromOrder(OrderItem order_item) {
@@ -155,7 +264,7 @@ public class OrderItem {
      * @param qty The number of items we want to remove from the order.
      * @return True if items are removed, false if they were not in the order tree to begin with.
      */
-    public boolean removeFromOrder(Item_Ref item_ref, int qty, Currency price_of_item_to_remove) {
+    public boolean removeFromOrder(Item_Ref item_ref, int qty, Currency price_of_item_to_remove, boolean removeFromPrice) {
         boolean is_removed = false;
         // check the list of dependants to see if the item is in the list (at the top level)
         int index = 0;
@@ -173,7 +282,7 @@ public class OrderItem {
             }
             index++;
         }
-        if (is_removed) {
+        if (is_removed && removeFromPrice) {
             for (int i = 0; i < qty; i++) {
                 if (price_of_item_to_remove != null) {
                     price.subCash(price_of_item_to_remove);
@@ -283,7 +392,7 @@ public class OrderItem {
             order_name = item.getName();
             String spacer = String.join("", Collections.nCopies(current_depth - 1, "  "));
             if (current_depth == 1) {
-                line = spacer + this.getQuantity() + " x " + order_name;
+                line = spacer + order_name;
                 if (wants_price) {
                     line += " @ "+this.getPrice()+" each";
                 }

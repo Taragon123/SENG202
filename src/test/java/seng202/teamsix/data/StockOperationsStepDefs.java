@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StockOperationsStepDefs {
     StockInstance stock_item;
-    float current_stock = 0;
+    double current_stock = 0;
 
     @Given("New stock items arrive")
     public void newStockItemsArrive() {

@@ -20,9 +20,23 @@ import java.util.Date;
 @XmlAccessorType(XmlAccessType.NONE)
 public class Order extends Order_Ref{
     @XmlElement
-    private OrderItem order_tree = new OrderItem();
+    private OrderItem order_tree;
     @XmlElement @QueryField
     private Date timestamp;
+    @XmlElement
+    private Currency total_cost;
+
+    public Order() {
+        order_tree = new OrderItem();
+        updateTotalCost();
+    }
+
+    /**
+     * This is to be used in finalise order so that the total order price is saved with the order.
+     */
+    public void updateTotalCost() {
+        total_cost = order_tree.getPrice();
+    }
 
     public OrderItem getOrderTree() {
         return order_tree;
@@ -46,7 +60,7 @@ public class Order extends Order_Ref{
      * @return the Currency object contained in the price attribute of the root OrderItem.
      */
     public Currency getTotalCost() {
-        return order_tree.getPrice();
+        return total_cost;
     }
 
     /**

@@ -12,7 +12,9 @@ public class OrderTest {
         Order order = new Order();
         Item_Ref burger_ref = initialiseItem1(); // returns a reference to a burger item already one of the xml files.
         OrderItem root = order.getOrderTree();
-        root.addToOrder(burger_ref, 25, null, 0); // Each burger has a selling price of $19.99. By multiplying this by 25 we get $499.75.
+        root.addToOrder(burger_ref, 25, null, 0); // later changed so that this does not add to the price, instead check to see if not null then add price
+        root.addToPrice(burger_ref, 25, null);
+        // Each burger has a selling price of $19.99. By multiplying this by 25 we get $499.75.
         assertEquals(499.75, order.getTotalCost().getTotalCash(), 0.0);
     }
 
@@ -29,7 +31,7 @@ public class OrderTest {
         Currency menu_combo_price = new Currency(19.99);
         menu_combo.setPrice(menu_combo_price);
         OrderManager orderManager = new OrderManager();
-        orderManager.addToCart(menu_combo, 4);
+        orderManager.addToCart(menu_combo, 4, false);
         String expectedChefsOrder =   "/**********  Chef's Order  **********/\n" +
                             "Order Number: 1\n" +
                             "Contents:\n" +

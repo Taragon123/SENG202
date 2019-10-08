@@ -14,13 +14,13 @@ class OrderManagerTest {
         OrderManager orderManager = new OrderManager();
         orderManager.resetCart();
         MenuItem menuItemToAdd = initialiseItem1();
-        orderManager.addToCart(menuItemToAdd, 5);
+        orderManager.addToCart(menuItemToAdd, 5, false);
         OrderItem orderItemRetrievedFromOrder = orderManager.getCart().getOrderTree().getDependants().get(0);
 
         assertEquals(((Item)menuItemToAdd.getItem()).getName(), ((Item)orderItemRetrievedFromOrder.getItem()).getName());
         assertEquals(5, orderItemRetrievedFromOrder.getQuantity());
 
-        orderManager.addToCart(menuItemToAdd, 10);
+        orderManager.addToCart(menuItemToAdd, 10, false);
         orderItemRetrievedFromOrder = orderManager.getCart().getOrderTree().getDependants().get(0);
 
         assertEquals(15, orderItemRetrievedFromOrder.getQuantity());
