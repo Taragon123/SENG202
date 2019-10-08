@@ -19,7 +19,7 @@ public class MenuItem {
     @XmlElement
     private String description;
     @XmlElement
-    private String colour = "#FFFFFF";
+    private int colour = 0x000000;
     @XmlElement
     private Currency price;
     /**
@@ -43,7 +43,7 @@ public class MenuItem {
      * Sets the colour associated with buttons of this menu
      * @param colour the colour that is to be associated with buttons of this menu
      */
-    public void setColour(String colour) {
+    public void setColour(int colour) {
         this.colour = colour;
     }
 
@@ -51,7 +51,7 @@ public class MenuItem {
      * Gets the colour associated with buttons of this menu
      * @return the colour that is associated with buttons of this menu
      */
-    public String getColour() {
+    public int getColour() {
         return colour;
     }
 
@@ -102,6 +102,5 @@ public class MenuItem {
     public Item_Ref getItem() {
         return item;
     }
-
 }
 

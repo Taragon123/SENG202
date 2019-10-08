@@ -34,10 +34,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.ResourceBundle;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Name: OrderScreenController.java
@@ -64,7 +61,6 @@ public class OrderScreenController implements Initializable {
     private OrderScreenApplication parent;
     private boolean isPopupInit = false;
     private boolean isInit = false;
-    private HashMap<String, String> colourMap;
 
     @FXML
     private Label date_time;
@@ -77,16 +73,6 @@ public class OrderScreenController implements Initializable {
     @FXML
     private Button confirmButton;
     private int x;
-
-    public OrderScreenController() {
-        colourMap = new HashMap<>();
-        colourMap.put("Black", "#000000");
-        colourMap.put("White", "#FFFFFF");
-        colourMap.put("Yellow", "#fcfc03");
-        colourMap.put("Red", "#fc0303");
-        colourMap.put("Blue", "#03a1fc");
-        colourMap.put("Green", "#44bd11");
-    }
 
 
     /**
@@ -166,15 +152,18 @@ public class OrderScreenController implements Initializable {
             /* Populate buttons in groups of colours */
             int currIndex = 0;
             ArrayList<MenuItem> menu_items = StorageAccess.instance().getMenu(menu_ref).getMenuItems();
-            for (String colour: colourMap.keySet()) {
-                for (MenuItem menu_item: menu_items) {
-                    if (menu_item.getColour().equals(colour)) {
-                        Button button = createButton(menu_item);
-                        button.setMinHeight(100);
-                        grid.add(button, currIndex % colMax, currIndex/colMax);
-                        currIndex++;
-                    }
+            menu_items.sort(new Comparator<MenuItem>() {
+                @Override
+                public int compare(MenuItem o1, MenuItem o2) {
+                    return Integer.compare(o1.getColour(), o2.getColour());
                 }
+            });
+            for (MenuItem menu_item: menu_items) {
+
+                    Button button = createButton(menu_item);
+                    button.setMinHeight(100);
+                    grid.add(button, currIndex % colMax, currIndex/colMax);
+                    currIndex++;
             }
         }
     }
@@ -211,16 +200,13 @@ public class OrderScreenController implements Initializable {
         button.setContentDisplay(ContentDisplay.CENTER);
         button.setTextAlignment(TextAlignment.CENTER);
         button.setTextOverrun(OverrunStyle.CENTER_ELLIPSIS);
-        button.setStyle("-fx-background-color: " + colourMap.get(menu_item.getColour()) + "; -fx-font-size: 20; -fx-background-radius: 10;");
+        button.setStyle(String.format("-fx-background-color: #%06X; -fx-font-size: 20; -fx-background-radius: 10;", menu_item.getColour()));
 
         //Decide on the colour of the text based on the colour of the button
-        String background = colourMap.get(menu_item.getColour());
-        int red = Integer.decode("0x" + background.substring(1, 3));
-        int green = Integer.decode("0x" + background.substring(3, 5));
-        int blue = Integer.decode("0x" + background.substring(5, 7));
+        int background = menu_item.getColour();
 
-        if ((red*0.299 + green*0.587 + blue*0.114) > 150) {
-            button.setTextFill(Paint.valueOf("#000000"));
+        if (menu_item.getColour() != 0x000000) {
+            button.setTextFill(Paint.valueOf("#FFFFFF"));
         } else {
             button.setTextFill(Paint.valueOf("#FFFFFF"));
         }

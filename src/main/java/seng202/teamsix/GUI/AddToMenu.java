@@ -19,6 +19,8 @@ public class AddToMenu implements Initializable, CustomDialogInterface {
     private Item_Ref item_ref;
     private final List<UUID_Entity> menus;
     private Boolean extraConfirm = false;
+    private int[] colourNum = {0x000000, 0x32a852, 0xa83232, 0x2d54bd, 0x9c5824, 0xc93ab2, 0x9233b5};
+    private String[] colourName = {"Black", "Green", "Red", "Blue", "Brown", "Pink", "Purple"};
 
     @FXML
     private TextField priceInput;
@@ -49,7 +51,7 @@ public class AddToMenu implements Initializable, CustomDialogInterface {
         for (UUID_Entity entity: menus) {
             menuDropdown.getItems().add(StorageAccess.instance().getMenu(new Menu_Ref(entity)).getName());
         }
-        colourDropDown.getItems().addAll("Black", "White", "Yellow", "Red", "Blue", "Green");
+        colourDropDown.getItems().addAll(colourName);
     }
 
     public void cancel() {
@@ -70,7 +72,7 @@ public class AddToMenu implements Initializable, CustomDialogInterface {
             newMenuItem.setDescription(descriptionInput.getText());
             newMenuItem.setName(StorageAccess.instance().getItem(item_ref).getName());
             newMenuItem.setPrice(price);
-            newMenuItem.setColour(colourDropDown.getSelectionModel().getSelectedItem());
+            newMenuItem.setColour(colourNum[colourDropDown.getSelectionModel().getSelectedIndex()]);
             menu.addToMenu(newMenuItem);
 
             StorageAccess.instance().updateMenu(menu);
