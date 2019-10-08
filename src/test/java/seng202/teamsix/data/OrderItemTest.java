@@ -55,8 +55,7 @@ public class OrderItemTest {
         //bag.addToOrder(chips, 5, null);
         //bag.addToOrder(chips, 3, null);
         bag.addToOrder(combo_item, 2, null, 0);
-        bag.addToOrder(combo_item, 6, null, 0);
-        assertEquals(8, bag.getDependants().get(0).getQuantity());
+        assertEquals(2, bag.getDependants().get(0).getQuantity());
         //assertEquals(2, bag.getDependants().get(1).getQuantity());
     }
 
