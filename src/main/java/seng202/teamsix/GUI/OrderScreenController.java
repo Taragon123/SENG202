@@ -360,6 +360,12 @@ public class OrderScreenController implements Initializable {
         parent.switchToManagementScreen();
     }
 
+    public void set_cash_float() {
+        optionPopup.hide();
+        SetCashFloat cash = new SetCashFloat(orderManager.getCashRegister());
+        cash.createNewWindow();
+    }
+
     /**
      * Opens the options popup, called when the Options button is clicked
      */

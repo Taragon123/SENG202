@@ -37,6 +37,9 @@ public class OrderManager {
         return true;
     }
 
+    public CashRegister getCashRegister() {
+        return cashRegister;
+    }
     /**
      * Constructor for OrderManager, whenever a OrderManager is constructed, the local order number must be set to 1.
      * Initially the OrderManager will need to start with an empty cart as well.
