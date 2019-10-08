@@ -24,9 +24,6 @@
          </VBox.margin>
       </Pane>
       <BorderPane prefHeight="23.0" prefWidth="452.0">
-         <left>
-            <Button fx:id="button_cancel" cancelButton="true" mnemonicParsing="false" onAction="#cancelClicked" text="Cancel" BorderPane.alignment="CENTER" />
-         </left>
          <right>
             <Button fx:id="button_confirm" alignment="CENTER" defaultButton="true" mnemonicParsing="false" onAction="#confirmClicked" text="Confirm" BorderPane.alignment="CENTER" />
          </right>
