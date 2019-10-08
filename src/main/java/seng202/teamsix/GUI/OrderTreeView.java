@@ -2,8 +2,10 @@ package seng202.teamsix.GUI;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import seng202.teamsix.data.Item;
@@ -40,6 +42,20 @@ class OrderTreeCell extends TreeCell<OrderItem> {
 
     @Override
     protected void updateItem(OrderItem order_item, boolean empty) {
+        final double icon_size = 16;
+        final double icon_padding = 4;
+        final ImageView addQtyIcon = new ImageView(getClass().getResource("icons/plus.png").toString());
+        addQtyIcon.setFitWidth(icon_size); addQtyIcon.setFitHeight(icon_size);
+        final ImageView subQtyIcon = new ImageView(getClass().getResource("icons/minus.png").toString());
+        subQtyIcon.setFitWidth(icon_size); subQtyIcon.setFitHeight(icon_size);
+        final ImageView nextVariantIcon = new ImageView(getClass().getResource("icons/right_arrow.png").toString());
+        nextVariantIcon.setFitWidth(icon_size); nextVariantIcon.setFitHeight(icon_size);
+        final ImageView prevVariantIcon = new ImageView(getClass().getResource("icons/left_arrow.png").toString());
+        prevVariantIcon.setFitWidth(icon_size); prevVariantIcon.setFitHeight(icon_size);
+        final ImageView addItemIcon = new ImageView(getClass().getResource("icons/plus_circle.png").toString());
+        addItemIcon.setFitWidth(icon_size); addItemIcon.setFitHeight(icon_size);
+
+
         super.updateItem(order_item, empty);
 
         // If the cell is empty we don't show anything.
@@ -47,7 +63,10 @@ class OrderTreeCell extends TreeCell<OrderItem> {
             setGraphic(null);
             setText(null);
         } else {
-            Button addQuantityButton = new Button("+");
+            Button addQuantityButton = new Button("");
+            addQuantityButton.setGraphic(addQtyIcon);
+            addQuantityButton.setPadding(new Insets(icon_padding));
+            addQuantityButton.setStyle("-fx-background-color: #2bff00");
             addQuantityButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
@@ -56,7 +75,10 @@ class OrderTreeCell extends TreeCell<OrderItem> {
                 }
             });
 
-            Button subQuantityButton = new Button("-");
+            Button subQuantityButton = new Button("");
+            subQuantityButton.setGraphic(subQtyIcon);
+            subQuantityButton.setPadding(new Insets(icon_padding));
+            subQuantityButton.setStyle("-fx-background-color: #ff493f");
             subQuantityButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent actionEvent) {
@@ -90,7 +112,10 @@ class OrderTreeCell extends TreeCell<OrderItem> {
 
                 label = new Label(variant_item.getName() + " x " + order_item.getQuantity());
 
-                Button nextVariantButton = new Button(">");
+                Button nextVariantButton = new Button("");
+                nextVariantButton.setGraphic(nextVariantIcon);
+                nextVariantButton.setPadding(new Insets(icon_padding));
+                nextVariantButton.setStyle("-fx-background-color: #56d1ff");
                 nextVariantButton.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent actionEvent) {
@@ -98,7 +123,10 @@ class OrderTreeCell extends TreeCell<OrderItem> {
                         getTreeView().refresh();
                     }
                 });
-                Button prevVariantButton = new Button("<");
+                Button prevVariantButton = new Button("");
+                prevVariantButton.setGraphic(prevVariantIcon);
+                prevVariantButton.setPadding(new Insets(icon_padding));
+                prevVariantButton.setStyle("-fx-background-color: #56d1ff");
                 prevVariantButton.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent actionEvent) {
