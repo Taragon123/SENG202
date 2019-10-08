@@ -9,7 +9,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
 import seng202.teamsix.data.*;
+
+import java.util.List;
 
 public class OrderTreeView extends TreeView<OrderItem> {
 
@@ -23,7 +26,7 @@ public class OrderTreeView extends TreeView<OrderItem> {
         this.setShowRoot(true);
     }
 
-    private TreeItem<OrderItem> createTreeFromOrderItem(OrderItem root_order) {
+    protected TreeItem<OrderItem> createTreeFromOrderItem(OrderItem root_order) {
         TreeItem<OrderItem> root = new TreeItem<>(root_order);
 
         Item item = StorageAccess.instance().getItem(root_order.getItem());
@@ -144,7 +147,13 @@ class OrderTreeCell extends TreeCell<OrderItem> {
                 addItemButton.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent actionEvent) {
-
+                        SelectItemWindow item_selection = new SelectItemWindow();
+                        List<Item_Ref> selected_items = item_selection.showAndWait(true, (Stage)getTreeView().getScene().getWindow());
+                        if(selected_items.size() > 0) {
+                            OrderItem added_orderitem = order_item.addToOrder(selected_items.get(0), 1, null, 0);
+                            getTreeItem().getChildren().add(((OrderTreeView) getTreeView()).createTreeFromOrderItem(added_orderitem));
+                            getTreeView().refresh();
+                        }
                     }
                 });
                 buttonHBox.getChildren().add(addItemButton);
