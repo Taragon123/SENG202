@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -428,6 +429,7 @@ public class OrderScreenController implements Initializable {
             this.price = new SimpleStringProperty(order_item.getPrice().toString());
 
             this.buttonHBox = new HBox(5);
+            this.buttonHBox.setAlignment(Pos.CENTER);
 
             // Delete Button
             this.deleteButton = new Button("");

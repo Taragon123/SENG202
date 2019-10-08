@@ -54,6 +54,7 @@ public class CustomOrderController implements Initializable {
         controller_window.initOwner(parent_window);
         controller_window.setScene(root);
         controller_window.getIcons().add(new Image("file:assets/icons/icon.png"));
+        controller_window.setTitle("Custom Order");
         controller_window.show();
     }
 

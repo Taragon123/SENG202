@@ -8,10 +8,8 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import seng202.teamsix.data.Item;
-import seng202.teamsix.data.OrderItem;
-import seng202.teamsix.data.StorageAccess;
-import seng202.teamsix.data.VariantItem;
+import javafx.scene.shape.Circle;
+import seng202.teamsix.data.*;
 
 public class OrderTreeView extends TreeView<OrderItem> {
 
@@ -53,7 +51,7 @@ class OrderTreeCell extends TreeCell<OrderItem> {
         final ImageView prevVariantIcon = new ImageView(getClass().getResource("icons/left_arrow.png").toString());
         prevVariantIcon.setFitWidth(icon_size); prevVariantIcon.setFitHeight(icon_size);
         final ImageView addItemIcon = new ImageView(getClass().getResource("icons/plus_circle.png").toString());
-        addItemIcon.setFitWidth(icon_size); addItemIcon.setFitHeight(icon_size);
+        addItemIcon.setFitWidth(icon_size+icon_padding); addItemIcon.setFitHeight(icon_size+icon_padding);
 
 
         super.updateItem(order_item, empty);
@@ -135,7 +133,22 @@ class OrderTreeCell extends TreeCell<OrderItem> {
                     }
                 });
                 buttonHBox.getChildren().addAll(prevVariantButton, nextVariantButton);
-            }else{
+            } else if(item instanceof CompositeItem) {
+                label = new Label(item.getName() + " x " + order_item.getQuantity());
+
+                double addItemRadius = 4;
+                Button addItemButton = new Button("");
+                addItemButton.setGraphic(addItemIcon);
+                addItemButton.setPadding(new Insets(0));
+                addItemButton.setStyle("-fx-background-color: #ffffff00");
+                addItemButton.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent actionEvent) {
+
+                    }
+                });
+                buttonHBox.getChildren().add(addItemButton);
+            } else {
                 label = new Label(item.getName() + " x " + order_item.getQuantity());
 
             }
