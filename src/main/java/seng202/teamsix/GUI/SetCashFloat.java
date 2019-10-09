@@ -6,6 +6,7 @@ import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -49,10 +50,13 @@ public class SetCashFloat implements Initializable, CustomDialogInterface {
     private CashRegister register;
     private Stage controller_window;
 
+
     @FXML
-    private TextField quantityInput;
+    private TextField dollarsInput;
     @FXML
     private Label errorBox;
+    @FXML
+    private TextField centsInput;
 
     void createNewWindow() {
         FXMLLoader loaderCreateItem = new FXMLLoader(getClass().getResource("cash_float_screen.fxml"));
@@ -85,18 +89,26 @@ public class SetCashFloat implements Initializable, CustomDialogInterface {
 
     public void confirm() {
         if (checkInputs()) {
-            float rawPrice = Float.parseFloat(quantityInput.getText());
-            register.setRegisterAmount((int) rawPrice);
+            float dollars = Float.parseFloat(dollarsInput.getText());
+            float cents = Float.parseFloat(centsInput.getText());
+            register.setRegisterAmount((int) ((dollars*100) + cents));
             controller_window.close();
         }
     }
 
     private boolean checkInputs() {
         errorBox.setText("");
+        if (centsInput.getText().equals("")) {
+            centsInput.setText("0");
+        }
+        if (dollarsInput.getText().equals("")) {
+            dollarsInput.setText("0");
+        }
         try {
-            double price = Double.parseDouble(quantityInput.getText());
-            if (price <= 0) {
-                errorBox.setText("Price must be\ngreater than $0");
+            double dollarValue = Double.parseDouble(dollarsInput.getText());
+            double centValue = Double.parseDouble(centsInput.getText());
+            if (dollarValue < 0 || centValue < 0) {
+                errorBox.setText("Price must be\ngreater or equal to $0");
                 return false;
             }
         } catch(NumberFormatException e){

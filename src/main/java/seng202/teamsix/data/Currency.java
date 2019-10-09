@@ -78,7 +78,7 @@ public class Currency implements Comparable<Currency> {
      * @return int amount of total cash
      */
     public double getTotalCash() {
-        return cents / 100.0;
+        return cents / 100.00;
     }
 
     /**
