@@ -97,7 +97,7 @@ public class AddToMenu implements Initializable, CustomDialogInterface {
                 errorBox.setText("Price must be\ngreater than $0");
                 return false;
             } else if (price < item.getMarkupPrice().getTotalCash()) {
-                errorBox.setText("Warning!\nCurrent price is lower\nthan recorded sale price");
+                errorBox.setText("Warning! Current price is lower\nthan recorded sale price\nconfirm again to bypass");
                 extraConfirm = true;
                 return false;
             }

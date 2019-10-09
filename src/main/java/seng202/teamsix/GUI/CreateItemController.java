@@ -381,7 +381,7 @@ public class CreateItemController implements Initializable {
             if (salePrice.getTotalCash() <= 0) {
                 label_errormessage.setText("Sale price must be greater than $0");
                 return;
-            } else if (salePrice.compareTo(costPrice) < 0){
+            } else if (salePrice.compareTo(costPrice) > 0){
                 label_errormessage.setText("Sale price must be at least as high as cost price");
                 return;
             }
