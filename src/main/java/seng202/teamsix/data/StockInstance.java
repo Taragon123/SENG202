@@ -135,10 +135,10 @@ public class StockInstance extends StockInstance_Ref {
     }
 
     public void addQuantity(double i) {
-        quantity_remaining += Math.max(0.0, i);;
+        quantity_remaining = Math.max(0, quantity_remaining + Math.max(0.0, i));
     }
 
     public void subQuantity(double i) {
-        quantity_remaining -= Math.max(0.0, i);
+        quantity_remaining = Math.max(0, quantity_remaining - Math.max(0.0, i));
     }
 }

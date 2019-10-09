@@ -31,40 +31,99 @@ public class OrderTest {
         Currency menu_combo_price = new Currency(19.99);
         menu_combo.setPrice(menu_combo_price);
         OrderManager orderManager = new OrderManager();
-        orderManager.addToCart(menu_combo, 4, false);
-        String expectedChefsOrder =   "/**********  Chef's Order  **********/\n" +
-                            "Order Number: 1\n" +
-                            "Contents:\n" +
-                            "4 x Cheese Burger Combo\n" +
-                            "    - Cheese Burger\n" +
-                            "      - Buns\n" +
-                            "        - Gluten Free Bun\n" +
-                            "      - Patty\n" +
-                            "        - Meat Patty\n" +
-                            "      - Cheese\n" +
-                            "    - Drink\n" +
-                            "    - Chips\n" +
-                            "\n" +
-                            "/************************************/";
+        orderManager.addToCart(menu_combo, false);
+        orderManager.addToCart(menu_combo, false);
+        orderManager.addToCart(menu_combo, false);
+        orderManager.addToCart(menu_combo, false);
+        String expectedChefsOrder =
+                "/**********  Chef's Order  **********/\n" +
+                "Order Number: 1\n" +
+                "Contents:\n" +
+                "Cheese Burger Combo\n" +
+                "    - Cheese Burger\n" +
+                "      - Buns\n" +
+                "        - Gluten Free Bun\n" +
+                "      - Patty\n" +
+                "        - Meat Patty\n" +
+                "      - Cheese\n" +
+                "    - Drink\n" +
+                "    - Chips\n" +
+                "Cheese Burger Combo\n" +
+                "    - Cheese Burger\n" +
+                "      - Buns\n" +
+                "        - Gluten Free Bun\n" +
+                "      - Patty\n" +
+                "        - Meat Patty\n" +
+                "      - Cheese\n" +
+                "    - Drink\n" +
+                "    - Chips\n" +
+                "Cheese Burger Combo\n" +
+                "    - Cheese Burger\n" +
+                "      - Buns\n" +
+                "        - Gluten Free Bun\n" +
+                "      - Patty\n" +
+                "        - Meat Patty\n" +
+                "      - Cheese\n" +
+                "    - Drink\n" +
+                "    - Chips\n" +
+                "Cheese Burger Combo\n" +
+                "    - Cheese Burger\n" +
+                "      - Buns\n" +
+                "        - Gluten Free Bun\n" +
+                "      - Patty\n" +
+                "        - Meat Patty\n" +
+                "      - Cheese\n" +
+                "    - Drink\n" +
+                "    - Chips\n" +
+                "\n" +
+                "/************************************/";
         assertEquals(expectedChefsOrder, orderManager.getCart().getChefOrder());
 
-        String expectedReceipt =    "/************  Receipt  *************/\n" +
-                                    "FoodByte\n" +
-                                    "null\n" +
-                                    "Receipt (Order Number: 1)\n" +
-                                    "Contents:\n" +
-                                    "4 x Cheese Burger Combo @ $19.99 each\n" +
-                                    "    - Cheese Burger\n" +
-                                    "      - Buns\n" +
-                                    "        - Gluten Free Bun\n" +
-                                    "      - Patty\n" +
-                                    "        - Meat Patty\n" +
-                                    "      - Cheese\n" +
-                                    "    - Drink\n" +
-                                    "    - Chips\n" +
-                                    "\n" +
-                                    "Total Amount Paid: $79.96\n" +
-                                    "/************************************/";
+        String expectedReceipt =
+                "/************  Receipt  *************/\n" +
+                "FoodByte\n" +
+                "null\n" +
+                "Receipt (Order Number: 1)\n" +
+                "Contents:\n" +
+                "Cheese Burger Combo @ $19.99 each\n" +
+                "    - Cheese Burger\n" +
+                "      - Buns\n" +
+                "        - Gluten Free Bun\n" +
+                "      - Patty\n" +
+                "        - Meat Patty\n" +
+                "      - Cheese\n" +
+                "    - Drink\n" +
+                "    - Chips\n" +
+                "Cheese Burger Combo @ $19.99 each\n" +
+                "    - Cheese Burger\n" +
+                "      - Buns\n" +
+                "        - Gluten Free Bun\n" +
+                "      - Patty\n" +
+                "        - Meat Patty\n" +
+                "      - Cheese\n" +
+                "    - Drink\n" +
+                "    - Chips\n" +
+                "Cheese Burger Combo @ $19.99 each\n" +
+                "    - Cheese Burger\n" +
+                "      - Buns\n" +
+                "        - Gluten Free Bun\n" +
+                "      - Patty\n" +
+                "        - Meat Patty\n" +
+                "      - Cheese\n" +
+                "    - Drink\n" +
+                "    - Chips\n" +
+                "Cheese Burger Combo @ $19.99 each\n" +
+                "    - Cheese Burger\n" +
+                "      - Buns\n" +
+                "        - Gluten Free Bun\n" +
+                "      - Patty\n" +
+                "        - Meat Patty\n" +
+                "      - Cheese\n" +
+                "    - Drink\n" +
+                "    - Chips\n" +
+                "\n" +
+                "Total Amount Paid: $79.96\n" +
+                "/************************************/";
         assertEquals(expectedReceipt, orderManager.getCart().getReceipt());
     }
 

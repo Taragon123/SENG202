@@ -14,16 +14,31 @@ class OrderManagerTest {
         OrderManager orderManager = new OrderManager();
         orderManager.resetCart();
         MenuItem menuItemToAdd = initialiseItem1();
-        orderManager.addToCart(menuItemToAdd, 5, false);
+        orderManager.addToCart(menuItemToAdd, false);
+        orderManager.addToCart(menuItemToAdd, false);
+        orderManager.addToCart(menuItemToAdd, false);
+        orderManager.addToCart(menuItemToAdd, false);
+        orderManager.addToCart(menuItemToAdd, false);
         OrderItem orderItemRetrievedFromOrder = orderManager.getCart().getOrderTree().getDependants().get(0);
 
         assertEquals(((Item)menuItemToAdd.getItem()).getName(), ((Item)orderItemRetrievedFromOrder.getItem()).getName());
-        assertEquals(5, orderItemRetrievedFromOrder.getQuantity());
 
-        orderManager.addToCart(menuItemToAdd, 10, false);
-        orderItemRetrievedFromOrder = orderManager.getCart().getOrderTree().getDependants().get(0);
+        int items_in_cart = orderManager.getCart().getOrderTree().getDependants().size();
+        assertEquals(5, items_in_cart);
 
-        assertEquals(15, orderItemRetrievedFromOrder.getQuantity());
+        orderManager.addToCart(menuItemToAdd, false);
+        orderManager.addToCart(menuItemToAdd, false);
+        orderManager.addToCart(menuItemToAdd, false);
+        orderManager.addToCart(menuItemToAdd, false);
+        orderManager.addToCart(menuItemToAdd, false);
+        orderManager.addToCart(menuItemToAdd, false);
+        orderManager.addToCart(menuItemToAdd, false);
+        orderManager.addToCart(menuItemToAdd, false);
+        orderManager.addToCart(menuItemToAdd, false);
+        orderManager.addToCart(menuItemToAdd, false);
+        items_in_cart = orderManager.getCart().getOrderTree().getDependants().size();
+
+        assertEquals(15, items_in_cart);
     }
 
     @Test

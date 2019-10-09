@@ -37,7 +37,7 @@ public class OrderOperationsStepDefs {
         burger = StorageAccess.instance().getItem(burger_ref);
 
         menuBurger.setItem(burger_ref);
-        cart.addToCart(menuBurger, 1, false);
+        cart.addToCart(menuBurger, false);
     }
 
     @When("Chips are added to the current order")
@@ -46,7 +46,7 @@ public class OrderOperationsStepDefs {
         chips = StorageAccess.instance().getItem(chip_ref);
 
         menuChip.setItem(chip_ref);
-        cart.addToCart(menuChip, 1, false);
+        cart.addToCart(menuChip, false);
     }
 
     @Then("The current order consists of one burger and one chips")
@@ -69,15 +69,15 @@ public class OrderOperationsStepDefs {
         chips = StorageAccess.instance().getItem(chip_ref);
 
         menuChip.setItem(chip_ref);
-        cart.addToCart(menuChip, 1, false);
+        cart.addToCart(menuChip,false);
 
         menuBurger.setItem(burger_ref);
-        cart.addToCart(menuBurger, 1, false);
+        cart.addToCart(menuBurger, false);
     }
 
     @When("Chips are removed from the current order")
     public void chipsAreRemovedFromTheCurrentOrder() {
-        cart.removeFromCart(menuChip, 1, true);
+        cart.removeFromCart(menuChip, true);
     }
 
     @Then("The current order consists of one burger")
@@ -98,10 +98,10 @@ public class OrderOperationsStepDefs {
         chips = StorageAccess.instance().getItem(chip_ref);
 
         menuChip.setItem(chip_ref);
-        cart.addToCart(menuChip, 1, false);
+        cart.addToCart(menuChip, false);
 
         menuBurger.setItem(burger_ref);
-        cart.addToCart(menuBurger, 1, false);
+        cart.addToCart(menuBurger, false);
     }
 
     @When("The customer asks to cancel the order")
@@ -128,10 +128,10 @@ public class OrderOperationsStepDefs {
         chips = StorageAccess.instance().getItem(chip_ref);
 
         menuChip.setItem(chip_ref);
-        cart.addToCart(menuChip, 1, false);
+        cart.addToCart(menuChip,false);
 
         menuBurger.setItem(burger_ref);
-        cart.addToCart(menuBurger, 1, false);
+        cart.addToCart(menuBurger,false);
     }
 
     @When("The order is confirmed by the user")
@@ -165,11 +165,11 @@ public class OrderOperationsStepDefs {
 
         menuChip.setItem(chip_ref);
         menuChip.setPrice(chipPrice);
-        cart.addToCart(menuChip, 1, false);
+        cart.addToCart(menuChip,false);
 
         menuBurger.setItem(burger_ref);
         menuBurger.setPrice(burgerPrice);
-        cart.addToCart(menuBurger, 1, false);
+        cart.addToCart(menuBurger,false);
     }
 
     @When("Total price of order is found and cash returned")
