@@ -48,6 +48,7 @@ class XML_Cache {
 public class XML_StorageAccess extends StorageAccess{
     // Members
     private String data_filename = "data.xml";
+    private String temp_filename = "temp.xml";
 
     private Boolean cache_modified = false;
     private XML_Cache cache = new XML_Cache();
@@ -163,6 +164,7 @@ public class XML_StorageAccess extends StorageAccess{
     // Generates file if it does not exist
     private void initFileStructure(String source_dir) throws IOException {
         data_filename = source_dir + "/data.xml";
+        temp_filename = source_dir + "/temp.xml";
 
         // Create folder if does not exist
         File dir = new File(source_dir);
@@ -210,18 +212,22 @@ public class XML_StorageAccess extends StorageAccess{
     public void saveData() {
         if(cache_modified) {
             cache_modified = false;
-
+            System.out.print("Saving... ");
             // Create File
-            File file = new File(data_filename);
+            File file = new File(temp_filename);
 
             // Write Cache to File
             try {
                 Marshaller m = contextCache.createMarshaller();
                 m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
                 m.marshal(cache, file);
+                file.renameTo(new File(data_filename));
+                System.out.println("Saved!");
             } catch (JAXBException e) {
                 System.err.println("Could not save xml cache");
             }
+
+
         }
     }
 
