@@ -18,6 +18,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import seng202.teamsix.data.*;
 import seng202.teamsix.data.Menu;
+import seng202.teamsix.managers.OrderManager;
 
 import java.io.File;
 import java.net.URL;
@@ -61,6 +62,7 @@ public class StockScreenController implements Initializable {
     @FXML
     private Button clearSearchBtn;
     private FXMLLoader loader;
+    public OrderManager orderManager;
 
     /**
      * Initialise the GUI
@@ -359,6 +361,11 @@ public class StockScreenController implements Initializable {
         priceColumn.setMinWidth(100);
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         orderTable.getColumns().add(priceColumn);
+
+        TableColumn<OrderTableEntry, ToggleButton> refundColumn = new TableColumn<>("Refund");
+        refundColumn.setMinWidth(100);
+        refundColumn.setCellValueFactory(new PropertyValueFactory<>("refundToggleBtn"));
+        orderTable.getColumns().add(refundColumn);
     }
 
     /**
@@ -417,7 +424,7 @@ public class StockScreenController implements Initializable {
         orderEntries.clear();
         for (UUID_Entity entity: orderList) {
             Order order = StorageAccess.instance().getOrder(new Order_Ref(entity));
-            orderEntries.add(new OrderTableEntry(order));
+            orderEntries.add(new OrderTableEntry(order, parent, this));
         }
     }
 
@@ -513,16 +520,57 @@ public class StockScreenController implements Initializable {
     }
 
     /**
+     * Setter function for the orderManager
+     * @param orderManager
+     */
+    public void setOrderManager(OrderManager orderManager) {
+        this.orderManager = orderManager;
+    }
+
+    /**
      * Class that stores the information needed for each row of the OrderTable
      */
-    public static class OrderTableEntry {
+    public class OrderTableEntry {
+        private final ToggleButton refundToggleBtn;
         private final SimpleStringProperty date;
         private final SimpleStringProperty price;
 
-        private OrderTableEntry(Order order) {
+
+        private OrderTableEntry(Order order, OrderScreenApplication orderScreen, StockScreenController parent) {
             DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
             this.date = new SimpleStringProperty(df.format(order.getTimestamp()));
             this.price = new SimpleStringProperty(order.getTotalCost().toString());
+            this.refundToggleBtn = new ToggleButton("Refund");
+            this.refundToggleBtn.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    // gets the price of the order
+                    Double orderPrice = order.getTotalCost().getTotalCash();
+                    //gets the current total of the cash register
+                    Double cashRegister = orderScreen.getOrderManager().getCashRegister().getRegisterAmount();
+                    String orderPriceString = orderPrice.toString();
+                    RefundAlertBox refundAlertBox = new RefundAlertBox();
+                    String menuTitle = "Refund Alert!";
+                    if (orderPrice <= cashRegister) {
+                        refundToggleBtn.setSelected(true);
+                        cashRegister -= orderPrice;
+                        // have a pop up dialog that says value has been refunded
+                        String title = "Refund Successfull!";
+                        //parent.createDialog(new RefundAlertBox(), "refund_message.fxml", "Refund");
+                        parent.createDialog(refundAlertBox, "refund_message.fxml", menuTitle);
+//                        refundAlertBox.init(title, orderPriceString);
+                        System.out.println("GREATER THAN");
+                    } else {
+                        refundToggleBtn.setSelected(false);
+                        System.out.println("LESS THAN");
+                        // Pop up dialog that says unsuccessful, insufficient money in cash register
+                        String newtitle = "Refund Unsuccessfull!";
+//                        refundAlertBox.init(newtitle, orderPriceString);
+                    }
+                    parent.refreshData();
+                }
+            });
+
         }
 
         public String getDate() {
@@ -531,7 +579,11 @@ public class StockScreenController implements Initializable {
         public String getPrice() {
             return price.get();
         }
+        public ToggleButton getRefundToggleBtn() {
+            return refundToggleBtn;
+        }
     }
+
 
     /**
      * Class that stores the information needed for each row of the MenuTable

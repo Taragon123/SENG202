@@ -40,9 +40,11 @@ public class OrderScreenApplication extends Application {
         orderController.optionPopup.setAutoHide(true);
 
         FXMLLoader loadManagement = new FXMLLoader(getClass().getResource("stock_screen.fxml"));
+        stockController.setOrderManager(orderManager);
         loadManagement.setController(stockController);
         Parent managementParent = loadManagement.load();
         managementScene = new Scene(managementParent, 1300, 800);
+
 
         orderController.preSet(primaryStage, this);
         stockController.preSet(primaryStage, this);
@@ -72,5 +74,9 @@ public class OrderScreenApplication extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public OrderManager getOrderManager() {
+        return orderManager;
     }
 }
