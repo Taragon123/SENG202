@@ -182,25 +182,11 @@
             <value uuid="096abbbe-2134-4841-939a-e6922e202a97">
                 <menuitem_list>
                     <menuitem>
-                        <item uuid="79e1c5af-ecca-4d8b-a3a5-1c0166c9f994"/>
-                        <name>Cheese Burger</name>
-                        <description>12</description>
-                        <colour>2970813</colour>
-                        <price cents="1999"/>
-                    </menuitem>
-                    <menuitem>
                         <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
                         <name>Cheese Burger Combo</name>
                         <description></description>
                         <colour>9581493</colour>
                         <price cents="1999"/>
-                    </menuitem>
-                    <menuitem>
-                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
-                        <name>Chips</name>
-                        <description>Chips</description>
-                        <colour>13187762</colour>
-                        <price cents="500"/>
                     </menuitem>
                 </menuitem_list>
                 <name>My Menu</name>
@@ -211,12 +197,4 @@
     <order_map>
         <entry>
             <key uuid="25058b57-6215-4d38-9c24-213335aa5546"/>
-            <value uuid="25058b57-6215-4d38-9c24-213335aa5546">
-                <order_tree>
-                    <dependants>
-                        <quantity>0</quantity>
-                    </dependants>
-                    <quantity>0</quantity>
-                </order_tree>
-                <timestamp>2019-09-17T19:34:48.404+12:00</timestamp>
-                
+            
