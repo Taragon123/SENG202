@@ -137,6 +137,7 @@ public class OrderScreenController implements Initializable {
             Tab tab = createTab(menu_ref, "-fx-background-color: #576574; -fx-pref-width: 175; -fx-pref-height: 50; -fx-font-size: 20;");
             ScrollPane scrollpane = new ScrollPane();
             scrollpane.setFitToWidth(true);
+            scrollpane.setFitToHeight(true);
             tab.setContent(scrollpane);
             menu_tabs.getTabs().add(tab);
 
@@ -397,8 +398,6 @@ public class OrderScreenController implements Initializable {
     public void setOrderManager(OrderManager orderManager1) {
         orderManager = orderManager1;
     }
-
-    public void saveData() {}
 
     /**
      * Class OrderTableEntry, used to store items in a TableView that displays the current order
