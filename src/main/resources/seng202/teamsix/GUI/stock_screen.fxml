@@ -18,7 +18,7 @@
 <GridPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="1200.0" prefHeight="800.0" prefWidth="1271.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="300.0" prefWidth="300.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="960.0" prefWidth="960.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" prefWidth="960.0" />
   </columnConstraints>
   <rowConstraints>
       <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" vgrow="NEVER" />
@@ -86,9 +86,9 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </GridPane>
-      <HBox minHeight="-Infinity" minWidth="900.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <HBox minHeight="-Infinity" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <children>
-            <Button fx:id="addButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="900.0" mnemonicParsing="false" text="Add Menu" HBox.hgrow="ALWAYS" />
+            <Button fx:id="addButton" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Add Menu" HBox.hgrow="ALWAYS" />
          </children>
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -110,7 +110,7 @@
                </HBox.margin></Button>
          </children>
       </HBox>
-      <HBox minWidth="900.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+      <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
          <children>
             <Button mnemonicParsing="false" onAction="#saveData" prefHeight="30.0" prefWidth="103.0" text="Save">
                <HBox.margin>
@@ -118,26 +118,26 @@
                </HBox.margin>
             </Button>
          </children></HBox>
-      <TabPane minWidth="900.0" prefHeight="685.0" prefWidth="955.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="30.0" tabMaxWidth="200.0" tabMinHeight="30.0" tabMinWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <TabPane prefHeight="685.0" prefWidth="955.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="30.0" tabMaxWidth="200.0" tabMinHeight="30.0" tabMinWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
         <tabs>
           <Tab fx:id="stockTab" text="Stock">
             <content>
-                  <StackPane fx:id="stockTabPane" minWidth="900.0" />
+                  <StackPane fx:id="stockTabPane" />
             </content>
           </Tab>
           <Tab fx:id="itemTab" text="Items">
             <content>
-                  <StackPane fx:id="itemTabPane" minWidth="900.0" prefWidth="950.0" />
+                  <StackPane fx:id="itemTabPane" prefWidth="950.0" />
             </content>
           </Tab>
             <Tab fx:id="menuTab" text="Menu">
               <content>
-                  <StackPane fx:id="menuTabPane" minWidth="900.0" prefWidth="950.0" />
+                  <StackPane fx:id="menuTabPane" prefWidth="950.0" />
               </content>
             </Tab>
             <Tab fx:id="orderTab" text="Past Orders">
               <content>
-                  <StackPane fx:id="orderTabPane" minWidth="900.0" prefWidth="900.0" />
+                  <StackPane fx:id="orderTabPane" prefWidth="900.0" />
               </content>
             </Tab>
         </tabs>

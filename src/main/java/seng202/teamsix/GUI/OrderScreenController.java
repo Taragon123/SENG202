@@ -75,7 +75,6 @@ public class OrderScreenController implements Initializable {
     private TableView<OrderTableEntry> order_list_display;
     @FXML
     private Button confirmButton;
-    private int x;
 
 
     /**

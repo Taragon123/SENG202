@@ -125,7 +125,10 @@ class DataQueryConstraintEqual<T extends Comparable<T>> extends DataQueryConstra
 
     boolean accepts(Object obj) {
         T value = (T) field.get(obj);
-        return value.compareTo(comparison) == 0;
+        if (value != null) {
+            return value.compareTo(comparison) == 0;
+        }
+        return false;
     }
 }
 
