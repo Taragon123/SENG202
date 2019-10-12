@@ -71,7 +71,7 @@
                   <VBox fx:id="filterVbox" prefHeight="200.0" prefWidth="100.0" spacing="5.0" />
                </content>
             </ScrollPane>
-            <Button mnemonicParsing="false" text="Create Tag" GridPane.rowIndex="4" />
+            <Button mnemonicParsing="false" onAction="#editItemTagsAction" text="Edit Tags" GridPane.rowIndex="4" />
          </children>
          <padding>
             <Insets left="5.0" right="5.0" />
@@ -111,12 +111,12 @@
          </children></HBox>
       <TabPane prefHeight="706.0" prefWidth="927.0" tabClosingPolicy="UNAVAILABLE" tabMinHeight="30.0" tabMinWidth="100.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
         <tabs>
-          <Tab fx:id="stockTab" onSelectionChanged="#test" text="Stock">
+          <Tab fx:id="stockTab" text="Stock">
             <content>
                   <StackPane fx:id="stockTabPane" />
             </content>
           </Tab>
-          <Tab fx:id="itemTab" onSelectionChanged="#test" text="Items">
+          <Tab fx:id="itemTab" text="Items">
             <content>
                   <StackPane fx:id="itemTabPane" />
             </content>
