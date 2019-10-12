@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class SelectItemWindow implements Initializable {
+public class SelectItemWindow extends StockScreenController implements Initializable {
     private Stage controller_window;
     private boolean single_selectmode = true;
 
@@ -114,6 +114,7 @@ public class SelectItemWindow implements Initializable {
 
     @FXML
     void confirmClicked(ActionEvent event) {
+        createStockTable();
         controller_window.close();
     }
 
