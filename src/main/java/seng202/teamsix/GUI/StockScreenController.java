@@ -129,13 +129,18 @@ public class StockScreenController implements Initializable {
         createDialog(new EditMenu(null), "edit_menu.fxml", "Add Menu");
     }
 
+    public void addStockAction() {
+        ItemSelectionController cash = new ItemSelectionController();
+        cash.createNewWindow();
+    }
+
     /**
      * Creates a dialog window and uses refreshData when it closes.
      * @param controller controller that implements CustomDialogInterface
      * @param fxml String name of FXML file in classpath e.g: edit_menu.fxml
      * @param title String title of window
      */
-    private void createDialog(CustomDialogInterface controller, String fxml, String title) {
+    void createDialog(CustomDialogInterface controller, String fxml, String title) {
         try {
             FXMLLoader menuEditDialogLoader = new FXMLLoader(getClass().getResource(fxml));
             menuEditDialogLoader.setController(controller);
@@ -283,6 +288,11 @@ public class StockScreenController implements Initializable {
             addButton.setOnAction(e -> addMenuAction());
             addButton.setDisable(false);
         }
+        else if (tabId.equals("stockTab")) {
+            addButton.setText("Add Stock");
+            addButton.setOnAction(e -> addStockAction());
+            addButton.setDisable(false);
+        }
         else {
             addButton.setText("");
             addButton.setDisable(true);
@@ -378,12 +388,6 @@ public class StockScreenController implements Initializable {
         unitColumn.setMinWidth(60);
         unitColumn.setCellValueFactory(new PropertyValueFactory<>("qty_unit"));
         itemTable.getColumns().add(unitColumn);
-
-        //Add button column
-        TableColumn<ItemTableEntry, Button> addStockButtonColumn = new TableColumn<>();
-        addStockButtonColumn.setMinWidth(70);
-        addStockButtonColumn.setCellValueFactory(new PropertyValueFactory<>("addStockInstance"));
-        itemTable.getColumns().add(addStockButtonColumn);
 
         //Add edit button column
         TableColumn<ItemTableEntry, Button> addEditButtonColumn = new TableColumn<>();
