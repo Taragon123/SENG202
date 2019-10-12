@@ -370,7 +370,7 @@ public class OrderScreenController implements Initializable {
 
     public void set_cash_float() {
         optionPopup.hide();
-        SetCashFloat cash = new SetCashFloat(orderManager.getCashRegister());
+        SetCashFloat cash = new SetCashFloat(orderManager.getCashRegister(), window, this);
         cash.createNewWindow();
     }
 
