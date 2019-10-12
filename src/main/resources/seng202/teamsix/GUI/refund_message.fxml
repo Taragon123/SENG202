@@ -5,7 +5,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="160.0" prefWidth="308.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label fx:id="refundTitleLbl" layoutX="70.0" layoutY="26.0" text="Refund Successful!">
@@ -13,7 +12,7 @@
             <Font name="System Bold" size="19.0" />
          </font>
       </Label>
-      <Label fx:id="refundAmountLbl" layoutX="65.0" layoutY="71.0" text="To be refunded: &lt;insert amount&gt;" />
+      <Label fx:id="refundAmountLbl" alignment="CENTER" layoutX="92.0" layoutY="71.0" maxWidth="1.7976931348623157E308" text="To be refunded: $$$" textAlignment="CENTER" />
       <Button layoutX="122.0" layoutY="111.0" mnemonicParsing="false" onAction="#OK" prefHeight="26.0" prefWidth="62.0" text="OK" />
    </children>
 </AnchorPane>

@@ -163,6 +163,31 @@ public class StockScreenController implements Initializable {
     }
 
     /**
+     * Creates a dialog window and uses refreshData when it closes.
+     * @param controller controller that implements CustomDialogInterface
+     * @param fxml String name of FXML file in classpath e.g: edit_menu.fxml
+     * @param title String title of window
+     * @param refundAlertBox the alert box for refund
+     */
+    void createDialog(CustomDialogInterface controller, String fxml, String title, RefundAlertBox refundAlertBox) {
+        try {
+            FXMLLoader menuEditDialogLoader = new FXMLLoader(getClass().getResource(fxml));
+            menuEditDialogLoader.setController(controller);
+            Stage stage = new Stage();
+            controller.preSet(stage);
+            Parent root = menuEditDialogLoader.load();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle(title);
+            refundAlertBox.init();
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+//            refreshData();
+        } catch (java.io.IOException e) {
+            System.out.println("Failed to launch dialog: " + e);
+        }
+    }
+
+    /**
      * Export StorageAccess data called from export button
      */
     public void exportXML() {
@@ -587,27 +612,25 @@ public class StockScreenController implements Initializable {
                 public void handle(ActionEvent event) {
                     // gets the price of the order
                     Currency orderPrice = order.getTotalCost();
-
-                    //gets the current total of the cash register
                     CashRegister cashRegister = orderScreen.getOrderManager().getCashRegister();
                     String orderPriceString = orderPrice.toString();
-                    RefundAlertBox refundAlertBox = new RefundAlertBox();
+                    String title;
+                    String menuTitle = "Refund Alert!!";
 
-                    String menuTitle = "Refund Alert!";
                     if (orderPrice.getTotalCash() <= cashRegister.getRegisterAmount()) {
-                        refundToggleBtn.setSelected(true);
                         cashRegister.subRegisterAmount(orderPrice);
-                        String title = "Refund Successfull!";
-                        parent.createDialog(refundAlertBox, "refund_message.fxml", menuTitle);
+                        title = "Refund Successfull!";
+                        RefundAlertBox refundAlertBox = new RefundAlertBox(title, orderPriceString);
+                        parent.createDialog(refundAlertBox, "refund_message.fxml", menuTitle, refundAlertBox);
+
 //                        refundAlertBox.init(title, orderPriceString);
-                        System.out.println("GREATER THAN");
                     } else {
                         refundToggleBtn.setSelected(false);
-                        System.out.println("LESS THAN");
-                        String newtitle = "Refund Unsuccessfull!";
-//                        refundAlertBox.init(newtitle, orderPriceString);
+                        title = "Refund Unsuccessfull!";
+                        RefundAlertBox refundAlertBox = new RefundAlertBox(title, "NULL");
+                        parent.createDialog(refundAlertBox, "refund_message.fxml", menuTitle, refundAlertBox);
+//                        refundAlertBox.init(title, orderPriceString);
                     }
-                    parent.refreshData();
                 }
             });
 
