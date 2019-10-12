@@ -82,8 +82,8 @@ public class SelectMenuItemController implements Initializable, CustomDialogInte
         }
         DataQuery<Menu> menuDataQuery = new DataQuery<>(Menu.class);
         menuList = menuDataQuery.runQuery();
-        parent.createDialog(new AddToMenu(item_ref, menuList), "add_to_menu.fxml", "Add to Menu");
         controller_window.close();
+        parent.createDialog(new AddToMenu(item_ref, menuList), "add_to_menu.fxml", "Add to Menu");
         parent.refreshData();
     }
 
