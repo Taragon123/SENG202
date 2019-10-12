@@ -8,6 +8,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -61,6 +62,20 @@ public class StockScreenController implements Initializable {
     private TextField searchBox;
     @FXML
     private Button clearSearchBtn;
+    @FXML
+    private Button addButton;
+
+
+    // Tabs in table view
+    @FXML
+    private Tab stockTab;
+    @FXML
+    private Tab itemTab;
+    @FXML
+    private Tab menuTab;
+    @FXML
+    private Tab orderTab;
+
     private FXMLLoader loader;
     public OrderManager orderManager;
 
@@ -77,6 +92,13 @@ public class StockScreenController implements Initializable {
         stockTabPane.getChildren().addAll(stockTable);
         orderTabPane.getChildren().addAll(orderTable);
         menuTabPane.getChildren().addAll(menuTable);
+
+        // Set action events for tabs
+        stockTab.setOnSelectionChanged(e -> tabChanged("stockTab"));
+        itemTab.setOnSelectionChanged(e -> tabChanged("itemTab"));
+        menuTab.setOnSelectionChanged(e -> tabChanged("menuTab"));
+        orderTab.setOnSelectionChanged(e -> tabChanged("orderTab"));
+        tabChanged("stockTab");
     }
 
     /**
@@ -88,10 +110,9 @@ public class StockScreenController implements Initializable {
 
     /**
      * Opens create item screen
-     * @param event event that triggered this function.
      */
     @FXML
-    public void addItemAction(ActionEvent event ) {
+    public void addItemAction() {
         CreateItemController itemController = new CreateItemController(null);
         itemController.createNewWindow(new EventHandler<ActionEvent>() {
             @Override
@@ -225,6 +246,7 @@ public class StockScreenController implements Initializable {
         getObservableMenuTableEntryList(menuEntries);
     }
 
+
     /**
      * Overloaded function for refreshData to make default option for doSearch false
      */
@@ -246,6 +268,37 @@ public class StockScreenController implements Initializable {
         refreshData();
         searchBox.setText("");
     }
+
+    /**
+     * Updates button at bottom to reflect tab view.
+     */
+    public void tabChanged(String tabId) {
+        if (tabId.equals("itemTab")) {
+            addButton.setText("Add Item");
+            addButton.setOnAction(e -> addItemAction());
+            addButton.setDisable(false);
+        }
+        else if (tabId.equals("menuTab")) {
+            addButton.setText("Add Menu");
+            addButton.setOnAction(e -> addMenuAction());
+            addButton.setDisable(false);
+        }
+        else {
+            addButton.setText("");
+            addButton.setDisable(true);
+        }
+    }
+
+    public void test() {
+//        Node node = (Node) event.getSource();
+//        System.out.println((String) node.getUserData());
+        System.out.println("Test");
+    }
+
+    public void selectedItemTab() {
+        System.out.println("Test2");
+    }
+
 
     /**
      * Runs table initialisation
@@ -340,7 +393,7 @@ public class StockScreenController implements Initializable {
 
         //Add menu button column
         TableColumn<ItemTableEntry, Button> addToMenuButtonColumn = new TableColumn<>();
-        addToMenuButtonColumn.setMinWidth(70);
+        addToMenuButtonColumn.setMinWidth(100);
         addToMenuButtonColumn.setCellValueFactory(new PropertyValueFactory<>("addToMenu"));
         itemTable.getColumns().add(addToMenuButtonColumn);
     }
