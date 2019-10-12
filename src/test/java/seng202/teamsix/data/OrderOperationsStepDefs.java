@@ -52,7 +52,7 @@ public class OrderOperationsStepDefs {
     @Then("The current order consists of one burger and one chips")
     public void theCurrentOrderConsistsOfOneBurgerAndOneChips() {
         
-        assertEquals("Burger", StorageAccess.instance().getItem(cart.getCart().getOrderTree().getDependants().get(0).getItem()).getName());
+        assertEquals("Cheese Burger Combo", StorageAccess.instance().getItem(cart.getCart().getOrderTree().getDependants().get(0).getItem()).getName());
         assertEquals("Chips", StorageAccess.instance().getItem(cart.getCart().getOrderTree().getDependants().get(1).getItem()).getName());
         assertEquals(2, cart.getCart().getOrderTree().getDependants().size());
     }
@@ -82,7 +82,7 @@ public class OrderOperationsStepDefs {
 
     @Then("The current order consists of one burger")
     public void theCurrentOrderConsistsOfOneBurger() {
-        assertEquals("Burger", StorageAccess.instance().getItem(cart.getCart().getOrderTree().getDependants().get(0).getItem()).getName());
+        assertEquals("Cheese Burger Combo", StorageAccess.instance().getItem(cart.getCart().getOrderTree().getDependants().get(0).getItem()).getName());
         assertEquals(1, cart.getCart().getOrderTree().getDependants().size());
     }
 

@@ -33,17 +33,17 @@ public class StockOperationsStepDefs {
     public void stockItemsExpireAreUsedEtc() {
         stock_item = new StockInstance();
         stock_item.setUUID("41b0ce5b-8ff1-4d63-8b73-311d79069ffc");
-        stock_item.setQuantityRemaining(19);
+        stock_item.setQuantityRemaining(10);
 }
 
     @When("Remove stock is selected")
     public void removeStockIsSelected() {
-        stock_item.setQuantityRemaining(-9);
+        stock_item.subQuantity(5);
     }
 
     @Then("Stock is removed to the inventory")
     public void stockIsRemovedToTheInventory() {
-        assertEquals(10, stock_item.getQuantityRemaining());
+        assertEquals(5, stock_item.getQuantityRemaining());
     }
 
     @Given("A user needs to view stock levels")

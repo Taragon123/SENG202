@@ -80,7 +80,7 @@ public class MenuOperationsStepDefs {
 
     @Then("New burger now in menu")
     public void newBurgerNowInMenu() {
-        assertEquals("Cheese Burger",  StorageAccess.instance().getItem(StorageAccess.instance().getMenu(menu_ref).getMenuItems().get(4).getItem()).getName());
+        assertEquals("Cheese Burger",  StorageAccess.instance().getItem(StorageAccess.instance().getMenu(menu_ref).getMenuItems().get(1).getItem()).getName());
     }
 
     @Given("A new recipe for an item is created")

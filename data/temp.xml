@@ -188,13 +188,6 @@
                         <colour>9581493</colour>
                         <price cents="1999"/>
                     </menuitem>
-                    <menuitem>
-                        <item uuid="8521e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
-                        <name>Meat Patty</name>
-                        <description>mean</description>
-                        <colour>3319890</colour>
-                        <price cents="10000"/>
-                    </menuitem>
                 </menuitem_list>
                 <name>My Menu</name>
                 <description>Hello I am a menu description</description>
@@ -204,52 +197,4 @@
     <order_map>
         <entry>
             <key uuid="25058b57-6215-4d38-9c24-213335aa5546"/>
-            <value uuid="25058b57-6215-4d38-9c24-213335aa5546">
-                <order_tree>
-                    <dependants>
-                        <quantity>0</quantity>
-                    </dependants>
-                    <quantity>0</quantity>
-                </order_tree>
-                <timestamp>2019-09-17T19:34:48.404+12:00</timestamp>
-                <total_cost cents="0"/>
-            </value>
-        </entry>
-    </order_map>
-    <stock_instance_map>
-        <entry>
-            <key uuid="41b0ce5b-8ff1-4d63-8b73-311d79069ffc"/>
-            <value uuid="41b0ce5b-8ff1-4d63-8b73-311d79069ffc">
-                <stock_item uuid="8421e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
-                <date_added>2019-09-17T19:34:48.482+12:00</date_added>
-                <date_expires>2019-09-17T19:34:48.482+12:00</date_expires>
-                <does_expire>true</does_expire>
-                <quantity_remaining>4.0</quantity_remaining>
-            </value>
-        </entry>
-        <entry>
-            <key uuid="42b9a8e6-48f0-41d2-a0c3-236e57e78948"/>
-            <value uuid="42b9a8e6-48f0-41d2-a0c3-236e57e78948">
-                <stock_item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="compositeItem" uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994">
-                    <name>Cheese Burger Combo</name>
-                    <description>Avaliable in small, medium and large</description>
-                    <base_price cents="1080"/>
-                    <markup_price cents="1999"/>
-                    <recipe>
-                        <method>Put it all in the bag</method>
-                    </recipe>
-                    <tags uuid="2c16418b-5d47-43f3-bcae-2061a7893ad6"/>
-                    <qty_unit>NUM</qty_unit>
-                    <composite_item_list>
-                        <item uuid="79e1c5af-ecca-4d8b-a3a5-1c0166c9f994"/>
-                        <item uuid="8821e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
-                        <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
-                    </composite_item_list>
-                </stock_item>
-                <date_added>2019-10-09T19:55:10.278+13:00</date_added>
-                <does_expire>false</does_expire>
-                <quantity_remaining>100.0</quantity_remaining>
-            </value>
-        </entry>
-    </stock_instance_map>
-</data>
+            
