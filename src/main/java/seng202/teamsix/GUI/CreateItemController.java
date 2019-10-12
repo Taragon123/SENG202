@@ -199,22 +199,22 @@ public class CreateItemController implements Initializable {
 
             // Set Item references
             List<Item_Ref> item_list = new ArrayList<>();
-            if (item instanceof CompositeItem) {
-                item_list = ((CompositeItem)item).getItems();
-            } else if (item instanceof VariantItem) {
-                item_list = ((VariantItem)item).getVariants();
-            }
+        if (item instanceof CompositeItem) {
+            item_list = ((CompositeItem)item).getItems();
+        } else if (item instanceof VariantItem) {
+            item_list = ((VariantItem)item).getVariants();
+        }
 
-            if(item_list != null) {
-                for(Item_Ref ref : item_list) {
-                    Item selected_item = StorageAccess.instance().getItem(ref);
-                    if (selected_item != null) {
-                        listview_selected_items.getItems().add(selected_item);
-                    }
+        if(item_list != null) {
+            for(Item_Ref ref : item_list) {
+                Item selected_item = StorageAccess.instance().getItem(ref);
+                if (selected_item != null) {
+                    listview_selected_items.getItems().add(selected_item);
                 }
             }
-            updateItemSearchList();
         }
+        updateItemSearchList();
+    }
     }
 
     /**
