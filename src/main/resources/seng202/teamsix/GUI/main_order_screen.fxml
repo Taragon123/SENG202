@@ -115,6 +115,13 @@
                </children>
             </HBox>
          </left>
+          <center>
+              <Label fx:id="currentCash" text="Current cash: $" textFill="WHITE" BorderPane.alignment="CENTER">
+                  <font>
+                      <Font size="25.0" />
+                  </font>
+              </Label>
+          </center>
       </BorderPane>
    </children>
 </GridPane>
