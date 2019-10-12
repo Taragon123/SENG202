@@ -73,7 +73,7 @@ public class OrderScreenApplication extends Application {
      */
     public void switchToManagementScreen() {
         primaryStage.setScene(managementScene);
-        primaryStage.setMinWidth(1220);
+        primaryStage.setMinWidth(1120);
         primaryStage.setMinHeight(600);
         stockController.refreshData();
     }
