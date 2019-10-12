@@ -614,29 +614,38 @@ public class StockScreenController implements Initializable {
             this.date = new SimpleStringProperty(df.format(order.getTimestamp()));
             this.price = new SimpleStringProperty(order.getTotalCost().toString());
             this.refundToggleBtn = new ToggleButton("Refund");
+            this.refundToggleBtn.setSelected(order.getIsRefunded());
+
             this.refundToggleBtn.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     // gets the price of the order
                     Currency orderPrice = order.getTotalCost();
                     CashRegister cashRegister = orderScreen.getOrderManager().getCashRegister();
-                    String orderPriceString = orderPrice.toString();
-                    String title;
-                    String menuTitle = "Refund Alert!!";
+                    if ((refundToggleBtn.isSelected())) {
+                        String orderPriceString = orderPrice.toString();
+                        String title;
+                        String menuTitle = "Refund Alert!!";
 
-                    if (orderPrice.getTotalCash() <= cashRegister.getRegisterAmount()) {
-                        cashRegister.subRegisterAmount(orderPrice);
-                        title = "Refund Successfull!";
-                        RefundAlertBox refundAlertBox = new RefundAlertBox(title, orderPriceString);
-                        parent.createDialog(refundAlertBox, "refund_message.fxml", menuTitle, refundAlertBox);
+                        if (orderPrice.getTotalCash() <= cashRegister.getRegisterAmount()) {
+                            cashRegister.subRegisterAmount(orderPrice);
+                            title = "Refund Successfull!";
+                            order.setIsRefunded(true);
+                            RefundAlertBox refundAlertBox = new RefundAlertBox(title, orderPriceString);
+                            parent.createDialog(refundAlertBox, "refund_message.fxml", menuTitle, refundAlertBox);
 
-//                        refundAlertBox.init(title, orderPriceString);
+                            //                        refundAlertBox.init(title, orderPriceString);
+                        } else {
+                            refundToggleBtn.setSelected(false);
+                            title = "Refund Unsuccessfull!";
+                            RefundAlertBox refundAlertBox = new RefundAlertBox(title, "NULL");
+                            parent.createDialog(refundAlertBox, "refund_message.fxml", menuTitle, refundAlertBox);
+                            //                        refundAlertBox.init(title, orderPriceString);
+                        }
                     } else {
                         refundToggleBtn.setSelected(false);
-                        title = "Refund Unsuccessfull!";
-                        RefundAlertBox refundAlertBox = new RefundAlertBox(title, "NULL");
-                        parent.createDialog(refundAlertBox, "refund_message.fxml", menuTitle, refundAlertBox);
-//                        refundAlertBox.init(title, orderPriceString);
+                        order.setIsRefunded(false);
+                        cashRegister.addRegisterAmount(orderPrice);
                     }
                 }
             });
