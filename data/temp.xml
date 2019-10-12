@@ -188,6 +188,13 @@
                         <colour>9581493</colour>
                         <price cents="1999"/>
                     </menuitem>
+                    <menuitem>
+                        <item uuid="8521e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                        <name>Meat Patty</name>
+                        <description>mean</description>
+                        <colour>3319890</colour>
+                        <price cents="10000"/>
+                    </menuitem>
                 </menuitem_list>
                 <name>My Menu</name>
                 <description>Hello I am a menu description</description>
@@ -218,24 +225,6 @@
                 <date_expires>2019-09-17T19:34:48.482+12:00</date_expires>
                 <does_expire>true</does_expire>
                 <quantity_remaining>4.0</quantity_remaining>
-            </value>
-        </entry>
-        <entry>
-            <key uuid="351cf2cd-146f-4a2c-aca8-3c59bdd0b11f"/>
-            <value uuid="351cf2cd-146f-4a2c-aca8-3c59bdd0b11f">
-                <stock_item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="item" uuid="8521e663-6b3a-4321-ad6f-c5e6e22a33c5">
-                    <name>Meat Patty</name>
-                    <description></description>
-                    <base_price cents="0"/>
-                    <markup_price cents="0"/>
-                    <recipe>
-                        <method></method>
-                    </recipe>
-                    <qty_unit>NUM</qty_unit>
-                </stock_item>
-                <date_added>2019-10-12T20:53:16.472+13:00</date_added>
-                <does_expire>false</does_expire>
-                <quantity_remaining>1.0</quantity_remaining>
             </value>
         </entry>
         <entry>
