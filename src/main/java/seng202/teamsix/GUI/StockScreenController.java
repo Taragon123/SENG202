@@ -282,7 +282,7 @@ public class StockScreenController implements Initializable {
     /**
      * Updates button at bottom to reflect tab view.
      */
-    private void tabChanged(String tabId) {
+    public void tabChanged(String tabId) {
         if (tabId.equals("itemTab")) {
             addButton.setText("Add Item");
             addButton.setOnAction(e -> addItemAction());
