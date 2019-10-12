@@ -64,6 +64,13 @@ public class ItemSelectionController implements Initializable, CustomDialogInter
             String regex = String.format("(?i).*(%s).*", searchText);
             query.addConstraintRegex("name", regex);
         }
+
+        List<UUID_Entity> itemref_list = query.runQuery();
+        listview_item_search.getItems().clear();
+        for (UUID_Entity item_ref : itemref_list) {
+            Item item = StorageAccess.instance().getItem(new Item_Ref(item_ref));
+            listview_item_search.getItems().add(item);
+        }
     }
 
     public void confirm() {
@@ -95,9 +102,14 @@ public class ItemSelectionController implements Initializable, CustomDialogInter
                 Item selected_item = StorageAccess.instance().getItem(ref);
                 if (selected_item != null) {
                 listview_item_search.getItems().add(selected_item);
+                }
             }
         }
-        }
+
+        // Setup search listener
+        textfield_search_items.textProperty().addListener((observable, oldValue, newValue) -> {
+            updateItemSearchList();
+        });
         updateItemSearchList();
     }
 

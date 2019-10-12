@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
@@ -28,10 +29,13 @@ public class SelectMenuItemController implements Initializable, CustomDialogInte
     private ListView<Item> listview_item_search;
 
     @FXML
+    private Label title;
+
+    @FXML
     private TextField textfield_search_items;
 
     void createNewWindow() {
-        FXMLLoader loaderCreateItem = new FXMLLoader(getClass().getResource("select_item_screen.fxml"));
+        FXMLLoader loaderCreateItem = new FXMLLoader(getClass().getResource("select_menu_item_screen.fxml"));
         loaderCreateItem.setController(this);
 
         // If it cannot load fxml the function exits without creating window
@@ -61,6 +65,13 @@ public class SelectMenuItemController implements Initializable, CustomDialogInte
         if (searchText.length() != 0) {
             String regex = String.format("(?i).*(%s).*", searchText);
             query.addConstraintRegex("name", regex);
+        }
+
+        List<UUID_Entity> itemref_list = query.runQuery();
+        listview_item_search.getItems().clear();
+        for (UUID_Entity item_ref : itemref_list) {
+            Item item = StorageAccess.instance().getItem(new Item_Ref(item_ref));
+                listview_item_search.getItems().add(item);
         }
     }
 
@@ -98,6 +109,10 @@ public class SelectMenuItemController implements Initializable, CustomDialogInte
                 }
             }
         }
+        // Setup search listener
+        textfield_search_items.textProperty().addListener((observable, oldValue, newValue) -> {
+            updateItemSearchList();
+        });
         updateItemSearchList();
     }
 

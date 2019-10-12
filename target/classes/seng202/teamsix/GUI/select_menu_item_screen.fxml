@@ -45,6 +45,6 @@
             <Button layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
          </children>
       </GridPane>
-      <Label prefHeight="17.0" prefWidth="287.0" text="Select item to add to menu" />
+      <Label fx:id="title" prefHeight="17.0" prefWidth="287.0" text="Select item to add to menu" />
    </children>
 </GridPane>

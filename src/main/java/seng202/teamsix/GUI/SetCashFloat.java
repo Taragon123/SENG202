@@ -43,6 +43,7 @@ public class SetCashFloat implements Initializable, CustomDialogInterface {
 
         Scene root = new Scene(parentCreateItem, 250, 225);
         controller_window = new Stage();
+        errorBox.setText(Double.toString(register.getRegisterAmount()));
         controller_window.setTitle("Set cash float");
         controller_window.setScene(root);
         controller_window.getIcons().add(new Image("file:assets/icons/icon.png"));
