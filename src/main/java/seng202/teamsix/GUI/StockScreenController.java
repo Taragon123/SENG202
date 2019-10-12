@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
@@ -64,6 +65,8 @@ public class StockScreenController implements Initializable {
     private Button clearSearchBtn;
     @FXML
     private Button addButton;
+    @FXML
+    private GridPane filtergrid;
 
 
     // Tabs in table view
@@ -287,20 +290,24 @@ public class StockScreenController implements Initializable {
             addButton.setText("Add Item");
             addButton.setOnAction(e -> addItemAction());
             addButton.setDisable(false);
+            filtergrid.setDisable(false);
         }
         else if (tabId.equals("menuTab")) {
             addButton.setText("Add Menu");
             addButton.setOnAction(e -> addMenuAction());
             addButton.setDisable(false);
+            filtergrid.setDisable(true);
         }
         else if (tabId.equals("stockTab")) {
             addButton.setText("Add Stock");
             addButton.setOnAction(e -> addStockAction());
             addButton.setDisable(false);
+            filtergrid.setDisable(false);
         }
         else {
             addButton.setText("");
             addButton.setDisable(true);
+            filtergrid.setDisable(true);
         }
     }
 
