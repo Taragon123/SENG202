@@ -586,25 +586,24 @@ public class StockScreenController implements Initializable {
                 @Override
                 public void handle(ActionEvent event) {
                     // gets the price of the order
-                    Double orderPrice = order.getTotalCost().getTotalCash();
+                    Currency orderPrice = order.getTotalCost();
+
                     //gets the current total of the cash register
-                    Double cashRegister = orderScreen.getOrderManager().getCashRegister().getRegisterAmount();
+                    CashRegister cashRegister = orderScreen.getOrderManager().getCashRegister();
                     String orderPriceString = orderPrice.toString();
                     RefundAlertBox refundAlertBox = new RefundAlertBox();
+
                     String menuTitle = "Refund Alert!";
-                    if (orderPrice <= cashRegister) {
+                    if (orderPrice.getTotalCash() <= cashRegister.getRegisterAmount()) {
                         refundToggleBtn.setSelected(true);
-                        cashRegister -= orderPrice;
-                        // have a pop up dialog that says value has been refunded
+                        cashRegister.subRegisterAmount(orderPrice);
                         String title = "Refund Successfull!";
-                        //parent.createDialog(new RefundAlertBox(), "refund_message.fxml", "Refund");
                         parent.createDialog(refundAlertBox, "refund_message.fxml", menuTitle);
 //                        refundAlertBox.init(title, orderPriceString);
                         System.out.println("GREATER THAN");
                     } else {
                         refundToggleBtn.setSelected(false);
                         System.out.println("LESS THAN");
-                        // Pop up dialog that says unsuccessful, insufficient money in cash register
                         String newtitle = "Refund Unsuccessfull!";
 //                        refundAlertBox.init(newtitle, orderPriceString);
                     }
