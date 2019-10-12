@@ -26,6 +26,8 @@ public class OrderScreenApplication extends Application {
         primaryStage.setMinHeight(600);
 
 
+
+
         FXMLLoader loaderOrder = new FXMLLoader(getClass().getResource("main_order_screen.fxml"));
         orderController.setOrderManager(orderManager);
         loaderOrder.setController(orderController);
@@ -61,6 +63,8 @@ public class OrderScreenApplication extends Application {
      */
     public void switchToOrderScreen() {
         primaryStage.setScene(orderScene);
+        primaryStage.setMinWidth(900);
+        primaryStage.setMinHeight(600);
         orderController.populateGrid();
     }
 
@@ -69,6 +73,8 @@ public class OrderScreenApplication extends Application {
      */
     public void switchToManagementScreen() {
         primaryStage.setScene(managementScene);
+        primaryStage.setMinWidth(1220);
+        primaryStage.setMinHeight(600);
         stockController.refreshData();
     }
 
