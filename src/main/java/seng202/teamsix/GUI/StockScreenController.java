@@ -76,6 +76,7 @@ public class StockScreenController implements Initializable {
     @FXML
     private Tab orderTab;
 
+
     private FXMLLoader loader;
     public OrderManager orderManager;
 
@@ -132,6 +133,10 @@ public class StockScreenController implements Initializable {
     public void addStockAction() {
         ItemSelectionController cash = new ItemSelectionController();
         cash.createNewWindow();
+    }
+
+    public void editItemTagsAction() {
+        createDialog(new EditItemTags(), "edit_item_tags.fxml", "Edit ItemTags");
     }
 
     /**
@@ -298,17 +303,6 @@ public class StockScreenController implements Initializable {
             addButton.setDisable(true);
         }
     }
-
-    public void test() {
-//        Node node = (Node) event.getSource();
-//        System.out.println((String) node.getUserData());
-        System.out.println("Test");
-    }
-
-    public void selectedItemTab() {
-        System.out.println("Test2");
-    }
-
 
     /**
      * Runs table initialisation
@@ -499,6 +493,14 @@ public class StockScreenController implements Initializable {
     }
 
     /**
+     * Setter function for the orderManager
+     * @param orderManager
+     */
+    public void setOrderManager(OrderManager orderManager) {
+        this.orderManager = orderManager;
+    }
+
+    /**
      * Class that stores the information needed for each row of the ItemTable
      */
     public static class ItemTableEntry {
@@ -567,14 +569,6 @@ public class StockScreenController implements Initializable {
     }
 
     /**
-     * Setter function for the orderManager
-     * @param orderManager
-     */
-    public void setOrderManager(OrderManager orderManager) {
-        this.orderManager = orderManager;
-    }
-
-    /**
      * Class that stores the information needed for each row of the OrderTable
      */
     public class OrderTableEntry {
@@ -630,7 +624,6 @@ public class StockScreenController implements Initializable {
             return refundToggleBtn;
         }
     }
-
 
     /**
      * Class that stores the information needed for each row of the MenuTable
