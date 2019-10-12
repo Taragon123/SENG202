@@ -136,7 +136,7 @@ public class OrderOperationsStepDefs {
 
     @When("The order is confirmed by the user")
     public void theOrderIsConfirmedByTheUser() {
-        cart.finaliseOrder();
+        cart.finaliseOrder(true);
     }
 
     @Then("The customer is asked to pay the full price which is then added to the cash register")

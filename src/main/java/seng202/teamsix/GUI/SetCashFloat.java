@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import seng202.teamsix.data.*;
 import java.io.IOException;
@@ -15,18 +16,17 @@ import java.util.ResourceBundle;
 
 
 
-public class SetCashFloat implements Initializable, CustomDialogInterface {
-    private Stage stage;
+public class SetCashFloat implements Initializable {
+    private Stage mainStage;
     private CashRegister register;
     private Stage controller_window;
+    private OrderScreenController orderController;
 
 
     @FXML
-    private TextField dollarsInput;
+    private TextField cashInput;
     @FXML
     private Label errorBox;
-    @FXML
-    private TextField centsInput;
 
     void createNewWindow() {
         FXMLLoader loaderCreateItem = new FXMLLoader(getClass().getResource("cash_float_screen.fxml"));
@@ -41,17 +41,22 @@ public class SetCashFloat implements Initializable, CustomDialogInterface {
             return;
         }
 
-        Scene root = new Scene(parentCreateItem, 250, 225);
+        Scene root = new Scene(parentCreateItem, 400, 300);
         controller_window = new Stage();
-        errorBox.setText(Double.toString(register.getRegisterAmount()));
+        cashInput.setPromptText(Double.toString(register.getRegisterAmount()));
         controller_window.setTitle("Set cash float");
+
+        controller_window.initModality(Modality.WINDOW_MODAL);
+        controller_window.initOwner(mainStage);
         controller_window.setScene(root);
         controller_window.getIcons().add(new Image("file:assets/icons/icon.png"));
         controller_window.show();
     }
 
-    public SetCashFloat(CashRegister register) {
+    public SetCashFloat(CashRegister register, Stage mainWindow, OrderScreenController orderController) {
+        this.orderController = orderController;
         this.register = register;
+        mainStage = mainWindow;
     }
 
     public void cancel() {
@@ -60,25 +65,18 @@ public class SetCashFloat implements Initializable, CustomDialogInterface {
 
     public void confirm() {
         if (checkInputs()) {
-            float dollars = Float.parseFloat(dollarsInput.getText());
-            float cents = Float.parseFloat(centsInput.getText());
-            register.setRegisterAmount((int) ((dollars*100) + cents));
+            Double cash = Double.parseDouble(cashInput.getText());
+            register.setRegisterAmount(cash);
+            orderController.update_current_cash();
             controller_window.close();
         }
     }
 
     private boolean checkInputs() {
         errorBox.setText("");
-        if (centsInput.getText().equals("")) {
-            centsInput.setText("0");
-        }
-        if (dollarsInput.getText().equals("")) {
-            dollarsInput.setText("0");
-        }
         try {
-            double dollarValue = Double.parseDouble(dollarsInput.getText());
-            double centValue = Double.parseDouble(centsInput.getText());
-            if (dollarValue < 0 || centValue < 0) {
+            double cashValue = Double.parseDouble(cashInput.getText());
+            if (cashValue <= 0) {
                 errorBox.setText("Price must be\ngreater or equal to $0");
                 return false;
             }
@@ -91,10 +89,5 @@ public class SetCashFloat implements Initializable, CustomDialogInterface {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-    }
-
-    @Override
-    public void preSet(Stage stage) {
-        this.stage = stage;
     }
 }
