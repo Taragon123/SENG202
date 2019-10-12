@@ -182,13 +182,6 @@
             <value uuid="096abbbe-2134-4841-939a-e6922e202a97">
                 <menuitem_list>
                     <menuitem>
-                        <item uuid="79e1c5af-ecca-4d8b-a3a5-1c0166c9f994"/>
-                        <name>Cheese Burger</name>
-                        <description></description>
-                        <colour>2970813</colour>
-                        <price cents="1999"/>
-                    </menuitem>
-                    <menuitem>
                         <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
                         <name>Cheese Burger Combo</name>
                         <description></description>
@@ -218,25 +211,19 @@
     </order_map>
     <stock_instance_map>
         <entry>
-            <key uuid="d9d4df7a-1ced-4542-8e91-3a1a37850e4b"/>
-            <value uuid="d9d4df7a-1ced-4542-8e91-3a1a37850e4b">
-                <stock_item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="compositeItem" uuid="79e1c5af-ecca-4d8b-a3a5-1c0166c9f994">
-                    <name>Cheese Burger</name>
-                    <description>Mhmmm sounds good</description>
-                    <base_price cents="1080"/>
-                    <markup_price cents="1999"/>
+            <key uuid="6d0ab24f-5373-4448-a050-0dbc32f65d2d"/>
+            <value uuid="6d0ab24f-5373-4448-a050-0dbc32f65d2d">
+                <stock_item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="item" uuid="8721e663-6b3a-4321-ad6f-c5e6e22a33c5">
+                    <name>Cheese</name>
+                    <description></description>
+                    <base_price cents="0"/>
+                    <markup_price cents="0"/>
                     <recipe>
-                        <method>Just slap that bad boy together</method>
+                        <method></method>
                     </recipe>
-                    <tags uuid="2c16418b-5d47-43f3-bcae-2061a7893ad6"/>
                     <qty_unit>NUM</qty_unit>
-                    <composite_item_list>
-                        <item uuid="a623c8de-ec5d-4636-bfa0-fe6168c33f30"/>
-                        <item uuid="a723c8de-ec5d-4636-bfa0-fe6168c33f30"/>
-                        <item uuid="8721e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
-                    </composite_item_list>
                 </stock_item>
-                <date_added>2019-10-13T11:52:40.369+13:00</date_added>
+                <date_added>2019-10-13T12:22:13.325+13:00</date_added>
                 <does_expire>false</does_expire>
                 <quantity_remaining>2.0</quantity_remaining>
             </value>

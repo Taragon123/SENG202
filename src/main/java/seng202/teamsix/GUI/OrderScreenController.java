@@ -130,7 +130,6 @@ public class OrderScreenController implements Initializable {
      * GridPane of all the MenuItems within that menu, called from the OrderScreenController initializer.
      */
     public void populateGrid() {
-        currentCash.setText("Current cash on hand: $"+ Double.toString(orderManager.getCashRegister().getRegisterAmount()));
         menu_tabs.getTabs().clear();
         Set<Menu_Ref> menu_refSet = StorageAccess.instance().getAllMenus(); //retrieve uuid of all menus
         for (Menu_Ref menu_ref : menu_refSet) {
@@ -162,6 +161,7 @@ public class OrderScreenController implements Initializable {
                 flowPane.getChildren().add(button);
             }
         }
+        update_current_cash();
     }
 
     /**
@@ -372,6 +372,10 @@ public class OrderScreenController implements Initializable {
         optionPopup.hide();
         SetCashFloat cash = new SetCashFloat(orderManager.getCashRegister());
         cash.createNewWindow();
+    }
+
+    public void update_current_cash() {
+        currentCash.setText("Current cash on hand: $"+ Double.toString(orderManager.getCashRegister().getRegisterAmount()));
     }
 
     /**

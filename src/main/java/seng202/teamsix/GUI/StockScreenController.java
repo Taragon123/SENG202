@@ -134,8 +134,8 @@ public class StockScreenController implements Initializable {
     }
 
     public void addStockAction() {
-        ItemSelectionController cash = new ItemSelectionController();
-        cash.createNewWindow();
+        ItemSelectionController stockItemSelection = new ItemSelectionController();
+        stockItemSelection.createNewWindow();
     }
 
     public void editItemTagsAction() {
@@ -324,7 +324,7 @@ public class StockScreenController implements Initializable {
     /**
      * Creates stock table
      */
-    private void createStockTable() {
+    void createStockTable() {
         stockTable = new TableView<>();
         stockTable.setItems(stockEntries);
 
