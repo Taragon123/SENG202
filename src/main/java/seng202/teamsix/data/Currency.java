@@ -81,6 +81,11 @@ public class Currency implements Comparable<Currency> {
         return cents / 100.00;
     }
 
+    public Currency roundToCash() {
+        Currency out = new Currency(Math.round(this.getTotalCash() * 10) / 10);
+        return out;
+    }
+
     /**
      * Sets the value of total cash using double as input.
      * @param newTotal Double containing the new cash total.

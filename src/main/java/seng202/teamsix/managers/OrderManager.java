@@ -107,7 +107,7 @@ public class OrderManager {
      * Finalises the order by saving it so it can be viewed in future if needed, sends order to chefs, prints receipt.
      * Also resets the cart and increments the localTicketCount by one and setting the new cart's localTicketNumber to 1.
      */
-    public void finaliseOrder() {
+    public void finaliseOrder(Boolean isEftpos) {
         // Save the order with StorageAccess/
         cart.setTimestamp(new Date());
         cart.updateTotalCost();
@@ -121,7 +121,9 @@ public class OrderManager {
         printChefsOrder();
         System.out.println();
         //Update the cash register
-        cashRegister.addRegisterAmount(cart.getTotalCost());
+        if (!isEftpos) {
+            cashRegister.addRegisterAmount(cart.getTotalCost().roundToCash());
+        }
 
         // Print customers receipt.
         printReceipt();

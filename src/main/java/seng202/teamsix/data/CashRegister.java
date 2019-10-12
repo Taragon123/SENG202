@@ -46,6 +46,14 @@ public class CashRegister {
     }
 
     /**
+     * This method sets the amount in the cash register given the total amount as an double of the amount of dollars.
+     * @param amount The amount we wish to set the cash register to, in dollars.
+     */
+    public void setRegisterAmount(Double amount) {
+        registerAmount.setTotalCash(amount);
+    }
+
+    /**
      * This method adds a Currency object, containing the number of cents to add, to the current registerAmount Currency
      * @param amount The Currency to be added containing the amount of cents that will be added
      */
