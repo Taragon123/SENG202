@@ -628,8 +628,10 @@ public class StockScreenController implements Initializable {
 
                         if (orderPrice.getTotalCash() <= cashRegister.getRegisterAmount()) {
                             cashRegister.subRegisterAmount(orderPrice);
+
                             title = "Refund Successfull!";
                             order.setIsRefunded(true);
+
                             RefundAlertBox refundAlertBox = new RefundAlertBox(title, orderPriceString);
                             parent.createDialog(refundAlertBox, "refund_message.fxml", menuTitle, refundAlertBox);
                             //                        refundAlertBox.init(title, orderPriceString);
@@ -645,6 +647,7 @@ public class StockScreenController implements Initializable {
                         order.setIsRefunded(false);
                         cashRegister.addRegisterAmount(orderPrice);
                     }
+                    StorageAccess.instance().updateOrder(order);
                 }
             });
 
