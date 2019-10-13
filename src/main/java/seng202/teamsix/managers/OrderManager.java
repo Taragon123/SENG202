@@ -124,7 +124,7 @@ public class OrderManager {
         //Update the cash register if cash is used
 
         if (!is_eftpos) {
-            cashRegister.addRegisterAmount(cart.getTotalCost());
+            cashRegister.addRegisterAmount(cart.getTotalCost().roundToCash());
         }
 
 

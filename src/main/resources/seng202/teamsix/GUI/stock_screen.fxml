@@ -110,39 +110,34 @@
                </HBox.margin></Button>
          </children>
       </HBox>
-      <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1">
+      <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowSpan="2">
          <children>
-            <Button mnemonicParsing="false" onAction="#saveData" prefHeight="30.0" prefWidth="103.0" text="Save">
-               <HBox.margin>
-                  <Insets top="10.0" />
-               </HBox.margin>
-            </Button>
+            <TabPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="685.0" prefWidth="951.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="30.0" tabMaxWidth="200.0" tabMinHeight="40.0" tabMinWidth="150.0" HBox.hgrow="ALWAYS">
+              <tabs>
+                <Tab fx:id="stockTab" text="Stock">
+                  <content>
+                        <StackPane fx:id="stockTabPane" />
+                  </content>
+                </Tab>
+                <Tab fx:id="itemTab" text="Items">
+                  <content>
+                        <StackPane fx:id="itemTabPane" prefWidth="950.0" />
+                  </content>
+                </Tab>
+                  <Tab fx:id="menuTab" text="Menu">
+                    <content>
+                        <StackPane fx:id="menuTabPane" prefWidth="950.0" />
+                    </content>
+                  </Tab>
+                  <Tab fx:id="orderTab" text="Past Orders">
+                    <content>
+                        <StackPane fx:id="orderTabPane" prefWidth="900.0" />
+                    </content>
+                  </Tab>
+              </tabs>
+            </TabPane>
          </children></HBox>
-      <TabPane prefHeight="685.0" prefWidth="955.0" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="30.0" tabMaxWidth="200.0" tabMinHeight="30.0" tabMinWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-        <tabs>
-          <Tab fx:id="stockTab" text="Stock">
-            <content>
-                  <StackPane fx:id="stockTabPane" />
-            </content>
-          </Tab>
-          <Tab fx:id="itemTab" text="Items">
-            <content>
-                  <StackPane fx:id="itemTabPane" prefWidth="950.0" />
-            </content>
-          </Tab>
-            <Tab fx:id="menuTab" text="Menu">
-              <content>
-                  <StackPane fx:id="menuTabPane" prefWidth="950.0" />
-              </content>
-            </Tab>
-            <Tab fx:id="orderTab" text="Past Orders">
-              <content>
-                  <StackPane fx:id="orderTabPane" prefWidth="900.0" />
-              </content>
-            </Tab>
-        </tabs>
-      </TabPane>
-      <Button fx:id="AddToMenuBtn" mnemonicParsing="false" prefHeight="60.0" prefWidth="294.0" text="Add to menu" GridPane.rowIndex="2" onAction="#addToMenuAction"/>
+      <Button fx:id="AddToMenuBtn" mnemonicParsing="false" onAction="#addToMenuAction" prefHeight="60.0" prefWidth="294.0" text="Add to menu" GridPane.rowIndex="2" />
    </children>
    <padding>
       <Insets bottom="5.0" left="10.0" right="10.0" />

@@ -324,32 +324,24 @@ public class StockScreenController implements Initializable {
             addButton.setText("Add Item");
             addButton.setOnAction(e -> addItemAction());
             addButton.setDisable(false);
-            AddToMenuBtn.setDisable(true);
-            AddToMenuBtn.setVisible(false);
             filtergrid.setDisable(false);
         }
         else if (tabId.equals("menuTab")) {
             addButton.setText("Add Menu");
             addButton.setOnAction(e -> addMenuAction());
             addButton.setDisable(false);
-            AddToMenuBtn.setDisable(false);
-            AddToMenuBtn.setVisible(true);
             filtergrid.setDisable(true);
         }
         else if (tabId.equals("stockTab")) {
             addButton.setText("Add Stock");
             addButton.setOnAction(e -> addStockAction());
             addButton.setDisable(false);
-            AddToMenuBtn.setDisable(true);
-            AddToMenuBtn.setVisible(false);
             filtergrid.setDisable(false);
         }
         else {
             addButton.setText("");
             addButton.setDisable(true);
             filtergrid.setDisable(true);
-            AddToMenuBtn.setVisible(false);
-            AddToMenuBtn.setDisable(true);
         }
     }
 
@@ -486,12 +478,6 @@ public class StockScreenController implements Initializable {
         editBtnColumn.setMinWidth(70);
         editBtnColumn.setCellValueFactory(new PropertyValueFactory<>("viewButton"));
         menuTable.getColumns().add(editBtnColumn);
-
-        //Add menu button column
-        TableColumn<MenuTableEntry, Button> addToMenuButtonColumn = new TableColumn<>();
-        addToMenuButtonColumn.setMinWidth(95);
-        addToMenuButtonColumn.setCellValueFactory(new PropertyValueFactory<>("addToMenu"));
-        menuTable.getColumns().add(addToMenuButtonColumn);
     }
 
     /**
