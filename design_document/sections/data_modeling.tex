@@ -1,0 +1,18 @@
+FoodByte stores data within XML files, though it was planned to move to storing data within a database to handle larger data sets. The separate data layer of the system allows developers to switch from XML storage access to database storage access a lot simpler.
+
+Data Modelling is about modelling the data that would need to be stored for the FoodByte application to function to the user's expectation. This included the ability to store ingredients. Ingredients required to make the
+\begin{tabularx}{\linewidth}{|X|X|X|X|X|X|X|}
+\hline
+\multicolumn{7}{c}{ Use cases } \\
+\hline
+ID & Description & Actors & Pre-conditions & Main effect & Post-conditions & Category/ package \\
+\hline
+UC1 & Cash register. & Employees. Manager. Owner. & Customer makes and pays for an order. & Send prompt to open cash register. & Cash is stored in the cash register, correct change is given and the register is closed. & Front of house / Cheeseburger. \\
+\hline
+UC2 & Add item to order. & Employees. Manager. Owner. & Customer orders an item/items. & Add requested item to the current order. & Item(s) added to the current order and total price updated. & Front of house / Cheeseburger. \\
+\hline
+UC3 & Remove item from order. & Employees. Manager. Owner. & Customer no longer desires a specific item/items in the current order. & Remove undesirable item from the current order. & Item(s) are removed for the current order and total price updated. & Front of house / Cheeseburger. \\
+\hline
+UC4 & Cancel order. & Employees. Manager. Owner. & Customer no longer wants to order from our truck. & Remove all items from the current order. & All items removed from the current order and total price updated. & Front of house / Cheeseburger. \\
+\hline
+\end{tabularx}
