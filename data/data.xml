@@ -120,11 +120,10 @@
                 <recipe>
                     <method></method>
                 </recipe>
-                <tags uuid="2c16418b-5d47-43f3-bcae-2061a7893ad6"/>
                 <qty_unit>NUM</qty_unit>
                 <variant_list>
                     <variant uuid="8521e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
-                    <variant uuid="8521e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                    <variant uuid="8621e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
                 </variant_list>
             </value>
         </entry>
@@ -199,13 +198,13 @@
             <key uuid="25058b57-6215-4d38-9c24-213335aa5546"/>
             <value uuid="25058b57-6215-4d38-9c24-213335aa5546">
                 <order_tree>
-                    <dependants>
-                        <quantity>0</quantity>
-                    </dependants>
+                    <dependants/>
                     <quantity>0</quantity>
                 </order_tree>
                 <timestamp>2019-09-17T19:34:48.404+12:00</timestamp>
                 <total_cost cents="0"/>
+                <isRefunded>false</isRefunded>
+                <is_eftpos>false</is_eftpos>
             </value>
         </entry>
     </order_map>

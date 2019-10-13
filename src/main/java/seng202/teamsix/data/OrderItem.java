@@ -10,10 +10,7 @@
 
 package seng202.teamsix.data;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -23,9 +20,9 @@ import java.util.List;
 public class OrderItem {
     @XmlElement
     private Item_Ref item = null;
-    @XmlElement
+    @XmlElementWrapper(name = "dependants")
+    @XmlElement(name = "order_item")
     private ArrayList<OrderItem> dependants = new ArrayList<OrderItem>();
-    @XmlElement
     private OrderItem parent_order = null;
     @XmlElement
     private int quantity = 0;
@@ -176,7 +173,6 @@ public class OrderItem {
                     if (remove) {
                         relevantInstance.setQuantityRemaining(0);
                         relevantInstance.setHidden("true");
-                        StorageAccess.instance().updateStockInstance(relevantInstance);
                     }
 
                     if (item_quantity == 0) {
@@ -186,7 +182,6 @@ public class OrderItem {
                 } else {
                     if (remove) {
                         relevantInstance.subQuantity(item_quantity);
-                        StorageAccess.instance().updateStockInstance(relevantInstance);
                     }
                     return true;
                 }
