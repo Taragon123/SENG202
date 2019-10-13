@@ -1,23 +1,20 @@
-\begin{table}[ht]
+
+\begin{table}
 	\centering
-	\begin{tabular}{|c|c|c|c|c|}
-	\hline
-	ID & Use case & Given & When & Then
-	\hline
-	\hline
-		UC1 & Add money to the cash register & $200 in the cash register & $50 is added & There is now $250 in the cash register \\
-		UC2 & Remove money from the cash register & $200 in the cash register & $50 is removed & There is now $150 in the cash register \\
-		UC3 & Too much money is removed from the cash register & $30 in the cash register & $50 is removed & Error is thrown \\
-		UC4 & Add an item to the current order & One buger in the current order & Chips are added to the current order & The current order now contains one burger and one chips \\
+	\begin{tabular}{lllll}
+		UC1 & Add money to the cash register & \$200 in the cash register & \$50 is added & There is now \$250 in the cash register \\
+		UC2 & Remove money from the cash register & \$200 in the cash register & \$50 is removed & There is now \$150 in the cash register \\
+		UC3 & Too much money is removed from the cash register & \$30 in the cash register & \$50 is removed & Error is thrown \\
+		UC4 & Add an item to the current order & One burger in the current order & Chips are added to the current order & The current order now contains one burger and one chips \\
 		UC5 & Remove an item from the current order & One burger and one chips in the current order & Chips are removed from the current order & The current order now contains one burger \\
-		UC6 & Cancel the current order & The current order contains one burger and one chips & The order is canceled & The current order is now empty \\
-		UC7 & Refund the total cost of an order & The cost of the order that is to be refunded was $15 and there is $50 in the cash register & $15 is removed from the cash register & $35 in the cash register \\
+		UC6 & Cancel the current order & The current order contains one burger and one chips & The order is cancelled & The current order is now empty \\
+		UC7 & Refund the total cost of an order & The cost of the order that is to be refunded was \$15 and there is \$50 in the cash register & \$15 is removed from the cash register & \$35 in the cash register \\
 		UC8 & Customise a menu item & The current order contains one burger & Tomatoes are removed & The chefs order and receipt reflect this \\
 		UC9 & Add a new menu to the system & There are zero menus in the system & New menu is added & There is one menu in the system \\
 		UC10 & Add an item to an existing menu & A menu contains zero items & Burger is added to the menu & Menu contains one item, Burger \\
 		UC11 & Remove an item from an existing menu & A menu contains one item, Burger & Burger is removed from the menu & Menu contains zero items \\
 		UC12 & Edit an item & Burger doesn't contain tomatoes & Tomatoes added to burger & Burger contains tomatoes \\
-		UC13 & Add a recipe to a menu item & Burger doesn't have a recipe & Recipe is added to burger & Burger now has an assosiated recipe \\
+		UC13 & Add a recipe to a menu item & Burger doesn't have a recipe & Recipe is added to burger & Burger now has an associated recipe \\
 		UC14 & View the recipe for a menu item & Recipe for a burger needs to be viewed & Burger selected AND View recipe selected & Recipe for burger displayed \\
 		UC15 & Add stock items & 5 buns are currently in stock & 10 buns are added to stock & 15 buns are currently in stock \\
 		UC16 & Update stock when stock is used & 2 chips are currently in stock & Chips are ordered & 1 chips are currently in stock \\
@@ -25,7 +22,10 @@
 		UC18 & View available stock & Levels of stock need to be viewed & Stock screen is opened & Available stock is displayed \\
 		UC19 & View daily sales & Daily sales need to be viewed & Past orders is selected & Past orders are displayed \\
 		UC20 & Generate sales report & Sales report is needed & Generate sales report is selected & Sales report containing financial information is generated \\
-		UC21 & 
-		\end{tabular}
-		\caption{Acceptance tests}
-		\label{tab:Acceptance tests}
+		UC21 & Change price of item & Price of burger is \$10 & Price changed to \$12 & Price of burger is now \$12 \\
+		UC22 & Save menus to external file & Menus need to be exported & Save menus to external file is selected & Menus.csv saved in local directory \\
+		UC23 & Load menus from an external file & Menus need to be imported & Load new menu is selected & File containing menus is loaded in the correct format \\
+		UC24 & View sales from previous days & Previous days sales need to be viewed & Past orders is selected AND date is changed to 12/10/2019 & Orders made on 12/10/2019 are displayed \\
+		UC25 & Confirming an order & Current order contains one burger and one chips, total cost is \$15 & Order is selected and stock is available to create order items & Chef's order and receipt are printed and \$15 added to register \\		
+\end{tabular}
+\end{table}

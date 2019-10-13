@@ -314,6 +314,24 @@
             </value>
         </entry>
         <entry>
+            <key uuid="0a57d3d0-95d5-43f5-8790-cb5346221f34"/>
+            <value uuid="0a57d3d0-95d5-43f5-8790-cb5346221f34">
+                <stock_item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="item" uuid="8421e663-6b3a-4321-ad6f-c5e6e22a33c5">
+                    <name>Regular Bread Bun</name>
+                    <description></description>
+                    <base_price cents="0"/>
+                    <markup_price cents="0"/>
+                    <recipe>
+                        <method></method>
+                    </recipe>
+                    <qty_unit>NUM</qty_unit>
+                </stock_item>
+                <date_added>2019-10-13T16:36:45.684+13:00</date_added>
+                <does_expire>false</does_expire>
+                <quantity_remaining>3.0</quantity_remaining>
+            </value>
+        </entry>
+        <entry>
             <key uuid="41b0ce5b-8ff1-4d63-8b73-311d79069ffc"/>
             <value uuid="41b0ce5b-8ff1-4d63-8b73-311d79069ffc">
                 <stock_item uuid="8421e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
