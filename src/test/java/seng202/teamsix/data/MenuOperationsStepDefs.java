@@ -13,6 +13,7 @@ public class MenuOperationsStepDefs {
     Menu_Ref menu_ref;
     Recipe testRecipe;
     Item burger = new Item();
+    Item burger2 = new Item();
     int currentLen = 0;
 
     @Given("The current price of a burger is ${int}")
@@ -45,20 +46,20 @@ public class MenuOperationsStepDefs {
     @Given("Menu is open and the user needs to check the recipe for a burger")
     public void menuIsOpenAndTheUserNeedsToCheckTheRecipeForABurger() {
         Item_Ref burger_ref = new Item_Ref();
-        burger_ref.setUUID(8782518176451284363l, -6654882082024982124l);
-        burger = StorageAccess.instance().getItem(burger_ref);
+        burger_ref.setUUID("79e1c5af-ecca-4d8b-a3a5-1c0166c9f994");
+        burger2 = StorageAccess.instance().getItem(burger_ref);
 
         menu_burger.setItem(burger_ref);
     }
 
-    @When("A burger is selected")
+    @When("A burger is selected and view recipe is selected")
     public void aBurgerIsSelected() {
         burger = StorageAccess.instance().getItem(menu_burger.getItem());
     }
 
     @Then("The recipe for a burger is displayed")
     public void theRecipeForABurgerIsDisplayed() {
-        assertEquals("Put it all in the bag", burger.getRecipe().getMethod());
+        assertEquals("Just put it together", burger.getRecipe().getMethod());
     }
 
     @Given("A new burger is created")
@@ -70,7 +71,7 @@ public class MenuOperationsStepDefs {
         menu_burger.setItem(burger_ref);
     }
 
-    @When("Edit menu is selected")
+    @When("New burger is added to the menu")
     public void editMenuIsSelected() {
         menu_ref = new Menu_Ref();
         menu_ref.setUUID("096abbbe-2134-4841-939a-e6922e202a97");
@@ -113,7 +114,7 @@ public class MenuOperationsStepDefs {
         menu_burger.setItem(burger_ref);
     }
 
-    @When("Edit menu is clicked")
+    @When("Delete burger is selected")
     public void editMenuIsClicked() {
         menu_ref = new Menu_Ref();
         menu_ref.setUUID("096abbbe-2134-4841-939a-e6922e202a97");

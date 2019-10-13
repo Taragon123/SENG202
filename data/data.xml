@@ -135,7 +135,7 @@
                 <base_price cents="1080"/>
                 <markup_price cents="1999"/>
                 <recipe>
-                    <method>Put it all in the bag</method>
+                    <method>Test that setting recipes works</method>
                 </recipe>
                 <tags uuid="2c16418b-5d47-43f3-bcae-2061a7893ad6"/>
                 <qty_unit>NUM</qty_unit>
@@ -154,7 +154,7 @@
                 <base_price cents="1080"/>
                 <markup_price cents="1999"/>
                 <recipe>
-                    <method>Just slap that bad boy together</method>
+                    <method>Just put it together</method>
                 </recipe>
                 <tags uuid="2c16418b-5d47-43f3-bcae-2061a7893ad6"/>
                 <qty_unit>NUM</qty_unit>
@@ -187,6 +187,26 @@
                         <colour>9581493</colour>
                         <price cents="1999"/>
                     </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5af-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <colour>0</colour>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5af-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <colour>0</colour>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5af-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <colour>0</colour>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5af-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <colour>0</colour>
+                    </menuitem>
+                    <menuitem>
+                        <item uuid="79e1c5af-ecca-4d8b-a3a5-1c0166c9f994"/>
+                        <colour>0</colour>
+                    </menuitem>
                 </menuitem_list>
                 <name>My Menu</name>
                 <description>Hello I am a menu description</description>
@@ -205,6 +225,74 @@
                 <total_cost cents="0"/>
                 <isRefunded>false</isRefunded>
                 <is_eftpos>false</is_eftpos>
+            </value>
+        </entry>
+        <entry>
+            <key uuid="3aadca48-545b-40fc-90ce-f908284b93e8"/>
+            <value uuid="3aadca48-545b-40fc-90ce-f908284b93e8">
+                <order_tree>
+                    <dependants>
+                        <order_item>
+                            <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                            <dependants/>
+                            <quantity>1</quantity>
+                        </order_item>
+                        <order_item>
+                            <item uuid="79e1c5bf-ecca-4d8b-a3a5-1c0166c9f994"/>
+                            <dependants>
+<order_item>
+    <item uuid="79e1c5af-ecca-4d8b-a3a5-1c0166c9f994"/>
+    <dependants>
+        <order_item>
+            <item uuid="a623c8de-ec5d-4636-bfa0-fe6168c33f30"/>
+            <dependants>
+                <order_item>
+                    <item uuid="8321e692-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                    <dependants/>
+                    <quantity>1</quantity>
+                </order_item>
+            </dependants>
+            <quantity>1</quantity>
+        </order_item>
+        <order_item>
+            <item uuid="a723c8de-ec5d-4636-bfa0-fe6168c33f30"/>
+            <dependants>
+                <order_item>
+                    <item uuid="8521e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+                    <dependants/>
+                    <quantity>1</quantity>
+                </order_item>
+            </dependants>
+            <quantity>1</quantity>
+        </order_item>
+        <order_item>
+            <item uuid="8721e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+            <dependants/>
+            <quantity>1</quantity>
+        </order_item>
+    </dependants>
+    <quantity>1</quantity>
+</order_item>
+<order_item>
+    <item uuid="8821e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+    <dependants/>
+    <quantity>1</quantity>
+</order_item>
+<order_item>
+    <item uuid="8921e663-6b3a-4321-ad6f-c5e6e22a33c5"/>
+    <dependants/>
+    <quantity>1</quantity>
+</order_item>
+                            </dependants>
+                            <quantity>1</quantity>
+                        </order_item>
+                    </dependants>
+                    <quantity>0</quantity>
+                </order_tree>
+                <timestamp>2019-10-14T12:34:43.049+13:00</timestamp>
+                <total_cost cents="1999"/>
+                <isRefunded>false</isRefunded>
+                <is_eftpos>true</is_eftpos>
             </value>
         </entry>
         <entry>
