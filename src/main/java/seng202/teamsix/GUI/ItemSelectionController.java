@@ -20,10 +20,10 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
 
-public class ItemSelectionController implements Initializable, CustomDialogInterface {
+public class ItemSelectionController extends StockScreenController implements Initializable, CustomDialogInterface {
     private Stage stage;
     private Stage controller_window;
-    private StockScreenController parent = new StockScreenController();
+    private OrderScreenApplication parent;
     private Item item;
 
     @FXML
@@ -32,7 +32,8 @@ public class ItemSelectionController implements Initializable, CustomDialogInter
     @FXML
     private TextField textfield_search_items;
 
-    void createNewWindow() {
+    void createNewWindow(OrderScreenApplication parent) {
+        this.parent = parent;
         FXMLLoader loaderCreateItem = new FXMLLoader(getClass().getResource("select_item_screen.fxml"));
         loaderCreateItem.setController(this);
 
@@ -78,9 +79,8 @@ public class ItemSelectionController implements Initializable, CustomDialogInter
         if (listview_item_search.getSelectionModel().getSelectedItem() != null) {
             item_ref = listview_item_search.getSelectionModel().getSelectedItem();
         }
-        parent.createDialog(new StockInstanceDialog(item_ref), "create_stock_instance.fxml", "Add Stock");
+        createDialog(new StockInstanceDialog(item_ref, parent), "create_stock_instance.fxml", "Add Stock");
         controller_window.close();
-        parent.refreshData();
     }
 
     public void cancel() {controller_window.close();}

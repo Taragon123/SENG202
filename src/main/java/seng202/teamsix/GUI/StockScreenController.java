@@ -135,7 +135,7 @@ public class StockScreenController implements Initializable {
 
     public void addStockAction() {
         ItemSelectionController stockItemSelection = new ItemSelectionController();
-        stockItemSelection.createNewWindow();
+        stockItemSelection.createNewWindow(parent);
     }
 
     public void editItemTagsAction() {
@@ -553,12 +553,6 @@ public class StockScreenController implements Initializable {
             this.markup_price = new SimpleStringProperty(item.getMarkupPrice().toString());
             this.qty_unit = new SimpleStringProperty(item.getQtyUnit().toString());
             this.addStockInstance = new Button("Add Stock");
-            this.addStockInstance.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    parent.createDialog(new StockInstanceDialog(item_ref), "create_stock_instance.fxml", "Add Stock");
-                }
-            });
             this.editItem = new Button("Edit Item");
             this.editItem.setOnAction(new EventHandler<ActionEvent>() {
                 @Override

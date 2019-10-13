@@ -193,6 +193,14 @@
                 <description>Hello I am a menu description</description>
             </value>
         </entry>
+        <entry>
+            <key uuid="6f71704b-713b-4393-aa48-633e2101ae76"/>
+            <value uuid="6f71704b-713b-4393-aa48-633e2101ae76">
+                <menuitem_list/>
+                <name>kafsa</name>
+                <description></description>
+            </value>
+        </entry>
     </menu_map>
     <order_map>
         <entry>
@@ -206,13 +214,14 @@
                 </order_tree>
                 <timestamp>2019-09-17T19:34:48.404+12:00</timestamp>
                 <total_cost cents="0"/>
+                <isRefunded>false</isRefunded>
             </value>
         </entry>
     </order_map>
     <stock_instance_map>
         <entry>
-            <key uuid="6d0ab24f-5373-4448-a050-0dbc32f65d2d"/>
-            <value uuid="6d0ab24f-5373-4448-a050-0dbc32f65d2d">
+            <key uuid="3649a7b4-16c0-4734-a47a-a617510adc5f"/>
+            <value uuid="3649a7b4-16c0-4734-a47a-a617510adc5f">
                 <stock_item xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="item" uuid="8721e663-6b3a-4321-ad6f-c5e6e22a33c5">
                     <name>Cheese</name>
                     <description></description>
@@ -223,9 +232,9 @@
                     </recipe>
                     <qty_unit>NUM</qty_unit>
                 </stock_item>
-                <date_added>2019-10-13T12:22:13.325+13:00</date_added>
+                <date_added>2019-10-13T13:40:40.715+13:00</date_added>
                 <does_expire>false</does_expire>
-                <quantity_remaining>2.0</quantity_remaining>
+                <quantity_remaining>50.0</quantity_remaining>
             </value>
         </entry>
         <entry>
