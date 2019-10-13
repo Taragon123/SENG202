@@ -434,7 +434,8 @@ public class StockScreenController implements Initializable {
 
         //Add edit button column
         TableColumn<ItemTableEntry, Button> addEditButtonColumn = new TableColumn<>();
-        addEditButtonColumn.setMinWidth(70);
+        addEditButtonColumn.setMinWidth(65);
+        addEditButtonColumn.setMaxWidth(70);
         addEditButtonColumn.setCellValueFactory(new PropertyValueFactory<>("editItem"));
         itemTable.getColumns().add(addEditButtonColumn);
 
@@ -457,8 +458,9 @@ public class StockScreenController implements Initializable {
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         orderTable.getColumns().add(priceColumn);
 
-        TableColumn<OrderTableEntry, ToggleButton> refundColumn = new TableColumn<>("Refund");
-        refundColumn.setMinWidth(100);
+        TableColumn<OrderTableEntry, ToggleButton> refundColumn = new TableColumn<>();
+        refundColumn.setMinWidth(50);
+        refundColumn.setMaxWidth(60);
         refundColumn.setCellValueFactory(new PropertyValueFactory<>("refundToggleBtn"));
         orderTable.getColumns().add(refundColumn);
     }
@@ -485,6 +487,11 @@ public class StockScreenController implements Initializable {
         editBtnColumn.setCellValueFactory(new PropertyValueFactory<>("viewButton"));
         menuTable.getColumns().add(editBtnColumn);
 
+        //Add menu button column
+        TableColumn<MenuTableEntry, Button> addToMenuButtonColumn = new TableColumn<>();
+        addToMenuButtonColumn.setMinWidth(95);
+        addToMenuButtonColumn.setCellValueFactory(new PropertyValueFactory<>("addToMenu"));
+        menuTable.getColumns().add(addToMenuButtonColumn);
     }
 
     /**
@@ -626,7 +633,7 @@ public class StockScreenController implements Initializable {
                 @Override
                 public void handle(ActionEvent event) {
                     // gets the price of the order
-                    Currency orderPrice = order.getTotalCost();
+                    Currency orderPrice = order.getTotalCost().roundToCash();
                     CashRegister cashRegister = orderScreen.getOrderManager().getCashRegister();
                     if ((refundToggleBtn.isSelected())) {
                         String orderPriceString = orderPrice.toString();
@@ -639,7 +646,6 @@ public class StockScreenController implements Initializable {
                             order.setIsRefunded(true);
                             RefundAlertBox refundAlertBox = new RefundAlertBox(title, orderPriceString);
                             parent.createDialog(refundAlertBox, "refund_message.fxml", menuTitle, refundAlertBox);
-
                             //                        refundAlertBox.init(title, orderPriceString);
                         } else {
                             refundToggleBtn.setSelected(false);
