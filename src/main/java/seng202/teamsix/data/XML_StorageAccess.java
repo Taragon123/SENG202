@@ -221,13 +221,20 @@ public class XML_StorageAccess extends StorageAccess{
                 Marshaller m = contextCache.createMarshaller();
                 m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
                 m.marshal(cache, file);
-                file.renameTo(new File(data_filename));
-                System.out.println("Saved!");
+                File dataFile = new File(data_filename);
+                if(!dataFile.delete()) {
+                    System.err.println("Could not delete data.xml to be replaced");
+                }
+
+                if(file.renameTo(dataFile)) {
+                    System.out.println("Saved!");
+                }else{
+                    System.err.println("Could not replace data.xml with temp.xml");
+                }
             } catch (JAXBException e) {
                 System.err.println("Could not save xml cache");
+                System.err.println("Reason:" + e.toString());
             }
-
-
         }
     }
 

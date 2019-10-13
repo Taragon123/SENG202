@@ -35,6 +35,8 @@ public class Order extends Order_Ref{
     public void setIsRefunded(boolean isRefunded) {
        this.isRefunded = isRefunded;
     }
+    @XmlElement
+    private Boolean is_eftpos = false;
 
     public Order() {
         order_tree = new OrderItem();
@@ -91,6 +93,13 @@ public class Order extends Order_Ref{
         // similar to the printChefOrder, more details.
         String returnString = "/************  Receipt  *************/\n";
         returnString += "FoodByte\n"+timestamp+"\n";
+
+        String payment_method = "Cash";
+        if (is_eftpos) {
+            payment_method = "Eftpos";
+        }
+
+        returnString += "Payment Method: "+payment_method+"\n";
         returnString += "Receipt (Order Number: "+localTicketNumber+")\nContents:\n";
         returnString += getOrderTree().getCleanOrderRepresentation(0, true);
         returnString += "Total Amount Paid: "+getTotalCost()+"\n";
@@ -114,5 +123,7 @@ public class Order extends Order_Ref{
         order_tree = new_root;
     }
 
-
+    public void setIsEftpos(Boolean is_eftpos) {
+        this.is_eftpos = is_eftpos;
+    }
 }

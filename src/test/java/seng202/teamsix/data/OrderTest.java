@@ -83,6 +83,7 @@ public class OrderTest {
                 "/************  Receipt  *************/\n" +
                 "FoodByte\n" +
                 "null\n" +
+                "Payment Method: Cash\n" +
                 "Receipt (Order Number: 1)\n" +
                 "Contents:\n" +
                 "Cheese Burger Combo @ $19.99 each\n" +

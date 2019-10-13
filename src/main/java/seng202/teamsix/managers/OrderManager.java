@@ -107,23 +107,26 @@ public class OrderManager {
      * Finalises the order by saving it so it can be viewed in future if needed, sends order to chefs, prints receipt.
      * Also resets the cart and increments the localTicketCount by one and setting the new cart's localTicketNumber to 1.
      */
-    public void finaliseOrder(Boolean isEftpos) {
+    public void finaliseOrder(boolean is_eftpos) {
         // Save the order with StorageAccess/
         cart.setTimestamp(new Date());
+        cart.setIsEftpos(is_eftpos);
         cart.updateTotalCost();
         StorageAccess.instance().updateOrder(cart);
 
         // Update the stock
-        System.out.println("Calling checkOrRemoveStock with remove set to true");
         cart.getOrderTree().checkOrRemoveStock(0, true);
 
         // Send order to kitchen via order ticket which is to be printed. Also prints a new line.
         printChefsOrder();
         System.out.println();
-        //Update the cash register
-        if (!isEftpos) {
+
+        //Update the cash register if cash is used
+
+        if (!is_eftpos) {
             cashRegister.addRegisterAmount(cart.getTotalCost().roundToCash());
         }
+
 
         // Print customers receipt.
         printReceipt();
