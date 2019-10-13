@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
@@ -64,6 +65,10 @@ public class StockScreenController implements Initializable {
     private Button clearSearchBtn;
     @FXML
     private Button addButton;
+    @FXML
+    private Button AddToMenuBtn;
+    @FXML
+    private GridPane filtergrid;
 
 
     // Tabs in table view
@@ -123,6 +128,13 @@ public class StockScreenController implements Initializable {
         });
     }
 
+    public void addToMenuAction() {
+
+                SelectMenuItemController selectedMenuItem = new SelectMenuItemController();
+                selectedMenuItem.createNewWindow();
+
+    }
+
     /**
      * Creates a dialog for adding a new menu
      */
@@ -131,8 +143,8 @@ public class StockScreenController implements Initializable {
     }
 
     public void addStockAction() {
-        ItemSelectionController cash = new ItemSelectionController();
-        cash.createNewWindow();
+        ItemSelectionController stockItemSelection = new ItemSelectionController();
+        stockItemSelection.createNewWindow(parent);
     }
 
     public void editItemTagsAction() {
@@ -157,6 +169,31 @@ public class StockScreenController implements Initializable {
             stage.setScene(new Scene(root));
             stage.showAndWait();
             refreshData();
+        } catch (java.io.IOException e) {
+            System.out.println("Failed to launch dialog: " + e);
+        }
+    }
+
+    /**
+     * Creates a dialog window and uses refreshData when it closes.
+     * @param controller controller that implements CustomDialogInterface
+     * @param fxml String name of FXML file in classpath e.g: edit_menu.fxml
+     * @param title String title of window
+     * @param refundAlertBox the alert box for refund
+     */
+    void createDialog(CustomDialogInterface controller, String fxml, String title, RefundAlertBox refundAlertBox) {
+        try {
+            FXMLLoader menuEditDialogLoader = new FXMLLoader(getClass().getResource(fxml));
+            menuEditDialogLoader.setController(controller);
+            Stage stage = new Stage();
+            controller.preSet(stage);
+            Parent root = menuEditDialogLoader.load();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle(title);
+            refundAlertBox.init();
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+//            refreshData();
         } catch (java.io.IOException e) {
             System.out.println("Failed to launch dialog: " + e);
         }
@@ -287,20 +324,32 @@ public class StockScreenController implements Initializable {
             addButton.setText("Add Item");
             addButton.setOnAction(e -> addItemAction());
             addButton.setDisable(false);
+            AddToMenuBtn.setDisable(true);
+            AddToMenuBtn.setVisible(false);
+            filtergrid.setDisable(false);
         }
         else if (tabId.equals("menuTab")) {
             addButton.setText("Add Menu");
             addButton.setOnAction(e -> addMenuAction());
             addButton.setDisable(false);
+            AddToMenuBtn.setDisable(false);
+            AddToMenuBtn.setVisible(true);
+            filtergrid.setDisable(true);
         }
         else if (tabId.equals("stockTab")) {
             addButton.setText("Add Stock");
             addButton.setOnAction(e -> addStockAction());
             addButton.setDisable(false);
+            AddToMenuBtn.setDisable(true);
+            AddToMenuBtn.setVisible(false);
+            filtergrid.setDisable(false);
         }
         else {
             addButton.setText("");
             addButton.setDisable(true);
+            filtergrid.setDisable(true);
+            AddToMenuBtn.setVisible(false);
+            AddToMenuBtn.setDisable(true);
         }
     }
 
@@ -317,7 +366,7 @@ public class StockScreenController implements Initializable {
     /**
      * Creates stock table
      */
-    private void createStockTable() {
+    void createStockTable() {
         stockTable = new TableView<>();
         stockTable.setItems(stockEntries);
 
@@ -436,11 +485,6 @@ public class StockScreenController implements Initializable {
         editBtnColumn.setCellValueFactory(new PropertyValueFactory<>("viewButton"));
         menuTable.getColumns().add(editBtnColumn);
 
-        //Add menu button column
-        TableColumn<MenuTableEntry, Button> addToMenuButtonColumn = new TableColumn<>();
-        addToMenuButtonColumn.setMinWidth(100);
-        addToMenuButtonColumn.setCellValueFactory(new PropertyValueFactory<>("addToMenu"));
-        menuTable.getColumns().add(addToMenuButtonColumn);
     }
 
     /**
@@ -521,12 +565,6 @@ public class StockScreenController implements Initializable {
             this.markup_price = new SimpleStringProperty(item.getMarkupPrice().toString());
             this.qty_unit = new SimpleStringProperty(item.getQtyUnit().toString());
             this.addStockInstance = new Button("Add Stock");
-            this.addStockInstance.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    parent.createDialog(new StockInstanceDialog(item_ref), "create_stock_instance.fxml", "Add Stock");
-                }
-            });
             this.editItem = new Button("Edit Item");
             this.editItem.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
@@ -582,32 +620,39 @@ public class StockScreenController implements Initializable {
             this.date = new SimpleStringProperty(df.format(order.getTimestamp()));
             this.price = new SimpleStringProperty(order.getTotalCost().toString());
             this.refundToggleBtn = new ToggleButton("Refund");
+            this.refundToggleBtn.setSelected(order.getIsRefunded());
+
             this.refundToggleBtn.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
                     // gets the price of the order
                     Currency orderPrice = order.getTotalCost();
-
-                    //gets the current total of the cash register
                     CashRegister cashRegister = orderScreen.getOrderManager().getCashRegister();
-                    String orderPriceString = orderPrice.toString();
-                    RefundAlertBox refundAlertBox = new RefundAlertBox();
+                    if ((refundToggleBtn.isSelected())) {
+                        String orderPriceString = orderPrice.toString();
+                        String title;
+                        String menuTitle = "Refund Alert!!";
 
-                    String menuTitle = "Refund Alert!";
-                    if (orderPrice.getTotalCash() <= cashRegister.getRegisterAmount()) {
-                        refundToggleBtn.setSelected(true);
-                        cashRegister.subRegisterAmount(orderPrice);
-                        String title = "Refund Successfull!";
-                        parent.createDialog(refundAlertBox, "refund_message.fxml", menuTitle);
-//                        refundAlertBox.init(title, orderPriceString);
-                        System.out.println("GREATER THAN");
+                        if (orderPrice.getTotalCash() <= cashRegister.getRegisterAmount()) {
+                            cashRegister.subRegisterAmount(orderPrice);
+                            title = "Refund Successfull!";
+                            order.setIsRefunded(true);
+                            RefundAlertBox refundAlertBox = new RefundAlertBox(title, orderPriceString);
+                            parent.createDialog(refundAlertBox, "refund_message.fxml", menuTitle, refundAlertBox);
+
+                            //                        refundAlertBox.init(title, orderPriceString);
+                        } else {
+                            refundToggleBtn.setSelected(false);
+                            title = "Refund Unsuccessfull!";
+                            RefundAlertBox refundAlertBox = new RefundAlertBox(title, "NULL");
+                            parent.createDialog(refundAlertBox, "refund_message.fxml", menuTitle, refundAlertBox);
+                            //                        refundAlertBox.init(title, orderPriceString);
+                        }
                     } else {
                         refundToggleBtn.setSelected(false);
-                        System.out.println("LESS THAN");
-                        String newtitle = "Refund Unsuccessfull!";
-//                        refundAlertBox.init(newtitle, orderPriceString);
+                        order.setIsRefunded(false);
+                        cashRegister.addRegisterAmount(orderPrice);
                     }
-                    parent.refreshData();
                 }
             });
 
@@ -632,7 +677,6 @@ public class StockScreenController implements Initializable {
         private final SimpleStringProperty name;
         private final SimpleStringProperty desc;
         private final Button viewButton;
-        private final Button addToMenu;
 
         private MenuTableEntry(Menu menu, StockScreenController parent){
             this.menu_ref = menu;
@@ -646,14 +690,6 @@ public class StockScreenController implements Initializable {
                     parent.createDialog(new EditMenu(menu_ref), "edit_menu.fxml", "Edit Menu");
                 }
             });
-            this.addToMenu = new Button("Add to menu");
-            this.addToMenu.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    SelectMenuItemController selectedMenuItem = new SelectMenuItemController();
-                    selectedMenuItem.createNewWindow();
-                }
-            });
         }
 
         public String getName() {
@@ -664,9 +700,6 @@ public class StockScreenController implements Initializable {
         }
         public Button getViewButton() {
             return viewButton;
-        }
-        public Button getAddToMenu() {
-            return addToMenu;
         }
     }
 

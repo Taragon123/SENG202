@@ -28,7 +28,7 @@
          </rowConstraints>
          <children>
             <ListView fx:id="listview_item_search" prefHeight="115.0" prefWidth="294.0" GridPane.rowIndex="1" />
-            <TextField fx:id="textfield_search_items" />
+            <TextField fx:id="textfield_search_items" promptText="Search Items"/>
          </children>
       </GridPane>
       <GridPane GridPane.rowIndex="2">

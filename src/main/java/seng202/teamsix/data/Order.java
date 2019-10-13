@@ -25,6 +25,16 @@ public class Order extends Order_Ref{
     private Date timestamp;
     @XmlElement
     private Currency total_cost;
+    @XmlElement
+    private boolean isRefunded = false;
+
+    public boolean getIsRefunded() {
+        return this.isRefunded;
+    }
+
+    public void setIsRefunded(boolean isRefunded) {
+       this.isRefunded = isRefunded;
+    }
 
     public Order() {
         order_tree = new OrderItem();

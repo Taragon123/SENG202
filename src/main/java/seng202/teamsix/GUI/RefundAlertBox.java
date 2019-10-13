@@ -18,20 +18,25 @@ public class RefundAlertBox implements CustomDialogInterface{
     @FXML
     private Label refundAmountLbl;
 
+    private String refundTitleString;
+    private String refundAmountString;
+
     public RefundAlertBox() {}
 
     public RefundAlertBox(String title, String msg) {
-        refundTitleLbl.setText(title);
-        refundAmountLbl.setText("To be refunded: $ " + msg);
+//        refundTitleLbl.setText(title);
+//        refundAmountLbl.setText("To be refunded: $" + msg);
+        this.refundTitleString = title;
+        this.refundAmountString = ("To be refunded: " + msg);
     }
 
     public RefundAlertBox(String msg) {
-        this.refundAmountLbl.setText("To be refunded: $ " + msg);
+        this.refundAmountLbl.setText("To be refunded: $" + msg);
     }
 
-    public void init(String title, String msg) {
-        refundTitleLbl.setText(title);
-        refundAmountLbl.setText("To be refunded: $" + msg);
+    public void init() {
+        refundTitleLbl.setText(refundTitleString);
+        refundAmountLbl.setText(refundAmountString);
     }
 
     public void display() {

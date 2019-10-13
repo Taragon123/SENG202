@@ -158,7 +158,7 @@ public class OrderConfirmController implements Initializable {
      * @throws IOException
      */
     public void confirm_order(ActionEvent event) throws IOException {
-        orderManager.finaliseOrder();
+        orderManager.finaliseOrder(isEftpos);
         confirmButton.setDisable(true);
         orderScreenController.clear_order();
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -166,6 +166,7 @@ public class OrderConfirmController implements Initializable {
         if (!isEftpos) {
             displayChange(window);
         }
+        orderScreenController.update_current_cash();
     }
 
     /**

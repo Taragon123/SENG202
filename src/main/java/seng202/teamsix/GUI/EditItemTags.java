@@ -25,14 +25,6 @@ public class EditItemTags implements Initializable, CustomDialogInterface{
     private TextField tagNameInput;
     @FXML
     private TableView<TagTableEntry> itemTagTable;
-    @FXML
-    private CheckBox isDominantCheckbox;
-
-
-    public EditItemTags() {
-
-    }
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -47,7 +39,7 @@ public class EditItemTags implements Initializable, CustomDialogInterface{
 
     public void addTag() {
         if (!tagNameInput.getText().matches("[a-zA-Z0-9]+")) {
-            StorageAccess.instance().updateItemTag(new ItemTag(tagNameInput.getText(), isDominantCheckbox.selectedProperty().get()));
+            StorageAccess.instance().updateItemTag(new ItemTag(tagNameInput.getText(), true));
         }
         refresh();
     }
@@ -91,6 +83,7 @@ public class EditItemTags implements Initializable, CustomDialogInterface{
         private TagTableEntry(ItemTag tag) {
             name = new SimpleStringProperty(tag.getName());
             delBtn = new Button("Delete");
+            delBtn.setDisable(true);
         }
 
         public String getName() {
