@@ -323,23 +323,31 @@ public class StockScreenController implements Initializable {
             addButton.setText("Add Item");
             addButton.setOnAction(e -> addItemAction());
             addButton.setDisable(false);
+            AddToMenuBtn.setVisible(false);
+            AddToMenuBtn.setDisable(true);
             filtergrid.setDisable(false);
         }
         else if (tabId.equals("menuTab")) {
             addButton.setText("Add Menu");
             addButton.setOnAction(e -> addMenuAction());
             addButton.setDisable(false);
+            AddToMenuBtn.setVisible(true);
+            AddToMenuBtn.setDisable(false);
             filtergrid.setDisable(true);
         }
         else if (tabId.equals("stockTab")) {
             addButton.setText("Add Stock");
             addButton.setOnAction(e -> addStockAction());
             addButton.setDisable(false);
+            AddToMenuBtn.setVisible(false);
+            AddToMenuBtn.setDisable(true);
             filtergrid.setDisable(false);
         }
         else {
             addButton.setText("");
             addButton.setDisable(true);
+            AddToMenuBtn.setVisible(false);
+            AddToMenuBtn.setDisable(true);
             filtergrid.setDisable(true);
         }
     }
