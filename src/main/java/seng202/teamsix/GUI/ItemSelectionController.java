@@ -13,17 +13,14 @@ import javafx.stage.Stage;
 import seng202.teamsix.data.*;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Set;
 
 public class ItemSelectionController extends StockScreenController implements Initializable, CustomDialogInterface {
     private Stage stage;
     private Stage controller_window;
-    private OrderScreenApplication parent;
+    private FoodByteApplication parent;
     private Item item;
 
     @FXML
@@ -32,7 +29,7 @@ public class ItemSelectionController extends StockScreenController implements In
     @FXML
     private TextField textfield_search_items;
 
-    void createNewWindow(OrderScreenApplication parent) {
+    void createNewWindow(FoodByteApplication parent) {
         this.parent = parent;
         FXMLLoader loaderCreateItem = new FXMLLoader(getClass().getResource("select_item_screen.fxml"));
         loaderCreateItem.setController(this);

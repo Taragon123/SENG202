@@ -11,7 +11,7 @@ import seng202.teamsix.managers.OrderManager;
 
 import java.io.IOException;
 
-public class OrderScreenApplication extends Application {
+public class FoodByteApplication extends Application {
     private Stage primaryStage;
     private Scene orderScene;
     private Scene managementScene;

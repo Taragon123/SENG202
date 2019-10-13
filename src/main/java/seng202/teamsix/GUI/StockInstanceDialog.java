@@ -8,7 +8,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import seng202.teamsix.data.Item_Ref;
-import seng202.teamsix.data.Order;
 import seng202.teamsix.data.StockInstance;
 import seng202.teamsix.data.StorageAccess;
 
@@ -21,7 +20,7 @@ import java.util.ResourceBundle;
 public class StockInstanceDialog implements Initializable, CustomDialogInterface {
     private Stage stage;
     private Item_Ref item_ref;
-    private OrderScreenApplication parent;
+    private FoodByteApplication parent;
 
     @FXML
     private TextField quantityInput;
@@ -38,7 +37,7 @@ public class StockInstanceDialog implements Initializable, CustomDialogInterface
      * Constructor that sets the item_ref for stock instance
      * @param item_ref stock instance will be created with this Item_Ref
      */
-    public StockInstanceDialog(Item_Ref item_ref, OrderScreenApplication parent) {
+    public StockInstanceDialog(Item_Ref item_ref, FoodByteApplication parent) {
         this.item_ref = item_ref;
         this.parent = parent;
     }

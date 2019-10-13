@@ -8,7 +8,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -37,7 +36,7 @@ public class StockScreenController implements Initializable {
     private List<UUID_Entity> orderList;
     private List<UUID_Entity> menuList;
 
-    private OrderScreenApplication parent;
+    private FoodByteApplication parent;
     private Stage window;
 
     private TableView<StockTableEntry> stockTable = new TableView<>();
@@ -250,7 +249,7 @@ public class StockScreenController implements Initializable {
      * @param window Stage this controller is in.
      * @param parent Parent application.
      */
-    public void preSet(Stage window, OrderScreenApplication parent) {
+    public void preSet(Stage window, FoodByteApplication parent) {
         this.parent = parent;
         this.window = window;
     }
@@ -608,7 +607,7 @@ public class StockScreenController implements Initializable {
         private final SimpleStringProperty price;
 
 
-        private OrderTableEntry(Order order, OrderScreenApplication orderScreen, StockScreenController parent) {
+        private OrderTableEntry(Order order, FoodByteApplication orderScreen, StockScreenController parent) {
             DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT);
             this.date = new SimpleStringProperty(df.format(order.getTimestamp()));
             this.price = new SimpleStringProperty(order.getTotalCost().toString());
