@@ -59,7 +59,7 @@ public class OrderScreenController implements Initializable {
     private OrderManager orderManager;
     public Popup optionPopup = new Popup();
     private Stage window;
-    private OrderScreenApplication parent;
+    private FoodByteApplication parent;
     private boolean isPopupInit = false;
     private boolean isInit = false;
 
@@ -396,7 +396,7 @@ public class OrderScreenController implements Initializable {
      */
     public void open_filters() {}
 
-    public void preSet(Stage primaryStage, OrderScreenApplication parent) {
+    public void preSet(Stage primaryStage, FoodByteApplication parent) {
         window = primaryStage;
         this.parent = parent;
     }

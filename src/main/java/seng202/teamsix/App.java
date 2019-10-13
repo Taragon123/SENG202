@@ -20,6 +20,6 @@ import seng202.teamsix.GUI.*;
 public class App {
     public static void main( String[] args )
     {
-        OrderScreenApplication.main(args);
+        FoodByteApplication.main(args);
     }
 }
