@@ -7,9 +7,13 @@
 \usepackage[english]{babel}
 \usepackage{subfiles}
 \usepackage{longtable}
+\usepackage{wrapfig}
 \usepackage{geometry}
+\usepackage{lipsum}
 \usepackage{ltxtable}
 \usepackage{xltabular}
+\usepackage{caption}
+\usepackage{csvsimple}
 \geometry{a4paper, margin=1.5cm}
 
 \usepackage{tabularx}
@@ -36,6 +40,13 @@
 	
 	\section{Business and System Context}
 	\subfile{sections/business_context}
+	
+	\subsection{System Context}
+	\subfile{sections/system_context}
+	
+	\subsection{Relevant Business Information}
+	\subfile{sections/relevant_business_information}	
+	
 	\pagebreak
 	
 	\section{Stakeholders}
@@ -72,6 +83,9 @@
 	
 	\section{GUI Prototypes}
 	\subfile{sections/gui_prototypes}
+	
+	\section{GUI Devolopment and deployment}
+	\subfile{sections/gui_dev_deply}
 	\pagebreak
 	
 	\section{Risks}
