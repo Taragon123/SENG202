@@ -1,24 +1,99 @@
 From the analysis of quality requirements it was revealed that Reliability(QR), Maintainability(QR) and Flexibility(QR) were all deemed to be of high or medium priority. These factors are influenced by the software having low-coupling and robust systems. Investing time on technical design and architecture at the start of the project allows for reduced cost of refactoring in the long term; This will be mentioned more under Design Post-Mortem. For this reason it was deemed an important focus on architecture throughout the project.
 
-\subsection{Data Model}
-Featured below is the UML Class diagrams of model objects to be implemented in Java. They were made from analysis of Data Modelling and modified to meet the needs of Functional Requirements. This model does not represent the full system but just the core classes in the model. All attributes can be assumed to have getters or setters unless stated otherwise and the functions mention are examples of additional functionality and may not be reflective of the final system completely.
+\subsection{Data Model} \label{subsec:DataModel}
+Featured below is the UML Class diagrams of model objects to be implemented in Java. They were made from analysis of Data Modelling and modified to meet the needs of Functional Requirements. This model does not represent the full system but just the core classes in the model; As these are the most complicated parts of our system and therefore needing to be diagramed. All attributes can be assumed to have getters or setters unless stated otherwise and the functions mention are examples of additional functionality and may not be reflective of the final system completely.
 Each of these core classes inherits from UUID Entity that gives the object a unique identifier that is used internally within the system that is discussed further in Section \ref{subsec:Architecture}.
 
 \subsubsection{Menu}
 
-\begin{wrapfigure}{l}{0.3\textwidth}
-	\centering
-	\includegraphics[width=0.25\textwidth]{images/data_model/menu.png}
-	\caption{This is a figure caption.} \label{fig:UML_Menu}
-\end{wrapfigure}
+	\begin{minipage}[t]{.6\linewidth}
+		The menu class is used to act as a collection of menuitems for the business. In practice this could be a breakfast menu, lunch menu, drinks menu etc. Any time of items which the user would like to combine together into one screen.
+		\linebreak
+		
+		A menu consists of a name, description and a list of menuitems. Menuitems are unqiue to the menu they belong to and consist of a name, description, colour, price and an Item reference of the food item it sells. The colour is used for gui display. The price is an optional overide to allow the user to have different prices on the same item for different menus. An example of this could be upselling for a festival.
+		
+	\end{minipage}
+	\hspace{0.02\linewidth}
+	\begin{minipage}[t][][b]{.3\linewidth}
+		\includegraphics[width=\linewidth]{images/data_model/menu.png}
+		\captionof{figure}{UML Menu Class}
+	\end{minipage}
 
-
-\lipsum[2-3]
+\pagebreak
 
 \subsubsection{Item}
+	\begin{figure}
+		\centering
+		\includegraphics[width=.6\linewidth]{images/data_model/item.png}
+		\caption{UML Item Class and Subclasses}
+	\end{figure}
+
+	Item class and its subclasses are used to model the process of ingredients inside a kitchen moving from storage into intermediary products and then finally finished products. It models this by using the Composite class pattern, where CompositeItem is the Composite class and Item is the leaf class. Using this pattern the system can represent heirarcys of ingredients into final products. For instance ground beef into patties and patties into burgers. This gives the user great flexibility and depth in representing production chains in the software and gives the software many metrics to provide functionality or statistics. The design deviates from the original gang of four's pattern by using an additional Composite class VariantItem. The purpose of variant item is to group similar items that can be interchanged in recipes. For instance gluten free bread and regular bread would be grouped in the variant item Bread. This allows for the system to dynamically adjust recipes by knowing which ingredients can be substituted to create different properties in the final product. Such as selecting that the final product be made from only gluten free ingredients. These features are only possible by having a seperate item model from menu items.
+	
+	The design was picked for robustness as the model makes no assumptions directly about selling food and can be fitted for any goods the user may want to sell.
+	
+	An item consists of a base price and markup price. This is the price the user can buy the item for and the price the user sells the item for. The base price is used to calculate profit margins for the user and the markup price is used as the default sell price of menu item. This field is useful even for ingredients that will never be on a menu as it is used to calculate add on cost for order customisation discussed further in Section \ref{subsubsec:Order}.
+	
+	The qty unit on item is an enum to designate the quantity unit for stock. This could be kilogram, litre or count.
+	
+
 \subsubsection{ItemTag}
+
+	\begin{minipage}[t]{.6\linewidth}
+		ItemTag class can be created and applied by the user to designate collections of items under a similar tag, such as gluten free or vegan. The class has two attributes name and dominant flag. The dominant flag is used in descision making in the software to how the tag interacts in composite items. If a tag is dominant then the parent item inheirts the tag if it has one child that owns it. For instance 'Contains peanuts' would be considered a dominant tag because anything made using that tag would also contain peanuts. If a tag is non-dominant then the parent tag only inherits the tag if all its children have the tag. For instance 'gluten-free' is only true if all ingredients are also gluten free. 
+		
+	\end{minipage}
+	\hspace{0.02\linewidth}
+	\begin{minipage}[t][][b]{.3\linewidth}
+		\includegraphics[width=\linewidth]{images/data_model/tag.png}
+		\captionof{figure}{UML ItemTag Class}
+	\end{minipage}
+
+
 \subsubsection{StockInstance}
-\subsubsection{Order}
+	\begin{minipage}[t]{.6\linewidth}
+		The StockInstance class represents physical stock of an item that the user has. Using this information the system calculates what products can be made from the ingredients avaliable and warns when running low or close to expiry. The model uses a seperate stock instance class rather than a quantity attribute for item to better emulate the real world. From stakeholder surveys(Section \ref{Surveys}) managing inventory is an important feature and the pattern in which stakeholders bought ingredients was in discrete bulk lots with indivdual expiry dates. The stock instance class aims to models these bulk lots and give more detail to the system of  ingredients freshness and quantities.
+		
+	\end{minipage}
+	\hspace{0.02\linewidth}
+	\begin{minipage}[t][][b]{.3\linewidth}
+		\includegraphics[width=\linewidth]{images/data_model/stock.png}
+		\captionof{figure}{UML StockInstance Class}
+	\end{minipage}
+
+\subsubsection{Order} \label{subsubsec:Order}
+
+	\begin{minipage}[t]{.6\linewidth}
+		The Order class models an order made to the system for a single or multiple menu items. The order class was designed with the ability to customise the ingredients in the order by adding, replacing or removing. To accomplish this the Order has to be expressed in the same form as the items and so a heirarcy of OrderItems is used. This is created by deep copying Composite Items into OrderItems. For variant items the variantItem is added to the order and the first variant is added as its child. This is done to perserve the information of the variant item so it can be swaped for other variants. See Appendix \ref{Appendix orders} for an example of this conversion.
+	\end{minipage}
+	\hspace{0.02\linewidth}
+	\begin{minipage}[t][][b]{.3\linewidth}
+		\includegraphics[width=\linewidth]{images/data_model/order.png}
+		\captionof{figure}{UML Order Class}
+	\end{minipage}
+
+\pagebreak
 
 \subsection{Architecture} \label{subsec:Architecture}
+	\subsubsection{Model-View-Controller}
+		The system was decided to use the Model View Controller design pattern for its architecture for the advantages of its low coupling of system and gui logic. The core of the data model is described with detail in Section \ref{subsec:DataModel}. To assist in the design of maintainable code the Controller was split into three sublayers of classes. Firstly Managers are identified systems of related code in the program that have shared state. They act as a linker foremost managing the access and use of shared state. The program has very litte state other than data model and so the only manager is OrderManager; That faciliates the order cart and the constuction and customisation of Orders.
+		 Second is Logical Services that provide some single responsibility service to the higher levels of the program. An example of this in the software is DataQuery which provides a service of data filtering data model lists. 
+		Lastly is GUI Controllers, which are in charge of data sanatation for lower layers and building of dynamic gui elements.
+		Having these sublayers allows for finer control of single responsibility and low coupling. In turn making code more maintainable and easier to test. Below is a visual diagram of these layers.
+
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=.6\linewidth]{images/data_model/architecture.png}
+			\caption{Software Layer Communication Diagram}
+		\end{figure}
+
+
+\subsubsection{Data Persistence}
+With the use cases of the user being able to modify the data model and make changes through the use of the program made data persistance a priority within and outside the application. To ensure that data model changes were universal in the software the references to objects had to be the same through out the program. This was accomplished using 
+
 \subsection{Design Post-Mortem}
+The good of using this kind of design.
+More than XML backend good for export import but bad since not made to be human editable so inefficent storage.
+Autosaving as it currently is.
+Unique identifiers shorter
+VariantItems in orders done differently
