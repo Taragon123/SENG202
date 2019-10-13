@@ -6,6 +6,11 @@
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 \usepackage{subfiles}
+\usepackage{longtable}
+\usepackage{geometry}
+\geometry{a4paper, margin=1.5cm}
+
+
 
 % Document
 \begin{document}
@@ -23,49 +28,65 @@
 	\tableofcontents
 	\pagebreak
 	
-	\section{Executive Summary} \subfile{sections/exec_summary}
+	\section{Executive Summary} 
+	\subfile{sections/exec_summary}
+	\pagebreak
 	
 	\section{Business and System Context}
 	\subfile{sections/business_context}
+	\pagebreak
 	
 	\section{Stakeholders}
 	\subfile{sections/stakeholders}
+	\pagebreak
 	
 	\section{Quality Requirements}
 	\subfile{sections/quality_requirements}
+	\pagebreak
 	
 	\section{Use Cases}
 	\subfile{sections/use_cases}
+	\pagebreak
 	
 	\section{Functional Requirements}
 	\subfile{sections/functional_requirements}
+	\pagebreak
 	
 	\section{Acceptance Testing}
 	\subfile{sections/acceptance_testing}
+	\pagebreak
 	
 	\section{Deployment Model}
 	\subfile{sections/deployment_model}
+	\pagebreak
 	
 	\section{Data Modeling}
 	\subfile{sections/data_modeling}
+	\pagebreak
 	
 	\section{Technical Design}
 	\subfile{sections/technical_design}
+	\pagebreak
 	
 	\section{GUI Prototypes}
 	\subfile{sections/gui_prototypes}
+	\pagebreak
 	
 	\section{Risks}
 	\subfile{sections/risks}
+	\pagebreak
 	
 	\section{Testing Protocol}
 	\subfile{sections/testing_protocol}
+	\pagebreak
 	
 	\section{Project Timeline}
 	\subfile{sections/project_timeline}
+	\pagebreak
 	
 	\section{Document Changelog}
 	\subfile{sections/document_changelog}
+	\pagebreak
 	
 	\appendix
 	\addcontentsline{toc}{section}{Appendices}
