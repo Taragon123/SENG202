@@ -42,7 +42,7 @@
          </GridPane.margin></Button>
       <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #576574;">
          <children>
-            <Label fx:id="date_time" layoutX="14.0" layoutY="6.0" prefHeight="45.0" style="-fx-font-size: 20; -fx-background-color: #c8d6e5; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #000000; -fx-border-width: 2;" text="Date Time">
+            <Label fx:id="date_time" layoutX="14.0" layoutY="6.0" prefHeight="45.0" style="-fx-font-size: 20; -fx-background-color: #c8d6e5; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #A0A0A0; -fx-border-width: 2;" text="Date Time">
                <padding>
                   <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                </padding>
@@ -89,7 +89,7 @@
       </GridPane>
       <BorderPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #576574;" GridPane.rowIndex="2">
          <right>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#toggle_options" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #c8d6e5; -fx-background-radius: 10; -fx-border-color: #000000; -fx-border-radius: 10; -fx-border-width: 2; -fx-font-size: 24;" text="Options" BorderPane.alignment="CENTER">
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#toggle_options" prefHeight="50.0" prefWidth="160.0" style="-fx-background-color: #c8d6e5; -fx-background-radius: 10; -fx-border-color: #A0A0A0; -fx-border-radius: 10; -fx-border-width: 2; -fx-font-size: 24;" text="Options" BorderPane.alignment="CENTER">
                <padding>
                   <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
                </padding>
@@ -99,9 +99,9 @@
             </Button>
          </right>
          <left>
-            <HBox alignment="CENTER_LEFT" prefHeight="77.0" prefWidth="255.0" BorderPane.alignment="CENTER">
+            <HBox alignment="CENTER_LEFT" prefHeight="77.0" prefWidth="125.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button alignment="CENTER" disable="true" mnemonicParsing="false" onAction="#open_filters" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: #c8d6e5; -fx-background-radius: 10; -fx-border-color: #000000; -fx-border-radius: 10; -fx-border-width: 2;" text="Filter">
+                  <Button alignment="CENTER" disable="true" mnemonicParsing="false" onAction="#open_filters" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: #c8d6e5; -fx-background-radius: 10; -fx-border-color: #A0A0A0; -fx-border-radius: 10; -fx-border-width: 2;" text="Filter">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -116,7 +116,7 @@
             </HBox>
          </left>
           <center>
-              <Label fx:id="currentCash" text="Current cash: $" textFill="WHITE" BorderPane.alignment="CENTER">
+              <Label fx:id="currentCash" prefHeight="36.0" prefWidth="615.0" text="Current cash: $" textFill="WHITE" textOverrun="LEADING_ELLIPSIS" BorderPane.alignment="CENTER">
                   <font>
                       <Font size="25.0" />
                   </font>

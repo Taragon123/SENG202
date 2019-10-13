@@ -16,7 +16,7 @@ public class OrderScreenApplication extends Application {
     private Scene orderScene;
     private Scene managementScene;
     private OrderScreenController orderController = new OrderScreenController();
-    private StockScreenController stockController = new StockScreenController();
+    public StockScreenController stockController = new StockScreenController();
     private OrderManager orderManager = new OrderManager();
 
     @Override
