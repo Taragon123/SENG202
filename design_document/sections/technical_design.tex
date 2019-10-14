@@ -111,10 +111,10 @@ To ensure that every persistent object has a primary key, A required attribute f
 From reflection the hypothesis that investing in architecture would save developer time and create more maintainable(QR) and flexible(QR) was correct. Most systems are well isolated and only communicate with services that it uses(reduced coupling). There is no god classes in the application and a large majority of classes have strict single responsibility. This has allowed the code to be very easily extendable. An example of this is the feature of auto-saving. By having StorageAccess solely responsible for persistence of data adding auto saving was trivial by calling save data method on any modification to the persistent state, effectively introducing auto save on any committed changes. This is a single example however the time savings are more revealed in the absence of infrastructure road blocks. Not once in the project was there a feature which was incompatible with the design of the system requiring work around solutions, everything had a place. This is a hard claim to proof so we can only refer to the commit logs as proof of this.
 
 \subsubsection{Design Reflections}
-More than XML backend good for export import but bad since not made to be human editable so inefficent storage.
+XML was chosen as the default to meet client requirements for import and export of XML data and while useful is not suited for being the primary StorageAccess implementation used.
+XML is designed to be human readable and editable however this comes at the cost of processing speed and storage. This trade off is not worth it in the current implementation
+as it is not expected that most users are manually editing the file but modifying data through the use of the application. It therefore makes sense to refactor this system into a more binary format
+to speed up the program and reduce data size. If given more time this would be a futher step.\\
 
-Autosaving as it currently is.
-
-Unique identifiers shorter.
-
-VariantItems in orders done differently.
+Autosaving as it stands works well, due to the issues mentioned above however autosaving will cause stutters as the application grows due to the requirements of JAXB(XML Library) to save the whole file on change.
+There are several mitagating factors that could be implemented to accomadate for this while still using XMl; These are mentioned in XML Storage Class header in the code base. \\
