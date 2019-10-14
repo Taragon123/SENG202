@@ -82,7 +82,7 @@ public class Currency implements Comparable<Currency> {
     }
 
     public Currency roundToCash() {
-        Currency out = new Currency(Math.round(this.getTotalCash() * 10) / 10);
+        Currency out = new Currency(Math.round(this.getTotalCash() * 10) / 10.0);
         return out;
     }
 

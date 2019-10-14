@@ -97,6 +97,7 @@ public abstract class StorageAccess {
     public abstract Menu getMenu(Menu_Ref ref);
     public abstract Order getOrder(Order_Ref ref);
     public abstract StockInstance getStockInstance(StockInstance_Ref ref);
+    public abstract CashRegister getCashRegister();
 
     // Update/Set Methods
     public abstract void updateItem(Item item);
@@ -104,6 +105,7 @@ public abstract class StorageAccess {
     public abstract void updateMenu(Menu menu);
     public abstract void updateOrder(Order order);
     public abstract void updateStockInstance(StockInstance stock);
+    public abstract void updateCashRegister(CashRegister register);
 
     // Get All references
     public abstract Set<Item_Ref> getAllItems();
