@@ -375,7 +375,7 @@ public class OrderScreenController implements Initializable {
     }
 
     public void update_current_cash() {
-        currentCash.setText("Current cash on hand: $"+ Double.toString(orderManager.getCashRegister().getRegisterAmount()));
+        currentCash.setText("Current cash on hand: " + orderManager.getCashRegister().getRegisterCurrency().toString());
     }
 
     /**

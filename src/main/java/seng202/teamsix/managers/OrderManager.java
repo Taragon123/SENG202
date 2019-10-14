@@ -22,7 +22,7 @@ public class OrderManager {
     /**
      * Initialise the Cash Register with $200 by default. This can be changed.
      */
-    private CashRegister cashRegister = new CashRegister(200);
+    private CashRegister cashRegister = null;
 
     /**
      * This method sets the cashRegister attribute to a the given newCashRegister attribute.
@@ -47,6 +47,7 @@ public class OrderManager {
     public OrderManager() {
         cart = new Order();
         cart.localTicketNumber = localTicketCount;
+        cashRegister = StorageAccess.instance().getCashRegister();
     }
 
     /**
@@ -124,7 +125,9 @@ public class OrderManager {
         //Update the cash register if cash is used
 
         if (!is_eftpos) {
+            System.out.println(cart.getTotalCost().roundToCash().toString());
             cashRegister.addRegisterAmount(cart.getTotalCost().roundToCash());
+            StorageAccess.instance().updateCashRegister(cashRegister);
         }
 
 

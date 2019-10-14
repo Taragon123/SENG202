@@ -1,5 +1,10 @@
 package seng202.teamsix.data;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * Name: CashRegister.java
  * Class is used to maintain the amount of cash we currently have in the cash register.
@@ -8,8 +13,11 @@ package seng202.teamsix.data;
  * Author: Hamesh Ravji
  */
 
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.NONE)
 public class CashRegister {
 
+    @XmlElement
     private Currency registerAmount;
 
     /**
@@ -35,6 +43,12 @@ public class CashRegister {
     public double getRegisterAmount() {
         return registerAmount.getTotalCash();
     }
+
+    /**
+     * Returns the currency object the makes up the register
+     * @return registerAmount, the currency object stored in the register
+     */
+    public Currency getRegisterCurrency() { return registerAmount; }
 
     /**
      * This method sets the amount in the cash register given the total amount as an integer cents. The Currency class
