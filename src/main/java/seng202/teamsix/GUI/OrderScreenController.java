@@ -181,7 +181,7 @@ public class OrderScreenController implements Initializable {
             public void handle(ActionEvent e) {
                 Button button = (Button)e.getSource(); //gets the button that was clicked
                 MenuItem menu_item = (MenuItem)button.getUserData(); //cast the userData of the button to a menuItem
-                add_to_order(menu_item);
+                add_to_order(menu_item, button);
             }
         };
         button.setOnAction(actionEvent);
@@ -280,7 +280,7 @@ public class OrderScreenController implements Initializable {
      * MenuItem button is clicked in the main screen.
      * @param menu_item MenuItem object to be added to the current order
      */
-    public void add_to_order(MenuItem menu_item) {
+    public void add_to_order(MenuItem menu_item, Button button) {
         //OrderManager will add the specified item to cart #backend
         OrderItem order_item = orderManager.addToCart(menu_item, true);
         if (order_item != null) {
@@ -289,7 +289,8 @@ public class OrderScreenController implements Initializable {
             cost_field.setText("Cost: " + orderManager.getCart().getTotalCost());
             confirmButton.setDisable(false);
         } else {
-            // item was not added because there is not enough stock.
+            button.setText(menu_item.getName() + " (Out of Stock)");
+            button.setDisable(true);
         }
 
     }
