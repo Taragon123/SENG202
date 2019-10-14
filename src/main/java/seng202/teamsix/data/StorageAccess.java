@@ -10,6 +10,7 @@ package seng202.teamsix.data;
 import javax.xml.bind.JAXBException;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Set;
 
 /**
@@ -29,9 +30,7 @@ public abstract class StorageAccess {
         if(internal == null) {
             //TODO(Connor): Add better error handling here
             try {
-                File jarDir = new File(ClassLoader.getSystemClassLoader().getResource(".").getPath());
-                String source_dir = jarDir + "/data";
-                internal = new XML_StorageAccess(source_dir);
+                internal = new XML_StorageAccess("data");
             } catch(IOException e) {
                 System.err.println("Could not create/open data file");
             } catch(JAXBException e) {
