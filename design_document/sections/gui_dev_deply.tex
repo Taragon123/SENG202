@@ -1,14 +1,14 @@
 
-Due to the detailed planning and development of the GUI elements during the first deliverable the creation of the main operations GUI elements were able to be completed rather swiftly. However there was an initial lag caused by the lack of familiarity with JavaFX and scene builder. After a few hours of familiarization, a FXML closely resembling the prototyped design was created for the main order screen. 
+Due to the detailed planning and development of the GUI elements during the first deliverable the creation of the main operations GUI elements were able to be completed rather swiftly. However there was an initial lag caused by the lack of familiarity with JavaFX and scene builder. After a few hours of familiarization, a FXML closely resembling the prototyped design was created for the main order screen.
 
-\begin{figure}[ht]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=150mm]{images/old_order_screen.png}
 	\caption{Initial implementation of the prototyped design}
 	\label{fig:old_order_screen}
 \end{figure}
 
-Most of the differences between the first implementation and the prototype (\ref{fig:old_order_screen} and \ref{fig:management_screen_moqueup} respectively) can be attributed to the differences between the programs used to create them as well as constraints created when implementing elements with relative alignments or elements that exist within other elements. 
+Most of the differences between the first implementation and the prototype (\ref{fig:old_order_screen} and \ref{fig:management_screen_moqueup} respectively) can be attributed to the differences between the programs used to create them as well as constraints created when implementing elements with relative alignments or elements that exist within other elements.
 
 The first implementation of the GUI was effectively a simple skin of the prototype with buttons that printed their name but no further functionality. This allowed for development of basic skills and experience as well as a platform for further development moving forward. The experience gained from this base was then taken forward and used in creating other UI elements for the operations side whilst refining the main order screen and adding the functionality. The creation of these scenes and their functionality was significantly easier after getting over the initial learning curve of JavaFX and SceneBuilder.
 
@@ -20,9 +20,11 @@ The development of the management side GUI was unfortunately neglected during th
 
 It is also worth noting that significant efforts towards planning and implementing the system architecture proved extremely valuable during the implementation of the functional elements and methods of the GUIs. This allowed for rapid implementation of features even when under time pressures close to the deliverable deadlines.
 
-Retrospectively the development and implementation of the GUIs should be considered with a split between the operations and the management sides. This both reflects how the system functions as well as how the GUIs were implemented. 
+Retrospectively the development and implementation of the GUIs should be considered with a split between the operations and the management sides. This both reflects how the system functions as well as how the GUIs were implemented.
 
-\begin{figure}[ht]
+\pagebreak
+
+\begin{figure}[h]
 	\centering
 	\includegraphics[width=150mm]{images/Final_GUI/main_order_screen.png}
 	\caption{Final implementation of the main order screen}
@@ -30,8 +32,9 @@ Retrospectively the development and implementation of the GUIs should be conside
 \end{figure}
 
 The operations side was the major focus during both the planning and the implementation stages. Because of this there was a very clear plan and style that was carried through strongly into the implementation stages. This resulted in a final implementation (\ref{fig:final_order_screen}) that is very similar to the initial design with only a few minor aesthetics changes. The only major change between the prototype and the final implementation is the change from having pages with next/previous buttons to hold any overflow items for a given menu in the prototype, to a scrolling pane in the final implementation. This change was made, in spite of our earlier choice to the counter, because it allowed for easier scaling of the interface when the window size was changed whilst not making any major compromise towards usability.
+\pagebreak
 
-\begin{figure}[ht]
+\begin{figure}[h]
 	\centering
 	\includegraphics[width=150mm]{images/Final_GUI/item_screen.png}
 	\caption{Final implementation of the item management screen}
