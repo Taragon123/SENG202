@@ -106,7 +106,7 @@ To ensure that every persistent object has a primary key, A required attribute f
 
 \pagebreak
 
-\subsection{Design Post-Mortem}
+\subsection{Design Post-Mortem} \label{subsec:TechnicalDesignPost}
 \subsubsection{Investing in Architecture}
 From reflection the hypothesis that investing in architecture would save developer time and create more maintainable(QR) and flexible(QR) was correct. Most systems are well isolated and only communicate with services that it uses(reduced coupling). There is no god classes in the application and a large majority of classes have strict single responsibility. This has allowed the code to be very easily extendable. An example of this is the feature of auto-saving. By having StorageAccess solely responsible for persistence of data adding auto saving was trivial by calling save data method on any modification to the persistent state, effectively introducing auto save on any committed changes. This is a single example however the time savings are more revealed in the absence of infrastructure road blocks. Not once in the project was there a feature which was incompatible with the design of the system requiring work around solutions, everything had a place. This is a hard claim to proof so we can only refer to the commit logs as proof of this.
 
