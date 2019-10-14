@@ -77,8 +77,11 @@ public class SetCashFloat implements Initializable {
         errorBox.setText("");
         try {
             double cashValue = Double.parseDouble(cashInput.getText());
-            if (cashValue <= 0) {
-                errorBox.setText("Price must be\ngreater or equal to $0");
+            if (cashValue < 0) {
+                errorBox.setText("Price must be\ngreater than or equal to $0");
+                return false;
+            } else if (cashValue >= 2000000) {
+                errorBox.setText("Error: Cash float is expected\nto be below $2,000,000");
                 return false;
             }
         } catch(NumberFormatException e){
