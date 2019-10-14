@@ -434,8 +434,7 @@ public class StockScreenController implements Initializable {
 
         //Add edit button column
         TableColumn<ItemTableEntry, Button> addEditButtonColumn = new TableColumn<>();
-        addEditButtonColumn.setMinWidth(65);
-        addEditButtonColumn.setMaxWidth(70);
+        addEditButtonColumn.setMinWidth(84);
         addEditButtonColumn.setCellValueFactory(new PropertyValueFactory<>("editItem"));
         itemTable.getColumns().add(addEditButtonColumn);
 
@@ -459,8 +458,7 @@ public class StockScreenController implements Initializable {
         orderTable.getColumns().add(priceColumn);
 
         TableColumn<OrderTableEntry, ToggleButton> refundColumn = new TableColumn<>();
-        refundColumn.setMinWidth(50);
-        refundColumn.setMaxWidth(60);
+        refundColumn.setMaxWidth(70);
         refundColumn.setCellValueFactory(new PropertyValueFactory<>("refundToggleBtn"));
         orderTable.getColumns().add(refundColumn);
     }
@@ -483,7 +481,7 @@ public class StockScreenController implements Initializable {
         menuTable.getColumns().add(descColumn);
 
         TableColumn<MenuTableEntry, Button> editBtnColumn = new TableColumn<>();
-        editBtnColumn.setMinWidth(70);
+        editBtnColumn.setMinWidth(90);
         editBtnColumn.setCellValueFactory(new PropertyValueFactory<>("viewButton"));
         menuTable.getColumns().add(editBtnColumn);
     }
