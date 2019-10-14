@@ -235,6 +235,7 @@ public class StockScreenController implements Initializable {
                 alert.showAndWait();
             }
         }
+        refreshData();
     }
 
     /**
@@ -635,6 +636,7 @@ public class StockScreenController implements Initializable {
 
                         if (orderPrice.getTotalCash() <= cashRegister.getRegisterAmount()) {
                             cashRegister.subRegisterAmount(orderPrice);
+                            StorageAccess.instance().updateCashRegister(cashRegister);
 
                             title = "Refund Successfull!";
                             order.setIsRefunded(true);
