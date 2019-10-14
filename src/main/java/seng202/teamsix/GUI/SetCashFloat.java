@@ -68,6 +68,7 @@ public class SetCashFloat implements Initializable {
             Double cash = Double.parseDouble(cashInput.getText());
             register.setRegisterAmount(cash);
             orderController.update_current_cash();
+            StorageAccess.instance().updateCashRegister(register);
             controller_window.close();
         }
     }

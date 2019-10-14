@@ -32,6 +32,7 @@ class XML_Cache {
     HashMap<Menu_Ref, Menu> menu_map = new HashMap<>();
     HashMap<Order_Ref, Order> order_map = new HashMap<>();
     HashMap<StockInstance_Ref, StockInstance> stock_instance_map = new HashMap<>();
+    CashRegister cashRegister = null;
 
     public void mergeWith(XML_Cache cache) {
         this.item_map.putAll(cache.item_map);
@@ -101,6 +102,13 @@ public class XML_StorageAccess extends StorageAccess{
     }
 
     @Override
+    public CashRegister getCashRegister() {
+        if (cache.cashRegister == null) {
+            cache.cashRegister = new CashRegister(0);
+        }
+    return cache.cashRegister; }
+
+    @Override
     public void updateItem(Item item) {
         cache.item_map.put(item.copyRef(), item);
         cache_modified = true;
@@ -132,6 +140,14 @@ public class XML_StorageAccess extends StorageAccess{
     public void updateStockInstance(StockInstance stock) {
         cache.stock_instance_map.put(stock.copyRef(), stock);
         cache_modified = true;
+        saveData();
+    }
+
+    @Override
+    public void updateCashRegister(CashRegister register) {
+        cache.cashRegister = register;
+        cache_modified = true;
+        System.out.print(cache.cashRegister.getRegisterAmount());
         saveData();
     }
 
@@ -288,7 +304,8 @@ public class XML_StorageAccess extends StorageAccess{
 
         // Combine with this Storage
         cache.mergeWith(import_storage.cache);
-
+        cache_modified = true;
+        this.saveData();
         return true;
     }
 
