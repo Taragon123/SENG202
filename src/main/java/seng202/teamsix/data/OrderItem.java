@@ -117,23 +117,13 @@ public class OrderItem {
         DataQuery<StockInstance> stockDataQuery1 = new DataQuery<>(StockInstance.class);
         String regex = String.format("(?i).*(%s).*", item.getName());
         stockDataQuery1.addConstraintRegex("name", regex);
-        //stockDataQuery1.addConstraintEqual("does_expire", "false");
-        //stockDataQuery1.addConstraintEqual("hidden", "false");
+        stockDataQuery1.addConstraintEqual("notExpired", "true");
+        stockDataQuery1.addConstraintEqual("hidden", "false");
         stockDataQuery1.sort_by("date_expires", true);
         List<UUID_Entity> orderedRelevantUUIDEntities1 = stockDataQuery1.runQuery();
         for (UUID_Entity uuid_entity: orderedRelevantUUIDEntities1) {
             orderedRelevantStockInstanceRefs.add((StockInstance_Ref) uuid_entity);
         }
-        /*
-        //Query 2
-        DataQuery<StockInstance> stockDataQuery2 = new DataQuery<>(StockInstance.class);
-        stockDataQuery2.addConstraintRegex("name", regex);
-        stockDataQuery2.addConstraintEqual("does_expire", "true");
-        stockDataQuery2.addConstraintEqual("hidden", "false");
-        List<UUID_Entity> orderedRelevantUUIDEntities2 = stockDataQuery2.runQuery();
-        for (UUID_Entity uuid_entity: orderedRelevantUUIDEntities2) {
-            orderedRelevantStockInstanceRefs.add((StockInstance_Ref) uuid_entity);
-        } */
 
         return orderedRelevantStockInstanceRefs;
     }
@@ -173,6 +163,7 @@ public class OrderItem {
                     if (remove) {
                         relevantInstance.setQuantityRemaining(0);
                         relevantInstance.setHidden("true");
+                        StorageAccess.instance().updateStockInstance(relevantInstance);
                     }
 
                     if (item_quantity == 0) {
@@ -182,6 +173,7 @@ public class OrderItem {
                 } else {
                     if (remove) {
                         relevantInstance.subQuantity(item_quantity);
+                        StorageAccess.instance().updateStockInstance(relevantInstance);
                     }
                     return true;
                 }

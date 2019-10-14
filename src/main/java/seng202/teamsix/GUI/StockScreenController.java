@@ -264,11 +264,12 @@ public class StockScreenController implements Initializable {
         DataQuery<Item> itemDataQuery = new DataQuery<>(Item.class);
         DataQuery<Order> orderDataQuery = new DataQuery<>(Order.class);
         DataQuery<Menu> menuDataQuery = new DataQuery<>(Menu.class);
+        stockDataQuery.addConstraintEqual("hidden", "false");
+        stockDataQuery.addConstraintRegex("notExpired", "true");
 
         if (doSearch) {
             String searchText = searchBox.getText();
 
-            stockDataQuery.addConstraintEqual("hidden", "false");
             stockDataQuery.sort_by("name", true);
 
             itemDataQuery.sort_by("name", true);

@@ -27,7 +27,7 @@ public class StockInstance extends StockInstance_Ref {
     @XmlElement @QueryField
     private double quantity_remaining;
     @XmlElement @QueryField
-    private String hidden;
+    private String hidden = "false";
 
     /**
      * Empty constructor
@@ -65,6 +65,21 @@ public class StockInstance extends StockInstance_Ref {
         } else {
             return false;
         }
+    }
+
+    /**
+     * Used to filter expired items from search.
+     * @return "true" if stock instance is not expired
+     */
+    @QueryField("notExpired")
+    public String notExpired() {
+        String result;
+        if (!hasExpired()) {
+            result = "true";
+        } else {
+            result = "false";
+        }
+        return result;
     }
 
     /**
@@ -106,17 +121,6 @@ public class StockInstance extends StockInstance_Ref {
             stockInstanceName = "null";
         }
         return stockInstanceName;
-    }
-
-    @QueryField("does_expire")
-    public String getDoesExpireString() {
-        String doesExpireString;
-        if (does_expire) {
-            doesExpireString = "true";
-        } else {
-            doesExpireString = "false";
-        }
-        return doesExpireString;
     }
 
     @QueryField("date_expires")
