@@ -179,6 +179,9 @@ public class XML_StorageAccess extends StorageAccess{
 
     // Generates file if it does not exist
     private void initFileStructure(String source_dir) throws IOException {
+        File jarDir = new File(ClassLoader.getSystemClassLoader().getResource(".").getPath());
+        source_dir = jarDir + "/" + source_dir;
+
         data_filename = source_dir + "/data.xml";
         temp_filename = source_dir + "/temp.xml";
 
