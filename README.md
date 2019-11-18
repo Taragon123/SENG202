@@ -1,3 +1,8 @@
+# Disclaimer
+This was a group project that I was a part of. This is not solely my own work. The team consisted of seven people (including me)
+People are accredited on the code they did however this may not be fully acurate as last minute fixes had most members of the team fixing and edditing multiple parts of the code base
+
+
 # SENG202-TeamSix
 FoodByte is a popup point of food sale application suitable for food trucks or other similar platforms. It was created by a group of seven students from the University of Canterbury as part of the SENG202 course.
 
